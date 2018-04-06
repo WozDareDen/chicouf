@@ -1,0 +1,14 @@
+#overPic{
+    width: 200px;
+    height: 200px;
+    border-radius:50%;
+}
+#overPic:hover{
+    border:2px solid black;
+}
+.avatarBox{
+    color:black;
+}
+.carre{
+    transform: translateZ(.25px) scale(1) rotate(2deg);
+}
