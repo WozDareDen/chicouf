@@ -77,10 +77,11 @@ $newConnex3 = $connex3->fetch()
             <textarea id="allergies" name="allergiesCo" rows="5" cols="30" ><?= $newConnex3['Allergies'] ?></textarea>
             </div>         
           <div class="form-check col-lg-12">
-            <input class="btn btn-primary " type="submit" name="updateChild" value="Valider" />
+            <input class="btn btn-primary" type="submit" name="updateChild" value="Valider" />
+            
           </div>
 </form>
-
+<a href="index.php?action=deleteChild&idMember=<?= $newData['idMember'] ?>&idChildren=<?= $newData['idChildren'] ?>"><button class="btn btn-danger" name="updateChild">Supprimer</button></a>
 
 <?php $content = ob_get_clean(); ?>
 <!--template.php-->

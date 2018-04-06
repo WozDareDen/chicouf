@@ -72,6 +72,11 @@ try{
             $allergies = htmlspecialchars($_POST['allergiesCo']);
             updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
         }
+        elseif($_GET['action'] == 'deleteChild'){
+            $idMember = htmlspecialchars($_GET['idMember']);
+            $idChildren = htmlspecialchars($_GET['idChildren']);
+            deleteChild($idMember,$idChildren);
+        }
         // FAMILY ACTIONS
         elseif($_GET['action'] == 'familyLink'){
             $idFamily = $_GET['idFamily'];

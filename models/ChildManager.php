@@ -62,7 +62,12 @@ public function updateOldHealth($meds,$allergies,$idChildren){
     $infos3->execute(array($meds,$allergies,$idChildren));
     return $infos3;
 }
-
+public function eraseChild($idChildren){
+    $db = $this -> dbConnect();
+    $delete = $db->prepare('DELETE FROM children WHERE idChildren = ?');
+    $delete->execute(array($idChildren));
+    return $delete;
+}
 
 
 

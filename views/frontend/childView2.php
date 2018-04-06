@@ -34,7 +34,6 @@
             <div class="row"> 
 <?php
 $bigData = $data->fetchAll();
-var_dump($bigData);
 if(empty($bigData)){
 ?>
                 <p>Vous pouvez dès à présent créer une fiche pour votre enfant, créer un Espace Famille ou en rejoindre un.</p>

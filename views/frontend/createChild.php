@@ -15,8 +15,6 @@
                 </li>
                 <li>Rejoindre un Espace Famille existant
                 </li>
-                <li><a href="index.php?action=deleteChild">Supprimer une fiche Enfant</a>
-                </li>
             </ul>
             </nav>
       <!--***********************SECTION********************-->

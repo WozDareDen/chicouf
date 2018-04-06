@@ -68,7 +68,13 @@ function goToUpdateChild($idChild){
 function goToCreateChild(){
     require 'views/frontend/createChild.php';
 }
-//
+// DELETE CHILD
+function deleteChild($idMember,$idChildren){
+    $childManager = new \OpenClassRooms\Chicouf\Models\ChildManager();
+    $delete = $childManager -> EraseChild($idChildren);
+    header('Location: index.php?action=memberView&idMember='.$idMember);
+}
+// UPLOAD AVATAR
 function uploadPic($idMember,$idChildren){
     $target_dir = "public/uploads/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
