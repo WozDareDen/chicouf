@@ -1,8 +1,6 @@
 <?php
 //Defining Namespace
-namespace OpenClassRooms\Chicouf\Models;
-//Calling Manager
-require_once('models/Manager.php');
+namespace Src\Models;
 //CommentsObject :
 class ChildManager extends Manager
 {

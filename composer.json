@@ -1,0 +1,16 @@
+{
+    "name": "fsadot/chicouf",
+    "description": "plateforme relationnelle familiale",
+    "authors": [
+        {
+            "name": "Florent Sadot",
+            "email": "fsadot@free.fr"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4" :{
+            "Src\\" : "./app/"
+        }
+    }
+}

@@ -17,12 +17,10 @@
                 </li>
                 <li>Rejoindre un Espace Famille existant
                 </li>
-                <li><a href="index.php?action=deleteChild">Supprimer une fiche Enfant</a>
-                </li>
             </ul>
             </nav>
       <!--***********************SECTION********************-->
-            <section class="col-sm-10" style="background-color:blue;color:white;">
+            <section class="col-sm-10" style="background-color:#117a8b;color:white;">
 
 
 

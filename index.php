@@ -1,7 +1,9 @@
 <?php
 session_start();
-require('controllers/frontOffice.php');
+require_once __DIR__ . '/vendor/autoload.php';
+
 try{
+    $frontoffice = new \Src\Controllers\FrontOffice();
     if (isset($_GET['action'])) {
         //ADD NEW USER
         if ($_GET['action'] == 'addUser'){
@@ -12,7 +14,7 @@ try{
             $mailCo = htmlspecialchars($_POST['mailCo']);
                 if($passCo == $pass2Co){
                     if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){                        
-                        newUser($firstNameCo, $lastNameCo, $passCo, $mailCo);                        
+                        $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo);                        
                     }
                     else{
                         throw new Exception('votre adresse mail n\'est pas valide');
@@ -29,11 +31,11 @@ try{
         // CHILDREN ACTIONS
         elseif($_GET['action'] == 'memberView'){
             $idMember = $_GET['idMember'];
-            goToMember($idMember);
+            $frontoffice->goToMember($idMember);
         }
         // MOVE TO CREATE CHILD VIEW
         elseif($_GET['action'] == 'createChild'){
-            goToCreateChild();
+            $frontoffice->goToCreateChild();
         }
         // ADD NEW CHILD
         elseif($_GET['action'] == 'addChild'){
@@ -46,17 +48,17 @@ try{
             $hatedMeal = htmlspecialchars($_POST['hatedMealCo']);
             $meds = htmlspecialchars($_POST['medsCo']);
             $allergies = htmlspecialchars($_POST['allergiesCo']);
-            addChild($lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
+            $frontoffice->addChild($lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
         }
         elseif($_GET['action'] == 'uploadPic'){
             $idMember = $_GET['idMember'];
             $idChildren = $_GET['idChildren'];
-            uploadPic($idMember,$idChildren);
+            $frontoffice->uploadPic($idMember,$idChildren);
         }
         elseif($_GET['action'] == 'goToUpdateChild'){
             // $idMember = $_GET['idMember'];
             $idChild = $_GET['idChildren'];
-            goToUpdateChild($idChild);
+            $frontoffice->goToUpdateChild($idChild);
         }
         elseif($_GET['action'] == 'updateChild'){
             $idMember = htmlspecialchars($_POST['idMember']);
@@ -70,28 +72,28 @@ try{
             $hatedMeal = htmlspecialchars($_POST['hatedMealCo']);
             $meds = htmlspecialchars($_POST['medsCo']);
             $allergies = htmlspecialchars($_POST['allergiesCo']);
-            updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
+            $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
         }
         elseif($_GET['action'] == 'deleteChild'){
             $idMember = htmlspecialchars($_GET['idMember']);
             $idChildren = htmlspecialchars($_GET['idChildren']);
-            deleteChild($idMember,$idChildren);
+            $frontoffice->deleteChild($idMember,$idChildren);
         }
         // FAMILY ACTIONS
         elseif($_GET['action'] == 'familyLink'){
             $idFamily = $_GET['idFamily'];
-            goToFamily($idFamily);
+            $frontoffice->goToFamily($idFamily);
         }
         elseif($_GET['action'] == 'profileView'){
             $idMember = $_GET['idMember'];
-            goToMemberBoard($idMember);
+            $frontoffice->goToMemberBoard($idMember);
         }
         else{
             echo 'banane';
         }    
     }
     else{
-        subView();
+        $frontoffice->subView();
     }
 }
 catch(Exception $e){

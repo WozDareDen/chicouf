@@ -1,6 +1,6 @@
 <?php
 //Defining Namespace
-namespace OpenClassRooms\Chicouf\Models;
+namespace Src\Models;
 //DATABASE CONNECTION
 class Manager
 {
