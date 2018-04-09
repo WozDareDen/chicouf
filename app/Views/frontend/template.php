@@ -20,7 +20,7 @@
         <meta name="twitter:image" content="public/images/charlesfav.png" />
         <title><?= $title ?></title>
         <link href="app/Public/css/style.css" rel="stylesheet" /> 
-        <link rel="icon" type="image/png" href="public/images/charlesfav.png" />
+        <link rel="icon" type="image/png" href="app/ublic/images/charlesfav.png" />
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     </head>        

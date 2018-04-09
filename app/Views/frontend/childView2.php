@@ -43,14 +43,18 @@ foreach($bigData as $newData){
 
                 <article class="col-sm-6" style="background-color:purple;color:white;">
             <div>
-<h3>IDENTITE </h3>
+<h3><?= $newData['Firstname']; ?> <?= $newData['Surname']; ?> </h3>
 <a href="index.php?action=goToUpdateChild&idChildren=<?= $newData['idChildren']; ?>">Modifier cette fiche enfant</a>
 <div class="sr-only"><?= $newData['idMember']; ?></div>
-<p>Nom : <?= $newData['Surname']; ?></p>
-<p>Prénom :  <?= $newData['Firstname']; ?></p>  
 <p>Date de naissance : <?= $newData['new_birthdate']; ?></p>
-<p>Parent 1 : <?= $newData['Parent1']; ?></p>
-<p>Parent 2 : <?= $newData['Parent2']; ?></p>
+<p>Parent(s) : <?= $newData['Parent1']?> 
+<?php 
+if(!empty($newData['Parent2'])){
+?>
+ & <?= $newData['Parent2']?>
+ <?php
+ }
+ ?> </p>
 <?php
 $newConnex2 = $connex2->fetch() 
  ?>

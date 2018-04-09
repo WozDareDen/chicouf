@@ -19,14 +19,14 @@
         <meta name="twitter:description" content="Blog du romancier Jean Forteroche" />
         <meta name="twitter:image" content="public/images/charlesfav.png" />
         <title>Formulaire d'inscription</title>
-        <link href="public/css/move.css" rel="stylesheet" /> 
+        <link href="app/Public/css/style.css" rel="stylesheet" /> 
         <link rel="icon" type="image/png" href="public/images/charlesfav.png" />
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head> 
-    <div class="container-fluid">
+    <div class="container-fluid regView">
       <div class="row">
-    <div class="col-lg-12">
-        <form method="post" action="index.php?action=addUser">
+    <div class="col-lg-4 regContent" >
+        <form method="post" class="regForm" action="index.php?action=addUser">
           <div class="form-group  col-lg-12">
             <label for="lastname">Nom</label><br />
             <input type="text" id="lastname" name="lastNameCo" required="valid" placeholder="entrez votre nom" > 
@@ -48,6 +48,16 @@
             <input type="email" id="mail" name="mailCo" required="valid" placeholder="renseignez votre email" >
             <small id="emailHelp" class="form-text text-muted">Nous ne partagerons votre email avec aucun tiers.</small>
           </div>
+          <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Parentalité</label>
+  </div>
+  <select class="custom-select" name="parentCo" id="inputGroupSelect01">
+    <option selected>Choisissez...</option>
+    <option value="0">Je suis ici en tant que grand-parent</option>
+    <option value="1">Je suis ici uniquement en tant cas que parent</option>
+  </select>
+</div>
           <div class="form-check col-lg-12">
             <input type="checkbox" name="choixCo" required="valid"> J'ai lu les règles d'usage et j'accepte de les respecter.</br>
             <input class="btn btn-primary " type="submit" name="addUser" value="S'inscrire" />
@@ -55,10 +65,69 @@
         </form>
       </div>
       </div>
+
+
+<div class="row">
+<div class="col-lg-12">
+<div class="col-lg-6">
+      <div class="pos-f-t">
+              <div class="collapse" id="navbarToggleExternalContent">
+                  <div class=" p-4" style='background-color:rgb(2, 73, 89); color:white;'>
+                  <h4 class="text-white">Gérer sa Fiche ENFANT</h4>
+                  <span class="text-muted">Toggleable via the navbar brand.</span>
+                  <span class="text-muted"> J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter.</span>
+                  </div>
+              </div>
+              <nav class="navbar navbar-dark "style='background-color:rgb(2, 73, 89); color:white;'role='navigation'>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  </button>
+              </nav>
+
+      </div>
+
+<div class="pos-f-t">
+              <div class="collapse" id="navbarToggleExternalContent2">
+                  <div class=" p-4" style='background-color:#00FA9A; color:white;'>
+                  <h4 class="text-white">Gérer sa Fiche PARENT</h4>
+                  <span class="text-muted">Toggleable via the navbar brand.</span>
+                  <span class="text-muted"> J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter.</span>
+                  </div>
+              </div>
+              <nav class="navbar navbar-dark "style='background-color:#00FA9A; color:white;'role='navigation'>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent2" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  </button>
+              </nav>
+
+      </div>
+
+
+      <div class="pos-f-t">
+              <div class="collapse" id="navbarToggleExternalContent3">
+                  <div class=" p-4" style='background-color:rgb(2, 73, 89); color:white;'>
+                  <h4 class="text-white">Gérer sa Fiche FAMILLE</h4>
+                  <span class="text-muted">Toggleable via the navbar brand.</span>
+                  <span class="text-muted"> J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter.</span>
+                  </div>
+              </div>
+              <nav class="navbar navbar-dark "style='background-color:rgb(2, 73, 89); color:white;'role='navigation'>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent3" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  </button>
+              </nav>
+
+      </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
     </div>
-
-
-
 
 
 

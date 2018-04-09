@@ -12,9 +12,10 @@ try{
             $passCo = htmlspecialchars($_POST['passCo']);
             $pass2Co = htmlspecialchars($_POST['pass2Co']);
             $mailCo = htmlspecialchars($_POST['mailCo']);
+            $parentCo = htmlspecialchars($_POST['parentCo']);
                 if($passCo == $pass2Co){
                     if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){                        
-                        $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo);                        
+                        $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo);                        
                     }
                     else{
                         throw new Exception('votre adresse mail n\'est pas valide');
@@ -50,6 +51,7 @@ try{
             $allergies = htmlspecialchars($_POST['allergiesCo']);
             $frontoffice->addChild($lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
         }
+        // ADD CHILDREN AVATAR
         elseif($_GET['action'] == 'uploadPic'){
             $idMember = $_GET['idMember'];
             $idChildren = $_GET['idChildren'];
@@ -60,6 +62,7 @@ try{
             $idChild = $_GET['idChildren'];
             $frontoffice->goToUpdateChild($idChild);
         }
+        // UPDATE CHILD
         elseif($_GET['action'] == 'updateChild'){
             $idMember = htmlspecialchars($_POST['idMember']);
             $idChildren = $_GET['idChildren'];
@@ -74,6 +77,7 @@ try{
             $allergies = htmlspecialchars($_POST['allergiesCo']);
             $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
         }
+        // DELETE CHILD
         elseif($_GET['action'] == 'deleteChild'){
             $idMember = htmlspecialchars($_GET['idMember']);
             $idChildren = htmlspecialchars($_GET['idChildren']);

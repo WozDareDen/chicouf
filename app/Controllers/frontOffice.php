@@ -4,11 +4,11 @@ namespace Src\Controllers;
 
 class FrontOffice{
 // GET USER TO DB & BACK TO HOMEVIEW
-    function newUser($firstNameCo, $lastNameCo, $passCo, $mailCo)
+    function newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo)
     {
         if(preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $passCo)){              
             $userManager = new \Src\Models\UserManager();
-            $connex = $userManager -> addUser($firstNameCo, $lastNameCo, $passCo, $mailCo);
+            $connex = $userManager -> addUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo);
             $connex11 = $userManager -> getMaxIdMember();
             $idMember111 = $connex11->fetch();
             $idMember = $idMember111[0];
@@ -28,6 +28,7 @@ class FrontOffice{
         $data = $childManager -> watchChild($idMember);
         $connex2 = $childManager -> getMealsInfos($idMember);
         $connex3 = $childManager -> getHealthInfos($idMember);
+        // $connex4 = $childManager -> getParents($)
         require 'app/Views/frontend/childView2.php';
     }
     // // PROFILE VIEW
@@ -47,6 +48,7 @@ class FrontOffice{
         $idChild = $idChild111[0];
         $infos2 = $childManager -> addNewMeal($favMeal, $hatedMeal,$idChild);
         $infos3 = $childManager -> addNewHealth($meds, $allergies,$idChild);
+        $infoJoin = $childManager -> addToMyParent($idChild);
         echo 'Success !';
     }
     // UPDATE CHILD
