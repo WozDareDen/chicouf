@@ -25,10 +25,6 @@ try{
                     throw new Exception('vos mots de passes ne sont pas identiques');
                 }
         }
-        // RATTACHER UN ENFANT A UNE FAMILLE OU UN PARENT
-        elseif($_GET['action'] == 'belong'){
-
-        }
         // CHILDREN ACTIONS
         elseif($_GET['action'] == 'memberView'){
             $idMember = $_GET['idMember'];
