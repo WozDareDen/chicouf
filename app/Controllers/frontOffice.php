@@ -18,6 +18,14 @@ class FrontOffice{
             throw new Exception('votre mot de passe doit comporter des lettres majuscules, minuscules ET des chiffres entre 8 et 16 caractères');
         }
     }
+    function goToFamily($idFamily){
+        $familyManager = new \Src\Models\FamilyManager();
+        $dataF = $familyManager -> watchFamily($idFamily);
+        $dataF2 = $familyManager -> watchFamilyMeals($idFamily);
+        $dataF3 = $familyManager -> watchFamilyHealth($idFamily);
+        $dataF4 = $familyManager -> getFamilyName($idFamily);
+        require 'app/Views/frontend/familyView.php';
+    }
     //GO TO REGISTRATION FORM
     function subView(){
         require 'app/Views/frontend/registrationView.php';
@@ -28,6 +36,9 @@ class FrontOffice{
         $data = $childManager -> watchChild($idMember);
         $connex2 = $childManager -> getMealsInfos($idMember);
         $connex3 = $childManager -> getHealthInfos($idMember);
+
+        $familyManager = new \Src\Models\FamilyManager();
+        $dataFam2 = $familyManager -> getFamilyId($idMember);
         // $connex4 = $childManager -> getParents($)
         require 'app/Views/frontend/childView2.php';
     }

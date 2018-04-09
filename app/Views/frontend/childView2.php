@@ -15,7 +15,7 @@
                 </li>
                 <li>Créer un nouvel Espace Famille
                 </li>
-                <li>Rejoindre un Espace Famille existant
+                <li><a href="index.php?action=familyLink&idFamily=<?= $dataFam2['idFamily'] ?>">Rejoindre un Espace Famille existant</a>
                 </li>
             </ul>
             </nav>
