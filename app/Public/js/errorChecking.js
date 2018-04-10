@@ -1,61 +1,56 @@
-$(document).ready(function () { // on s'assure que le document est chargé
-
-
-    var $mdp1 = $('#pass'),
-        $mdp2 = $('#pass2'),
-        $champ = $('.champ'),
-        $mail = $('#mail');
-
-
-    $champ.keyup(function () {// si la chaîne de caractères est inférieure ou égale à 1
-        if ($(this).val().length <= 1) {
-            $(this).css({ // on rend le champ rouge
-                borderColor: 'red',
-                color: 'red'
-            });
-        }
-
-        else {
-            $(this).css({ // si tout est bon, on le rend vert
-                borderColor: 'green',
-                color: 'green',
+$(document).ready(function () { 
+    var $champ = $('.champ');
+        $champ.keyup(function () {
+        // CHECK FILLED FIELDS
+            if ($(this).val().length <= 1) {
+                $(this).css({ 
+                    borderColor: 'red'
+                });
+            }
+            else {
+                $(this).css({
+                    borderColor: 'initial'
             });
         }
     });
 
-    $mdp1.keyup(function (){
-        if ($($mdp1)[0].value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/)) {
-            console.log('true');
-            document.getElementById('pop').style.display = 'none';
-        }
 
-        else{
-            console.log('false');
-            document.getElementById('pop').style.display = 'block';
-            $(this).css({ // on rend le champ rouge
-                borderColor: 'red',
-                color: 'red'
-            });
+// EMAIL VALIDATION
+var $mdp = $('#regFormPass');
+var regPassTest = $mdp.value;
+$mdp.keyup(function(){
+    if ($mdp[0].value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/)) {
+        document.getElementById('pop').style.display = 'none';
+    }else{
+        document.getElementById('pop').style.display = 'block';
+    }
+});
+// SHOW/HIDE PASSWORD 1
+function myFunction() {
+    var x = document.getElementById("regFormPass"); 
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }    
+} 
+// SHOW/HIDE PASSWORD 2
+function myFunction2() {
+    var y = document.getElementById("regFormPass2");
+        if (y.type === "password") {
+            y.type = "text";
+        } else {
+            y.type = "password";
         }
-    });
+}
+// PASSWORDS MATCH
+$('#regFormPass2').on('keyup',function(){
+    if ($('#regFormPass').val() == $('#regFormPass2').val()) {
+        $('#message').html('Les mots de passe correspondent').css('color', 'green');
+      } else 
+        $('#message').html('Les mots de passe ne correspondent pas').css('color', 'red');
+});
 
-    $mdp2.keyup(function () {// si la confirmation est différente du mot de passe
-        if ($(this).val() != $mdp1.val()) {
-            $(this).css({ // on rend le champ rouge
-                borderColor: 'red',
-                color: 'red'
-            });
-        }
-        else {// si tout est bon, on le rend vert
-            $(this).css({
-                borderColor: 'green',
-                color: 'green'
-            });
-        }
-
-
-    });
-    
     $mail.keyup(function () {
         if ($($mail)[0].value.match(/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/)) {
             console.log('mailTrue');
