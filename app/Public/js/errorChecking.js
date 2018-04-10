@@ -14,6 +14,7 @@ $(document).ready(function () {
         }
     });
 });
+
 // EMAIL VALIDATION
 var $mdp = $('#regFormPass');
 var regPassTest = $mdp.value;
