@@ -24,7 +24,7 @@ $(document).ready(function () { // on s'assure que le document est chargé
     });
 
     $mdp1.keyup(function (){
-        if ($($mdp1)[0].value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/)) {//verification conformitée du mot de passe
+        if ($($mdp1)[0].value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/)) {
             console.log('true');
             document.getElementById('pop').style.display = 'none';
         }
@@ -56,8 +56,8 @@ $(document).ready(function () { // on s'assure que le document est chargé
 
     });
     
-    $mail.keyup(function () { //
-        if ($($mail)[0].value.match(/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/)) { //verification conformitée du mail
+    $mail.keyup(function () {
+        if ($($mail)[0].value.match(/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/)) {
             console.log('mailTrue');
             document.getElementById('popMail').style.display = 'none';
         }else {
