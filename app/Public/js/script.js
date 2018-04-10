@@ -1,7 +1,3 @@
-var e = document.getElementById('overPic');
-e.onmouseover = function() {
-    $('.popup').css('display','block');
-}
-e.onmouseout = function() {
-    $('.popup').css('display','none');
-}
+$(".photoChild").on("click",function(e){
+   $(e.target).css("transform","rotate(1turn)");
+});

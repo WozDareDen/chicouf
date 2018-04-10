@@ -17,29 +17,63 @@ a:hover{
 ul{
     list-style-type: none;
 }
-
-#overPic{
+.photoChild{     
+    position:relative; 
+    animation-name:animRoule; -webkit-animation-name:animRoule; 
+    -moz-animation-name:animRoule; -o-animation-name:animRoule; 
+    animation-duration:1.3s; -webkit-animation-duration:1.3s; 
+    -moz-animation-duration:1.3s; -o-animation-duration:1.3s; 
+    animation-iteration-count :1; -webkit-animation-iteration-count:1; 
+    -moz-animation-iteration-count:1; -o-animation-iteration-count:1; 
+    animation-direction:alternate; -webkit-animation-direction:alternate; 
+    -moz-animation-direction:alternate; -o-animation-direction:alternate; 
+    animation-timing-function:linear; -webkit-animation-timing-function:linear; 
+    -moz-animation-timing-function:linear; -o-animation-timing-function:linear; 
+} 
+    @keyframes animRoule{ 
+    0% {transform:rotate(0deg); left:-1200px;
+    }
+        100%{transform:rotate(360deg); left:0px;}
+    } 
+    @-webkit-keyframes animRoule{ 
+    from {-webkit-transform:rotate(0deg); left:0px;} to {-webkit-transform:rotate(360deg); left:350px;} 
+    } 
+    @-moz-keyframes animRoule{ 
+    from {-moz-transform:rotate(0deg); left:0px;} to {-moz-transform:rotate(360deg); left:350px;} 
+    } 
+    @-o-keyframes animRoule{ 
+    from {-o-transform:rotate(0deg); left:0px;} to {-o-transform:rotate(360deg); left:350px;} 
+    }
+.photoChild:hover, .photoChild2:hover{
+    border:2px solid black;
+} 
+.childName{
+    animation: cssName 1.5s 1 ease forwards;
+    -webkit-animation: cssName 1.5s 1 ease forwards;
+    -moz-animation: cssName 1.5s 1 ease forwards;
+    -o-animation: cssName 1.5s 1 ease forwards;
+    } 
+    @keyframes cssName{
+        0% {transform: scale(0);}         
+        100% {transform: scale(1);}
+    }
+.avatarBox a, .photoChild2{
     width: 200px;
     height: 200px;
     border-radius:50%;
-}
-#overPic:hover{
-    border:2px solid black;
+    background-size:contain;
+    background-position: center center;
+    display: inline-block;
 }
 .avatarBox{
     color:black;
 }
-
+.fly p{
+    font-style: italic;
+}
 
 /*--------REGISTRATION VIEW------------*/
 
-/* .regView{
-    display: flex;
-    flex-direction: column;
-}
-.regContent{
-
-}*/
 .regForm{
     margin-bottom:100px;
     border:1px solid black;
