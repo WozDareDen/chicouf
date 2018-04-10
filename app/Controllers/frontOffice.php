@@ -15,7 +15,7 @@ class FrontOffice{
             header('Location: index.php?action=memberView&idMember='.$idMember);
         }
         else{
-            throw new Exception('votre mot de passe doit comporter des lettres majuscules, minuscules ET des chiffres entre 8 et 16 caractères');
+            throw new \Exception('votre mot de passe doit comporter des lettres majuscules, minuscules ET des chiffres entre 8 et 16 caractères');
         }
     }
     //GO TO REGISTRATION FORM
