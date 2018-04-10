@@ -78,4 +78,16 @@ ul{
     margin-bottom:100px;
     border:1px solid black;
     padding: 30px;
-} 
+}
+
+/*----------------registrationView.php-----------------*/
+/*------------------popup password and mail-------------------------*/
+
+#pop{
+    display: none;
+    border: 1px solid;
+}
+#popMail{
+    display: none;
+    border: 1px solid;
+}

@@ -39,21 +39,21 @@
                       <div class="form-group col-lg-12">
                         <label for="pass">Mot de passe</label><br />
                         <input type="password" id="pass" class="champ" name="passCo" required="valid" autocomplete="off" placeholder="entrez votre mot de passe">
-                          <div id="pop"></div>
+                          <div id="pop">
+                              <p>Votre mot de passe doit contenir: <br>
+
+                              </p>
+                          </div>
                       </div>
                       <div class="form-group col-lg-12">
                         <label for="pass2">Confirmation du mot de passe</label><br />
                         <input type="password" id="pass2" class="champ" name="pass2Co" required="valid" autocomplete="off" placeholder="confirmez-le">
-
-                          <style>
-                              #pop{
-                                  display: none;
-                              }
-                          </style>
                       </div>
                       <div class="form-group col-lg-12 ">
                         <label for="mail">Adresse email</label><br />
                         <input type="email" id="mail" class="champ" name="mailCo" required="valid" placeholder="renseignez votre email" >
+                          <div id="popMail">Votre mail n'est pas conforme</div>
+
                         <small id="emailHelp" class="form-text text-muted">Nous ne partagerons votre email avec aucun tiers.</small>
                       </div>
                       <div class="input-group mb-3">
@@ -147,6 +147,7 @@
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="app/Public/js/errorChecking.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>

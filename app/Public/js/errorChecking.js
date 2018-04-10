@@ -3,7 +3,8 @@ $(document).ready(function () { // on s'assure que le document est chargé
 
     var $mdp1 = $('#pass'),
         $mdp2 = $('#pass2'),
-        $champ = $('.champ');
+        $champ = $('.champ'),
+        $mail = $('#mail');
 
 
     $champ.keyup(function () {// si la chaîne de caractères est inférieure ou égale à 1
@@ -13,10 +14,27 @@ $(document).ready(function () { // on s'assure que le document est chargé
                 color: 'red'
             });
         }
+
         else {
             $(this).css({ // si tout est bon, on le rend vert
                 borderColor: 'green',
-                color: 'green'
+                color: 'green',
+            });
+        }
+    });
+
+    $mdp1.keyup(function (){
+        if ($($mdp1)[0].value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/)) {//verification conformitée du mot de passe
+            console.log('true');
+            document.getElementById('pop').style.display = 'none';
+        }
+
+        else{
+            console.log('false');
+            document.getElementById('pop').style.display = 'block';
+            $(this).css({ // on rend le champ rouge
+                borderColor: 'red',
+                color: 'red'
             });
         }
     });
@@ -36,25 +54,21 @@ $(document).ready(function () { // on s'assure que le document est chargé
         }
 
 
-
     });
-
-    /*var password = document.getElementById('pass').value;
-    if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/.test(password)){
-        document.getElementById('pop').style.display  ='block';
-    }else {
-
-    }*/
-
-    var expr = document.getElementById('pass').textContent;
-
-    var r1 = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/;
-
-    var rest = r1.test(expr);
-
-    var resultat = document.getElementById('pop');
-
-    resultat.innerHTML = console.log('resulatat' + rest );
+    
+    $mail.keyup(function () { //
+        if ($($mail)[0].value.match(/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/)) { //verification conformitée du mail
+            console.log('mailTrue');
+            document.getElementById('popMail').style.display = 'none';
+        }else {
+            console.log('mailfalse');
+            document.getElementById('popMail').style.display = 'block';
+            $(this).css({ // on rend le champ rouge
+                borderColor: 'red',
+                color: 'red'
+            });
+        }
+    });
 
 });
 
