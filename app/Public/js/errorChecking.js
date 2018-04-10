@@ -13,7 +13,7 @@ $(document).ready(function () {
             });
         }
     });
-});
+
 
 // EMAIL VALIDATION
 var $mdp = $('#regFormPass');
@@ -51,5 +51,19 @@ $('#regFormPass2').on('keyup',function(){
         $('#message').html('Les mots de passe ne correspondent pas').css('color', 'red');
 });
 
+    $mail.keyup(function () {
+        if ($($mail)[0].value.match(/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/)) {
+            console.log('mailTrue');
+            document.getElementById('popMail').style.display = 'none';
+        }else {
+            console.log('mailfalse');
+            document.getElementById('popMail').style.display = 'block';
+            $(this).css({ // on rend le champ rouge
+                borderColor: 'red',
+                color: 'red'
+            });
+        }
+    });
 
+});
 

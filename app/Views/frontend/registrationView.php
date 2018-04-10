@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-lg-4 regContent" >
 
-                <form method="post" class="regForm" name="regForm" action="index.php?action=addUser">
+                <form method="post" class="regForm" action="index.php?action=addUser">
                       <div class="form-group  col-lg-12">
                         <label for="lastname">Nom</label><br />
                         <input type="text" id="lastname" class="champ" name="lastNameCo" required="valid" placeholder="entrez votre nom" >
@@ -38,26 +38,29 @@
                       </div>
                       <div class="form-group col-lg-12">
                         <label for="pass">Mot de passe</label><br />
-                        <input type="password" id="regFormPass" class="champ2 champPass" name="passCo" required="valid" autocomplete="off" placeholder="entrez votre mot de passe">
-                        <input type="checkbox" onclick="myFunction()">Afficher le mot de passe 
-                          <div id="pop"></div>
+                        <input type="password" id="pass" class="champ" name="passCo" required="valid" autocomplete="off" placeholder="entrez votre mot de passe">
+                          <div id="pop">
+                              <p>Votre mot de passe doit contenir: <br>
+
+                              </p>
+                          </div>
                       </div>
                       <div class="form-group col-lg-12">
                         <label for="pass2">Confirmation du mot de passe</label><br />
-                        <input type="password" id="regFormPass2" class="champ2 champPass" name="pass2Co" required="valid" autocomplete="off" placeholder="confirmez-le">
-                        <input type="checkbox" onclick="myFunction2()">Afficher le mot de passe <br />
-                        <span id="message"></span>
+                        <input type="password" id="pass2" class="champ" name="pass2Co" required="valid" autocomplete="off" placeholder="confirmez-le">
                       </div>
                       <div class="form-group col-lg-12 ">
                         <label for="mail">Adresse email</label><br />
-                        <input type="email" id="mail" name="mailCo" required="valid" placeholder="renseignez votre email" >
+                        <input type="email" id="mail" class="champ" name="mailCo" required="valid" placeholder="renseignez votre email" >
+                          <div id="popMail">Votre mail n'est pas conforme</div>
+
                         <small id="emailHelp" class="form-text text-muted">Nous ne partagerons votre email avec aucun tiers.</small>
                       </div>
                       <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Parentalité</label>
                       </div>
-                      <select required class="custom-select" name="parentCo" id="inputGroupSelect01">
+                      <select class="custom-select" name="parentCo" id="inputGroupSelect01">
                         <option selected>Choisissez...</option>
                         <option value="0">Je suis ici en tant que grand-parent</option>
                         <option value="1">Je suis ici uniquement en tant cas que parent</option>
