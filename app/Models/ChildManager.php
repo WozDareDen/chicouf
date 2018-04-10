@@ -4,6 +4,7 @@ namespace Src\Models;
 //CommentsObject :
 class ChildManager extends Manager
 {
+//GET CHILD THROUGH MEMBER
 public function watchChild($idMember){
     $db = $this -> dbConnect(); 
     $data = $db->prepare('SELECT children.idChildren, member_children.idMember, Surname, Firstname, img, Parent1, Parent2, DATE_FORMAT(Birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN member_children ON member_children.idChildren = children.idChildren WHERE idMember = ? ORDER BY member_children.idChildren');
@@ -41,7 +42,7 @@ public function addNewHealth($meds,$allergies,$idChild){
     $infos3->execute(array($meds,$allergies,$idChild));
     return $infos3;
 }
-// CHILD UPDATE
+// CHILD UPDATES
 public function updateOldChild($lastName,$firstName,$birthdate,$parent1,$parent2, $idChildren){
     $db = $this -> dbConnect();
     $infos1 = $db->prepare('UPDATE children SET Surname=?, Firstname=?, Birthdate=?, Parent1=? ,Parent2=? WHERE idChildren = ?');
@@ -60,20 +61,19 @@ public function updateOldHealth($meds,$allergies,$idChildren){
     $infos3->execute(array($meds,$allergies,$idChildren));
     return $infos3;
 }
+// DELETE CHILD
 public function eraseChild($idChildren){
     $db = $this -> dbConnect();
     $delete = $db->prepare('DELETE FROM children WHERE idChildren = ?');
     $delete->execute(array($idChildren));
     return $delete;
 }
-
-
-
 public function getMaxIdChild(){
     $db = $this -> dbConnect();
     $infos11 = $db->query('SELECT MAX(idChildren) FROM children');
     return $infos11;
 }
+// GET CHILD INFOS THROUGH CHILD
 public function getChild($idChild){
     $db = $this -> dbConnect(); 
     $data = $db->prepare('SELECT * FROM children INNER JOIN member_children ON member_children.idChildren = children.idChildren WHERE member_children.idChildren = ?');
@@ -92,10 +92,14 @@ public function getHealth($idChild){
     $connex3->execute(array($idChild));
     return $connex3;
 }
+// UPLOAD PICTURE
 public function uploadPicture($target_file,$idChildren){
     $db = $this -> dbConnect();
     $insertPicture = $db->prepare('UPDATE children SET img=? WHERE idChildren= ?');
     $insertPicture->execute(array($target_file, intval($idChildren)));
     return $insertPicture;
+}
+public function addToMyParent($idChild){
+    
 }
 }

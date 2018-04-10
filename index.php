@@ -25,6 +25,26 @@ try{
                     throw new Exception('vos mots de passes ne sont pas identiques');
                 }
         }
+        // GO TO REGISTRATION VIEW
+        elseif($_GET['action'] == 'subView'){
+            $frontoffice->subView();
+        }
+        // USER RECORD
+        elseif ($_GET['action'] == 'record'){
+            $firstname = htmlspecialchars($_POST['firstname']);
+            $surname = htmlspecialchars($_POST['surname']);
+            $pass = htmlspecialchars($_POST['pass']);
+            if(isset($firstname) && isset($surname) && isset($pass)){
+                    $frontoffice->connected($firstname,$surname,$pass);
+            }
+            else{
+                    throw new Exception('veuillez renseignez vos identifiants');
+            }    
+        }     
+        // USER DISCONNECTION
+        elseif($_GET['action'] == 'deco'){
+            $frontoffice->disconnected();
+        }
         // RATTACHER UN ENFANT A UNE FAMILLE OU UN PARENT
         elseif($_GET['action'] == 'belong'){
 
@@ -97,7 +117,8 @@ try{
         }    
     }
     else{
-        $frontoffice->subView();
+        // $frontoffice->subView();
+        $frontoffice->homeView();
     }
 }
 catch(Exception $e){

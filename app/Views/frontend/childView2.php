@@ -28,7 +28,9 @@
 <div class="row">
     <div class="col-sm-10">      
         <!--***********************ARTICLES********************-->
-        <h2 class="row">Bienvenue sur votre Espace Membre !</h2>
+        <h2 class="row">Bienvenue sur votre Espace Membre <?= $_SESSION['firstname'] ?> !</h2>
+                    <a class="dropdown-item" href="index.php?action=deco">Déconnexion</a>
+                  
             <div class="row"> 
 <?php
 $bigData = $data->fetchAll();
@@ -75,7 +77,7 @@ $newConnex3 = $connex3->fetch()
 
 
                 <article class="col-sm-6 avatarBox" >
-                <img data-toggle="modal" data-target="#exampleModal<?= $newData['idChildren'] ?>" data-whatever="@mdo" id="overPic" src="<?= $newData['img'] ?>" title="Vous pouvez modifier la photo" />
+                <img data-toggle="modal" data-target="#exampleModal<?= $newData['idChildren'] ?>" data-whatever="@mdo" class="photoChild2" src="<?= $newData['img'] ?>" title="Vous pouvez modifier la photo" />
                 <div class="modal fade" id="exampleModal<?= $newData['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

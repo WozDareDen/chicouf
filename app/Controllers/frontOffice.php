@@ -4,20 +4,55 @@ namespace Src\Controllers;
 
 class FrontOffice{
 // GET USER TO DB & BACK TO HOMEVIEW
-    function newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo)
-    {
+    function newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo){
         if(preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $passCo)){              
             $userManager = new \Src\Models\UserManager();
             $connex = $userManager -> addUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo);
             $connex11 = $userManager -> getMaxIdMember();
             $idMember111 = $connex11->fetch();
             $idMember = $idMember111[0];
-            header('Location: index.php?action=memberView&idMember='.$idMember);
+            $req = $userManager -> userById($idMember);
+            $resultat = $req->fetch();
+            $_SESSION['firstname'] =  $resultat['Firstname'];
+            $_SESSION['parentHood'] = $resultat['ParentHood'];
+            $_SESSION['id'] =  $resultat['idMember'];
+            $_SESSION['modo'] =  $resultat['modo'];
+                if($_SESSION['parentHood'] == 1){
+                    header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);
+                }
+                else{
+                    header('Location: index.php');
+                }
         }
         else{
-            throw new Exception('votre mot de passe doit comporter des lettres majuscules, minuscules ET des chiffres entre 8 et 16 caractères');
+            throw new \Exception('votre mot de passe doit comporter des lettres majuscules, minuscules ET des chiffres entre 8 et 16 caractères');
         }
     }
+    //LOGIN FUNCTION
+    function connected($firstname,$surname,$pass){        
+        $userManager = new \Src\Models\UserManager();
+        $req = $userManager -> userConnex($firstname,$surname);
+        $resultat = $req->fetch();
+        $isPasswordCorrect = password_verify($pass,$resultat['pass']);
+        $_SESSION['firstname'] =  $resultat['Firstname'];
+        $_SESSION['parentHood'] = $resultat['ParentHood'];
+        $_SESSION['id'] =  $resultat['idMember'];
+        $_SESSION['modo'] =  $resultat['modo'];
+        $_SESSION['img'] =  $resultat['img'];
+            if($isPasswordCorrect){
+                header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);             
+            }
+            else{
+                throw new \Exception('vos identifiants sont incorrects');
+            }
+    }    
+    //LOGOUT FUNCTION
+    function disconnected(){
+        $_SESSION = array();
+        session_destroy();
+        header('Location: index.php');
+    }
+    //FAMILY BOARD
     function goToFamily($idFamily){
         $familyManager = new \Src\Models\FamilyManager();
         $dataF = $familyManager -> watchFamily($idFamily);
@@ -30,7 +65,11 @@ class FrontOffice{
     function subView(){
         require 'app/Views/frontend/registrationView.php';
     }
-    // GET CHILD INFOS IN MEMBERVIEW
+    // GO TO HOME VIEW
+    function homeView(){
+        require 'app/Views/frontend/homeView.php';
+    }
+    // MEMBER BOARD
     function goToMember($idMember){
         $childManager = new \Src\Models\ChildManager();
         $data = $childManager -> watchChild($idMember);
@@ -42,14 +81,6 @@ class FrontOffice{
         // $connex4 = $childManager -> getParents($)
         require 'app/Views/frontend/childView2.php';
     }
-    // // PROFILE VIEW
-    // function goToMemberBoard($idMember){
-    //     $userManager = new UserManager();
-    //     $connex = $userManager -> getMemberInfos($idMember);
-    //     $childManager = new ChildManager();
-    //     $connex = $childManager -> watchChild($idChild);
-    //     require 'views/frontend/croquis2.php';
-    // }
     // ADD CHILD
     function addChild($lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies){
         $childManager = new \Src\Models\ChildManager();

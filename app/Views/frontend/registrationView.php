@@ -52,7 +52,7 @@
   <div class="input-group-prepend">
     <label class="input-group-text" for="inputGroupSelect01">Parentalité</label>
   </div>
-  <select class="custom-select" name="parentCo" id="inputGroupSelect01">
+  <select class="custom-select" name="parentCo" required id="inputGroupSelect01">
     <option selected>Choisissez...</option>
     <option value="0">Je suis ici en tant que grand-parent</option>
     <option value="1">Je suis ici uniquement en tant cas que parent</option>

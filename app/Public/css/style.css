@@ -44,7 +44,7 @@ ul{
     @-o-keyframes animRoule{ 
     from {-o-transform:rotate(0deg); left:0px;} to {-o-transform:rotate(360deg); left:350px;} 
     }
-.photoChild:hover{
+.photoChild:hover, .photoChild2:hover{
     border:2px solid black;
 } 
 .childName{
@@ -57,7 +57,7 @@ ul{
         0% {transform: scale(0);}         
         100% {transform: scale(1);}
     }
-.avatarBox a{
+.avatarBox a, .photoChild2{
     width: 200px;
     height: 200px;
     border-radius:50%;
@@ -74,13 +74,6 @@ ul{
 
 /*--------REGISTRATION VIEW------------*/
 
-/* .regView{
-    display: flex;
-    flex-direction: column;
-}
-.regContent{
-
-}*/
 .regForm{
     margin-bottom:100px;
     border:1px solid black;

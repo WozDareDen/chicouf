@@ -36,7 +36,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#">Mon profil</a>
                         <a class="dropdown-item pink" data-bubble="2" href="#">Mes messages </a>
-                        <a class="dropdown-item" href="#">Déconnexion</a>
+                        <a class="dropdown-item" href="index.php?action=deco">Déconnexion</a>
                     </div>
                 </div></div>
         </header>
