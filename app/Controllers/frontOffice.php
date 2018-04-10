@@ -4,10 +4,10 @@ namespace Src\Controllers;
 
 class FrontOffice{
 // GET USER TO DB & BACK TO HOMEVIEW
-    function newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo){
+    function newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $gender){
         if(preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $passCo)){              
             $userManager = new \Src\Models\UserManager();
-            $connex = $userManager -> addUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo);
+            $connex = $userManager -> addUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo,$gender);
             $connex11 = $userManager -> getMaxIdMember();
             $idMember111 = $connex11->fetch();
             $idMember = $idMember111[0];
@@ -82,16 +82,22 @@ class FrontOffice{
         require 'app/Views/frontend/childView2.php';
     }
     // ADD CHILD
-    function addChild($lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies){
+    function addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies){
         $childManager = new \Src\Models\ChildManager();
-        $infos1 = $childManager -> addNewChild($lastName, $firstName, $birthdate, $parent1, $parent2);
+        $infos1 = $childManager -> addNewChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2);
         $infos11 = $childManager -> getMaxIdChild();
         $idChild111 = $infos11->fetch();
         $idChild = $idChild111[0];
         $infos2 = $childManager -> addNewMeal($favMeal, $hatedMeal,$idChild);
         $infos3 = $childManager -> addNewHealth($meds, $allergies,$idChild);
-        $infoJoin = $childManager -> addToMyParent($idChild);
-        echo 'Success !';
+        $idMember = $_SESSION['id'];
+        $infoJoin = $childManager -> addToMyParent($idChild,$idMember);
+        $userManager = new \Src\Models\UserManager();
+        $infosParent = $userManager -> getFamilyId($idMember);
+        $infosParent2 = $infosParent->fetch();
+        $idFamily = $infosParent2['idFamily'];
+        $infos4 = $childManager -> addToMyFamily($idChild,$idFamily);
+        header('Location: index.php?action=memberView&idMember='.$_SESSION['id']); 
     }
     // UPDATE CHILD
     function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies){

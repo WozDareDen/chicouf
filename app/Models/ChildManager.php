@@ -24,10 +24,16 @@ public function getHealthInfos($idMember){
     return $connex3;
 }
 // CHILD CREATION
-public function addNewChild($lastName,$firstName,$birthdate,$parent1,$parent2){
+public function addNewChild($lastName,$firstName,$birthdate,$gender,$parent1,$parent2){
+    if($gender == 0){
+        $img = 'app/Public/uploads/avatarBoy.png';
+    }
+    else{
+        $img = 'app/Public/uploads/avatarGirl.png';
+    }    
     $db = $this -> dbConnect();
-    $infos1 = $db->prepare('INSERT INTO children(Surname,Firstname,Birthdate,Parent1,Parent2) VALUES(?,?,?,?,?)');
-    $infos1->execute(array($lastName,$firstName,$birthdate,$parent1,$parent2));
+    $infos1 = $db->prepare('INSERT INTO children(Surname,Firstname,Birthdate,gender,Parent1,Parent2,img) VALUES(?,?,?,?,?,?,?)');
+    $infos1->execute(array($lastName,$firstName,$birthdate,$gender, $parent1,$parent2,$img));
     return $infos1;
 }
 public function addNewMeal($favMeal,$hatedMeal,$idChild){
@@ -99,7 +105,16 @@ public function uploadPicture($target_file,$idChildren){
     $insertPicture->execute(array($target_file, intval($idChildren)));
     return $insertPicture;
 }
-public function addToMyParent($idChild){
-    
+public function addToMyParent($idChild,$idMember){
+    $db = $this -> dbConnect();
+    $req = $db->prepare('INSERT INTO member_children(idMember,idChildren) VALUES(?,?)');
+    $req->execute(array($idMember, $idChild));
+    return $req;
+}
+public function addToMyFamily($idChild, $idFamily){
+    $db = $this -> dbConnect();
+    $request = $db->prepare('INSERT INTO family_children(idFamily, idChildren) VALUES(?,?)');
+    $request->execute(array($idFamily,$idChild));
+    return $request;
 }
 }

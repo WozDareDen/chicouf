@@ -37,6 +37,11 @@
             <input type="date" id="birthdate" name="birthDateCo" required="valid" cols="30" placeholder="entrez sa date de naissance">
           </div>
           <div class="form-group col-lg-12">
+            <label for="sexe">Sexe de l'enfant</label><br />
+            <input type="radio" name="genderCo" value="0" checked> Garçon<br>
+            <input type="radio" name="genderCo" value="1"> Fille<br>
+          </div>
+          <div class="form-group col-lg-12">
             <label for="parent1">Parent 1</label><br />
             <input type="text" id="parent1" name="parent1Co" required="valid" cols="30" placeholder="entrez le nom du 1er parent">
             </div>
