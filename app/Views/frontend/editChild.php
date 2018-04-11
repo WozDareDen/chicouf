@@ -28,11 +28,11 @@ $newData = $data->fetch()
 ?>
 <form method="post" action="index.php?action=updateChild&idChildren=<?= $newData['idChildren'] ?>">
 <div class="form-group  col-lg-10">
-<div class="sr-only"><?= $newData['idMember']; ?></div>
             <h2>IDENTITE</h2>
             <label for="lastname">Nom</label><br />
             <input type="text" id="lastname" name="lastNameCo" autofocus="on" required="valid" cols="30" value="<?= $newData['Surname']; ?>" /> 
-            <input class="sr-only" type="text" name="idMember" value="<?= $newData['idMember']; ?>" />
+            <input hidden type="text" name="idMember" value="<?= $newData['idMember']; ?>" />
+            <input hidden type="text" name="checkParent" value="<?= $check2['firstname']; ?>" />
           </div>
           <div class="form-group col-lg-12"> 
             <label for="firstname">Prénom</label><br />
@@ -40,7 +40,7 @@ $newData = $data->fetch()
           </div>
           <div class="form-group col-lg-12">
             <label for="birthdate">Date de Naissance</label><br />
-            <input type="date" id="birthdate" name="birthDateCo" required="valid" cols="30"value="<?= $newData['Birthdate']; ?>" >
+            <input type="date" id="birthdate" name="birthDateCo" required="valid" cols="30" value="<?= $newData['Birthdate']; ?>" >
           </div>
           <div class="form-group col-lg-12">
             <label for="parent1">Parent 1</label><br />
@@ -79,7 +79,7 @@ $newConnex3 = $connex3->fetch()
             
           </div>
 </form>
-<a href="index.php?action=deleteChild&idMember=<?= $newData['idMember'] ?>&idChildren=<?= $newData['idChildren'] ?>"><button class="btn btn-danger" name="updateChild">Supprimer</button></a>
+<a href="index.php?action=deleteChild&idMember=<?= $_SESSION['id'] ?>&idChildren=<?= $newData['idChildren'] ?>"><button class="btn btn-danger" name="updateChild">Supprimer</button></a>
 
 <?php $content = ob_get_clean(); ?>
 <!--template.php-->

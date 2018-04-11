@@ -51,28 +51,49 @@ try{
 
         }
         // CHILDREN ACTIONS
-        elseif($_GET['action'] == 'memberView'){
-            $idMember = $_GET['idMember'];
-            $frontoffice->goToMember($idMember);
+        elseif($_GET['action'] == 'memberView'){            
+            $idMember = $_GET['idMember'];     
+            if(isset($_SESSION['id'])){          
+                if($_SESSION['id'] === $idMember){
+                    $frontoffice->goToMember($idMember);
+                }
+                else{
+                    throw new \Exception('Vous devez être connecté');
+                }
+            }
+            else{
+                throw new \Exception('Vous devez être connecté');
+            }
         }
         // MOVE TO CREATE CHILD VIEW
         elseif($_GET['action'] == 'createChild'){
-            $frontoffice->goToCreateChild();
+            if(isset($_SESSION['id'])){
+                $frontoffice->goToCreateChild();
+            }
+            else{
+                throw new \Exception('Vous devez être connecté');
+            }
         }
+    
         // ADD NEW CHILD
         elseif($_GET['action'] == 'addChild'){
-            $lastName = htmlspecialchars($_POST['lastNameCo']);
-            $firstName = htmlspecialchars($_POST['firstNameCo']);
-            $birthdate = $_POST['birthDateCo'];
-            $gender = $_POST['genderCo'];
-            $parent1 = htmlspecialchars($_POST['parent1Co']);
-            $parent2 = htmlspecialchars($_POST['parent2Co']);
-            $favMeal = htmlspecialchars($_POST['favoriteMealCo']);
-            $hatedMeal = htmlspecialchars($_POST['hatedMealCo']);
-            $meds = htmlspecialchars($_POST['medsCo']);
-            $allergies = htmlspecialchars($_POST['allergiesCo']);
-            $frontoffice->addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
-        }
+            if(($_SESSION['id'])){
+                $lastName = htmlspecialchars($_POST['lastNameCo']);
+                $firstName = htmlspecialchars($_POST['firstNameCo']);
+                $birthdate = $_POST['birthDateCo'];
+                $gender = $_POST['genderCo'];
+                $parent1 = htmlspecialchars($_POST['parent1Co']);
+                $parent2 = htmlspecialchars($_POST['parent2Co']);
+                $favMeal = htmlspecialchars($_POST['favoriteMealCo']);
+                $hatedMeal = htmlspecialchars($_POST['hatedMealCo']);
+                $meds = htmlspecialchars($_POST['medsCo']);
+                $allergies = htmlspecialchars($_POST['allergiesCo']);
+                $frontoffice->addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
+            }
+            else{
+                throw new \Exception('Vous devez être connecté');
+            }
+        }            
         // ADD CHILDREN AVATAR
         elseif($_GET['action'] == 'uploadPic'){
             $idMember = $_GET['idMember'];
@@ -80,24 +101,33 @@ try{
             $frontoffice->uploadPic($idMember,$idChildren);
         }
         elseif($_GET['action'] == 'goToUpdateChild'){
-            // $idMember = $_GET['idMember'];
             $idChild = $_GET['idChildren'];
             $frontoffice->goToUpdateChild($idChild);
         }
         // UPDATE CHILD
         elseif($_GET['action'] == 'updateChild'){
-            $idMember = htmlspecialchars($_POST['idMember']);
-            $idChildren = $_GET['idChildren'];
-            $lastName = htmlspecialchars($_POST['lastNameCo']);
-            $firstName = htmlspecialchars($_POST['firstNameCo']);
-            $birthdate = $_POST['birthDateCo'];
-            $parent1 = htmlspecialchars($_POST['parent1Co']);
-            $parent2 = htmlspecialchars($_POST['parent2Co']);
-            $favMeal = htmlspecialchars($_POST['favoriteMealCo']);
-            $hatedMeal = htmlspecialchars($_POST['hatedMealCo']);
-            $meds = htmlspecialchars($_POST['medsCo']);
-            $allergies = htmlspecialchars($_POST['allergiesCo']);
-            $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
+            if(isset($_SESSION['id'])){
+                $idMember = $_SESSION['id'];
+                $idChildren = $_GET['idChildren'];
+                $lastName = htmlspecialchars($_POST['lastNameCo']);
+                $firstName = htmlspecialchars($_POST['firstNameCo']);
+                $birthdate = $_POST['birthDateCo'];
+                $parent1 = htmlspecialchars($_POST['parent1Co']);
+                $parent2 = htmlspecialchars($_POST['parent2Co']);
+                $favMeal = htmlspecialchars($_POST['favoriteMealCo']);
+                $hatedMeal = htmlspecialchars($_POST['hatedMealCo']);
+                $meds = htmlspecialchars($_POST['medsCo']);
+                $allergies = htmlspecialchars($_POST['allergiesCo']);
+                    if($_SESSION['firstname'] === $parent1 || $_SESSION['firstname'] === $parent2){
+                    $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
+                    }
+                    else{
+                        throw new \Exception('Vous devez être connecté');
+                    }                    
+            }
+            else{
+                throw new \Exception('Vous devez être connecté');
+            }
         }
         // DELETE CHILD
         elseif($_GET['action'] == 'deleteChild'){

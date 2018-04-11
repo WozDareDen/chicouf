@@ -22,7 +22,7 @@
 
  <h1>CREATION D'UNE FICHE ENFANT</h1>           
 
-<form method="post" action="index.php?action=addChild&idMember=<?= $newData['idMember']; ?>">
+<form method="post" action="index.php?action=addChild&idMember=<?= $_SESSION['id']; ?>">
 <div class="form-group  col-lg-10">
             <h2>IDENTITE</h2>
             <label for="lastname">Nom</label><br />

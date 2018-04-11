@@ -97,7 +97,7 @@ class FrontOffice{
         $infosParent2 = $infosParent->fetch();
         $idFamily = $infosParent2['idFamily'];
         $infos4 = $childManager -> addToMyFamily($idChild,$idFamily);
-        header('Location: index.php?action=memberView&idMember='.$_SESSION['id']); 
+        header('Location: index.php?action=memberView&idMember='.$idMember); 
     }
     // UPDATE CHILD
     function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies){
@@ -114,7 +114,18 @@ class FrontOffice{
         $data = $childManager -> getChild($idChild);
         $connex2 = $childManager -> getMeals($idChild);
         $connex3 = $childManager -> getHealth($idChild);
-        require 'App/Views/frontend/editChild.php';
+        $newData = $data->fetch();
+            if(isset($_SESSION['firstname'])){
+                if($_SESSION['firstname'] === $newData['Parent1'] || $_SESSION['firstname'] === $newData['Parent2']){
+                    require 'App/Views/frontend/editChild.php';
+                }
+                else{
+                    throw new \Exception('Cette page n\'existe pas !');
+                }
+            }
+            else{
+                throw new \Exception('Cette page n\'existe pas !');
+            }
     }
     // CREATE CHILD VIEW
     function goToCreateChild(){

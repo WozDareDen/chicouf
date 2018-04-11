@@ -52,7 +52,7 @@ class UserManager extends Manager
     public function change($lastName, $pass, $mdp, $mail, $bornDate,  $city, $id){
         $db = $this -> dbConnect();
         $ins = $db->prepare('UPDATE members SET Surname = ?, pass = ?, mail = ?, BirthDate = ?, city = ? WHERE id = ?');
-        $ins = $db->execute(array($lastName, $pass, $mdp, $mail, $bornDate,  $city, $id));
+        $ins->execute(array($lastName, $pass, $mdp, $mail, $bornDate,  $city, $id));
         return $ins;
     }
 }
