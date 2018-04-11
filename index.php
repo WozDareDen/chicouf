@@ -13,9 +13,15 @@ try{
             $pass2Co = htmlspecialchars($_POST['pass2Co']);
             $mailCo = htmlspecialchars($_POST['mailCo']);
             $parentCo = htmlspecialchars($_POST['parentCo']);
+            $gender = htmlspecialchars($_POST['genderCo']);
                 if($passCo == $pass2Co){
+<<<<<<< HEAD
                     if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){
                         $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo);
+=======
+                    if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){                        
+                        $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $gender);                        
+>>>>>>> 6cf9a4384b9ad704377aedcad1ffae68d08461ff
                     }
                     else{
                         throw new Exception('votre adresse mail n\'est pas valide');
@@ -63,13 +69,14 @@ try{
             $lastName = htmlspecialchars($_POST['lastNameCo']);
             $firstName = htmlspecialchars($_POST['firstNameCo']);
             $birthdate = $_POST['birthDateCo'];
+            $gender = $_POST['genderCo'];
             $parent1 = htmlspecialchars($_POST['parent1Co']);
             $parent2 = htmlspecialchars($_POST['parent2Co']);
             $favMeal = htmlspecialchars($_POST['favoriteMealCo']);
             $hatedMeal = htmlspecialchars($_POST['hatedMealCo']);
             $meds = htmlspecialchars($_POST['medsCo']);
             $allergies = htmlspecialchars($_POST['allergiesCo']);
-            $frontoffice->addChild($lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
+            $frontoffice->addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
         }
         // ADD CHILDREN AVATAR
         elseif($_GET['action'] == 'uploadPic'){

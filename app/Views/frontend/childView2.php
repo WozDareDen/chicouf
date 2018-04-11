@@ -29,7 +29,6 @@
     <div class="col-sm-10">      
         <!--***********************ARTICLES********************-->
         <h2 class="row">Bienvenue sur votre Espace Membre <?= $_SESSION['firstname'] ?> !</h2>
-                    <a class="dropdown-item" href="index.php?action=deco">Déconnexion</a>
                   
             <div class="row"> 
 <?php
