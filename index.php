@@ -137,13 +137,14 @@ try{
         }
         // FAMILY ACTIONS
         elseif($_GET['action'] == 'familyLink'){
-            $idFamily = $_GET['idFamily'];
+            $idFamily = $_GET['id'];
             $frontoffice->goToFamily($idFamily);
         }
         elseif($_GET['action'] == 'profileView'){
             $idMember = $_GET['idMember'];
             $frontoffice->goToMemberBoard($idMember);
-        }elseif ($_GET['action'] == 'editPassword'){
+        }
+        elseif ($_GET['action'] == 'editPassword'){
 
         }elseif ($_GET['action'] == 'changeProfile'){ //modifier sa fiche profile cedric
             $id = $_GET['id'];

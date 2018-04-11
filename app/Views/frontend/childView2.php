@@ -7,7 +7,7 @@
             <ul>
                 <li><a href="#"><i class="fa fa-home" style="font-size:30px;"></i></a>
                 </li>
-                <li>Accéder à votre Espace Famille
+                <li><a href="index.php?action=familyLink&id=<?= $dataFam2['idFamily'] ?>">Accéder à votre Espace Famille</a>
                 </li>
                 <li><a href="index.php?action=createChild">Créer une fiche Enfant</a>
                 </li>
