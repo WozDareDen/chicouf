@@ -27,7 +27,6 @@
 <div class="container-fluid regView">
     <div class="row">
         <div class="col-lg-4 regContent" >
-
             <form method="post" class="regForm" name="regForm" action="index.php?action=addUser">
                 <div class="form-group  col-lg-12">
                     <label for="lastname">Nom</label><br />
@@ -36,6 +35,11 @@
                 <div class="form-group col-lg-12">
                     <label for="firstname">Prénom</label><br />
                     <input type="text" id="firstname" class="champ" name="firstNameCo" required="valid" placeholder="entrez votre prénom" >
+                </div>
+                <div class="form-group col-lg-12">
+                    <label for="sexe">Genre</label><br />
+                    <input type="radio" name="genderCo" value="0" checked> Homme<br>
+                    <input type="radio" name="genderCo" value="1"> Femme<br>
                 </div>
                 <div class="form-group col-lg-12">
                     <label for="pass">Mot de passe</label><br />
