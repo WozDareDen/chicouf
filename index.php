@@ -14,12 +14,12 @@ try{
             $mailCo = htmlspecialchars($_POST['mailCo']);
             $parentCo = htmlspecialchars($_POST['parentCo']);
                 if($passCo == $pass2Co){
-                    if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){                        
-                        $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo);                        
+                    if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){
+                        $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo);
                     }
                     else{
                         throw new Exception('votre adresse mail n\'est pas valide');
-                    }                    
+                    }
                 }
                 else{
                     throw new Exception('vos mots de passes ne sont pas identiques');
@@ -39,8 +39,8 @@ try{
             }
             else{
                     throw new Exception('veuillez renseignez vos identifiants');
-            }    
-        }     
+            }
+        }
         // USER DISCONNECTION
         elseif($_GET['action'] == 'deco'){
             $frontoffice->disconnected();
@@ -111,10 +111,12 @@ try{
         elseif($_GET['action'] == 'profileView'){
             $idMember = $_GET['idMember'];
             $frontoffice->goToMemberBoard($idMember);
+        }elseif ($_GET['action'] == 'editPassword'){
+
         }
         else{
             echo 'banane';
-        }    
+        }
     }
     else{
         // $frontoffice->subView();
