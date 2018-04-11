@@ -26,7 +26,6 @@
     <div class="container-fluid regView">
         <div class="row">
             <div class="col-lg-4 regContent" >
-
                 <form method="post" class="regForm" action="index.php?action=addUser">
                       <div class="form-group  col-lg-12">
                         <label for="lastname">Nom</label><br />
