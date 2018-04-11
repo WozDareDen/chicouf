@@ -86,61 +86,6 @@
     </div>
 
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="col-lg-6">
-                <div class="pos-f-t">
-                    <div class="collapse" id="navbarToggleExternalContent">
-                        <div class=" p-4" style='background-color:rgb(2, 73, 89); color:white;'>
-                            <h4 class="text-white">Gérer sa Fiche ENFANT</h4>
-                            <span class="text-muted">Toggleable via the navbar brand.</span>
-                            <span class="text-muted"> J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter.</span>
-                        </div>
-                    </div>
-                    <nav class="navbar navbar-dark "style='background-color:rgb(2, 73, 89); color:white;'role='navigation'>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </nav>
-
-                </div>
-
-                <div class="pos-f-t">
-                    <div class="collapse" id="navbarToggleExternalContent2">
-                        <div class=" p-4" style='background-color:#00FA9A; color:white;'>
-                            <h4 class="text-white">Gérer sa Fiche PARENT</h4>
-                            <span class="text-muted">Toggleable via the navbar brand.</span>
-                            <span class="text-muted"> J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter.</span>
-                        </div>
-                    </div>
-                    <nav class="navbar navbar-dark "style='background-color:#00FA9A; color:white;'role='navigation'>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent2" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </nav>
-
-                </div>
-
-
-                <div class="pos-f-t">
-                    <div class="collapse" id="navbarToggleExternalContent3">
-                        <div class=" p-4" style='background-color:rgb(2, 73, 89); color:white;'>
-                            <h4 class="text-white">Gérer sa Fiche FAMILLE</h4>
-                            <span class="text-muted">Toggleable via the navbar brand.</span>
-                            <span class="text-muted"> J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter. J'ai lu les règles d'usage et j'accepte de les respecter.</span>
-                        </div>
-                    </div>
-                    <nav class="navbar navbar-dark "style='background-color:rgb(2, 73, 89); color:white;'role='navigation'>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent3" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </nav>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
 
 
 
@@ -148,7 +93,6 @@
 
 </div>
 
-
 <?php $content = ob_get_clean(); ?>
 <!--template.php-->
-<?php require 'template.php'; ?>
+<?php require 'templateHeadScripts.php'; ?>
