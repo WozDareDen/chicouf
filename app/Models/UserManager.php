@@ -48,4 +48,11 @@ class UserManager extends Manager
         $infosParent->execute(array($idMember));
         return $infosParent;
     }
+
+    public function change($lastName, $pass, $mdp, $mail, $bornDate,  $city, $id){
+        $db = $this -> dbConnect();
+        $ins = $db->prepare('UPDATE members SET Surname = ?, pass = ?, mail = ?, BirthDate = ?, city = ? WHERE id = ?');
+        $ins = $db->execute(array($lastName, $pass, $mdp, $mail, $bornDate,  $city, $id));
+        return $ins;
+    }
 }

@@ -167,4 +167,13 @@ class FrontOffice{
         }
         
     }
+
+    //change profile
+    function changeProfile($id, $pass, $mdp, $mail, $bornDate, $lastName, $city){
+        if(preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $mdp)){
+            $changeYourProfile = new \Src\Models\UserManager();
+            $changeYp = $changeYourProfile->change($id, $pass, $mdp, $mail, $bornDate, $lastName, $city);
+            header('Location: index.php?action=changeProfile&id');
+        }
+    }
 }

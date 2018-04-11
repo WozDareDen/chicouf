@@ -115,6 +115,18 @@ try{
             $frontoffice->goToMemberBoard($idMember);
         }elseif ($_GET['action'] == 'editPassword'){
 
+        }elseif ($_GET['action'] == 'changeProfile'){ //modifier sa fiche profile cedric
+            $id = $_GET['id'];
+            $pass = $_POST['passCo'];
+            $mdp = password_hash($pass, PASSWORD_DEFAULT);
+            $mail = htmlspecialchars($_POST['mailCo']);
+            $bornDate = htmlspecialchars($_POST['bornDate']);
+            $lastName = htmlspecialchars($_POST['lastName']);
+            $city = htmlspecialchars($_POST['city']);
+            $frontoffice->changeProfile($id, $pass, $mdp, $mail, $bornDate, $lastName, $city);
+
+
+
         }
         else{
             echo 'banane';
