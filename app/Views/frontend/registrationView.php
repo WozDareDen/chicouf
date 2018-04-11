@@ -1,64 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-<<<<<<< HEAD
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta http-equiv="X-UA-compatible" content="IE=edge" />
-        <meta name="description" content="Blog du romancier Jean Forteroche" />
-        <meta name="keywords" content="Jean Forteroche, ecrivain, blog, roman, Alaska" />
-<!--******************Meta Facebook**************-->        
-        <meta property="og:title" content="Blog du romancier Jean Forteroche" />
-        <meta property="og:url" content="" />
-        <meta property="og:site_name" content="JeanForteroche.fr" />
-        <meta property="og:description" content="Blog du romancier Jean Forteroche" />
-        <meta property="og:image" content="public/images/charlesfav.png" />
-<!--******************Meta Twitter**************-->             
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Blog du romancier Jean Forteroche" />
-        <meta name="twitter:url" content="" />
-        <meta name="twitter:description" content="Blog du romancier Jean Forteroche" />
-        <meta name="twitter:image" content="public/images/charlesfav.png" />
-        <title>Formulaire d'inscription</title>
-        <link href="app/Public/css/style.css" rel="stylesheet" /> 
-        <link rel="icon" type="image/png" href="public/images/charlesfav.png" />
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head> 
-    <div class="container-fluid regView">
-        <div class="row">
-            <div class="col-lg-4 regContent" >
-                <form method="post" class="regForm" action="index.php?action=addUser">
-                      <div class="form-group  col-lg-12">
-                        <label for="lastname">Nom</label><br />
-                        <input type="text" id="lastname" class="champ" name="lastNameCo" required="valid" placeholder="entrez votre nom" >
-                      </div>
-                      <div class="form-group col-lg-12">
-                        <label for="firstname">Prénom</label><br />
-                        <input type="text" id="firstname" class="champ" name="firstNameCo" required="valid" placeholder="entrez votre prénom" >
-                      </div>
-                      <div class="form-group col-lg-12">
-                        <label for="pass">Mot de passe</label><br />
-                        <input type="password" id="pass" class="champ" name="passCo" required="valid" autocomplete="off" placeholder="entrez votre mot de passe">
-                          <div id="pop">
-                              <p>Votre mot de passe doit contenir: <br>
-
-                              </p>
-                          </div>
-                      </div>
-                      <div class="form-group col-lg-12">
-                        <label for="pass2">Confirmation du mot de passe</label><br />
-                        <input type="password" id="pass2" class="champ" name="pass2Co" required="valid" autocomplete="off" placeholder="confirmez-le">
-                      </div>
-                      <div class="form-group col-lg-12 ">
-                        <label for="mail">Adresse email</label><br />
-                        <input type="email" id="mail" class="champ" name="mailCo" required="valid" placeholder="renseignez votre email" >
-                          <div id="popMail">Votre mail n'est pas conforme</div>
-
-                        <small id="emailHelp" class="form-text text-muted">Nous ne partagerons votre email avec aucun tiers.</small>
-                      </div>
-                      <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-=======
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -148,7 +89,6 @@
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
->>>>>>> 51cd3c3f61ee6432b7d2b84f074d6172b271c3c3
                         <label class="input-group-text" for="inputGroupSelect01">Parentalité</label>
                     </div>
                     <select required class="custom-select" name="parentCo" id="inputGroupSelect01">
