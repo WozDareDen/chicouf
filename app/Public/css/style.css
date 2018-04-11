@@ -85,7 +85,11 @@ ul{
 
 #pop{
     display: none;
-    border: 1px solid;
+    width: max-content;
+}
+
+#buttonPassword{
+
 }
 #popMail{
     display: none;

@@ -15,9 +15,8 @@ $(document).ready(function () {
     });
 
 
-// EMAIL VALIDATION
+// PASSWORD VALIDATION
 var $mdp = $('#regFormPass');
-var regPassTest = $mdp.value;
 $mdp.keyup(function(){
     if ($mdp[0].value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/)) {
         document.getElementById('pop').style.display = 'none';
@@ -51,8 +50,9 @@ $('#regFormPass2').on('keyup',function(){
         $('#message').html('Les mots de passe ne correspondent pas').css('color', 'red');
 });
 
+    var $mail = $('#mail');
     $mail.keyup(function () {
-        if ($($mail)[0].value.match(/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/)) {
+        if ($mail[0].value.match(/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/)) {
             console.log('mailTrue');
             document.getElementById('popMail').style.display = 'none';
         }else {
