@@ -11,10 +11,10 @@
 if(empty($_SESSION['firstname'])){
 ?>
             <div>    
-              <?php require 'app/Views/frontend/templateMain.php' ?>
+              <?php require 'app/Views/frontend/templateNav.php' ?>
             </div>
             <div style="width:30%;border:1px solid black;">
-                <img src="app/Public/uploads/logo.png" style="width:100%;" />
+                <img class="logo" id="logo" src="app/Public/uploads/logo.png" style="width:100%;" />
             </div>
 
             <div>

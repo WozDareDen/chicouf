@@ -78,3 +78,4 @@ function myFunction2() {
             y.type = "password";
         }
 }
+
