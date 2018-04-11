@@ -5,14 +5,14 @@ namespace Src\Models;
 class UserManager extends Manager
 { 
     // ADD NEW USER
-    public function addUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $gender){
-        if($gender == 0 && $parentCo == 0){
+    public function addUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo){
+        if($genderCo == 0 && $parentCo == 0){
             $img = 'app/Public/uploads/avatarGrandPa.png';
         }
-        elseif($gender == 0 && $parentCo == 1){
+        elseif($genderCo == 0 && $parentCo == 1){
             $img = 'app/Public/uploads/avatarMan.png';
         }
-        elseif($gender == 1 && $parentCo == 0){
+        elseif($genderCo == 1 && $parentCo == 0){
             $img = 'app/Public/uploads/avatarGrandMa.png';
         }
         else{
@@ -20,8 +20,8 @@ class UserManager extends Manager
         }
         $pass_hache = password_hash($passCo, PASSWORD_DEFAULT);
         $db = $this -> dbConnect(); 
-        $connex = $db->prepare('INSERT INTO members(firstname, surname, pass, mail, parentHood, gender, img, modo, registration_date) VALUES(?,?,?,?,?,?,"0",CURDATE())');
-        $connex->execute(array($firstNameCo, $lastNameCo, $pass_hache, $mailCo, $parentCo, $gender, $img));
+        $connex = $db->prepare('INSERT INTO members(firstname, surname, pass, mail, parentHood, gender, img, modo, registration_date) VALUES(?,?,?,?,?,?,?,"0",CURDATE())');
+        $connex->execute(array($firstNameCo, $lastNameCo, $pass_hache, $mailCo, $parentCo, $genderCo, $img));
         return $connex;
         }
     public function getMaxIdMember(){

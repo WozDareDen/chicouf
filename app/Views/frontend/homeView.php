@@ -1,38 +1,25 @@
 <?php $title = 'Accueil' ?>
 <?php ob_start(); ?>
+<div id="header-wrapper" class="wrapper">
+    <div id="header">
 
 
 
-<h1>Chicouf.fr !</h1>
+<?php
 
-<div id="identify">
-<?php 
 //LOGIN BOX
 if(empty($_SESSION['firstname'])){
 ?>
-      <button class="identifyB">s'identifier</button>
-        <div class="register">
-          <div class="close">X</div>
-          <form action="index.php?action=record" method="post">
-            <div>
-            <label for="firstname">Prénom</label><br />
-            <input type="text" id="firstname" name="firstname" placeholder="entrez votre prénom">
+            <div>    
+              <?php require 'app/Views/frontend/templateNav.php' ?>
             </div>
-            <div>
-            <label for="surname">Nom</label><br />
-            <input type="text" id="surname" name="surname" placeholder="entrez votre nom">
-            </div>                     
-            <div>
-            <label for="pass">Mot de passe</label><br />
-            <input type="password" id="pass" name="pass" autocomplete="off" placeholder="et votre mot de passe">
+            <div style="width:30%;border:1px solid black;">
+                <img class="logo" id="logo" src="app/Public/uploads/logo.png" style="width:100%;" />
             </div>
+
             <div>
-            <input id="submit" type="submit" value="GO !">
+              <?php require 'app/Views/frontend/templateLogin.php' ?> 
             </div>
-            <div class="compte">Pas encore inscrit ? <span class="compteLien"><a href="index.php?action=subView">Créez un compte !</a></span>
-            </div>                      
-          </form>
-        </div>
 <?php 
 }
 else{
@@ -41,26 +28,11 @@ else{
 <?php 
 }
 ?>
-    </div>
+</div>
+</div>
 
-
-
-
-<style>
-
-</style>
-<script>
-$('.identifyB').click(function(){
-    $('.register').slideToggle("fast");
-    $('.identifyB').css('display','none');});
-
-$('.close').click(function(){
-    $('.register').css('display','none');
-    $('.identifyB').css('display','block');
-});
-</script>
 
 
 <?php $content = ob_get_clean(); ?>
 <!--template.php-->
-<?php require 'template.php'; ?>
+<?php require 'templateHeadScripts.php'; ?>

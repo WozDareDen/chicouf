@@ -13,10 +13,10 @@ try{
             $pass2Co = htmlspecialchars($_POST['pass2Co']);
             $mailCo = htmlspecialchars($_POST['mailCo']);
             $parentCo = htmlspecialchars($_POST['parentCo']);
-            $gender = htmlspecialchars($_POST['genderCo']);
+            $genderCo = htmlspecialchars($_POST['genderCo']);
                 if($passCo == $pass2Co){
                     if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){                        
-                        $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $gender);                        
+                        $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo);                        
                     }
                     else{
                         throw new Exception('votre adresse mail n\'est pas valide');

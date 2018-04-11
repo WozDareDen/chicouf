@@ -24,24 +24,7 @@ $mdp.keyup(function(){
         document.getElementById('pop').style.display = 'block';
     }
 });
-// SHOW/HIDE PASSWORD 1
-function myFunction() {
-    var x = document.getElementById("regFormPass"); 
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }    
-} 
-// SHOW/HIDE PASSWORD 2
-function myFunction2() {
-    var y = document.getElementById("regFormPass2");
-        if (y.type === "password") {
-            y.type = "text";
-        } else {
-            y.type = "password";
-        }
-}
+
 // PASSWORDS MATCH
 $('#regFormPass2').on('keyup',function(){
     if ($('#regFormPass').val() == $('#regFormPass2').val()) {
@@ -66,4 +49,33 @@ $('#regFormPass2').on('keyup',function(){
     });
 
 });
+
+$('.identifyB').click(function(){
+    $('.register').slideToggle("fast");
+    $('.identifyB').css('display','none');});
+
+$('.close').click(function(){
+    $('.register').css('display','none');
+    $('.identifyB').css('display','block');
+});
+
+// SHOW/HIDE PASSWORD 1
+function watchPW() {
+    console.log(x);
+    var x = document.getElementById("regFormPass"); 
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }    
+} 
+// SHOW/HIDE PASSWORD 2
+function myFunction2() {
+    var y = document.getElementById("regFormPass2");
+        if (y.type === "password") {
+            y.type = "text";
+        } else {
+            y.type = "password";
+        }
+}
 

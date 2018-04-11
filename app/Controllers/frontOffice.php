@@ -4,10 +4,10 @@ namespace Src\Controllers;
 
 class FrontOffice{
 // GET USER TO DB & BACK TO HOMEVIEW
-    function newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $gender){
+    function newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo){
         if(preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $passCo)){              
             $userManager = new \Src\Models\UserManager();
-            $connex = $userManager -> addUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo,$gender);
+            $connex = $userManager -> addUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo);
             $connex11 = $userManager -> getMaxIdMember();
             $idMember111 = $connex11->fetch();
             $idMember = $idMember111[0];
