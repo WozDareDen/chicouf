@@ -1,17 +1,19 @@
-<link rel="stylesheet" href="../../Public/css/style.css">
-<h1>Modifier votre profil</h1>
-
+<link rel="stylesheet" href="app/Public/css/style.css">
+<?php $modif = $recoverUs->fetch() ?>
+<h1>Modifier votre profil <?= $modif['Firstname'] ?></h1>
 <ul>
-    <li><h2>Modifier votre mot de passe</h2>
+    <h2>Modifier votre mot de passe</h2>
         <p><h4>Votre mot de passe doit comporter :</h4>
         Au moin une Majuscule. <br>
         Au moin un chiffre.<br>
         Et contenir entre 8 et 16 carractère.
         </p><br>
 
-        <form action="../../../index.php?action=changeProfile&id" method="post">
 
-            <input type="password" id="regFormPass" class="champ2 champPass" name="passCo"
+        <form action="index.php?action=changeProfile&id" method="post">
+    <li>
+        <h3>Nouveau mot de passe</h3>
+        <input type="password" id="regFormPass" class="champ2 champPass" name="passCo"
                    autocomplete="off" placeholder="entrez votre mot de passe">
             <input type="checkbox" onclick="myFunction()">Afficher le mot de passe <br>
 
@@ -34,23 +36,25 @@
             <input type="checkbox" onclick="myFunction2()">Afficher le mot de passe <br/>
             <span id="message"></span>
     </li>
-    <li><p>Modifier votre E-mail</p>
-        <label for="mail">Adresse email</label><br/>
-        <input type="email" id="mail" name="mailCo" placeholder="<?= htmlspecialchars($connex['mailCo']) ?>"
+    <li>
+        <h3>Modifier votre E-mail</h3>
+
+        <label for="mail"><h4>Nouvelle adresse mail</h4></label><br/>
+        <input type="email" id="mail" name="mailCo" placeholder="<?= $modif['mail'] ?>">
         <div id="popMail">
             <p>
                 Votre mail n'est pas conforme.
             </p>
         </div>
     </li>
-    <li><p>Modifier votre date de naissance</p>
-        <input type="text" id="dateBorn" name="bornDate"  placeholder="JJ/MM/AAAA">
+    <li><h3>Modifier votre date de naissance</h3>
+        <input type="text" id="dateBorn" name="bornDate"  placeholder="<?= $modif['BirthDate'] ?>">
     </li>
-    <li><p>Modifier votre nom</p>
-        <input type="text" id="dateBorn" name="lastName"  placeholder="votre nom">
+    <li><h3>Modifier votre nom</h3>
+        <input type="text" id="dateBorn" name="firstName"  placeholder="<?= $modif['Surname'] ?>"
     </li>
-    <li><p>Modifier votre Adresse</p>
-        <input type="text" id="addres" name="city"  placeholder="Votre adresse">
+    <li><h3>Modifier votre Adresse</h3>
+        <input type="text" id="address" name="city"  placeholder="<?= $modif['City'] ?>">
     </li>
 </ul>
 
@@ -58,7 +62,7 @@
 </form>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="../../Public/js/errorChecking.js"></script>
+<script src="app/Public/js/errorChecking.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"

@@ -49,10 +49,18 @@ class UserManager extends Manager
         return $infosParent;
     }
 
-    public function change($lastName, $pass, $mdp, $mail, $bornDate,  $city, $id){
+    public function user($idMember){ //recup donner utilisateur
         $db = $this -> dbConnect();
-        $ins = $db->prepare('UPDATE members SET Surname = ?, pass = ?, mail = ?, BirthDate = ?, city = ? WHERE id = ?');
-        $ins = $db->execute(array($lastName, $pass, $mdp, $mail, $bornDate,  $city, $id));
+        $req = $db->prepare('SELECT * FROM members WHERE idMember = ?');
+        $req->execute(array($idMember));
+        return $req;
+    }
+
+    public  function changeUser($name, $mdp, $mail, $dateBorn, $city, $idMember){
+        $db = $this -> dbConnect();
+        $ins = $db->prepare('UPDATE members SET Surname = ?, pass = ?, mail = ?, BirthDate = ?, city = ? WHERE idMember = ?');
+        $ins->execute(array($name, $mdp, $mail, $dateBorn, $city, $idMember));
         return $ins;
     }
+
 }

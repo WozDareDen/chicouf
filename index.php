@@ -16,7 +16,7 @@ try{
             $genderCo = htmlspecialchars($_POST['genderCo']);
                 if($passCo == $pass2Co){
                     if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){                        
-                        $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo);                        
+                        $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo);
                     }
                     else{
                         throw new Exception('votre adresse mail n\'est pas valide');
@@ -115,19 +115,22 @@ try{
             $frontoffice->goToMemberBoard($idMember);
         }elseif ($_GET['action'] == 'editPassword'){
 
-        }elseif ($_GET['action'] == 'changeProfile'){ //modifier sa fiche profile cedric
-            $id = $_GET['id'];
+        }elseif ($_GET['action'] == 'recoverUser'){
+            $idMember = $_SESSION['id'];
+            $frontoffice->recoverUser($idMember);
+        }elseif ($_GET['action'] == 'changeProfile'){ // changer valeur utilisateur
+            $idMember = $_SESSION['id'];
+            $name = htmlspecialchars($_POST['firstName']);
             $pass = $_POST['passCo'];
             $mdp = password_hash($pass, PASSWORD_DEFAULT);
             $mail = htmlspecialchars($_POST['mailCo']);
-            $bornDate = htmlspecialchars($_POST['bornDate']);
-            $lastName = htmlspecialchars($_POST['lastName']);
+            $dateBorn = htmlspecialchars($_POST['bornDate']);
             $city = htmlspecialchars($_POST['city']);
-            $frontoffice->changeProfile($id, $pass, $mdp, $mail, $bornDate, $lastName, $city);
-
-
+            $frontoffice->changeProfile($name, $mdp, $mail, $dateBorn, $city, $idMember);
 
         }
+
+
         else{
             echo 'banane';
         }

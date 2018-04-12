@@ -34,7 +34,7 @@
                         Mon Compte
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="app/views/frontend/profilView.php">Mon profil</a>
+                        <a class="dropdown-item" href="index.php?action=recoverUser&id=<?= $_SESSION['id'] ?>">Mon profil</a>
                         <a class="dropdown-item pink" data-bubble="2" href="#">Mes messages </a>
                         <a class="dropdown-item" href="index.php?action=deco">Déconnexion</a>
                     </div>
