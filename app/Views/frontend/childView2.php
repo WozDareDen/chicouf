@@ -44,15 +44,15 @@ foreach($bigData as $newData){
 
                 <article class="col-sm-6" style="background-color:purple;color:white;">
             <div>
-<h3><?= $newData['Firstname']; ?> <?= $newData['Surname']; ?> </h3>
+<h3><?= $newData['firstname']; ?> <?= $newData['surname']; ?> </h3>
 <a href="index.php?action=goToUpdateChild&idChildren=<?= $newData['idChildren']; ?>">Modifier cette fiche enfant</a>
 <div class="sr-only"><?= $newData['idMember']; ?></div>
 <p>Date de naissance : <?= $newData['new_birthdate']; ?></p>
-<p>Parent(s) : <?= $newData['Parent1']?> 
+<p>Parent(s) : <?= $newData['parent1']?> 
 <?php 
-if(!empty($newData['Parent2'])){
+if(!empty($newData['parent2'])){
 ?>
- & <?= $newData['Parent2']?>
+ & <?= $newData['parent2']?>
  <?php
  }
  ?> </p>
@@ -61,15 +61,15 @@ $newConnex2 = $connex2->fetch()
  ?>
 
 <h3>ALIMENTATION </h3>
-<p>Plats préférés : <?= $newConnex2['Favorite_meal']; ?></p>
-<p>Plats détestés : <?= $newConnex2['Hated_meal']; ?></p>
+<p>Plats préférés : <?= $newConnex2['favorite_meal']; ?></p>
+<p>Plats détestés : <?= $newConnex2['hated_meal']; ?></p>
 <?php
 $newConnex3 = $connex3->fetch()
 ?>
 <h3>TRAITEMENT</h3>
 
-<p>Noms, posologies, durées : <?= $newConnex3['Meds']; ?></p>
-<p>Allergies : <?= $newConnex3['Allergies']; ?></p>
+<p>Noms, posologies, durées : <?= $newConnex3['meds']; ?></p>
+<p>Allergies : <?= $newConnex3['allergies']; ?></p>
 
 
                 </article>

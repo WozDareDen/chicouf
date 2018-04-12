@@ -13,8 +13,8 @@ class FrontOffice{
             $idMember = $idMember111[0];
             $req = $userManager -> userById($idMember);
             $resultat = $req->fetch();
-            $_SESSION['firstname'] =  $resultat['Firstname'];
-            $_SESSION['parentHood'] = $resultat['ParentHood'];
+            $_SESSION['firstname'] =  $resultat['firstname'];
+            $_SESSION['parentHood'] = $resultat['parenthood'];
             $_SESSION['id'] =  $resultat['idMember'];
             $_SESSION['modo'] =  $resultat['modo'];
                 if($_SESSION['parentHood'] == 1){
@@ -34,8 +34,8 @@ class FrontOffice{
         $req = $userManager -> userConnex($firstname,$surname);
         $resultat = $req->fetch();
         $isPasswordCorrect = password_verify($pass,$resultat['pass']);
-        $_SESSION['firstname'] =  $resultat['Firstname'];
-        $_SESSION['parentHood'] = $resultat['ParentHood'];
+        $_SESSION['firstname'] =  $resultat['firstname'];
+        $_SESSION['parentHood'] = $resultat['parentHood'];
         $_SESSION['id'] =  $resultat['idMember'];
         $_SESSION['modo'] =  $resultat['modo'];
         $_SESSION['img'] =  $resultat['img'];
@@ -114,9 +114,11 @@ class FrontOffice{
         $data = $childManager -> getChild($idChild);
         $connex2 = $childManager -> getMeals($idChild);
         $connex3 = $childManager -> getHealth($idChild);
-        $newData = $data->fetch();
-            if(isset($_SESSION['firstname'])){
-                if($_SESSION['firstname'] === $newData['Parent1'] || $_SESSION['firstname'] === $newData['Parent2']){
+        $idMember = $_SESSION['id'];
+        $connex4 = $childManager -> getIdMember($idChild,$idMember);
+        $newConnex4 = $connex4->fetch();
+            if(isset($_SESSION['id'])){
+                if($_SESSION['id'] === $newConnex4['idMember']){
                     require 'App/Views/frontend/editChild.php';
                 }
                 else{
