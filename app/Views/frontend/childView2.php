@@ -1,5 +1,6 @@
 <?php $title = 'Espace Membre' ?>
 <?php ob_start(); ?>
+<?php require 'templateNav.php' ?>
           <!--***********************MENU & SECTION********************-->
           <div class="row">    
         <!--***********************MENU********************-->
@@ -108,9 +109,10 @@ $newConnex3 = $connex3->fetch()
 }
 ?>
 </div>
+</section>
+</div>
 
-
-
+<?php require 'templateFooter.php' ?>
 <?php $content = ob_get_clean(); ?>
 <!--template.php-->
-<?php require 'template.php'; ?>
+<?php require 'templateHeadScripts.php'; ?>

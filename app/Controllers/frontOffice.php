@@ -35,7 +35,7 @@ class FrontOffice{
         $resultat = $req->fetch();
         $isPasswordCorrect = password_verify($pass,$resultat['pass']);
         $_SESSION['firstname'] =  $resultat['firstname'];
-        $_SESSION['parentHood'] = $resultat['parentHood'];
+        $_SESSION['parenthood'] = $resultat['parenthood'];
         $_SESSION['id'] =  $resultat['idMember'];
         $_SESSION['modo'] =  $resultat['modo'];
         $_SESSION['img'] =  $resultat['img'];

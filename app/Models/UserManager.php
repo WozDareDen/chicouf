@@ -20,7 +20,7 @@ class UserManager extends Manager
         }
         $pass_hache = password_hash($passCo, PASSWORD_DEFAULT);
         $db = $this -> dbConnect(); 
-        $connex = $db->prepare('INSERT INTO members(firstname, surname, pass, mail, parentHood, gender, img, modo, registration_date) VALUES(?,?,?,?,?,?,?,"0",CURDATE())');
+        $connex = $db->prepare('INSERT INTO members(firstname, surname, pass, mail, parentHood, gender, img, modo, registrationDate) VALUES(?,?,?,?,?,?,?,"0",CURDATE())');
         $connex->execute(array($firstNameCo, $lastNameCo, $pass_hache, $mailCo, $parentCo, $genderCo, $img));
         return $connex;
         }
