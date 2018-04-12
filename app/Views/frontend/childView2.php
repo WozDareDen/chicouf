@@ -1,5 +1,8 @@
 <?php $title = 'Espace Membre' ?>
 <?php ob_start(); ?>
+
+<?php require 'templateHeader.php';
+?>
           <!--***********************MENU & SECTION********************-->
           <div class="row">    
         <!--***********************MENU********************-->
