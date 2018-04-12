@@ -92,7 +92,3 @@
 
 
 </div>
-
-<?php $content = ob_get_clean(); ?>
-<!--template.php-->
-<?php require 'templateHeadScripts.php'; ?>

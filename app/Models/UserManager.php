@@ -36,6 +36,19 @@ class UserManager extends Manager
         $req->execute(array($firstname,$surname));
         return $req;
     }
+    // BELONG PARENT TO CHILD
+    public function getBelongParent($mailCo){
+        $db = $this -> dbConnect();
+        $belong0 = $db->prepare('SELECT idMember FROM members WHERE mail = ?');
+        $belong0->execute(array($mailCo));
+        return $belong0;
+    }
+    public function belongParent($idMember,$idChild){
+        $db = $this -> dbConnect();
+        $belong2 = $db->prepare('INSERT INTO member_children(idMember,idChildren) VALUES(?,?)');
+        $belong2->execute(array($idMember,$idChild));
+        return $belong2;
+    }
     public function userById($idMember){
         $db = $this -> dbConnect();
         $req = $db->prepare('SELECT * FROM members WHERE idMember = ?');

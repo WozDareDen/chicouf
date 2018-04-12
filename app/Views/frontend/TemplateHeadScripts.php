@@ -26,7 +26,11 @@
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     </head> 
 
+        <?php require 'templateHeader.php' ?>
+        
         <?= $content ?>
+
+        <?php require 'templateFooter.php' ?>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="app/Public/js/errorChecking.js"></script>

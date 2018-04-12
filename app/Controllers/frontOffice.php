@@ -129,7 +129,7 @@ class FrontOffice{
                 throw new \Exception('Cette page n\'existe pas !');
             }
     }
-    // CREATE CHILD VIEW
+    // CREATECHILD VIEW
     function goToCreateChild(){
         require 'app/Views/frontend/createChild.php';
     }
@@ -139,7 +139,16 @@ class FrontOffice{
         $delete = $childManager -> EraseChild($idChildren);
         header('Location: index.php?action=memberView&idMember='.$idMember);
     }
-    // UPLOAD AVATAR
+    // BELONG PARENT
+    function belong($mailCo,$idChild){
+        $userManager = new \Src\Models\UserManager();
+        $belong0 = $userManager -> getBelongParent($mailCo);
+        $belong1 = $belong0->fetch();
+        $idMember = $belong1['idMember'];
+        $belong2 = $userManager -> belongParent($idMember,$idChild);
+        header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);
+    }  
+    // UPLOAD CHILD AVATAR
     function uploadPic($idMember,$idChildren){
         $target_dir = "app/Public/uploads/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);

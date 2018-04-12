@@ -32,11 +32,11 @@ try{
         }
         // USER RECORD
         elseif ($_GET['action'] == 'record'){
-            $firstname = htmlspecialchars($_POST['firstname']);
-            $surname = htmlspecialchars($_POST['surname']);
-            $pass = htmlspecialchars($_POST['pass']);
-            if(isset($firstname) && isset($surname) && isset($pass)){
-                    $frontoffice->connected($firstname,$surname,$pass);
+            if(isset($_POST['firstnameCo']) && isset($_POST['surnameCo']) && isset($_POST['passCo'])){
+                $firstname = htmlspecialchars($_POST['firstnameCo']);
+                $surname = htmlspecialchars($_POST['surnameCo']);
+                $pass = htmlspecialchars($_POST['passCo']);
+                $frontoffice->connected($firstname,$surname,$pass);
             }
             else{
                     throw new Exception('veuillez renseignez vos identifiants');
@@ -46,9 +46,15 @@ try{
         elseif($_GET['action'] == 'deco'){
             $frontoffice->disconnected();
         }
+        // REGISTRATION
+        elseif($_GET['action'] == 'subView'){
+            $frontoffice->subView();
+        }
         // RATTACHER UN ENFANT A UNE FAMILLE OU UN PARENT
         elseif($_GET['action'] == 'belong'){
-
+            $mailCo = $_POST['mailCo'];
+            $idChild = $_GET['idChildren'];
+            $frontoffice->belong($mailCo,$idChild);
         }
         // CHILDREN ACTIONS
         elseif($_GET['action'] == 'memberView'){            
