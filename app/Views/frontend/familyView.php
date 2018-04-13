@@ -1,5 +1,9 @@
 <?php $title = 'Espace Famille' ?>
 <?php ob_start(); ?>
+<?php
+require 'app/Views/frontend/templateHeader.php'
+?>
+
 <div class="container-fluid">
     <div class="row justify-content-md-center">
         <div class="col-md-8 col-md-offset-2 text-xs-center" style="border:1px solid black;">
