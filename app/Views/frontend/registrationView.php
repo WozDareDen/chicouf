@@ -1,8 +1,9 @@
 <?php $title = 'Formulaire d\'inscription' ?>
 <?php ob_start(); ?>
     <div class="row">
-        <div class="col-lg-4 regContent" >
-            <form method="post" class="regForm" name="regForm" action="index.php?action=addUser">
+        <div class="col-lg-12 regContent" >
+            <h2 style="border:1px solid black;text-align:center;">Inscrivez-vous !</h2>
+            <form method="post" class="regForm col-sm-6" name="regForm" action="index.php?action=addUser">
                 <div class="form-group  col-lg-12">
                     <label for="lastname">Nom</label><br />
                     <input type="text" id="lastname" class="champ" name="lastNameCo" required="valid" placeholder="entrez votre nom" >
@@ -92,7 +93,3 @@
 
 
 </div>
-
-<?php $content = ob_get_clean(); ?>
-<!--template.php-->
-<?php require 'templateHeadScripts.php'; ?>

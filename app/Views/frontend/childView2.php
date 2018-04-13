@@ -1,24 +1,15 @@
 <?php $title = 'Espace Membre' ?>
 <?php ob_start(); ?>
+
+<?php require 'templateHeader.php';
+?>
           <!--***********************MENU & SECTION********************-->
           <div class="row">    
         <!--***********************MENU********************-->
-            <nav class="col-sm-2" style="background-color:red;">MENU
-            <ul>
-                <li><a href="#"><i class="fa fa-home" style="font-size:30px;"></i></a>
-                </li>
-                <li><a href="index.php?action=familyLink&id=<?= $dataFam2['idFamily'] ?>">Accéder à votre Espace Famille</a>
-                </li>
-                <li><a href="index.php?action=createChild">Créer une fiche Enfant</a>
-                </li>
-                <li><a href="index.php?action=belong">Rattacher une fiche Enfant</a>
-                </li>
-                <li>Créer un nouvel Espace Famille
-                </li>
-                <li><a href="index.php?action=familyLink&idFamily=<?= $dataFam2['idFamily'] ?>">Rejoindre un Espace Famille existant</a>
-                </li>
-            </ul>
-            </nav>
+        <article class="col-sm-1" >
+            
+
+        </article>
       <!--***********************SECTION********************-->
             <section class="col-sm-10" style="background-color:#117a8b;color:white;">
 
@@ -45,7 +36,36 @@ foreach($bigData as $newData){
                 <article class="col-sm-6" style="background-color:purple;color:white;">
             <div>
 <h3><?= $newData['firstname']; ?> <?= $newData['surname']; ?> </h3>
-<a href="index.php?action=goToUpdateChild&idChildren=<?= $newData['idChildren']; ?>">Modifier cette fiche enfant</a>
+<a href="index.php?action=goToUpdateChild&idChildren=<?= $newData['idChildren']; ?>"><button type="button" class="btn btn-warning">Modifier cette fiche enfant</button></a>
+
+
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal2<?= $newData['idChildren'] ?>">Rattacher un parent à cet enfant</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2<?= $newData['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:black;">Rattacher un deuxième parent à cet enfant</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span >&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="color:black;">
+        <p>Pour rattacher cette fiche Enfant à un autre Parent, il vous suffit de renseigner son adresse mail. <br />
+          Ainsi cette personne pourra elle aussi gérer l'intégralité de cette fiche.
+        </p>
+        <form action="index.php?action=belong&idChildren=<?=$newData['idChildren']; ?>" method="post">
+          <div class="form-group">
+            <input type="mail" class="form-control" id="mailCo" name="mailCo" placeholder="Entrez son mail">
+          </div>
+          <button type="submit" class="btn btn-primary">Valider</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="sr-only"><?= $newData['idMember']; ?></div>
 <p>Date de naissance : <?= $newData['new_birthdate']; ?></p>
 <p>Parent(s) : <?= $newData['parent1']?> 
@@ -95,9 +115,6 @@ $newConnex3 = $connex3->fetch()
             </fieldset>
         </form>
       </div>
-      <div class="modal-footer">
-       
-      </div>
     </div>
   </div>
 </div>
@@ -108,9 +125,10 @@ $newConnex3 = $connex3->fetch()
 }
 ?>
 </div>
-
+</section>
+</div>
 
 
 <?php $content = ob_get_clean(); ?>
 <!--template.php-->
-<?php require 'template.php'; ?>
+<?php require 'templateHeadScripts.php'; ?>

@@ -1,12 +1,15 @@
 <?php $title = 'Espace Famille' ?>
 <?php ob_start(); ?>
-<?php require 'templateNav.php' ?>
-<div class="container">
+<?php
+require 'app/Views/frontend/templateHeader.php'
+?>
+
+<div class="container-fluid">
     <div class="row justify-content-md-center">
         <div class="col-md-8 col-md-offset-2 text-xs-center" style="border:1px solid black;">
             <h3 class="mbr-section-title display-2">Bienvenue dans votre Espace - Famille <?= $dataF4['familyName'] ?></h3>
             <div class="lead"><p>Edit your menu with ease! Change the font, size and color, set your own links... Notice that it's possible to add buttons to the menu as well. Discover the new block parameters and enjoy your beautiful responsive mobile menu!</p></div>
-            <div class="row justify-content-md-center"><a class="btn btn-primary" href="">DOWNLOAD FOR WINDOWS</a> <a class="btn btn-black" href="">DOWNLOAD FOR MAC</a></div>
+            <div class="row justify-content-md-center"><a class="btn btn-primary" href="">PETITS-ENFANTS</a> <a class="btn btn-black" href="">PARENTS</a></div>
         </div>
     </div>
     <div class="row ">
@@ -92,7 +95,6 @@ $newConnex3 = $dataF3->fetch()
 
 
 
-<?php require 'templateFooter.php' ?>
 <?php $content = ob_get_clean(); ?>
 
 <?php require 'templateHeadScripts.php' ?>

@@ -3,21 +3,8 @@
           <!--***********************MENU & SECTION********************-->
           <div class="row">    
         <!--***********************MENU********************-->
-            <nav class="col-sm-2" style="background-color:red;">MENU
-            <ul>
-                <li><a href="#"><i class="fa fa-home" style="font-size:30px;"></i></a>
-                </li>
-                <li>Accéder à votre Espace Famille
-                </li>
-                <li><a href="index.php?action=createChild">Créer une fiche Enfant</a>
-                </li>
-                <li><a href="index.php?action=belong">Rattacher une fiche Enfant</a>
-                </li>
-                <li>Créer un nouvel Espace Famille
-                </li>
-                <li>Rejoindre un Espace Famille existant
-                </li>
-            </ul>
+            <nav class="col-sm-1" style="background-color:red;">
+            
             </nav>
       <!--***********************SECTION********************-->
             <section class="col-sm-10" style="background-color:blue;color:white;">

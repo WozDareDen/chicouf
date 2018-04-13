@@ -1,22 +1,7 @@
-a{
-    text-decoration: none !important;
-    color:#007799;
-    text-shadow: 0px 0px 0px #fff;
-    -webkit-transition: 0.2s ease-in;
-    -o-transition: 0.2s ease-in;
-    transition: 0.2s ease-in;
-  }
-a:hover{
-    color:#03294D;
-    text-shadow: 0px 0px 0px #fff;
-    padding-left:20px;
-  }
-
-
-
-ul{
-    list-style-type: none;
+h5{
+    color:black;
 }
+
 .photoChild{     
     position:relative; 
     animation-name:animRoule; -webkit-animation-name:animRoule; 

@@ -20,7 +20,7 @@ class UserManager extends Manager
         }
         $pass_hache = password_hash($passCo, PASSWORD_DEFAULT);
         $db = $this -> dbConnect(); 
-        $connex = $db->prepare('INSERT INTO members(firstname, surname, pass, mail, parentHood, gender, img, modo, registration_date) VALUES(?,?,?,?,?,?,?,"0",CURDATE())');
+        $connex = $db->prepare('INSERT INTO members(firstname, surname, pass, mail, parentHood, gender, img, modo, registrationDate) VALUES(?,?,?,?,?,?,?,"0",CURDATE())');
         $connex->execute(array($firstNameCo, $lastNameCo, $pass_hache, $mailCo, $parentCo, $genderCo, $img));
         return $connex;
         }
@@ -35,6 +35,19 @@ class UserManager extends Manager
         $req = $db->prepare('SELECT * FROM members WHERE firstname = ? AND surname = ?');
         $req->execute(array($firstname,$surname));
         return $req;
+    }
+    // BELONG PARENT TO CHILD
+    public function getBelongParent($mailCo){
+        $db = $this -> dbConnect();
+        $belong0 = $db->prepare('SELECT idMember FROM members WHERE mail = ?');
+        $belong0->execute(array($mailCo));
+        return $belong0;
+    }
+    public function belongParent($idMember,$idChild){
+        $db = $this -> dbConnect();
+        $belong2 = $db->prepare('INSERT INTO member_children(idMember,idChildren) VALUES(?,?)');
+        $belong2->execute(array($idMember,$idChild));
+        return $belong2;
     }
     public function userById($idMember){
         $db = $this -> dbConnect();
