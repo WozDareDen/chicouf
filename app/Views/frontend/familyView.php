@@ -1,7 +1,7 @@
 <?php $title = 'Espace Famille' ?>
 <?php ob_start(); ?>
 <?php
-require 'app/Views/frontend/templateHeader.php'
+require 'bureau.php'
 ?>
 
 <div class="container-fluid">

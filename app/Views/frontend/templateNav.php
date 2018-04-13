@@ -35,7 +35,7 @@ else{
 ?>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#footer-wrapper">Nous contacter</a>
+                <a class="nav-link" href="#footer">Nous contacter</a>
             </li>
         </ul>
     </nav>
@@ -58,7 +58,7 @@ elseif($_SESSION['parenthood'] == 0){
             <a class="nav-link" href="index.php?action=familyLink&id=<?= $dataFam2['idFamily'] ?>">Espace Famille</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#footer-wrapper">Nous contacter</a>
+            <a class="nav-link" href="#footer">Nous contacter</a>
         </li>
     </ul>
 </nav>
@@ -70,7 +70,7 @@ elseif($_SESSION['parenthood'] == 0){
 else{
 ?>
 
-<nav>
+<navbar class="navbar-fixed-top navbar-no-bg">
     <ul class="nav nav-pills">
         <li class="nav-item">
             <a class="nav-link active" href="#header-wrapper">Accueil</a>
@@ -79,7 +79,7 @@ else{
             <a class="nav-link" href="#mainContent">Comment ça marche ?</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#footer-wrapper">Nous contacter</a>
+            <a class="nav-link" href="#footer">Nous contacter</a>
         </li>
     </ul>
 </nav>

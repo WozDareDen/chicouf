@@ -1,22 +1,16 @@
 <?php $title = 'Accueil' ?>
 <?php ob_start(); ?>
-
-
-
-
-    <?php
-    require 'templateHeader.php';
-    ?>
+<?php require 'bureau.php' ?>
 
 
 
 <div class="container">
     <div class="row">
 
-    <h1 class="col-sm-12" id="mainContent" style="border:1px solid black;width:50%;text-align:center;margin-top:100px;margin-bottom:100px;">Bienvenue sur Chicouf.fr</h1>
+    <h1 class="col-sm-12"  style="border:1px solid black;width:50%;text-align:center;margin-top:100px;margin-bottom:100px;">Bienvenue sur Chicouf.fr</h1>
     </div>
     <section>
-        <article>
+        <article id="mainContent">
             <h2>Qu'est-ce que c'est ?</h2>
             <p>Vous êtes designer, artiste, étudiant ou chercheur ? Qu’elle ait un caractère technique ou artistique, qu’elle ait un but commercial ou non, votre création peut faire l’objet d’un dépôt par enveloppe Soleau.
 L’enveloppe Soleau, du nom de son créateur, est un moyen de preuve simple et peu coûteux. Elle vous permet de vous constituer une preuve de création et de donner une date certaine à votre idée ou votre projet.</p>

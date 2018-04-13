@@ -4,8 +4,9 @@
 //LOGIN BOX
 if(empty($_SESSION['firstname'])){
 ?>
-<button type="button" class="btn btn-primary btnConnex" data-toggle="modal" data-target="#exampleModal">Connexion</button>
-
+<div class="form-inline my-2 my-lg-0">
+<button type="button" class="btn btn-outline-danger btnConnex" data-toggle="modal" data-target="#exampleModal">Connexion</button>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -42,7 +43,7 @@ if(empty($_SESSION['firstname'])){
 }
 else{
 ?>
-<a href="index.php?action=deco"><button type="button" class="btn btn-primary btnConnex" data-toggle="modal" >
+<a href="index.php?action=deco"><button type="button" class="btn btn-danger btnConnex" data-toggle="modal" >
   Déconnexion
 </button></a>
 

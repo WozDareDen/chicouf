@@ -8,6 +8,7 @@
             <div>    
               <?php require 'app/Views/frontend/templateNav.php' ?>
             </div>
+
             <div class="avatarBox">
                 <a class="photoMember" data-toggle="collapse" data-target="photoMember" style="background-image: url( <?=$_SESSION['img'] ?>)" href="#collapseExampleBB" role="button" aria-expanded="false" aria-controls="collapseExampleAA"></a>
                 <div class="modal fade" id="photoMember" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -31,9 +32,9 @@
     </div>
   </div>
 </div>
+ </div>
 
-
-            </div>
+           
             <div>
               <?php require 'app/Views/frontend/templateLogin.php' ?> 
             </div>

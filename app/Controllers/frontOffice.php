@@ -61,13 +61,23 @@ class FrontOffice{
         $dataF4 = $familyManager -> getFamilyName($idFamily);
         require 'app/Views/frontend/familyView.php';
     }
-    //GO TO REGISTRATION FORM
+    // GO TO REGISTRATION FORM
     function subView(){
         require 'app/Views/frontend/registrationView.php';
     }
     // GO TO HOME VIEW
     function homeView(){
         require 'app/Views/frontend/homeView.php';
+    }
+    // GO TO MENTIONS
+    function mentions(){
+        require 'app/Views/frontend/mentionsView.php';
+    }
+    // USER CONTACT
+    function contact($usernameContact,$mailContact,$titleContact,$contentContact){
+        $userManager = new \Src\Models\UserManager();
+        $contact = $userManager -> contactDb($usernameContact,$mailContact,$titleContact,$contentContact);
+        header('Location: index.php');
     }
     // MEMBER BOARD
     function goToMember($idMember){

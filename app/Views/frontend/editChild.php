@@ -1,20 +1,18 @@
 <?php $title = 'Modif Fiche Enfant' ?>
 <?php ob_start(); ?>
+<?php require 'bureau.php' ?>
+<div class="container-fluid childMain">
           <!--***********************MENU & SECTION********************-->
           <div class="row">    
-        <!--***********************MENU********************-->
-            <nav class="col-sm-1" style="background-color:red;">
-            
-            </nav>
-      <!--***********************SECTION********************-->
-            <section class="col-sm-10" style="background-color:blue;color:white;">
 
- <h1>MODIFICATION D'UNE FICHE ENFANT</h1>           
+
+     
 <?php 
 $newData = $data->fetch()
 ?>
-<form method="post" action="index.php?action=updateChild&idChildren=<?= $newData['idChildren'] ?>">
-<div class="form-group  col-lg-10">
+<form method="post" class="childForm" action="index.php?action=updateChild&idChildren=<?= $newData['idChildren'] ?>">
+<h1>MODIFICATION D'UNE FICHE ENFANT</h1>      
+<div class="form-group  col-lg-12">
             <h2>IDENTITE</h2>
             <label for="lastname">Nom</label><br />
             <input type="text" id="lastname" name="lastNameCo" autofocus="on" required="valid" cols="30" value="<?= $newData['surname']; ?>" /> 
@@ -64,9 +62,27 @@ $newConnex3 = $connex3->fetch()
             <input class="btn btn-primary" type="submit" name="updateChild" value="Valider" />
             
           </div>
+</div>
 </form>
 <a href="index.php?action=deleteChild&idMember=<?= $_SESSION['id'] ?>&idChildren=<?= $newData['idChildren'] ?>"><button class="btn btn-danger" name="updateChild">Supprimer</button></a>
+</div>
+</div>
+
+
+
+<style>
+  .childMain{
+    display:flex;
+    flex-direction: column; 
+    align-items:center;
+    border:1px solid black;
+  }
+
+</style>
+
+
 
 <?php $content = ob_get_clean(); ?>
 <!--template.php-->
-<?php require 'template.php'; ?>
+<?php require 'templateHeadScripts.php'; ?>
+

@@ -30,6 +30,20 @@ try{
         elseif($_GET['action'] == 'subView'){
             $frontoffice->subView();
         }
+        // GO TO MENTIONS
+        elseif($_GET['action'] == 'mentions'){
+            $frontoffice->mentions();
+        }
+        // USER CONTACT
+        elseif($_GET['action'] == 'contact'){
+            if(isset($_POST['usernameContact']) && isset($_POST['mailContact']) && isset($_POST['titleContact']) && isset($_POST['contentContact'])){
+                $usernameContact = htmlspecialchars($_POST['usernameContact']);
+                $mailContact = htmlspecialchars($_POST['mailContact']);
+                $titleContact = htmlspecialchars($_POST['titleContact']);
+                $contentContact = htmlspecialchars($_POST['contentContact']);
+                $frontoffice->contact($usernameContact,$mailContact,$titleContact,$contentContact);
+            }
+        }
         // USER RECORD
         elseif ($_GET['action'] == 'record'){
             if(isset($_POST['firstnameCo']) && isset($_POST['surnameCo']) && isset($_POST['passCo'])){

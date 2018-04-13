@@ -75,5 +75,10 @@ class UserManager extends Manager
         $ins->execute(array($name, $mdp, $mail, $dateBorn, $city, $idMember));
         return $ins;
     }
-
+    public function contactDb($usernameContact,$mailContact,$titleContact,$contentContact){
+        $db = $this -> dbConnect();
+        $contact = $db->prepare('INSERT INTO contact(title,msg,mailContact,nameContact) VALUES(?,?,?,?)');
+        $contact->execute(array($titleContact,$contentContact,$mailContact,$usernameContact));
+        return $contact;
+    }
 }

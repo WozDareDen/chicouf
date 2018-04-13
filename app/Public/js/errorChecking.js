@@ -70,4 +70,8 @@ function myFunction2() {
             y.type = "password";
         }
 }
-
+$(".photoChild").on("click",function(e){
+    $(e.target).css("transform","rotate(1turn)");
+    console.log(e.target);
+ });
+ 

@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="app/Public/css/style.css">
 <?php $modif = $recoverUs->fetch() ?>
 <h1>Modifier votre profil <?= $modif['Firstname'] ?></h1>
 <ul>
