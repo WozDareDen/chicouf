@@ -173,7 +173,6 @@ try{
         }
     }
     else{
-        // $frontoffice->subView();
         $frontoffice->homeView();
     }
 }
