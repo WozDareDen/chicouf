@@ -37,15 +37,23 @@ Espace Enfant
     if(isset($dataFam2)){  
 ?>     
 
-<li class="nav-item">
-            <a class="nav-link" href="index.php?action=familyLink&id=<?= $dataFam2['idFamily'] ?>">Espace Famille</a>
+<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Espace Famille</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="index.php?action=familyLink&id=<?= $dataFam2['idFamily'] ?>">Rejoindre mon espace Famille</a>
+            <a class="dropdown-item" href="index.php?action=goToCreateFamily" >Créer un Espace Famille</a>
+            </div>
         </li>
         <?php            
 }
 else{
 ?>
-<li class="nav-item">
-            <a class="nav-link" href="index.php?action=familyLink&id=<?= $_GET['id'] ?>">Espace Famille</a>
+<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Espace Famille</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="index.php?action=familyLink&id=<?= $_GET['id'] ?>">Rejoindre mon espace Famille</a>
+            <a class="dropdown-item" href="index.php?action=goToCreateFamily" >Créer un Espace Famille</a>
+            </div>
         </li>
 
 

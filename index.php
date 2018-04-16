@@ -94,7 +94,26 @@ try{
                 throw new \Exception('Vous devez être connecté');
             }
         }
-    
+        // GO TO NEW FAMILY
+        elseif($_GET['action'] == 'goToCreateFamily'){
+            $frontoffice->goToCreateFamily();
+        }
+        // CREATE FAMILY
+        elseif($_GET['action'] == 'createNewFamily'){
+            if(isset($_SESSION['id']) && isset($_POST['familyNameCo'])){
+                $familyName = $_POST['familyNameCo'];
+                $idMember = $_SESSION['id'];
+                $frontoffice->createFamily($idMember,$familyName);
+            }
+            else{
+                throw new \Exception ('vous devez donner un nom à cette famille');
+            }
+        }
+        elseif($_GET['action'] == 'belongParent'){
+            $idFamily = $_POST['idCoFamily'];
+            $mailCoParent = $_POST['mailCoParent'];
+            $frontoffice->belongFamily($idFamily,$mailCoParent);
+        }
         // ADD NEW CHILD
         elseif($_GET['action'] == 'addChild'){
             if(($_SESSION['id'])){
@@ -155,10 +174,16 @@ try{
             $idChildren = htmlspecialchars($_GET['idChildren']);
             $frontoffice->deleteChild($idMember,$idChildren);
         }
-        // FAMILY ACTIONS
+        // GO TO FAMILY VIEW
         elseif($_GET['action'] == 'familyLink'){
             $idFamily = $_GET['id'];
-            $frontoffice->goToFamily($idFamily);
+            $idMember = $_SESSION['id'];
+            $frontoffice->goToFamily($idFamily,$idMember);
+        }
+        // UPLOAD BANNER
+        elseif($_GET['action'] == 'uploadBanner'){
+            $idFamily = $_POST['idFamilyCo'];
+            $frontoffice->uploadBanners($idFamily);
         }
         elseif($_GET['action'] == 'profileView'){
             $idMember = $_GET['idMember'];

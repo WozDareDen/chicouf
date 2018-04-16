@@ -53,12 +53,16 @@ class FrontOffice{
         header('Location: index.php');
     }
     //FAMILY BOARD
-    function goToFamily($idFamily){
+    function goToFamily($idFamily,$idMember){
         $familyManager = new \Src\Models\FamilyManager();
         $dataF = $familyManager -> watchFamily($idFamily);
         $dataF2 = $familyManager -> watchFamilyMeals($idFamily);
         $dataF3 = $familyManager -> watchFamilyHealth($idFamily);
         $dataF4 = $familyManager -> getFamilyName($idFamily);
+        $dataF6 = $familyManager -> getImgFamily($idFamily);
+        $dataMember = $familyManager -> watchMembersFamily($idFamily);
+        $userManager = new \Src\Models\UserManager();
+        $dataF5 = $userManager -> userById($idMember);
         require 'app/Views/frontend/familyView.php';
     }
     // GO TO REGISTRATION FORM
@@ -90,6 +94,53 @@ class FrontOffice{
         $dataFam2 = $familyManager -> getFamilyId($idMember);
         // $connex4 = $childManager -> getParents($)
         require 'app/Views/frontend/childView2.php';
+    }
+    // CREATE FAMILY
+    function goToCreateFamily(){
+        require 'app/Views/frontend/familyView.php';
+    }
+    function createFamily($idMember,$familyName){
+        $familyManager = new \Src\Models\FamilyManager();
+        $createFamily = $familyManager -> newFamily($familyName);
+        $getNewfamilyId = $familyManager -> getIdFamily($idMember);
+        $maxIdFamily = $getNewfamilyId->fetch();
+        $idFamily = $maxIdFamily[0];
+        $newFamily = $familyManager -> parentFamilyLink($idMember,$idFamily);
+        $childManager = new \Src\Models\ChildManager();
+        $getChildId = $childManager -> watchChild($idMember);
+        $getChildId2 = $getChildId->fetchAll();
+        $goModo = $familyManager -> newModo($idMember);
+        if(!empty($getChildId2)){
+            foreach($getChildId2 as $getChildId3){
+                $idChild = $getChildId3['idChildren'];
+                $addToMyFamily = $childManager -> AddToMyFamily($idChild,$idFamily);
+            }
+        }
+        header('Location: index.php?action=familyLink&id='.$idFamily);
+    }
+    function belongFamily($idFamily,$mailCoParent){
+        $familyManager = new \Src\Models\FamilyManager();
+        $dataParent = $familyManager -> getParentId($mailCoParent); 
+        $dataParent2 = $dataParent->fetch(); 
+            if(!(empty($dataParent2))){
+            $idMember = $dataParent2['idMember'];
+            $dataParent3 = $familyManager -> belongParent($idMember,$idFamily);
+            $dataParent4 = $familyManager -> getChildParent($idMember);
+            $dataParent6 = $dataParent4->fetchAll();
+                if(empty($dataParent6)){
+                    throw new \Exception ('vous n\'avez aucun enfant rattaché à votre compte');
+                }
+                else{
+                    foreach($dataParent6 as $dataParent7){
+                        $idChild = $dataParent7['idChildren'];
+                        $dataParent5 = $familyManager -> belongChild($idFamily,$idChild);
+                    }
+                }
+            }
+            else{
+                throw new \Exception ('cet email ne figure pas dans notre base de données');
+            }
+        header('Location: index.php?action=familyLink&id='.$idFamily);
     }
     // ADD CHILD
     function addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies){
@@ -199,6 +250,48 @@ class FrontOffice{
         }
         
     }
+    // UPLOAD BANNER
+    function uploadBanners($idFamily){
+        $target_dir = "app/Public/uploads/banners/";
+        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        // Check if image file is a actual image or fake image
+        if(isset($_POST["submit"])) {
+            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+            if($check !== false) {
+                // Check file size
+                if ($_FILES["fileToUpload"]["size"] > 500000) {
+                    echo "Désolé, votre fichier est trop volumineux. ";
+                    $uploadOk = 0;
+                }
+                // Allow certain file formats
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" ) {
+                    echo "Seuls les formats JPG, JPEG, PNG & GIF files sont authorisés. ";
+                    $uploadOk = 0;
+                }
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) {
+                    echo "Désolé, votre avatar n'a pu être envoyé.";
+                // if everything is ok, try to upload file
+                } else {
+                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                        $familyManager = new \Src\Models\FamilyManager();
+                        $insertPicture = $familyManager -> uploadBanner($target_file,$idFamily);
+                        header('Location: index.php?action=familyLink&id='.$idFamily);
+                    } else {
+                        echo "Désolé, une erreur est survenue dans l'envoi de votre fichier. ";
+                    }
+                }
+            } else {
+                echo "Ce fichier n'est pas une image. ";
+                $uploadOk = 0;
+            }
+        }
+        
+    }
+
 
     function recoverUser($idMember)
     {
