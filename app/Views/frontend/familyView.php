@@ -6,7 +6,8 @@ require 'bureau.php'
 
 <div class="container-fluid">
 
-    <?php
+    <?php 
+    // NEW CREATION VIEW
         if(empty($dataF4)){
     ?>
     <div class="row justify-content-md-center">
@@ -48,7 +49,8 @@ require 'bureau.php'
     </div>
 
 <?php
-        }
+        } 
+        // CLASSIC FAMILY VIEW
         else{
                    
 ?>
@@ -62,7 +64,8 @@ require 'bureau.php'
    
         <div class="col-md-8 col-md-offset-2 text-xs-center" style="border:1px solid black;">
            
-            <h3 class="mbr-section-title display-2">Bienvenue dans votre Espace - Famille <?= $dataF4['familyName'] ?></h3>
+            <h3 class="mbr-section-title display-3">Bienvenue dans votre Espace </h3>
+            <h3 class="mbr-section-title display-3">Famille <?= $dataF4['familyName'] ?></h3>
             
             <div class="lead"><p>Edit your menu with ease! Change the font, size and color, set your own links... Notice that it's possible to add buttons to the menu as well. Discover the new block parameters and enjoy your beautiful responsive mobile menu!</p></div>
 
@@ -74,7 +77,7 @@ if($newDataF5['modo']=1){
             <div class="row justify-content-md-center">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddParent" >RATTACHER UN MEMBRE</button>
                 <button class="btn btn-info" data-toggle="modal" data-target="#modalAddBanner" >MODIFIER LA BANNIERE</button>
-                <button class="btn btn-danger">SUPPRIMER CET ESPACE FAMILLE</button>
+                <a href="index.php?action=deleteFamily&id=<?= $_GET['id'] ?>"><button class="btn btn-danger">SUPPRIMER CET ESPACE FAMILLE</button></a>
             </div>
 
 <?php
@@ -83,6 +86,15 @@ if($newDataF5['modo']=1){
 
         </div>
     </div>
+
+            <div class="row justify-content-md-center">
+                <div class="col-md-8 col-md-offset-2 text-xs-center" style="border:1px solid black;"><h4 class="mbr-section-title display-2">Espace de discussion</h4></div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-md-8 col-md-offset-2 text-xs-center" style="border:1px solid black;">
+                    
+                </div>
+            </div>
     <div class="row ">
         <div class="col-md-3 col-md-offset-2 text-xs-center" style="margin-top:100px;">
             <h3 class="mbr-section-title display-2"></h3>
@@ -109,11 +121,10 @@ foreach($bigData as $newData){
             <article class="col-sm-4" >
             <div>
             <article class="col-sm-4 avatarBox" >
-            <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$newData['img'] ?>)" href="#collapseExample<?= $newData['idChildren']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+            <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$newData['img'] ?>)" href="#collapseExample<?= $newData['idChildren']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a><h3><div class="childName"> <?= $newData['firstname']; ?></div></h3>
+            </article>
 
-                </article>
 
-<h3><div class="childName"> <?= $newData['firstname']; ?> <?= $newData['surname']; ?> </div></h3>
 
 <div class="sr-only"><?= $newData['idMember']; ?></div>
 <div class="collapse" id="collapseExample<?= $newData['idChildren']; ?>">
@@ -166,8 +177,12 @@ $newConnex3 = $dataF3->fetch()
 
            </div>   
     </div>
+<?php    
+if(isset($dataMember)){
+?> 
         <h3 class="row">Les parents</h3>
         <div class="row"> 
+
 <?php
 $bigDataMember = $dataMember->fetchAll();
 if(empty($bigDataMember)){
@@ -179,6 +194,7 @@ else{
     foreach($bigDataMember as $newDataMember){
 
 ?>          
+            <div>
             <article class="col-sm-4 avatarBox" >
             <a class="photoChild" style="background-image: url( <?=$newDataMember['img'] ?>)" href="#collapseExample<?= $newDataMember['idMember']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
 
@@ -190,7 +206,16 @@ else{
 }
 }
 ?>
+            </div>
 
+<?php
+}
+else{
+?>
+    <p></p>
+<?php    
+}
+?>            
 <!-- MODAL ADD PARENT -->
 <div class="modal fade" id="modalAddParent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
   <div class="modal-dialog" role="document">

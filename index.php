@@ -109,10 +109,17 @@ try{
                 throw new \Exception ('vous devez donner un nom à cette famille');
             }
         }
+        // BELONG A PARENT TO FAMILY
         elseif($_GET['action'] == 'belongParent'){
             $idFamily = $_POST['idCoFamily'];
             $mailCoParent = $_POST['mailCoParent'];
             $frontoffice->belongFamily($idFamily,$mailCoParent);
+        }
+        // DELETE FAMILY
+        elseif($_GET['action'] == 'deleteFamily'){
+            $idMember = $_SESSION['id'];
+            $idFamily = $_GET['id'];
+            $frontoffice->deleteFamily($idFamily,$idMember);
         }
         // ADD NEW CHILD
         elseif($_GET['action'] == 'addChild'){
@@ -146,6 +153,7 @@ try{
         // UPDATE CHILD
         elseif($_GET['action'] == 'updateChild'){
             if(isset($_SESSION['id'])){
+                $username = $_POST['username'];
                 $idMember = $_SESSION['id'];
                 $idChildren = $_GET['idChildren'];
                 $lastName = htmlspecialchars($_POST['lastNameCo']);
@@ -158,7 +166,7 @@ try{
                 $meds = htmlspecialchars($_POST['medsCo']);
                 $allergies = htmlspecialchars($_POST['allergiesCo']);
                     if($_SESSION['firstname'] === $parent1 || $_SESSION['firstname'] === $parent2){
-                    $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
+                    $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $allergies);
                     }
                     else{
                         throw new \Exception('Vous devez être connecté');
@@ -184,6 +192,23 @@ try{
         elseif($_GET['action'] == 'uploadBanner'){
             $idFamily = $_POST['idFamilyCo'];
             $frontoffice->uploadBanners($idFamily);
+        }
+        // DISCUSSION
+        elseif ($_GET['action'] == 'addComment') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $chatDissId = htmlspecialchars($_GET['id']); 
+                $chatMemberId = htmlspecialchars($_POST['chatMemberId']);
+                $chatComment = htmlspecialchars($_POST['chatComment']);
+                if (!empty($chatMemberId) && !empty($chatComment)) {
+                    addComment($chatDissId, $chatMemberId, $chatComment);
+                }
+                else {
+                    throw new Exception('tous les champs ne sont pas remplis');
+                }
+            }
+            else {
+                throw new Exception('vous devez être connecté');
+            }
         }
         elseif($_GET['action'] == 'profileView'){
             $idMember = $_GET['idMember'];

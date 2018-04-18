@@ -97,6 +97,13 @@ class FamilyManager extends Manager{
         $goModo->execute(array($idMember));
         return $goModo;
     }
+    // DELETE FAMILY
+    public function eraseFamily($idFamily){
+        $db = $this -> dbConnect();
+        $eraseFamily = $db->prepare('DELETE FROM family WHERE idFamily = ?');
+        $eraseFamily->execute(array($idFamily));
+        return $eraseFamily;
+    }
     // UPLOAD BANNER
     public function uploadBanner($target_file,$idFamily){
         $db = $this -> dbConnect();

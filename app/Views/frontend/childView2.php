@@ -89,7 +89,7 @@ $newConnex3 = $connex3->fetch()
 
 <p>Noms, posologies, durées : <?= $newConnex3['meds']; ?></p>
 <p>Allergies : <?= $newConnex3['allergies']; ?></p>
-
+<p>Dernière modification effectuée par <?= $newData['upDateUser'] ?>, le <?= $newData['new_upDateLog'] ?>.</p>
 
                 </article>
 

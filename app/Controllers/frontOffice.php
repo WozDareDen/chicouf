@@ -14,7 +14,7 @@ class FrontOffice{
             $req = $userManager -> userById($idMember);
             $resultat = $req->fetch();
             $_SESSION['firstname'] =  $resultat['firstname'];
-            $_SESSION['parentHood'] = $resultat['parenthood'];
+            $_SESSION['parenthood'] = $resultat['parenthood'];
             $_SESSION['id'] =  $resultat['idMember'];
             $_SESSION['modo'] =  $resultat['modo'];
                 if($_SESSION['parentHood'] == 1){
@@ -64,6 +64,11 @@ class FrontOffice{
         $userManager = new \Src\Models\UserManager();
         $dataF5 = $userManager -> userById($idMember);
         require 'app/Views/frontend/familyView.php';
+    }
+    function deleteFamily($idFamily,$idMember){
+        $familyManager = new \Src\Models\FamilyManager();
+        $eraseFam = $familyManager -> eraseFamily($idFamily);
+        header('Location: index.php?action=memberView&idMember='.$idMember);
     }
     // GO TO REGISTRATION FORM
     function subView(){
@@ -142,6 +147,17 @@ class FrontOffice{
             }
         header('Location: index.php?action=familyLink&id='.$idFamily);
     }
+    //ADD COMMENT
+    function addComment($chatDissId, $chatMemberId, $chatComment){
+    $commentManager = new \Src\Models\CommentManager();
+    $comments = $commentManager -> postDiscussComment($chatDissId, $chatMemberId, $chatComment);
+    if ($comments === false) {
+        throw new Exception('Impossible d\'ajouter le commentaire !');
+    }
+    else {
+        header('Location: index.php?action=post&id=' . $id_Chapters . '#comments');
+    }
+}    
     // ADD CHILD
     function addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies){
         $childManager = new \Src\Models\ChildManager();
@@ -161,9 +177,9 @@ class FrontOffice{
         header('Location: index.php?action=memberView&idMember='.$idMember);
     }
     // UPDATE CHILD
-    function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies){
+    function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $allergies){
         $childManager = new \Src\Models\ChildManager();
-        $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChildren);
+        $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChildren, $username);
         $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChildren);
         $infos3 = $childManager -> updateOldHealth($meds, $allergies, $idChildren);
         header('Location: index.php?action=memberView&idMember='.$idMember);

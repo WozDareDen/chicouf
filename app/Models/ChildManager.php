@@ -1,13 +1,13 @@
 <?php
 //Defining Namespace
 namespace Src\Models;
-//CommentsObject :
+//ChildObject :
 class ChildManager extends Manager
 {
     //GET CHILD THROUGH MEMBER
     public function watchChild($idMember){
         $db = $this -> dbConnect(); 
-        $data = $db->prepare('SELECT children.idChildren, member_children.idMember, surname, firstname, img, parent1, parent2, DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN member_children ON member_children.idChildren = children.idChildren WHERE idMember = ? ORDER BY member_children.idChildren');
+        $data = $db->prepare('SELECT children.idChildren, member_children.idMember, surname, firstname, img, parent1, parent2, upDateUser, DATE_FORMAT(upDateLog, \'%d/%m/%Y à %Hh%i\') as new_upDateLog,  DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN member_children ON member_children.idChildren = children.idChildren WHERE idMember = ? ORDER BY member_children.idChildren');
         $data->execute(array($idMember));
         return $data;
     }
@@ -49,10 +49,10 @@ class ChildManager extends Manager
         return $infos3;
     }
     // CHILD UPDATES
-    public function updateOldChild($lastName,$firstName,$birthdate,$parent1,$parent2, $idChildren){
+    public function updateOldChild($lastName,$firstName,$birthdate,$parent1,$parent2, $idChildren, $username){
         $db = $this -> dbConnect();
-        $infos1 = $db->prepare('UPDATE children SET surname=?, firstname=?, birthdate=?, parent1=? ,parent2=? WHERE idChildren = ?');
-        $infos1->execute(array($lastName,$firstName,$birthdate,$parent1,$parent2,$idChildren));
+        $infos1 = $db->prepare('UPDATE children SET surname=?, firstname=?, birthdate=?, parent1=? ,parent2=?, upDateLog=NOW(), upDateUser=? WHERE idChildren = ?');
+        $infos1->execute(array($lastName,$firstName,$birthdate,$parent1,$parent2,$username,$idChildren));
         return $infos1;
     }
     public function updateOldMeal($favMeal,$hatedMeal,$idChildren){

@@ -64,6 +64,18 @@ else{
         <li class="nav-item">
             <div class="nav-link contactMouse" data-toggle="modal" data-target="#ModalContact" >Nous contacter</div>
         </li>
+<?php
+  if(($_SESSION['id'] == 32) && ($_SESSION['modo'] == 2)){
+
+?>
+        <li class="nav-item">
+            <a class="nav-link" href="admin.php?action=dashboard">Admin</a>
+        </li>
+<?php
+  }
+?>
+
+
 </ul>
 
 <div class="form-inline my-2 my-lg-0">

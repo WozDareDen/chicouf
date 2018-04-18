@@ -17,6 +17,8 @@ $newData = $data->fetch()
             <label for="lastname">Nom</label><br />
             <input type="text" id="lastname" name="lastNameCo" autofocus="on" required="valid" cols="30" value="<?= $newData['surname']; ?>" /> 
             <input hidden type="text" name="idMember" value="<?= $newData['idMember']; ?>" />
+            <input hidden type="text" name="username" value="<?= $_SESSION['firstname']; ?>" />
+            
           </div>
           <div class="form-group col-lg-12"> 
             <label for="firstname">Prénom</label><br />
