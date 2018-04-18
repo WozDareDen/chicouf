@@ -19,47 +19,27 @@ if(isset($_SESSION['parenthood'])){
 <div class="collapse navbar-collapse justify-content-between" id="navbar2">
 <ul class="navbar-nav">
 <li class="nav-item">
-            <a class="nav-link" href="index.php?action=memberView&idMember=<?= $_SESSION['id'] ?>">Mon Profil</a>
-        </li>
-        
+  <a class="nav-link" href="index.php?action=recoverUser&id=<?= $_SESSION['id'] ?>">Mon Profil</a>
+</li>
 <li class="nav-item dropdown">
 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 Espace Enfant
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<a class="dropdown-item" href="index.php?action=memberView&idMember=<?= $_SESSION['id'] ?>">Voir mes Enfants</a>
 <a class="dropdown-item" href="index.php?action=createChild">Créer une fiche Enfant</a>
-<a class="dropdown-item" href="badges.html">Badges</a>
-<a class="dropdown-item" href="cards.html">Cards</a>
 </div>
 </li>
 
-<?php
-    if(isset($dataFam2)){  
-?>     
-
 <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Espace Famille</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="index.php?action=familyLink&id=<?= $dataFam2['idFamily'] ?>">Rejoindre mon espace Famille</a>
+            <a class="dropdown-item" href="index.php?action=familyLink&id=<?= $_SESSION['family'] ?>">Rejoindre mon espace Famille</a>
             <a class="dropdown-item" href="index.php?action=goToCreateFamily" >Créer un Espace Famille</a>
             </div>
         </li>
-        <?php            
-}
-else{
-?>
-<li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Espace Famille</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="index.php?action=familyLink&id=<?= $_GET['id'] ?>">Rejoindre mon espace Famille</a>
-            <a class="dropdown-item" href="index.php?action=goToCreateFamily" >Créer un Espace Famille</a>
-            </div>
-        </li>
+              
 
-
-<?php
-}
-?>
 
         <li class="nav-item">
             <div class="nav-link contactMouse" data-toggle="modal" data-target="#ModalContact" >Nous contacter</div>

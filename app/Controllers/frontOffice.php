@@ -29,7 +29,8 @@ class FrontOffice{
         }
     }
     //LOGIN FUNCTION
-    function connected($firstname,$surname,$pass){        
+    function connected($firstname,$surname,$pass){  
+
         $userManager = new \Src\Models\UserManager();
         $req = $userManager -> userConnex($firstname,$surname);
         $resultat = $req->fetch();
@@ -39,6 +40,9 @@ class FrontOffice{
         $_SESSION['id'] =  $resultat['idMember'];
         $_SESSION['modo'] =  $resultat['modo'];
         $_SESSION['img'] =  $resultat['img'];
+        $familyManager = new \Src\Models\FamilyManager();     
+        $dataFam = $familyManager ->  getfamilyId($_SESSION['id']); 
+        $_SESSION['family'] = $dataFam['idFamily'];
             if($isPasswordCorrect){
                 header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);             
             }
@@ -98,7 +102,7 @@ class FrontOffice{
         $familyManager = new \Src\Models\FamilyManager();
         $dataFam2 = $familyManager -> getFamilyId($idMember);
         // $connex4 = $childManager -> getParents($)
-        require 'app/Views/frontend/childView2.php';
+        require 'app/Views/frontend/childView.php';
     }
     // CREATE FAMILY
     function goToCreateFamily(){
@@ -177,12 +181,18 @@ class FrontOffice{
         header('Location: index.php?action=memberView&idMember='.$idMember);
     }
     // UPDATE CHILD
-    function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $allergies){
+    function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $allergies){            
         $childManager = new \Src\Models\ChildManager();
-        $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChildren, $username);
+        $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChildren,$username);
         $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChildren);
         $infos3 = $childManager -> updateOldHealth($meds, $allergies, $idChildren);
-        header('Location: index.php?action=memberView&idMember='.$idMember);
+        if($_SESSION['firstname'] == $parent1 || $_SESSION['firstname'] == $parent2){           
+            header('Location: index.php?action=memberView&idMember='.$idMember);
+        }
+        else{
+            header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
+        }
+        
     }
 
     // GO TO UPDATE CHILD
@@ -192,10 +202,12 @@ class FrontOffice{
         $connex2 = $childManager -> getMeals($idChild);
         $connex3 = $childManager -> getHealth($idChild);
         $idMember = $_SESSION['id'];
-        $connex4 = $childManager -> getIdMember($idChild,$idMember);
-        $newConnex4 = $connex4->fetch();
+        // $connex4 = $childManager -> getIdMember($idChild,$idMember);
+        // $newConnex4 = $connex4->fetch();
+        $connex5 = $childManager -> getIdFamilyByChild($idChild);
+        $newConnex5 = $connex5->fetch();
             if(isset($_SESSION['id'])){
-                if($_SESSION['id'] === $newConnex4['idMember']){
+                if($_SESSION['family'] === $newConnex5['idFamily']){
                     require 'App/Views/frontend/editChild.php';
                 }
                 else{

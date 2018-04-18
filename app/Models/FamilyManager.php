@@ -76,8 +76,9 @@ class FamilyManager extends Manager{
     // CREATE FAMILY
     public function newFamily($familyName){
         $db = $this -> dbConnect();
-        $createfamily = $db->prepare('INSERT INTO family(familyName) VALUES(?)');
-        $createfamily->execute(array($familyName));
+        $banner = 'app/Public/uploads/banners/banniere.png';
+        $createfamily = $db->prepare('INSERT INTO family(familyName,banner) VALUES(?,?)');
+        $createfamily->execute(array($familyName,$banner));
         return $createfamily;
     }
     public function getIdFamily($idMember){

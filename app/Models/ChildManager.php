@@ -49,6 +49,12 @@ class ChildManager extends Manager
         return $infos3;
     }
     // CHILD UPDATES
+    public function getIdFamilyByChild($idChild){
+        $db = $this -> dbConnect();
+        $connex5 = $db->prepare('SELECT idFamily FROM family_children WHERE idChildren = ?');
+        $connex5->execute(array($idChild));
+        return $connex5;
+    }
     public function updateOldChild($lastName,$firstName,$birthdate,$parent1,$parent2, $idChildren, $username){
         $db = $this -> dbConnect();
         $infos1 = $db->prepare('UPDATE children SET surname=?, firstname=?, birthdate=?, parent1=? ,parent2=?, upDateLog=NOW(), upDateUser=? WHERE idChildren = ?');

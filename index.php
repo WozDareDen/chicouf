@@ -153,7 +153,7 @@ try{
         // UPDATE CHILD
         elseif($_GET['action'] == 'updateChild'){
             if(isset($_SESSION['id'])){
-                $username = $_POST['username'];
+                $username = $_SESSION['firstname'];
                 $idMember = $_SESSION['id'];
                 $idChildren = $_GET['idChildren'];
                 $lastName = htmlspecialchars($_POST['lastNameCo']);
@@ -164,13 +164,8 @@ try{
                 $favMeal = htmlspecialchars($_POST['favoriteMealCo']);
                 $hatedMeal = htmlspecialchars($_POST['hatedMealCo']);
                 $meds = htmlspecialchars($_POST['medsCo']);
-                $allergies = htmlspecialchars($_POST['allergiesCo']);
-                    if($_SESSION['firstname'] === $parent1 || $_SESSION['firstname'] === $parent2){
-                    $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $allergies);
-                    }
-                    else{
-                        throw new \Exception('Vous devez être connecté');
-                    }                    
+                $allergies = htmlspecialchars($_POST['allergiesCo']);                   
+                    $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $allergies);                 
             }
             else{
                 throw new \Exception('Vous devez être connecté');
