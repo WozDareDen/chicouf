@@ -13,7 +13,7 @@ if(isset($_SESSION['parenthood'])){
 <span class="navbar-toggler-icon"></span>
 </button>
 <a class="navbar-brand" href="index.php">
-<img src="app/Public/uploads/logo.png" width="30" height="30" alt="Logo">
+<img id="logoTurn" src="app/Public/uploads/logo.png" width="30" height="30" alt="Logo">
 </a>
 <a class="navbar-brand" href="index.php">Chicouf</a>
 <div class="collapse navbar-collapse justify-content-between" id="navbar2">
@@ -96,7 +96,7 @@ elseif($_SESSION['parenthood'] == 0){
 <span class="navbar-toggler-icon"></span>
 </button>
 <a class="navbar-brand" href="index.php">
-<img src="app/Public/uploads/logo.png" width="30" height="30" alt="Logo">
+<img id="logoTurn" src="app/Public/uploads/logo.png" width="30" height="30" alt="Logo">
 </a>
 <a class="navbar-brand" href="index.html">Chicouf</a>
 <div class="collapse navbar-collapse justify-content-between" id="navbar2">

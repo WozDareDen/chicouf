@@ -17,6 +17,7 @@ $bigData = $data->fetchAll();
 if(empty($bigData)){
 ?>
                 <p>Vous pouvez dès à présent créer une fiche pour votre enfant, créer un Espace Famille ou en rejoindre un.</p>
+                <img id="logoTurn2" class="logTurn" src="app/Public/uploads/logo.png" alt="logo pleine page" title="logo pleine page" />
 <?php
 }
 else{

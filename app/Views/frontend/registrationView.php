@@ -1,9 +1,8 @@
-
 <?php ob_start(); ?>
     <div class="row">
         <div class="col-lg-12 regContent" >
-            <h2 style="border:1px solid black;text-align:center;">Inscrivez-vous !</h2>
-            <form method="post" class="regForm col-sm-6" name="regForm" action="index.php?action=addUser">
+            <h2 class="h2Home">Inscrivez-vous !</h2>
+            <form method="post" class="regForm offset-sm-3 col-sm-6" name="regForm" action="index.php?action=addUser">
                 <div class="form-group  col-lg-12">
                     <label for="lastname">Nom</label><br />
                     <input type="text" id="lastname" class="champ" name="lastNameCo" required="valid" placeholder="entrez votre nom" >
@@ -49,8 +48,10 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
+
                 <div class="form-group col-lg-12">
                     <label for="pass2">Confirmation du mot de passe</label><br />
                     <input type="password" id="regFormPass2" class="champ2 champPass" name="pass2Co" required="valid" autocomplete="off" placeholder="confirmez-le">
@@ -92,4 +93,4 @@
 
 
 
-</div>
+
