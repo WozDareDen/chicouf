@@ -79,7 +79,7 @@
                     </select>
                 </div>
                 <div class="form-check col-lg-12">
-                    <input type="checkbox" name="choixCo" required="valid"> J'ai lu les règles d'usage et j'accepte de les respecter.</br>
+                    <input type="checkbox" name="choixCo" required="valid"> J'ai lu les <a href="index.php?action=legal">règles d'usage</a> et j'accepte de les respecter.</br>
                     <input class="btn btn-primary " id="registration" type="submit" name="addUser" value="S'inscrire" />
                 </div>
             </form>

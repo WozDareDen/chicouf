@@ -10,11 +10,11 @@
                           </li>
                                  
                          <li>
-                            <a href="index.php?action=mentions">Mentions légales</a>
+                            <a href="index.php?action=legal">Mentions légales</a>
                           </li>
                                
                           <li>
-                             <a href="#">A propos</a>
+                             <a href="index.php?action=about">A propos</a>
                           </li>
                                
                           

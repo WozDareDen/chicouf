@@ -91,8 +91,12 @@ class FrontOffice{
         require 'app/Views/frontend/homeView.php';
     }
     // GO TO MENTIONS
-    function mentions(){
-        require 'app/Views/frontend/mentionsView.php';
+    function goLegal(){
+        require 'app/Views/frontend/legalView.php';
+    }
+    // GO TO ABOUT
+    function goAbout(){
+        require 'app/Views/frontend/about.php';
     }
     // USER CONTACT
     function contact($usernameContact,$mailContact,$titleContact,$contentContact){

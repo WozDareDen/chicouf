@@ -30,10 +30,6 @@ try{
         elseif($_GET['action'] == 'subView'){
             $frontoffice->subView();
         }
-        // GO TO MENTIONS
-        elseif($_GET['action'] == 'mentions'){
-            $frontoffice->mentions();
-        }
         // USER CONTACT
         elseif($_GET['action'] == 'contact'){
             if(isset($_POST['usernameContact']) && isset($_POST['mailContact']) && isset($_POST['titleContact']) && isset($_POST['contentContact'])){
@@ -209,6 +205,12 @@ try{
             else {
                 throw new Exception('vous devez être connecté');
             }
+        }
+        elseif($_GET['action'] == 'legal'){
+            $frontoffice->goLegal();
+        }
+        elseif($_GET['action'] == 'about'){
+            $frontoffice->goAbout();
         }
         elseif($_GET['action'] == 'profileView'){
             $idMember = $_GET['idMember'];
