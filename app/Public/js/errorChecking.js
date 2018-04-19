@@ -70,8 +70,13 @@ function myFunction2() {
             y.type = "password";
         }
 }
-$(".photoChild").on("click",function(e){
-    $(e.target).css("transform","rotate(1turn)");
-    console.log(e.target);
- });
+// $(".photoChild").on("click",function(e){
+//     $(e.target).css("transform","rotate(1turn)");
+//     console.log(e.target);
+//  });
  
+// var divs = $('.social');
+// $(window).scroll(function(){
+//    var percent = $(document).scrollTop() / ($(document).height() - $(window).height());
+//    divs.css('opacity', 1 - percent);
+// });

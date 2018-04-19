@@ -1,7 +1,7 @@
 <?php
 //Defining Namespace
 namespace Src\Models;
-//UserObject :
+//FamilyObject :
 class FamilyManager extends Manager{
     public function getfamilyId($idMember){
         $db = $this -> dbConnect();
@@ -47,6 +47,12 @@ class FamilyManager extends Manager{
         $dataMember = $db->prepare('SELECT * FROM members INNER JOIN member_family ON member_family.idMember = members.idMember WHERE idFamily = ? ');
         $dataMember->execute(array($idFamily));
         return $dataMember;
+    }
+    public function watchModo($idFamily){
+        $db = $this -> dbConnect();
+        $dataF7 = $db->prepare('SELECT firstname FROM `members` INNER JOIN member_family ON member_family.idMember = members.idMember WHERE member_family.idFamily = ? AND members.modo >0');
+        $dataF7->execute(array($idFamily));
+        return $dataF7;
     }
     // ADD PARENT AND CHILDREN TO FAMILY
     public function getParentId($mailCoParent){
@@ -97,6 +103,12 @@ class FamilyManager extends Manager{
         $goModo = $db->prepare('UPDATE members set modo=1 WHERE idMember = ?');
         $goModo->execute(array($idMember));
         return $goModo;
+    }
+    public function insertNewModo($mailNewModo){
+        $db = $this -> dbConnect();
+        $newModo = $db->prepare('UPDATE members set modo=1 WHERE mail = ?');
+        $newModo->execute(array($mailNewModo));
+        return $newModo;
     }
     // DELETE FAMILY
     public function eraseFamily($idFamily){

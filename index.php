@@ -121,6 +121,11 @@ try{
             $idFamily = $_GET['id'];
             $frontoffice->deleteFamily($idFamily,$idMember);
         }
+        // NEW MODO
+        elseif($_GET['action'] == 'newModo'){
+            $mailNewModo = $_POST['mailCoModo'];
+            $frontoffice->addNewModo($mailNewModo); 
+        }
         // ADD NEW CHILD
         elseif($_GET['action'] == 'addChild'){
             if(($_SESSION['id'])){

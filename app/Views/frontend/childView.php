@@ -5,9 +5,9 @@
 <div class="container" style="background-color: #FFFAFA;">
 
 
-  <h1 style="text-align:center;">Bienvenue sur votre Espace Membre <?= $_SESSION['firstname'] ?>&nbsp;!</h1>
+  <h1 style="text-align:center;" class="social">Bienvenue sur votre Espace Membre <?= $_SESSION['firstname'] ?>&nbsp;!</h1>
 
-  <article class="row justify-content-md-center" style="text-align:center;text-align:justify;">Vous trouverez ici tous les renseignements nécessaires à la gestion des fiches de vos enfants. Vous pouvez les modifier et les personnaliser à loisir. 
+  <article class="row justify-content-md-center social" style="text-align:center;text-align:justify;">Vous trouverez ici tous les renseignements nécessaires à la gestion des fiches de vos enfants. Vous pouvez les modifier et les personnaliser à loisir. 
   </article>
 
 
@@ -28,7 +28,7 @@ foreach($bigData as $newData){
 
 
 
-    <article class="col-sm-3 avatarBox" >
+    <article class="col-sm-3 avatarBox social" >
     <a href="#" data-toggle="modal" data-target="#exampleModal<?= $newData['idChildren'] ?>" data-whatever="@mdo" class="photoChild2" style="background-image: url(<?= $newData['img'] ?>);" title="Vous pouvez modifier la photo" ></a>
                   <div class="modal fade" id="exampleModal<?= $newData['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -54,10 +54,10 @@ foreach($bigData as $newData){
     </article>
 
   
-    <article class="col-sm-7" >
+    <article class="col-sm-7 social" >
     <h3><?= $newData['firstname']; ?> <?= $newData['surname']; ?> </h3>
-                    <a href="index.php?action=goToUpdateChild&idChildren=<?= $newData['idChildren']; ?>"><button type="button" class="btn btn-warning">Modifier cette fiche enfant</button></a>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal2<?= $newData['idChildren'] ?>">Rattacher un parent à cet enfant</button>
+                    <a href="index.php?action=goToUpdateChild&idChildren=<?= $newData['idChildren']; ?>" class="social"><button type="button" class="btn btn-warning">Modifier cette fiche enfant</button></a>
+                    <button type="button" class="btn btn-info social" data-toggle="modal" data-target="#exampleModal2<?= $newData['idChildren'] ?>">Rattacher un parent à cet enfant</button>
 
 <!--***************************Modal Child-to-Parent****************************-->
                     <div class="modal fade" id="exampleModal2<?= $newData['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
@@ -85,8 +85,8 @@ foreach($bigData as $newData){
                     </div>
 <!--*************************IDENTITY********************************-->
                     <div class="sr-only"><?= $newData['idMember']; ?></div>
-                    <p>Date de naissance : <?= $newData['new_birthdate']; ?></p>
-                    <p>Parent(s) : <?= $newData['parent1']?> 
+                    <p class="social">Date de naissance : <?= $newData['new_birthdate']; ?></p>
+                    <p class="social">Parent(s) : <?= $newData['parent1']?> 
 <?php 
 if(!empty($newData['parent2'])){
 ?>
@@ -100,17 +100,17 @@ if(!empty($newData['parent2'])){
 <?php
 $newConnex2 = $connex2->fetch() 
 ?>
-                    <h3>ALIMENTATION </h3>
-                    <p>Plats préférés : <?= $newConnex2['favorite_meal']; ?></p>
-                    <p>Plats détestés : <?= $newConnex2['hated_meal']; ?></p>
+                    <h3 class="social">ALIMENTATION </h3>
+                    <p class="social">Plats préférés : <?= $newConnex2['favorite_meal']; ?></p>
+                    <p class="social">Plats détestés : <?= $newConnex2['hated_meal']; ?></p>
 <!--**************************HEALTH**********************************-->        
 <?php
 $newConnex3 = $connex3->fetch()
 ?>
-                    <h3>TRAITEMENT</h3>
-                    <p>Noms, posologies, durées : <?= $newConnex3['meds']; ?></p>
-                    <p>Allergies : <?= $newConnex3['allergies']; ?></p>
-                    <p>Dernière modification effectuée par <?= $newData['upDateUser'] ?>, le <?= $newData['new_upDateLog'] ?>.</p>
+                    <h3 class="social">TRAITEMENT</h3>
+                    <p class="social">Noms, posologies, durées : <?= $newConnex3['meds']; ?></p>
+                    <p class="social">Allergies : <?= $newConnex3['allergies']; ?></p>
+                    <p class="social">Dernière modification effectuée par <?= $newData['upDateUser'] ?>, le <?= $newData['new_upDateLog'] ?>.</p>
 
     </article>
     <?php

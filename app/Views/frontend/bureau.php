@@ -26,8 +26,8 @@ if(isset($_SESSION['parenthood'])){
 Espace Enfant
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-<a class="dropdown-item" href="index.php?action=memberView&idMember=<?= $_SESSION['id'] ?>">Voir mes Enfants</a>
-<a class="dropdown-item" href="index.php?action=createChild">Créer une fiche Enfant</a>
+<a class="dropdown-item easyRed" href="index.php?action=memberView&idMember=<?= $_SESSION['id'] ?>">Voir mes Enfants</a>
+<a class="dropdown-item easyRed" href="index.php?action=createChild">Créer une fiche Enfant</a>
 </div>
 </li>
 
@@ -38,12 +38,29 @@ Espace Enfant
             <a class="dropdown-item" href="index.php?action=goToCreateFamily" >Créer un Espace Famille</a>
             </div>
         </li>
-              
-
 
         <li class="nav-item">
             <div class="nav-link contactMouse" data-toggle="modal" data-target="#ModalContact" >Nous contacter</div>
         </li>
+        <?php
+if($_SESSION['modo'] >0){
+  ?>
+  <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" id="navbarDropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Modération</a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+            <a href="#" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#modalAddParent" >Rattacher un membre à votre famille</a>
+            <a href="#" class="btn btn-info dropdown-item" data-toggle="modal" data-target="#modalAddBanner" >Modifier la bannière</a>
+            <a href="#" class="btn btn-success dropdown-item" data-toggle="modal" data-target="#modalAddModo" >Ajouter un modérateur</a>
+            <div class="dropdown-divider"></div>
+            <a href="index.php?action=deleteFamily&id=<?= $_GET['id'] ?>" class="btn btn-danger dropdown-item">Supprimer cet Espace Famille</a>
+  </div>
+</li>
+<?php
+}
+?>
+
+
+
 <?php
   if(($_SESSION['id'] == 32) && ($_SESSION['modo'] == 2)){
 

@@ -64,10 +64,18 @@ class FrontOffice{
         $dataF3 = $familyManager -> watchFamilyHealth($idFamily);
         $dataF4 = $familyManager -> getFamilyName($idFamily);
         $dataF6 = $familyManager -> getImgFamily($idFamily);
+        $dataF7 = $familyManager -> watchModo($idFamily);
+        $dataF8 = $dataF7->fetchAll();
+        
         $dataMember = $familyManager -> watchMembersFamily($idFamily);
         $userManager = new \Src\Models\UserManager();
         $dataF5 = $userManager -> userById($idMember);
         require 'app/Views/frontend/familyView.php';
+    }
+    function addNewModo($mailNewModo){
+        $familyManager = new \Src\Models\FamilyManager();
+        $newModo = $familyManager -> insertNewModo($mailNewModo);
+        header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
     }
     function deleteFamily($idFamily,$idMember){
         $familyManager = new \Src\Models\FamilyManager();
