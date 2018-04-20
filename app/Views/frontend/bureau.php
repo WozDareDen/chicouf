@@ -35,7 +35,17 @@ Espace Enfant
             <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Espace Famille</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="index.php?action=familyLink&id=<?= $_SESSION['family'] ?>">Rejoindre mon espace Famille</a>
+
+<?php
+if(!(isset($_SESSION['family']))){
+?>
+           
             <a class="dropdown-item" href="index.php?action=goToCreateFamily" >Créer un Espace Famille</a>
+
+<?php
+}
+?>
+
             </div>
         </li>
 
@@ -52,7 +62,9 @@ if($_SESSION['modo'] >0){
             <a href="#" class="btn btn-info dropdown-item" data-toggle="modal" data-target="#modalAddBanner" >Modifier la bannière</a>
             <a href="#" class="btn btn-success dropdown-item" data-toggle="modal" data-target="#modalAddModo" >Ajouter un modérateur</a>
             <div class="dropdown-divider"></div>
-            <a href="index.php?action=deleteFamily&id=<?= $_GET['id'] ?>" class="btn btn-danger dropdown-item">Supprimer cet Espace Famille</a>
+            <a href="#" class="btn btn-info dropdown-item" data-toggle="modal" data-target="#modalStopModo">Quitter la modération</a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="btn btn-danger dropdown-item" data-toggle="modal" data-target="#modalDeleteFamily">Supprimer cet Espace Famille</a>
   </div>
 </li>
 <?php
@@ -118,29 +130,15 @@ elseif($_SESSION['parenthood'] == 0){
 <a class="navbar-brand" href="index.html">Chicouf</a>
 <div class="collapse navbar-collapse justify-content-between" id="navbar2">
 <ul class="navbar-nav">
-<li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="index.php?action=memberView&idMember=<?= $_SESSION['id'] ?>">Mon Profil</a>
         </li>
         
-<?php
-    if(isset($dataFam2)){  
-?>     
 
-<li class="nav-item">
-            <a class="nav-link" href="index.php?action=familyLink&id=<?= $dataFam2['idFamily'] ?>">Espace Famille</a>
-        </li>
-        <?php            
-}
-else{
-?>
-<li class="nav-item">
-            <a class="nav-link" href="index.php?action=familyLink&id=<?= $_GET['id'] ?>">Espace Famille</a>
+        <li class="nav-item">
+            <a class="nav-link" href="index.php?action=familyLink&id=<?= $_SESSION['family'] ?>">Espace Famille</a>
         </li>
 
-
-<?php
-}
-?>
 
         <li class="nav-item">
             <div class="nav-link contactMouse" data-toggle="modal" data-target="#ModalContact">Nous contacter</div>
@@ -216,7 +214,7 @@ else{
 ?>
 <!-- End of Navbar -->
 
-<!-- Modal -->
+<!-- Modal Connection-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -248,10 +246,126 @@ else{
   </div>
 </div>
 
+<!-- Modal DeleteFamily-->
+<div class="modal fade" id="modalDeleteFamily" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel5" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header padiday">
+        <h5 class="modal-title" id="exampleModalLabel5">Suppression de votre Espace Famille</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <p>Cette action entrainera la <strong>suppression définitive</strong> de cet Espace Famille. Par la suite, vous pourrez créer un nouvel Espace Famille.</p>
+        <form action="index.php?action=deleteFamily&id=<?= $_SESSION['family'] ?>" method="post">
+          <div class="form-check">
+          <input type="checkbox" name="choixDelCo" required="valid" /> Je confirme vouloir supprimer cet Espace Famille.</br>
+          </div>
+          <button type="submit" class="btn btn-outline-danger">Valider</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
+<!-- MODAL ADD PARENT -->
+<div class="modal fade" id="modalAddParent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color:black;">Rattacher un utilisateur à cet Espace Famille</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="color:black;">
+                <p>Pour rattacher un utilisateur à cet Espace Famille, il vous suffit de renseigner son adresse mail.<br />Ainsi cette personne tout comme ses enfants seront réunis au sein de cet Espace.</p>
+                <form action="index.php?action=belongParent" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="idCoFamily" value="<?= $_GET['id'] ?>">
+                        <input type="mail" class="form-control" id="mailCoParent" name="mailCoParent" placeholder="Entrez son mail">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
+<!-- MODAL ADD BANNER -->
+<div class="modal fade" id="modalAddBanner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color:black;">Modifier la bannière de cet Espace Famille</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="index.php?action=uploadBanner&idFamily=<?= $_GET['id'] ?>" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <input type="hidden" name="idFamilyCo" value="<?= $dataF6['idFamily'] ?>" />
+                        <input type="file" name="fileToUpload" id="fileToUpload" /> 
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <input type="submit" class="btn btn-primary" value="Envoyer" name="submit" />
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL ADD MODO -->
+<div class="modal fade" id="modalAddModo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color:black;">Ajouter un Modérateur à cet Espace Famille</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="color:black;">
+                <p>Pour ajouter un modérateur à cet Espace Famille, il vous suffit de renseigner son adresse mail.<br />Ainsi cette personne disposera des mêmes droits que vous au sein de cet Espace.</p>
+                <form action="index.php?action=newModo" method="post">
+                    <div class="form-group">
+                        <input type="mail" class="form-control" id="mailCoModo" name="mailCoModo" placeholder="Entrez son mail">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL STOP MODO -->
+<div class="modal fade" id="modalStopModo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color:black;">Quitter la modération</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="color:black;">
+                <p>En validant, vous resterez membre de votre Espace Famille mais vous n'en serez plus le modérateur. <br /></p>
+                
+                <p>Etant le seul modérateur de votre Espace Famille, avant d'abandonner vos droits de modération, veuillez renseigner le mail du nouveau modérateur.
+
+                <form action="index.php?action=newModo" method="post">
+                    <div class="form-group">
+                        <input type="mail" class="form-control" id="mailCoModo" name="mailCoModo" placeholder="Entrez son mail">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

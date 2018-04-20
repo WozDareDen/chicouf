@@ -114,7 +114,7 @@ try{
         // DELETE FAMILY
         elseif($_GET['action'] == 'deleteFamily'){
             $idMember = $_SESSION['id'];
-            $idFamily = $_GET['id'];
+            $idFamily = $_SESSION['id'];
             $frontoffice->deleteFamily($idFamily,$idMember);
         }
         // NEW MODO

@@ -35,15 +35,15 @@ class FrontOffice{
         $req = $userManager -> userConnex($firstname,$surname);
         $resultat = $req->fetch();
         $isPasswordCorrect = password_verify($pass,$resultat['pass']);
-        $_SESSION['firstname'] =  $resultat['firstname'];
-        $_SESSION['parenthood'] = $resultat['parenthood'];
-        $_SESSION['id'] =  $resultat['idMember'];
-        $_SESSION['modo'] =  $resultat['modo'];
-        $_SESSION['img'] =  $resultat['img'];
-        $familyManager = new \Src\Models\FamilyManager();     
-        $dataFam = $familyManager ->  getfamilyId($_SESSION['id']); 
-        $_SESSION['family'] = $dataFam['idFamily'];
             if($isPasswordCorrect){
+                $_SESSION['firstname'] =  $resultat['firstname'];
+                $_SESSION['parenthood'] = $resultat['parenthood'];
+                $_SESSION['id'] =  $resultat['idMember'];
+                $_SESSION['modo'] =  $resultat['modo'];
+                $_SESSION['img'] =  $resultat['img'];
+                $familyManager = new \Src\Models\FamilyManager();     
+                $dataFam = $familyManager ->  getfamilyId($_SESSION['id']); 
+                $_SESSION['family'] = $dataFam['idFamily'];
                 header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);             
             }
             else{

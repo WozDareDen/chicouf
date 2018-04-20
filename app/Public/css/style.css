@@ -215,3 +215,22 @@ a.dropdown-item:hover{
 #logoTurn2:hover{
     animation-play-state: paused;
 }
+
+/*------DELETE FAMILY MODAL---------*/
+.padiday{
+    background: linear-gradient(120deg, #da3e44, #AA0044);
+    background-size: 200% 200%;
+    animation: warningModal 3s ease infinite;
+}
+
+@keyframes warningModal{
+    0%{background-position: 0% 50%;
+
+    }
+    50%{background-position: 100% 50%;
+
+    }
+    100%{background-position: 0% 50%;
+
+    }
+}
