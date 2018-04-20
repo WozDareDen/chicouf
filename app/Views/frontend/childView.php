@@ -2,12 +2,12 @@
 <?php ob_start(); ?>
 <?php require 'bureau.php' ?>
 
-<div class="container" style="background-color: #FFFAFA;">
+<div class="container" >
 
 
   <h1 style="text-align:center;" class="social">Bienvenue sur votre Espace Membre <?= $_SESSION['firstname'] ?>&nbsp;!</h1>
 
-  <article class="row justify-content-md-center social" style="text-align:center;text-align:justify;">Vous trouverez ici tous les renseignements nécessaires à la gestion des fiches de vos enfants. Vous pouvez les modifier et les personnaliser à loisir. 
+  <article class="row justify-content-md-center social" style="text-align:center;text-align:justify;">Vous trouverez ici tous les renseignements nécessaires à la gestion des fiches de vos enfants. Vous pouvez les modifier et les personnaliser à loisir.<br /> 
   </article>
 
 
@@ -56,8 +56,8 @@ foreach($bigData as $newData){
   
     <article class="col-sm-7 social" >
     <h3><?= $newData['firstname']; ?> <?= $newData['surname']; ?> </h3>
-                    <a href="index.php?action=goToUpdateChild&idChildren=<?= $newData['idChildren']; ?>" class="social"><button type="button" class="btn btn-warning">Modifier cette fiche enfant</button></a>
-                    <button type="button" class="btn btn-info social" data-toggle="modal" data-target="#exampleModal2<?= $newData['idChildren'] ?>">Rattacher un parent à cet enfant</button>
+                    <a href="index.php?action=goToUpdateChild&idChildren=<?= $newData['idChildren']; ?>" class="social"><button type="button" style="background-color:#FCD64C;color:#0B2F3D;" class="btn">Modifier cette fiche enfant</button></a>
+                    <button type="button" style="background-color:#3D91B2;color:#FFF" class="btn social" data-toggle="modal" data-target="#exampleModal2<?= $newData['idChildren'] ?>">Rattacher un parent à cet enfant</button>
 
 <!--***************************Modal Child-to-Parent****************************-->
                     <div class="modal fade" id="exampleModal2<?= $newData['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >

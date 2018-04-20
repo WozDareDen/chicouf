@@ -3,20 +3,17 @@
 <div class="container">
 <?php require 'templateAdminHeader2.php' ?>
 <?php
-$userAll = $useAll->fetch(); 
+$newFamAll = $famAll->fetch()
 ?>
 
-
 <div class="jumbotron">
-  <h1 class="display-4">Liste des <?= $userAll[0] ?> membres</h1>
+  <h1 class="display-4">Liste des <?= $newFamAll[0] ?> familles</h1>
   <!-- MEMBERS TABLE-->
   <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Noms</th>
-                        <th scope="col">Villes</th>
-                        <th scope="col">Inscription</th>
                     </tr>
                 </thead>
             <tbody>
@@ -26,7 +23,7 @@ $bigData = $data->fetchAll();
 if(empty($bigData)){
 ?>
 
-                <p>Aucun utilisateur enregistré.</p>
+                <p>Aucune famille enregistrée.</p>
 
 <?php
 }
@@ -35,10 +32,8 @@ foreach($bigData as $newData){
 ?>
 
                 <tr>
-                    <td><?= $newData['idMember'] ?></td>
-                    <td><?= $newData['surname'] ?> <?= $newData['firstname'] ?></td>
-                    <td><?= $newData['city'] ?></td>
-                    <td><?= $newData['registrationDate'] ?></td>
+                    <td><?= $newData['idFamily'] ?></td>
+                    <td><?= $newData['familyName'] ?></td>
                 </tr>
 
 <?php
@@ -69,13 +64,6 @@ foreach($bigData as $newData){
     </li>
   </ul>
 </nav>
-<?php 
-
-$userInfo = $userInfos->fetch();
-?>
-            <p><br />
-            L'utilisateur enregistré le plus récent est <span class="fatRed"><?= $userInfo['firstname'] ?> <?= $userInfo['surname'] ?></span>, le <?=$userInfo['reg_date'] ?>.<br />
-            </p>
 </div>
 
 

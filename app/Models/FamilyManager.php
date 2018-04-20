@@ -98,17 +98,33 @@ class FamilyManager extends Manager{
         $newFamily->execute(array($idMember,$idFamily));
         return $newFamily;
     }
+    // FIRST MODO
     public function newModo($idMember){
         $db = $this -> dbConnect();
         $goModo = $db->prepare('UPDATE members set modo=1 WHERE idMember = ?');
         $goModo->execute(array($idMember));
         return $goModo;
     }
+    // ADD MODO
     public function insertNewModo($mailNewModo){
         $db = $this -> dbConnect();
         $newModo = $db->prepare('UPDATE members set modo=1 WHERE mail = ?');
         $newModo->execute(array($mailNewModo));
         return $newModo;
+    }
+    // CHECK MODO
+    public function checkModo($idFamily){
+        $db = $this -> dbConnect();
+        $checkModo = $db->prepare('SELECT firstname FROM members INNER JOIN member_family ON member_family.idMember = members.idMember WHERE idFamily = ? AND modo > 0');
+        $checkModo->execute(array($idFamily));
+        return $checkModo;
+    }
+    // CHANGE MODO 
+    public function changeModoStatus($idMember){
+        $db = $this -> dbConnect();
+        $changeModo = $db->prepare('UPDATE members set modo=0 WHERE idMember = ?');
+        $changeModo->execute(array($idMember));
+        return $changeModo;
     }
     // DELETE FAMILY
     public function eraseFamily($idFamily){

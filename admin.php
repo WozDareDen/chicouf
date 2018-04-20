@@ -4,25 +4,37 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 try{
     $backoffice = new \Src\Controllers\BackOffice();
+
     if (isset($_GET['action'])) {
-        if($_SESSION['modo']==2){       
-        }
+        if(isset($_SESSION['id']) && $_SESSION['modo'] == 2){       
+       
             if($_GET['action'] == 'dashboard'){
                 $backoffice->goToDashboard();
             }
             elseif($_GET['action'] == 'deleteMember'){
-                $idMember = $_GET['id'];
-                $backoffice->deleteMember($idMember);
+                $idBackMember = int($_POST['idBackMember']);
+                $backoffice->deleteMember($idBackMember);
+            }
+            elseif($_GET['action'] == 'deleteFamily'){
+                $idBackFamily = int($_POST['idBackFamily']);
+                $backoffice->deleteFamily($idBackFamily);
             }
             elseif($_GET['action'] == 'membersView'){
                 $backoffice->watchMembers();
             }
-        else{
-            throw new \Exception ('vous n\'êtes pas administrateur');
-        }
+            elseif($_GET['action'] == 'familiesView'){
+                $backoffice->watchFamilies();
+            }
+            elseif($_GET['action'] == 'msgView'){
+                $backoffice->msgView();
+            }
+            else{
+                throw new \Exception ('cette page n\'existe pas');
+            }
     }
+}
     else{
-        echo 'beurre';
+        header('Location: index.php');
     }
 }
 catch(Exception $e){

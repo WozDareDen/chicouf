@@ -122,6 +122,11 @@ try{
             $mailNewModo = $_POST['mailCoModo'];
             $frontoffice->addNewModo($mailNewModo); 
         }
+        // CHANGE MODO
+        elseif($_GET['action'] == 'changeModo'){
+            $idMember = $_SESSION['id'];
+            $frontoffice->changeModo($idMember);
+        }
         // ADD NEW CHILD
         elseif($_GET['action'] == 'addChild'){
             if(($_SESSION['id'])){

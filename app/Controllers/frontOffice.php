@@ -72,11 +72,28 @@ class FrontOffice{
         $dataF5 = $userManager -> userById($idMember);
         require 'app/Views/frontend/familyView.php';
     }
+    // ADD NEW MODO
     function addNewModo($mailNewModo){
         $familyManager = new \Src\Models\FamilyManager();
         $newModo = $familyManager -> insertNewModo($mailNewModo);
         header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
     }
+    // CHANGE MODO
+    function changeModo($idMember){
+        $idFamily = $_SESSION['family'];
+        $familyManager = new \Src\Models\FamilyManager();
+        $checkModo = $familyManager -> checkModo($idFamily);
+        $checkModo2 = $checkModo->fetchAll();
+            if(count($checkModo2)>1){ 
+                $changeModo = $familyManager -> changeModoStatus($idMember);
+                $_SESSION['modo'] = 0;
+                header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
+            }
+            else{
+                throw new \Exception('vous devez d\'abord désigner un nouveau modérateur');
+            }
+    }
+    // DELETE FAMILY
     function deleteFamily($idFamily,$idMember){
         $familyManager = new \Src\Models\FamilyManager();
         $eraseFam = $familyManager -> eraseFamily($idFamily);
