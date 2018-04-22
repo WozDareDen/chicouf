@@ -1,83 +1,58 @@
-
+<div class="container">
     <nav class="main-menu">
         <div>
             <a href="index.php?action=memberView&idMember=<?= $_SESSION['id'] ?>"><img src="app/Public/uploads/logo.png" style="width:80%;"/>
             </a> 
         </div> 
-        <div class="settings"></div>
-        <div class="scrollbar" id="style-1">
-      
+        <div class="scrollbar" id="style-1">     
             <ul>
                 <li>                                   
-                <a href="admin.php?action=dashboard">
-                <i class="fa fa-home fa-lg"></i>
-                <span class="nav-text">Tableau de Bord</span>
-                </a>
-                </li>   
-                
+                    <a href="admin.php?action=dashboard">
+                    <i class="fa fa-home fa-lg"></i>
+                    <span class="nav-text">Tableau de Bord</span>
+                    </a>
+                </li>                  
                 <li>                                 
-                <a href="admin.php?action=membersView">
-                <i class="fa fa-user fa-lg"></i>
-                <span class="nav-text">Membres</span>
-                </a>
+                    <a href="admin.php?action=membersView">
+                    <i class="fa fa-user fa-lg"></i>
+                    <span class="nav-text">Membres</span>
+                    </a>
                 </li>   
-        
-                <li class="darkerli">
-                <a href="#" data-toggle="modal" data-target="#modalDeleteMember">
-                <i class="fa fa-trash fa-lg"></i>
-                <span class="nav-text">Supprimer un utilisateur</span>
-                </a>
-                </li>   
-
                 <li>                                 
-                <a href="admin.php?action=familiesView">
-                <i class="fa fa-users fa-lg"></i>
-                <span class="nav-text">Familles</span>
-                </a>
-                </li>
-              
-                <li class="darkerli">
-                <a href="#" data-toggle="modal" data-target="#modalDeleteFamily">
-                <i class="fa fa-trash fa-lg"></i>
-                <span class="nav-text">Supprimer une famille</span>
-                </a>
-                </li>
-
+                    <a href="admin.php?action=familiesView">
+                    <i class="fa fa-users fa-lg"></i>
+                    <span class="nav-text">Familles</span>
+                    </a>
+                </li>           
                 <li>                                 
-                <a href="admin.php?action=msgView">
-                <i class="fa fa-envelope-o fa-lg"></i>
-                <span class="nav-text">Messages</span>
-                </a>
-                </li>   
-                                                     
+                    <a href="admin.php?action=msgView">
+                    <i class="fa fa-envelope-o fa-lg"></i>
+                    <span class="nav-text">Messages</span>
+                    </a>
+                </li>                                                       
                 <li class="darkerli">
-                <a href="http://startific.com">
-                <i class="fa fa-desktop fa-lg"></i>
-                <span class="nav-text">Statistiques</span>
-                </a>
+                    <a href="#">
+                    <i class="fa fa-desktop fa-lg"></i>
+                    <span class="nav-text">Statistiques</span>
+                    </a>
                 </li>
 
                 <li class="darkerli">
-                <a href="http://startific.com">
-                <i class="fa fa-picture-o fa-lg"></i>
-                <span class="nav-text">Images</span>
-                </a>
-                </li>
-                
-                </ul> 
-                                  
-                <ul class="logout">
+                    <a href="#">
+                    <i class="fa fa-picture-o fa-lg"></i>
+                    <span class="nav-text">Images</span>
+                    </a>
+                </li>               
+            </ul>                                  
+            <ul class="logout">
                 <li>
-                                <a href="index.php?action=deco">
-                                        <i class="fa fa-lightbulb-o fa-lg"></i>
-                                        <span class="nav-text">
-                                            Déconnexion 
-                                        </span>
-                                        
-                                    </a>
+                    <a href="index.php?action=deco">
+                    <i class="fa fa-lightbulb-o fa-lg"></i>
+                    <span class="nav-text">Déconnexion</span>                        
+                    </a>
                 </li>  
             </ul>
-        </nav>
+    </nav>
         
 <!-- MODAL DELETE MEMBER -->
 <div class="modal fade" id="modalDeleteMember" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
@@ -105,7 +80,7 @@
     </div>
 </div>
 			
-  <!-- MODAL DELETE MEMBER -->
+  <!-- MODAL DELETE FAMILY -->
 <div class="modal fade" id="modalDeleteFamily" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">

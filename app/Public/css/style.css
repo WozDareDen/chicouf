@@ -286,3 +286,10 @@ a.dropdown-item:hover{
 .jumbotron{
     margin-top: 100px;
 }
+.main-menu{
+    z-index:10000;
+}
+.folio1, .folio2{
+    margin-top:100px;
+    height: 300px;
+}

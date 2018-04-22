@@ -9,16 +9,9 @@ body
 
 }
 
-
-@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-}
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 
-.logo{
-  
-}
-
-.settings {
+/* .settings {
   
   height:73px; 
   float:left;
@@ -30,12 +23,7 @@ body
 font-size:20px;
 font-family: 'Strait', sans-serif;
 
-}
-
-
-
-
-
+} */
 
 /* ScrolBar  */
 .scrollbar
@@ -177,8 +165,7 @@ width:190px;
 font-family: 'Titillium Web', sans-serif;
 }
 
-.main-menu .share {
-}
+
 
 
 
