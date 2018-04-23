@@ -19,7 +19,7 @@ class FamilyManager extends Manager{
     }
     public function watchFamily($idFamily){
         $db = $this -> dbConnect(); 
-        $dataF = $db->prepare('SELECT children.idChildren, family_children.idFamily, surname, firstname, img, parent1, parent2, DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN family_children ON family_children.idChildren = children.idChildren WHERE idFamily = ? ORDER BY children.idChildren');
+        $dataF = $db->prepare('SELECT children.idChildren, family_children.idFamily, surname, firstname, img, parent1, parent2, DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN family_children ON family_children.idChildren = children.idChildren WHERE idFamily = ? ORDER BY birthdate');
         $dataF->execute(array($idFamily));
         return $dataF;
     }
@@ -44,7 +44,7 @@ class FamilyManager extends Manager{
     }
     public function watchMembersFamily($idFamily){
         $db = $this -> dbConnect();
-        $dataMember = $db->prepare('SELECT * FROM members INNER JOIN member_family ON member_family.idMember = members.idMember WHERE idFamily = ? ');
+        $dataMember = $db->prepare('SELECT members.idMember,firstname,surname,city, gender, modo, DATE_FORMAT(registrationDate, \'%d/%m/%Y\') as new_regDate,parenthood,img,mail,DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM members INNER JOIN member_family ON member_family.idMember = members.idMember WHERE idFamily = ? ORDER BY birthdate');
         $dataMember->execute(array($idFamily));
         return $dataMember;
     }

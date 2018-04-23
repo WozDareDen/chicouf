@@ -17,7 +17,7 @@ class FrontOffice{
             $_SESSION['parenthood'] = $resultat['parenthood'];
             $_SESSION['id'] =  $resultat['idMember'];
             $_SESSION['modo'] =  $resultat['modo'];
-                if($_SESSION['parentHood'] == 1){
+                if($_SESSION['parenthood'] == 1){
                     header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);
                 }
                 else{
@@ -97,6 +97,7 @@ class FrontOffice{
     function deleteFamily($idFamily,$idMember){
         $familyManager = new \Src\Models\FamilyManager();
         $eraseFam = $familyManager -> eraseFamily($idFamily);
+        $_SESSION['modo'] = 0;
         header('Location: index.php?action=memberView&idMember='.$idMember);
     }
     // GO TO REGISTRATION FORM
@@ -154,24 +155,24 @@ class FrontOffice{
                 $addToMyFamily = $childManager -> AddToMyFamily($idChild,$idFamily);
             }
         }
+        $_SESSION['family'] = $idFamily;
+        $_SESSION['modo'] = 1;
         header('Location: index.php?action=familyLink&id='.$idFamily);
     }
     function belongFamily($idFamily,$mailCoParent){
         $familyManager = new \Src\Models\FamilyManager();
         $dataParent = $familyManager -> getParentId($mailCoParent); 
+
         $dataParent2 = $dataParent->fetch(); 
             if(!(empty($dataParent2))){
-            $idMember = $dataParent2['idMember'];
+            $idMember = $dataParent2['idMember'];        
             $dataParent3 = $familyManager -> belongParent($idMember,$idFamily);
             $dataParent4 = $familyManager -> getChildParent($idMember);
             $dataParent6 = $dataParent4->fetchAll();
-                if(empty($dataParent6)){
-                    throw new \Exception ('vous n\'avez aucun enfant rattaché à votre compte');
-                }
-                else{
+                if(!(empty($dataParent6))){
                     foreach($dataParent6 as $dataParent7){
-                        $idChild = $dataParent7['idChildren'];
-                        $dataParent5 = $familyManager -> belongChild($idFamily,$idChild);
+                    $idChild = $dataParent7['idChildren'];
+                    $dataParent5 = $familyManager -> belongChild($idFamily,$idChild);
                     }
                 }
             }
@@ -205,8 +206,10 @@ class FrontOffice{
         $userManager = new \Src\Models\UserManager();
         $infosParent = $userManager -> getFamilyId($idMember);
         $infosParent2 = $infosParent->fetch();
+        if(!(empty($infosParent2))){
         $idFamily = $infosParent2['idFamily'];
         $infos4 = $childManager -> addToMyFamily($idChild,$idFamily);
+        }
         header('Location: index.php?action=memberView&idMember='.$idMember);
     }
     // UPDATE CHILD
@@ -349,25 +352,81 @@ class FrontOffice{
         
     }
 
+// UPLOAD USER AVATAR
+function uploadAvatar($idMember){
+    $target_dir = "app/Public/uploads/";
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    // Check if image file is a actual image or fake image
+    if(isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        if($check !== false) {
+            // Check file size
+            if ($_FILES["fileToUpload"]["size"] > 500000) {
+                echo "Désolé, votre fichier est trop volumineux. ";
+                $uploadOk = 0;
+            }
+            // Allow certain file formats
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif" ) {
+                echo "Seuls les formats JPG, JPEG, PNG & GIF files sont authorisés. ";
+                $uploadOk = 0;
+            }
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+                echo "Désolé, votre avatar n'a pu être envoyé.";
+            // if everything is ok, try to upload file
+            } else {
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                    $userManager = new \Src\Models\UserManager();
+                    $insertAvatar = $userManager -> insertAvatar($target_file,$idMember);
+                    $this->recoverUser($idMember);
+                } else {
+                    echo "Désolé, une erreur est survenue dans l'envoi de votre fichier. ";
+                }
+            }
+        } else {
+            echo "Ce fichier n'est pas une image. ";
+            $uploadOk = 0;
+        }
+    }
+    
+}
+
 
     function recoverUser($idMember)
     {
         $recovUser = new \Src\Models\UserManager();
-        $recoverUs = $recovUser->user($idMember);
-        require 'app/Views/frontend/profilView.php';
+        $recoverUs = $recovUser -> watchUser($idMember);
+        require 'app/Views/frontend/profileView.php';
     }
 
-    function changeProfile($name, $mdp, $mail, $dateBorn, $city, $idMember)
+    function changeProfile($name, $mail, $birthdate, $city, $idMember)
     {
-        preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $mdp);
-
         $newChange = new \Src\Models\UserManager();
-        $change = $newChange->changeUser($name, $mdp, $mail, $dateBorn, $city, $idMember);
+        $change = $newChange -> changeUser($name, $mail, $birthdate, $city, $idMember);
 
-        $recovUser = new \Src\Models\UserManager();
-        $recoverUs = $recovUser->user($idMember);
+        $this->recoverUser($idMember);
 
-        require 'app/Views/frontend/profilView.php';
-
+    }
+    function newPass($idMember,$initPass,$pass){
+        if(preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $pass)){
+            $userManager = new \Src\Models\UserManager();
+            $getUserPass = $userManager -> watchUser($idMember);
+            $oldPass = $getUserPass->fetch();   
+            $isPasswordCorrect = password_verify($initPass,$oldPass['pass']);
+                if($isPasswordCorrect){
+                    $newPass = password_hash($pass, PASSWORD_DEFAULT);
+                    $changePass = $userManager -> changePass($idMember,$newPass);
+                    $this->recoverUser($idMember);
+                }   
+                else{
+                    throw new \Exception('votre mot de passe actuel est erroné');
+                }      
+        }
+        else{
+            throw new \Exception('votre mot de passe doit comporter des lettres majuscules, minuscules ET des chiffres entre 8 et 16 caractères');
+        }
     }
 }

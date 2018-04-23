@@ -62,7 +62,7 @@ if(empty($dataF4)){
             <h3 class="mbr-section-title display-3 frame5" style="text-align:center"><span>Bienvenue dans votre Espace</span> </h3>
             <h3 class="mbr-section-title display-3 frame6" style="text-align:center"><span>Famille <?= $dataF4['familyName'] ?></span></h3>
     
-            <div class="lead loco">
+            <div class="lead loco alert alert-success alert-dismissible fade show"  data-dismiss="alert" role="alert" title="Faîtes disparaitre ce message en cliquant dessus, il réapparaitra la prochaine fois que vous viendrez sur cette page ;)">
                 <p>Retrouvez tous vos proches au sein de cet Espace. <strong>L'ensemble des membres </strong>de cette famille peut modifier les habitudes alimentaires et les traitements de tous les enfants présents.</p>
 
 <?php
@@ -94,8 +94,8 @@ else{
 
     </div>
 <!--*************GRANDCHILDREN**************-->
-    <h3 class="loco">Les petits-enfants</h3>
-    <div class="row"> 
+    <h3 class="loco" >Les petits-enfants</h3>
+    <div class="row" style="border:1px solid black;" > 
 <?php
 $bigData = $dataF->fetchAll();
 foreach($bigData as $newData){
@@ -151,7 +151,7 @@ $newConnex3 = $dataF3->fetch()
         
 <?php
 }
-}
+
 ?>
 
     </div>
@@ -162,31 +162,137 @@ if(isset($dataMember)){
 ?>
 
     <h3 class="loco">Les parents</h3>
-    <div class="row"> 
+    <div class="row parents" style="border:1px solid black;"> 
 
 <?php
 $bigDataMember = $dataMember->fetchAll();
 if(!(empty($bigDataMember))){    
-foreach($bigDataMember as $newDataMember){
+   
+foreach($bigDataMember as $newDataMember){ 
+    if($newDataMember['parenthood'] ==1){
+?>
+       
+            <article class="col-sm-3 avatarBox" >
+                <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$newDataMember['img'] ?>)" href="#collapseExample<?= $newDataMember['idMember']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                <h3 class="childName"> <?= $newDataMember['firstname']; ?> <?= $newDataMember['surname']; ?></h3>
+            
+            <div class="collapse" id="collapseExample<?= $newDataMember['idMember']; ?>">
+                <h5>Adresse : </h5>
+
+<?php
+if(!($newDataMember['city'] == null)){                
+?>               
+
+                <p><?= $newDataMember['city'] ?></p>
+
+<?php                
+}
+else{
+    ?>
+
+                <p style="font-style:italic">non renseignée</p>
+
+<?php                
+}    
+?>          
+
+                <h5>Date de naissance :</h5>
+
+<?php
+if(!($newDataMember['new_birthdate'] == null)){                
 ?>
 
-       
-            <article class="col-sm-2 avatarBox" >
-                <a class="photoChild" style="background-image: url( <?=$newDataMember['img'] ?>)" href="#collapseExample<?= $newDataMember['idMember']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                <p><?= $newDataMember['new_birthdate'] ?></p>
+<?php                
+}
+else{
+    ?>
+                <p style="font-style:italic">anniversaire non renseigné</p>
+<?php                
+}    
+?>          
+                <p>Inscrit le <?= $newDataMember['new_regDate'] ?>.</p>
+
+            </div></article>
+<?php
+}
+}
+}
+?>
+
+   </div>
+
+<?php    
+}
+?>        
+
+    <h3 class="loco">Les grand-parents</h3>
+    <div class="row" style="border:1px solid black;"> 
+
+<?php
+   
+foreach($bigDataMember as $newDataMember){ 
+    if($newDataMember['parenthood'] == 0){
+?>
+
+            <article class="col-sm-3 avatarBox" >
+                <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$newDataMember['img'] ?>);" href="#collapseExample<?= $newDataMember['idMember']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
                 <h3 class="childName"> <?= $newDataMember['firstname']; ?> <?= $newDataMember['surname']; ?></h3>
+                <div class="collapse" id="collapseExample<?= $newDataMember['idMember']; ?>">
+                <h5>Adresse : </h5>
+
+<?php
+if(!($newDataMember['city'] == null)){                
+?>               
+
+                <p><?= $newDataMember['city'] ?></p>
+
+<?php                
+}
+else{
+    ?>
+
+                <p style="font-style:italic">non renseignée</p>
+
+<?php                
+}    
+?>          
+
+                <h5>Date de naissance :</h5>
+
+<?php
+if(!($newDataMember['new_birthdate'] == null)){                
+?>
+
+                <p><?= $newDataMember['new_birthdate'] ?></p>
+<?php                
+}
+else{
+    ?>
+                <p style="font-style:italic">anniversaire non renseigné</p>
+<?php                
+}    
+?>          
+                <p>Inscrit le <?= $newDataMember['new_regDate'] ?>.</p>
+
+            </div>
             </article>
         
 
 <?php
 }
 }
+}
 ?>
 
-    </div>
+   </div>
 
-<?php    
-}
-?>        
+      
+
+
+
+
+     
 
 
 </div>    

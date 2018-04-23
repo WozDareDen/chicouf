@@ -133,6 +133,10 @@ a.dropdown-item:hover{
     background-repeat: no-repeat;
     display: inline-block;
 }
+.photoChild{
+    margin-right:250px;
+}
+
 @keyframes blurFadeIn {
 	0% {
 		opacity: 0;

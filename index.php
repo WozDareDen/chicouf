@@ -114,7 +114,7 @@ try{
         // DELETE FAMILY
         elseif($_GET['action'] == 'deleteFamily'){
             $idMember = $_SESSION['id'];
-            $idFamily = $_SESSION['id'];
+            $idFamily = $_SESSION['family'];
             $frontoffice->deleteFamily($idFamily,$idMember);
         }
         // NEW MODO
@@ -226,19 +226,38 @@ try{
         }elseif ($_GET['action'] == 'recoverUser'){
             $idMember = $_SESSION['id'];
             $frontoffice->recoverUser($idMember);
-        }elseif ($_GET['action'] == 'changeProfile'){ // changer valeur utilisateur
+        }elseif ($_GET['action'] == 'changeProfile'){ 
             $idMember = $_SESSION['id'];
-            $name = htmlspecialchars($_POST['firstName']);
-            $pass = $_POST['passCo'];
-            $mdp = password_hash($pass, PASSWORD_DEFAULT);
+            $name = htmlspecialchars($_POST['surnameCo']);
             $mail = htmlspecialchars($_POST['mailCo']);
-            $dateBorn = htmlspecialchars($_POST['bornDate']);
-            $city = htmlspecialchars($_POST['city']);
-            $frontoffice->changeProfile($name, $mdp, $mail, $dateBorn, $city, $idMember);
-
+            $birthdate = htmlspecialchars($_POST['birthdateCo']);
+            $city = htmlspecialchars($_POST['cityCo']);
+            $frontoffice->changeProfile($name, $mail, $birthdate, $city, $idMember);
         }
-
-
+        elseif($_GET['action'] == "changePass"){
+            if(isset($_SESSION['id']) && isset($_POST['pass2Co']) && isset($_POST['passCo']) && isset($_POST['initPassCo'])){
+                $idMember = $_SESSION['id'];
+                $pass2Co = htmlspecialchars($_POST['pass2Co']);
+                $pass = htmlspecialchars($_POST['passCo']);
+                $initPass = htmlspecialchars($_POST['initPassCo']);
+                    if($pass2Co === $pass){
+                        $frontoffice->newPass($idMember,$initPass,$pass);
+                    }
+                    else{
+                        throw new \Exception('vos mots de passe ne sont pas identiques');
+                    }
+            }        
+            else{
+                throw new \Exception('tous les champs ne sont pas remplis');
+            }              
+            
+        }
+        elseif($_GET['action'] == "uploadAva"){
+            if($_SESSION['id'] == $_GET['idMember']){
+                $idMember = $_SESSION['id'];
+                $frontoffice->uploadAvatar($idMember);
+            }
+        }
         else{
             echo 'banane';
         }

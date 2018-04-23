@@ -7,13 +7,13 @@ class UserManager extends Manager
     // ADD NEW USER
     public function addUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo){
         if($genderCo == 0 && $parentCo == 0){
-            $img = 'app/Public/uploads/avatarGrandPa.png';
+            $img = 'app/Public/uploads/avatarGrandPa.jpg';
         }
         elseif($genderCo == 0 && $parentCo == 1){
             $img = 'app/Public/uploads/avatarMan.png';
         }
         elseif($genderCo == 1 && $parentCo == 0){
-            $img = 'app/Public/uploads/avatarGrandMa.png';
+            $img = 'app/Public/uploads/avatarGrandMa.jpg';
         }
         else{
             $img = 'app/Public/uploads/avatarWoman.png';
@@ -62,17 +62,17 @@ class UserManager extends Manager
         return $infosParent;
     }
 
-    public function user($idMember){ //recup donner utilisateur
+    public function watchUser($idMember){ //recup donner utilisateur
         $db = $this -> dbConnect();
         $req = $db->prepare('SELECT * FROM members WHERE idMember = ?');
         $req->execute(array($idMember));
         return $req;
     }
 
-    public  function changeUser($name, $mdp, $mail, $dateBorn, $city, $idMember){
+    public  function changeUser($name, $mail, $birthdate, $city, $idMember){
         $db = $this -> dbConnect();
-        $ins = $db->prepare('UPDATE members SET Surname = ?, pass = ?, mail = ?, BirthDate = ?, city = ? WHERE idMember = ?');
-        $ins->execute(array($name, $mdp, $mail, $dateBorn, $city, $idMember));
+        $ins = $db->prepare('UPDATE members SET surname = ?, mail = ?, birthdate = ?, city = ? WHERE idMember = ?');
+        $ins->execute(array($name, $mail, $birthdate, $city, $idMember));
         return $ins;
     }
     public function contactDb($usernameContact,$mailContact,$titleContact,$contentContact){
@@ -80,5 +80,17 @@ class UserManager extends Manager
         $contact = $db->prepare('INSERT INTO contact(title,msg,mailContact,nameContact) VALUES(?,?,?,?)');
         $contact->execute(array($titleContact,$contentContact,$mailContact,$usernameContact));
         return $contact;
+    }
+    public function changePass($idMember,$newPass){
+        $db = $this -> dbConnect();
+        $changePass = $db->prepare('UPDATE members SET pass=? WHERE idMember=?');
+        $changePass->execute(array($newPass,$idMember));
+        return $changePass;
+    }
+    public function insertAvatar($target_file,$idMember){
+        $db = $this -> dbConnect();
+        $insertAvatar = $db->prepare('UPDATE members SET img=? WHERE idMember=?');
+        $insertAvatar->execute(array($target_file,$idMember));
+        return $insertAvatar;
     }
 }

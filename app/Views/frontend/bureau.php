@@ -192,7 +192,7 @@ else{
 <a class="navbar-brand" href="index.php">
 <img src="app/Public/uploads/logo.png" width="30" height="30" alt="Logo">
 </a>
-<a class="navbar-brand" href="index.html">Chicouf</a>
+<a class="navbar-brand" href="index.php">Chicouf</a>
 <div class="collapse navbar-collapse justify-content-between" id="navbar2">
 <ul class="navbar-nav">
 
@@ -274,7 +274,7 @@ else{
 </div>
 
 
-<!-- MODAL ADD PARENT -->
+<!-- MODAL ADD PARENT TO FAMILY-->
 <div class="modal fade" id="modalAddParent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -288,7 +288,7 @@ else{
                 <p>Pour rattacher un utilisateur à cet Espace Famille, il vous suffit de renseigner son adresse mail.<br />Ainsi cette personne tout comme ses enfants seront réunis au sein de cet Espace.</p>
                 <form action="index.php?action=belongParent" method="post">
                     <div class="form-group">
-                        <input type="hidden" name="idCoFamily" value="<?= $_GET['id'] ?>">
+                        <input type="hidden" name="idCoFamily" value="<?= $_SESSION['family'] ?>">
                         <input type="mail" class="form-control" id="mailCoParent" name="mailCoParent" placeholder="Entrez son mail">
                     </div>
                     <button type="submit" class="btn btn-outline-info">Valider</button>

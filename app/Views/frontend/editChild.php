@@ -12,7 +12,9 @@ $newData = $data->fetch()
 ?>
         <form method="post" class="childForm" action="index.php?action=updateChild&idChildren=<?= $newData['idChildren'] ?>">
           <h1>MODIFICATION D'UNE FICHE ENFANT</h1>      
-          
+          <article>
+            <p>Vous et vos proches pouvaient à tout moment modifier la fiche de renseignement de votre enfant.</p>
+            <p>Seuls les parents peuvent mettre à jour l'identité et la photo de leur enfant.</p> </article>
 
 <?php
 if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $newData['parent2']){

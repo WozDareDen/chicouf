@@ -1,30 +1,30 @@
 <?php $modif = $recoverUs->fetch() ?>
-<h1>Modifier votre profil <?= $modif['Firstname'] ?></h1>
+<h1>Modifier votre profil <?= $modif['firstname'] ?></h1>
 <ul>
-    <h2>Modifier votre mot de passe</h2>
+    <!-- <h2>Modifier votre mot de passe</h2>
         <p><h4>Votre mot de passe doit comporter :</h4>
-        Au moin une Majuscule. <br>
-        Au moin un chiffre.<br>
-        Et contenir entre 8 et 16 carractère.
-        </p><br>
+        Au moins une Majuscule. <br>
+        Au moins un chiffre.<br>
+        Et contenir entre 8 et 16 caractères.
+        </p><br> -->
 
 
         <form action="index.php?action=changeProfile&id" method="post">
-    <li>
+    <!-- <li>
         <h3>Nouveau mot de passe</h3>
         <input type="password" id="regFormPass" class="champ2 champPass" name="passCo"
                    autocomplete="off" placeholder="entrez votre mot de passe">
-            <input type="checkbox" onclick="myFunction()">Afficher le mot de passe <br>
+            <input type="checkbox" onclick="myFunction()" name="pass2Co">Afficher le mot de passe <br>
 
 
             <div id="pop">
                 <!-- Button trigger modal -->
-                <div id="buttonPassword" class="btn" data-toggle="modal" data-target="#exampleModalCenter">
+                <!-- <div id="buttonPassword" class="btn" data-toggle="modal" data-target="#exampleModalCenter">
                     Mot de passe non conforme
                 </div>
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
                 </div>
@@ -34,7 +34,7 @@
                    autocomplete="off" placeholder="confirmez-le">
             <input type="checkbox" onclick="myFunction2()">Afficher le mot de passe <br/>
             <span id="message"></span>
-    </li>
+    </li>   -->
     <li>
         <h3>Modifier votre E-mail</h3>
 
@@ -47,13 +47,13 @@
         </div>
     </li>
     <li><h3>Modifier votre date de naissance</h3>
-        <input type="text" id="dateBorn" name="bornDate"  placeholder="<?= $modif['BirthDate'] ?>">
+        <input type="text" id="dateBorn" name="birthdate"  placeholder="<?= $modif['birthdate'] ?>">
     </li>
     <li><h3>Modifier votre nom</h3>
-        <input type="text" id="dateBorn" name="firstName"  placeholder="<?= $modif['Surname'] ?>"
+        <input type="text" id="dateBorn" name="surname"  placeholder="<?= $modif['surname'] ?>"
     </li>
     <li><h3>Modifier votre Adresse</h3>
-        <input type="text" id="address" name="city"  placeholder="<?= $modif['City'] ?>">
+        <input type="text" id="address" name="city"  placeholder="<?= $modif['city'] ?>">
     </li>
 </ul>
 
