@@ -12,11 +12,11 @@ try{
                 $backoffice->goToDashboard();
             }
             elseif($_GET['action'] == 'deleteMember'){
-                $idBackMember = int($_POST['idBackMember']);
+                $idBackMember = htmlspecialchars($_POST['idBackMember']);
                 $backoffice->deleteMember($idBackMember);
             }
             elseif($_GET['action'] == 'deleteFamily'){
-                $idBackFamily = int($_POST['idBackFamily']);
+                $idBackFamily = htmlspecialchars($_POST['idBackFamily']);
                 $backoffice->deleteFamily($idBackFamily);
             }
             elseif($_GET['action'] == 'membersView'){

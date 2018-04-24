@@ -298,8 +298,37 @@ else{
 
    </div>
 
-      
 
+      
+      <fieldset style="width: 300px;
+        background-color: #e6e2af;
+        border: black 1px solid;
+        position:fixed;
+        right:10px;
+        top:100px;">
+
+<legend>chatroom</legend>
+
+ <div id="conversation" style=" width: 270px;
+        height: 300px;
+        border: black 1px solid;
+        background-color: #efecca;
+        overflow-x: hidden;
+        overflow-y: scroll; 
+        padding: 5px;
+        margin-left: 10px;"></div><br />
+
+ <form action="index.php?action=chat" method="post">
+
+   <input type="text" id="nom" name="usernameCo"value="<?=$_SESSION['firstname'] ?>" size="6">
+
+   <input type="text" id="message" name="contentCo" size="27">
+
+   <button class="btn btn-info" type="submit" id="envoyer" title="Envoyer">Valider</button>
+
+ </form>
+
+</fieldset>
 
 
 
@@ -308,8 +337,6 @@ else{
 
 </div>    
 <!--********END OF PAGE*************-->
-
-
 
 
 <?php $content = ob_get_clean(); ?>

@@ -15,16 +15,21 @@ try{
                 $mailCo = htmlspecialchars($_POST['mailCo']);
                 $parentCo = htmlspecialchars($_POST['parentCo']);
                 $genderCo = htmlspecialchars($_POST['genderCo']);
-                    if($passCo == $pass2Co){
-                        if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){                        
-                            $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo);
+                    if($parentCo == 1 || $parentCo == 2){
+                        if($passCo == $pass2Co){
+                            if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){                        
+                                $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo);
+                            }
+                            else{
+                                throw new Exception('votre adresse mail n\'est pas valide');
+                            }
                         }
                         else{
-                            throw new Exception('votre adresse mail n\'est pas valide');
+                            throw new Exception('vos mots de passes ne sont pas identiques');
                         }
                     }
                     else{
-                        throw new Exception('vos mots de passes ne sont pas identiques');
+                        throw new Exception('veuillez préciser votre parentalité');
                     }
             }
             else{
@@ -65,7 +70,7 @@ try{
         elseif($_GET['action'] == 'subView'){
             $frontoffice->subView();
         }
-        // RATTACHER UN ENFANT A UNE FAMILLE OU UN PARENT
+        // GET CHILD TO PARENT
         elseif($_GET['action'] == 'belong'){
             if(isset($_POST['mailCo'])){
                 $mailCo = htmlspecialchars($_POST['mailCo']);
@@ -76,7 +81,7 @@ try{
                 throw new \Exception('l\'adresse email est invalide');
             }
         }
-        // CHILDREN ACTIONS
+        // CHILD VIEW
         elseif($_GET['action'] == 'memberView'){            
             $idMember = $_GET['idMember'];     
             if(isset($_SESSION['id'])){          
@@ -172,6 +177,7 @@ try{
             $idChildren = $_GET['idChildren'];
             $frontoffice->uploadPic($idMember,$idChildren);
         }
+        // GO TO UPDATE CHILD VIEW
         elseif($_GET['action'] == 'goToUpdateChild'){
             $idChild = $_GET['idChildren'];
             $frontoffice->goToUpdateChild($idChild);
@@ -242,22 +248,26 @@ try{
                 throw new Exception('vous devez être connecté');
             }
         }
+        // GO TO MENTIONS INFOS
         elseif($_GET['action'] == 'legal'){
             $frontoffice->goLegal();
         }
+        // GO TO ABOUT INFOS
         elseif($_GET['action'] == 'about'){
             $frontoffice->goAbout();
         }
+        // GO TO PROFILE VIEW
         elseif($_GET['action'] == 'profileView'){
             $idMember = $_GET['idMember'];
             $frontoffice->goToMemberBoard($idMember);
         }
-        elseif ($_GET['action'] == 'editPassword'){
-
-        }elseif ($_GET['action'] == 'recoverUser'){
+        // GO TO PROFILE VIEW
+        elseif ($_GET['action'] == 'recoverUser'){
             $idMember = $_SESSION['id'];
-            $frontoffice->recoverUser($idMember);
-        }elseif ($_GET['action'] == 'changeProfile'){ 
+            $frontoffice->recoverUser($idMember);      
+        }
+        // UPDATE PROFILE
+        elseif ($_GET['action'] == 'changeProfile'){ 
             $idMember = $_SESSION['id'];
             $name = htmlspecialchars($_POST['surnameCo']);
             $mail = htmlspecialchars($_POST['mailCo']);
@@ -265,6 +275,7 @@ try{
             $city = htmlspecialchars($_POST['cityCo']);
             $frontoffice->changeProfile($name, $mail, $birthdate, $city, $idMember);
         }
+        // CHANGE PASS
         elseif($_GET['action'] == "changePass"){
             if(isset($_SESSION['id']) && isset($_POST['pass2Co']) && isset($_POST['passCo']) && isset($_POST['initPassCo'])){
                 $idMember = $_SESSION['id'];
@@ -282,11 +293,21 @@ try{
                 throw new \Exception('tous les champs ne sont pas remplis');
             }                          
         }
+        // UPDATE AVATAR
         elseif($_GET['action'] == "uploadAva"){
             if($_SESSION['id'] == $_GET['idMember']){
                 $idMember = $_SESSION['id'];
                 $frontoffice->uploadAvatar($idMember);
             }
+        }
+        elseif($_GET['action'] == "chat"){
+            $nom = $_POST['usernameCo'];                    //On récupère le pseudo et on le stocke dans une variable
+$message = $_POST['contentCo'];            //On fait de même avec le message
+$ligne = $nom.' > '.$message.'<br>';     //Le message est créé 
+$leFichier = file('ac.htm');             //On lit le fichier ac.htm et on stocke la réponse dans une variable (de type tableau)
+array_unshift($leFichier, $ligne);       //On ajoute le texte calculé dans la ligne précédente au début du tableau
+file_put_contents('ac.htm', $leFichier);
+header('Location: index.php?action=familyLink&id='.$_SESSION['family']);
         }
         else{
             echo 'banane';

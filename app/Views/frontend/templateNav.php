@@ -7,7 +7,7 @@ if(isset($_SESSION['parenthood'])){
     ?>    
 
 
-<!-- Start of Navbar -->
+<!-- NAVBAR START -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2" aria-controls="navbar2" aria-expanded="false" aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span>
@@ -201,7 +201,7 @@ else{
 
         
 <li class="nav-item">
-            <a class="nav-link" href="#mainContent">Comment ça marche ?</a>
+            <a class="nav-link" href="index.php#mainContent">Comment ça marche ?</a>
     </li>
         <li class="nav-item">
             <div class="nav-link contactMouse" data-toggle="modal" data-target="#ModalContact">Nous contacter</div>
@@ -214,7 +214,6 @@ else{
 </div>
 </div>
 </nav>
-
 
 <?php
 }
