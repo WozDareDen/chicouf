@@ -1,7 +1,7 @@
 <?php $title = 'Mentions légales' ?>
 <?php ob_start(); ?>
 <?php
-require 'bureau.php'
+require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
 <div class="container">

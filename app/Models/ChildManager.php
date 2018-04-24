@@ -24,7 +24,7 @@ class ChildManager extends Manager
         return $connex3;
     }
     // CHILD CREATION
-    public function addNewChild($lastName,$firstName,$birthdate,$gender,$parent1,$parent2){
+    public function addNewChild($lastName,$firstName,$birthdate,$gender,$parent1,$parent2,$upDateUser){
         if($gender == 0){
             $img = 'app/Public/uploads/avatarBoy.png';
         }
@@ -32,8 +32,8 @@ class ChildManager extends Manager
             $img = 'app/Public/uploads/avatarGirl.png';
         }    
         $db = $this -> dbConnect();
-        $infos1 = $db->prepare('INSERT INTO children(surname,firstname,birthdate,gender,parent1,parent2,img) VALUES(?,?,?,?,?,?,?)');
-        $infos1->execute(array($lastName,$firstName,$birthdate,$gender, $parent1,$parent2,$img));
+        $infos1 = $db->prepare('INSERT INTO children(surname,firstname,birthdate,gender,parent1,parent2,img,upDateLog,upDateUser) VALUES(?,?,?,?,?,?,?,NOW(),?)');
+        $infos1->execute(array($lastName,$firstName,$birthdate,$gender, $parent1,$parent2,$img,$upDateUser));
         return $infos1;
     }
     public function addNewMeal($favMeal,$hatedMeal,$idChild){

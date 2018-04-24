@@ -1,6 +1,6 @@
 <?php $title = 'Accueil' ?>
 <?php ob_start(); ?>
-<?php require 'bureau.php' ?>
+<?php require 'templateNav.php' ?>
 
 
 

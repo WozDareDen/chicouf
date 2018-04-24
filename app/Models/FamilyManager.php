@@ -119,12 +119,13 @@ class FamilyManager extends Manager{
         $checkModo->execute(array($idFamily));
         return $checkModo;
     }
-    // CHANGE MODO 
-    public function changeModoStatus($idMember){
+    // BANN MEMBER
+    public function bannMember($idFamily,$idMember){
         $db = $this -> dbConnect();
-        $changeModo = $db->prepare('UPDATE members set modo=0 WHERE idMember = ?');
-        $changeModo->execute(array($idMember));
-        return $changeModo;
+        $bann = $db->prepare('DELETE FROM member_family WHERE idFamily = ? AND idMember = ?');
+        $bann->execute(array($idFamily,$idMember));
+        return $bann;
+
     }
     // DELETE FAMILY
     public function eraseFamily($idFamily){

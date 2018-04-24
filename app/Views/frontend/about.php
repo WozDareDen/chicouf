@@ -1,7 +1,7 @@
 <?php $title = 'A propos' ?>
 <?php ob_start(); ?>
 <?php
-require 'bureau.php'
+require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
 <div class="container">

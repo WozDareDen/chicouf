@@ -33,7 +33,20 @@ h5{
 .fly p{
     font-style: italic;
 }
-
+.icone{
+    display:inline-block;
+    position:absolute;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-size:contain;
+    width:36px;
+    height:36px;
+    left:-38px;
+    border-radius:50%;
+}
+.iconeSpan{
+    position:relative;
+}
 /*--------REGISTRATION VIEW------------*/
 .regForm{
     margin-bottom:100px;

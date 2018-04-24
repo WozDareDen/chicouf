@@ -1,7 +1,7 @@
 <?php $title = 'Espace Famille' ?>
 <?php ob_start(); ?>
 <?php
-require 'bureau.php'
+require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
 <div class="container">
@@ -234,7 +234,7 @@ else{
 
 <?php    
 }
-if(!(empty($bigDataMember['parenthood']))){
+if($newDataMember['parenthood'] == 0){
 ?>        
 
     <h3 class="loco">Les grand-parents</h3>

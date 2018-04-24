@@ -36,7 +36,7 @@ class UserManager extends Manager
         $req->execute(array($firstname,$surname));
         return $req;
     }
-    // BELONG PARENT TO CHILD
+    // HET IDMEMBER THROUGH MAIL
     public function getBelongParent($mailCo){
         $db = $this -> dbConnect();
         $belong0 = $db->prepare('SELECT idMember FROM members WHERE mail = ?');

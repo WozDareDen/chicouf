@@ -1,7 +1,7 @@
 <?php $title = 'Votre profil' ?>
 <?php ob_start(); ?>
 <?php
-require 'bureau.php'
+require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
 <div class="container">
@@ -24,11 +24,34 @@ else{
         
 <?php $modif = $recoverUs->fetch() ?>
 
-<h1 class="mbr-section-title" style="text-align:center;">Modifier votre profil <?= $modif['firstname'] ?></h1>
+        <h1 class="mbr-section-title" style="text-align:center;">Modifier votre profil <?= $modif['firstname'] ?></h1>
+
+<?php
+if($getFamilyName['familyName']==true){
+?>
+        <h4 style="text-align:center;">Vous êtes membre de la Famille <?= $getFamilyName['familyName'] ?></h4>
+<?php
+}
+?>
+
 <div class="row justify-content-md-center">   
-       <p>Vous pouvez modifier ici les informations vous concernant. </p>
-       <p> Pour modifier votre photo de profil, cliquez dessus.</p>
+       <p>Vous pouvez gérer ici les informations vous concernant. Pour modifier votre photo de profil, cliquez dessus.</p>
+       
+<?php
+if($_SESSION['parenthood'] == 0){
+?>     
+
+       <div class="lead loco alert alert-success alert-dismissible fade show"  data-dismiss="alert" role="alert" title="Faîtes disparaitre ce message en cliquant dessus, il réapparaitra la prochaine fois que vous viendrez sur cette page ;)">
+
+       <p>L'Espace Famille permet de regrouper tous les enfants, parents et grand-parents. Deux options s'offrent à vous : <br /> -créer cet Espace ou en rejoindre un existant.</p>
+       <p> Le modérateur de l'Espace Famille, c'est-à-dire celui qui est à l'origine de sa création, est le seul à pouvoir vous rattacher à cet Espace en renseignant votre email. Si dans votre entourage, aucun espace n'a été créé, soyez la première personne à le faire et devenez-en le modérateur. Rendez-vous sur l'Espace Famille, accessible depuis la barre de navigation.</p>
         </div>
+
+<?php
+}
+?>
+
+    </div>
     <div class="row justify-content-md-center">
         <article class="col-sm-3 avatarBox social" >
             <a href="#" data-toggle="modal" data-target="#userModal<?= $modif['idMember'] ?>" data-whatever="@mdo" class="photoChild2" style="background-image: url(<?= $modif['img'] ?>);" title="Vous pouvez modifier la photo" ></a>

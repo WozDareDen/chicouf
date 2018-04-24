@@ -1,6 +1,6 @@
 <?php $title = 'Modif Fiche Enfant' ?>
 <?php ob_start(); ?>
-<?php require 'bureau.php' ?>
+<?php require 'templateNav.php' ?>
 <div class="container-fluid childMain">
           <!--***********************MENU & SECTION********************-->
           <div class="row">    

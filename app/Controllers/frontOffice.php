@@ -15,13 +15,14 @@ class FrontOffice{
             $resultat = $req->fetch();
             $_SESSION['firstname'] =  $resultat['firstname'];
             $_SESSION['parenthood'] = $resultat['parenthood'];
+            $_SESSION['img'] = $resultat['img'];
             $_SESSION['id'] =  $resultat['idMember'];
             $_SESSION['modo'] =  $resultat['modo'];
                 if($_SESSION['parenthood'] == 1){
                     header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);
                 }
                 else{
-                    header('Location: index.php');
+                    header('Location: index.php?action=recoverUser&id='.$_SESSION['id']);
                 }
         }
         else{
@@ -30,7 +31,6 @@ class FrontOffice{
     }
     //LOGIN FUNCTION
     function connected($firstname,$surname,$pass){  
-
         $userManager = new \Src\Models\UserManager();
         $req = $userManager -> userConnex($firstname,$surname);
         $resultat = $req->fetch();
@@ -44,7 +44,12 @@ class FrontOffice{
                 $familyManager = new \Src\Models\FamilyManager();     
                 $dataFam = $familyManager ->  getfamilyId($_SESSION['id']); 
                 $_SESSION['family'] = $dataFam['idFamily'];
-                header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);             
+                if($_SESSION['parenthood'] == 1){
+                    header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);
+                }
+                else{
+                    header('Location: index.php?action=recoverUser&id='.$_SESSION['id']);
+                }
             }
             else{
                 throw new \Exception('vos identifiants sont incorrects');
@@ -85,7 +90,8 @@ class FrontOffice{
         $checkModo = $familyManager -> checkModo($idFamily);
         $checkModo2 = $checkModo->fetchAll();
             if(count($checkModo2)>1){ 
-                $changeModo = $familyManager -> changeModoStatus($idMember);
+                $userManager = new \Src\Models\UserManager();
+                $changeModo = $userManager -> eraseModo($idMember);
                 $_SESSION['modo'] = 0;
                 header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
             }
@@ -96,12 +102,21 @@ class FrontOffice{
     // DELETE FAMILY
     function deleteFamily($idFamily,$idMember){
         $familyManager = new \Src\Models\FamilyManager();
-        $eraseFam = $familyManager -> eraseFamily($idFamily);
-        
+        $eraseFam = $familyManager -> eraseFamily($idFamily);       
         $userManager = new \Src\Models\UserManager();
         $eraseModo = $userManager -> eraseModo($idMember);
         $_SESSION['modo'] = 0;
         header('Location: index.php?action=memberView&idMember='.$idMember);
+    }
+    // BANN MEMBER
+    function bann($idFamily,$mailCo){
+        $userManager = new \Src\Models\UserManager();
+        $getIdModo = $userManager -> getBelongParent($mailCo);
+        $getIdModo2 = $getIdModo->fetch();
+        $idMember = $getIdModo2['idMember'];
+        $familyManager = new \Src\Models\FamilyManager();
+        $bann = $familyManager -> bannMember($idFamily,$idMember);
+        header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
     }
     // GO TO REGISTRATION FORM
     function subView(){
@@ -167,7 +182,6 @@ class FrontOffice{
     function belongFamily($idFamily,$mailCoParent){
         $familyManager = new \Src\Models\FamilyManager();
         $dataParent = $familyManager -> getParentId($mailCoParent); 
-
         $dataParent2 = $dataParent->fetch(); 
             if(!(empty($dataParent2))){
             $idMember = $dataParent2['idMember'];        
@@ -200,7 +214,8 @@ class FrontOffice{
     // ADD CHILD
     function addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies){
         $childManager = new \Src\Models\ChildManager();
-        $infos1 = $childManager -> addNewChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2);
+        $upDateUser = $_SESSION['firstname'];
+        $infos1 = $childManager -> addNewChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2,$upDateUser);
         $infos11 = $childManager -> getMaxIdChild();
         $idChild111 = $infos11->fetch();
         $idChild = $idChild111[0];
@@ -401,18 +416,19 @@ function uploadAvatar($idMember){
     // GET USER PROFILE INFOS
     function recoverUser($idMember)
     {
-        $recovUser = new \Src\Models\UserManager();
-        $recoverUs = $recovUser -> watchUser($idMember);
+        $userManager = new \Src\Models\UserManager();
+        $recoverUs = $userManager -> watchUser($idMember);
+        $idFamily = $_SESSION['family'];
+        $familyManager = new \Src\Models\FamilyManager();
+        $getFamilyName = $familyManager -> getFamilyName($idFamily);
         require 'app/Views/frontend/profileView.php';
     }
     // UPDATE PROFILE
     function changeProfile($name, $mail, $birthdate, $city, $idMember)
     {
-        $newChange = new \Src\Models\UserManager();
-        $change = $newChange -> changeUser($name, $mail, $birthdate, $city, $idMember);
-
+        $userManager = new \Src\Models\UserManager();
+        $change = $userManager -> changeUser($name, $mail, $birthdate, $city, $idMember);       
         $this->recoverUser($idMember);
-
     }
     // CHANGE USER PASS
     function newPass($idMember,$initPass,$pass){

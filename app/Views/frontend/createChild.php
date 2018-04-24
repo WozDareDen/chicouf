@@ -1,6 +1,6 @@
 <?php $title = 'Fiche Enfant' ?>
 <?php ob_start(); ?>
-<?php require 'bureau.php' ?>
+<?php require 'templateNav.php' ?>
       <div class="container-fluid childMain">
           <div class="row">    
         <!--***********************MENU********************-->

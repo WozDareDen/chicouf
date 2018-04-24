@@ -7,24 +7,29 @@ try{
     if (isset($_GET['action'])) {
         //ADD NEW USER
         if ($_GET['action'] == 'addUser'){
-            $firstNameCo = htmlspecialchars($_POST['firstNameCo']);
-            $lastNameCo = htmlspecialchars($_POST['lastNameCo']);
-            $passCo = htmlspecialchars($_POST['passCo']);
-            $pass2Co = htmlspecialchars($_POST['pass2Co']);
-            $mailCo = htmlspecialchars($_POST['mailCo']);
-            $parentCo = htmlspecialchars($_POST['parentCo']);
-            $genderCo = htmlspecialchars($_POST['genderCo']);
-                if($passCo == $pass2Co){
-                    if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){                        
-                        $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo);
+            if(isset($_POST['firstNameCo']) && isset($_POST['lastNameCo']) && isset($_POST['passCo']) && isset($_POST['pass2Co']) && isset($_POST['mailCo']) && isset($_POST['parentCo']) && isset($_POST['genderCo'])){
+                $firstNameCo = htmlspecialchars($_POST['firstNameCo']);
+                $lastNameCo = htmlspecialchars($_POST['lastNameCo']);
+                $passCo = htmlspecialchars($_POST['passCo']);
+                $pass2Co = htmlspecialchars($_POST['pass2Co']);
+                $mailCo = htmlspecialchars($_POST['mailCo']);
+                $parentCo = htmlspecialchars($_POST['parentCo']);
+                $genderCo = htmlspecialchars($_POST['genderCo']);
+                    if($passCo == $pass2Co){
+                        if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){                        
+                            $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo);
+                        }
+                        else{
+                            throw new Exception('votre adresse mail n\'est pas valide');
+                        }
                     }
                     else{
-                        throw new Exception('votre adresse mail n\'est pas valide');
+                        throw new Exception('vos mots de passes ne sont pas identiques');
                     }
-                }
-                else{
-                    throw new Exception('vos mots de passes ne sont pas identiques');
-                }
+            }
+            else{
+                throw new \Exception('tous les champs ne sont pas remplis');
+            }
         }
         // GO TO REGISTRATION VIEW
         elseif($_GET['action'] == 'subView'){
@@ -62,9 +67,14 @@ try{
         }
         // RATTACHER UN ENFANT A UNE FAMILLE OU UN PARENT
         elseif($_GET['action'] == 'belong'){
-            $mailCo = $_POST['mailCo'];
-            $idChild = $_GET['idChildren'];
-            $frontoffice->belong($mailCo,$idChild);
+            if(isset($_POST['mailCo'])){
+                $mailCo = htmlspecialchars($_POST['mailCo']);
+                $idChild = $_GET['idChildren'];
+                $frontoffice->belong($mailCo,$idChild);
+            }
+            else{
+                throw new \Exception('l\'adresse email est invalide');
+            }
         }
         // CHILDREN ACTIONS
         elseif($_GET['action'] == 'memberView'){            
@@ -74,7 +84,7 @@ try{
                     $frontoffice->goToMember($idMember);
                 }
                 else{
-                    throw new \Exception('Vous devez être connecté');
+                    throw new \Exception('Vous n\'avez pas accès à cette page');
                 }
             }
             else{
@@ -97,8 +107,8 @@ try{
         // CREATE FAMILY
         elseif($_GET['action'] == 'createNewFamily'){
             if(isset($_SESSION['id']) && isset($_POST['familyNameCo'])){
-                $familyName = $_POST['familyNameCo'];
-                $idMember = $_SESSION['id'];
+                $familyName = htmlspecialchars($_POST['familyNameCo']);
+                $idMember = htmlspecialchars($_SESSION['id']);
                 $frontoffice->createFamily($idMember,$familyName);
             }
             else{
@@ -107,9 +117,14 @@ try{
         }
         // BELONG A PARENT TO FAMILY
         elseif($_GET['action'] == 'belongParent'){
-            $idFamily = $_POST['idCoFamily'];
-            $mailCoParent = $_POST['mailCoParent'];
-            $frontoffice->belongFamily($idFamily,$mailCoParent);
+            if(isset($_POST['mailCoParent'])){
+                $idFamily = $_POST['idCoFamily'];
+                $mailCoParent = htmlspecialchars($_POST['mailCoParent']);
+                $frontoffice->belongFamily($idFamily,$mailCoParent);
+            }
+            else{
+                throw new \Exception('l\'adresse email est invalide');
+            }
         }
         // DELETE FAMILY
         elseif($_GET['action'] == 'deleteFamily'){
@@ -119,8 +134,13 @@ try{
         }
         // NEW MODO
         elseif($_GET['action'] == 'newModo'){
-            $mailNewModo = $_POST['mailCoModo'];
-            $frontoffice->addNewModo($mailNewModo); 
+            if(isset($_POST['mailCoModo'])){
+                $mailNewModo = htmlspecialchars($_POST['mailCoModo']);
+                $frontoffice->addNewModo($mailNewModo); 
+            }
+            else{
+                throw new \Exception('l\'adresse email est invalide');
+            }
         }
         // CHANGE MODO
         elseif($_GET['action'] == 'changeModo'){
@@ -132,8 +152,8 @@ try{
             if(($_SESSION['id'])){
                 $lastName = htmlspecialchars($_POST['lastNameCo']);
                 $firstName = htmlspecialchars($_POST['firstNameCo']);
-                $birthdate = $_POST['birthDateCo'];
-                $gender = $_POST['genderCo'];
+                $birthdate = htmlspecialchars($_POST['birthDateCo']);
+                $gender = htmlspecialchars($_POST['genderCo']);
                 $parent1 = htmlspecialchars($_POST['parent1Co']);
                 $parent2 = htmlspecialchars($_POST['parent2Co']);
                 $favMeal = htmlspecialchars($_POST['favoriteMealCo']);
@@ -164,7 +184,7 @@ try{
                 $idChildren = $_GET['idChildren'];
                 $lastName = htmlspecialchars($_POST['lastNameCo']);
                 $firstName = htmlspecialchars($_POST['firstNameCo']);
-                $birthdate = $_POST['birthDateCo'];
+                $birthdate = htmlspecialchars($_POST['birthDateCo']);
                 $parent1 = htmlspecialchars($_POST['parent1Co']);
                 $parent2 = htmlspecialchars($_POST['parent2Co']);
                 $favMeal = htmlspecialchars($_POST['favoriteMealCo']);
@@ -189,9 +209,20 @@ try{
             $idMember = $_SESSION['id'];
             $frontoffice->goToFamily($idFamily,$idMember);
         }
+        // BANN MEMBER
+        elseif($_GET['action'] == 'bann'){
+            if(isset($_POST['mailCoModo'])){
+                $idFamily = $_SESSION['family'];
+                $mailCo = htmlspecialchars($_POST['mailCoModo']);
+                $frontoffice->bann($idFamily,$mailCo);
+            }
+            else{
+                throw new \Exception('le mail est invalide');
+            }
+        }
         // UPLOAD BANNER
         elseif($_GET['action'] == 'uploadBanner'){
-            $idFamily = $_POST['idFamilyCo'];
+            $idFamily = htmlspecialchars($_POST['idFamilyCo']);
             $frontoffice->uploadBanners($idFamily);
         }
         // DISCUSSION
@@ -249,8 +280,7 @@ try{
             }        
             else{
                 throw new \Exception('tous les champs ne sont pas remplis');
-            }              
-            
+            }                          
         }
         elseif($_GET['action'] == "uploadAva"){
             if($_SESSION['id'] == $_GET['idMember']){
