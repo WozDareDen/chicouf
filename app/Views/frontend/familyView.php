@@ -93,11 +93,21 @@ else{
 
 
     </div>
-<!--*************GRANDCHILDREN**************-->
-    <h3 class="loco" >Les petits-enfants</h3>
-    <div class="row" style="border:1px solid black;" > 
 <?php
 $bigData = $dataF->fetchAll();
+if((empty($bigData))){
+?>
+
+    <div class="row"> 
+
+<?php
+}else{
+?>
+<!--*************GRANDCHILDREN**************-->
+    <h3 class="loco col-sm-12" >Les petits-enfants</h3>
+    <div class="row" > 
+<?php
+}
 foreach($bigData as $newData){
 ?>
 <!--**************AVATAR********************-->
@@ -162,7 +172,7 @@ if(isset($dataMember)){
 ?>
 
     <h3 class="loco">Les parents</h3>
-    <div class="row parents" style="border:1px solid black;"> 
+    <div class="row parents" style="background-color:#6bbfb0;"> 
 
 <?php
 $bigDataMember = $dataMember->fetchAll();
@@ -224,13 +234,14 @@ else{
 
 <?php    
 }
+if(!(empty($bigDataMember['parenthood']))){
 ?>        
 
     <h3 class="loco">Les grand-parents</h3>
     <div class="row" style="border:1px solid black;"> 
 
 <?php
-   
+}   
 foreach($bigDataMember as $newDataMember){ 
     if($newDataMember['parenthood'] == 0){
 ?>

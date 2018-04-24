@@ -97,6 +97,9 @@ class FrontOffice{
     function deleteFamily($idFamily,$idMember){
         $familyManager = new \Src\Models\FamilyManager();
         $eraseFam = $familyManager -> eraseFamily($idFamily);
+        
+        $userManager = new \Src\Models\UserManager();
+        $eraseModo = $userManager -> eraseModo($idMember);
         $_SESSION['modo'] = 0;
         header('Location: index.php?action=memberView&idMember='.$idMember);
     }
@@ -134,10 +137,11 @@ class FrontOffice{
         // $connex4 = $childManager -> getParents($)
         require 'app/Views/frontend/childView.php';
     }
-    // CREATE FAMILY
+    // GO TO FAMILY SPACE
     function goToCreateFamily(){
         require 'app/Views/frontend/familyView.php';
     }
+    // CREATE FAMILY
     function createFamily($idMember,$familyName){
         $familyManager = new \Src\Models\FamilyManager();
         $createFamily = $familyManager -> newFamily($familyName);
@@ -159,6 +163,7 @@ class FrontOffice{
         $_SESSION['modo'] = 1;
         header('Location: index.php?action=familyLink&id='.$idFamily);
     }
+    // BELONG PARENT TO FAMILY (and children if necessary)
     function belongFamily($idFamily,$mailCoParent){
         $familyManager = new \Src\Models\FamilyManager();
         $dataParent = $familyManager -> getParentId($mailCoParent); 
@@ -169,7 +174,7 @@ class FrontOffice{
             $dataParent3 = $familyManager -> belongParent($idMember,$idFamily);
             $dataParent4 = $familyManager -> getChildParent($idMember);
             $dataParent6 = $dataParent4->fetchAll();
-                if(!(empty($dataParent6))){
+                if(empty($dataParent6)){
                     foreach($dataParent6 as $dataParent7){
                     $idChild = $dataParent7['idChildren'];
                     $dataParent5 = $familyManager -> belongChild($idFamily,$idChild);
@@ -260,7 +265,7 @@ class FrontOffice{
         $delete = $childManager -> EraseChild($idChildren);
         header('Location: index.php?action=memberView&idMember='.$idMember);
     }
-    // BELONG PARENT
+    // BELONG PARENT TO CHILD
     function belong($mailCo,$idChild){
         $userManager = new \Src\Models\UserManager();
         $belong0 = $userManager -> getBelongParent($mailCo);
@@ -393,15 +398,14 @@ function uploadAvatar($idMember){
     }
     
 }
-
-
+    // GET USER PROFILE INFOS
     function recoverUser($idMember)
     {
         $recovUser = new \Src\Models\UserManager();
         $recoverUs = $recovUser -> watchUser($idMember);
         require 'app/Views/frontend/profileView.php';
     }
-
+    // UPDATE PROFILE
     function changeProfile($name, $mail, $birthdate, $city, $idMember)
     {
         $newChange = new \Src\Models\UserManager();
@@ -410,6 +414,7 @@ function uploadAvatar($idMember){
         $this->recoverUser($idMember);
 
     }
+    // CHANGE USER PASS
     function newPass($idMember,$initPass,$pass){
         if(preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $pass)){
             $userManager = new \Src\Models\UserManager();

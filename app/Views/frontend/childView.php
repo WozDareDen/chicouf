@@ -33,7 +33,7 @@ foreach($bigData as $newData){
                   <div class="modal fade" id="exampleModal<?= $newData['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                      <div class="modal-header">
+                      <div class="modal-header" style="background-color:#6bbfb0;">
                         <h5 class="modal-title" id="exampleModalLabel">Modifier la photo de votre enfant</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
@@ -44,7 +44,7 @@ foreach($bigData as $newData){
                             <fieldset>
                             <input type="file" name="fileToUpload" id="fileToUpload" /> 
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            <input type="submit" class="btn btn-primary" value="Envoyer" name="submit" />
+                            <input type="submit" class="btn"style="background-color:#6bbfb0;" value="Envoyer" name="submit" />
                             </fieldset>
                         </form>
                       </div>
@@ -63,21 +63,22 @@ foreach($bigData as $newData){
                     <div class="modal fade" id="exampleModal2<?= $newData['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" style="color:black;">Rattacher un deuxième parent à cet enfant</h5>
+                          <div class="modal-header" style="background-color:#17a2b8;">
+                            <h5 class="modal-title" style="color:white;">Rattacher un deuxième parent à cet enfant</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span >&times;</span>
+                              <span style="color:white;">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body" style="color:black;">
                             <p>Pour rattacher cette fiche Enfant à un autre Parent, il vous suffit de renseigner son adresse mail. <br />
                               Ainsi cette personne pourra elle aussi gérer l'intégralité de cette fiche.
                             </p>
+                            <p>Cependant ce parent ne sera pas automatiquement rattaché à votre Espace Famille. Seul le modérateur de celui-ci peut le faire.</p>
                             <form action="index.php?action=belong&idChildren=<?=$newData['idChildren']; ?>" method="post">
                               <div class="form-group">
                                 <input type="mail" class="form-control" id="mailCo" name="mailCo" placeholder="Entrez son mail">
                               </div>
-                              <button type="submit" class="btn btn-primary">Valider</button>
+                              <button type="submit" class="btn btn-outline-info">Valider</button>
                             </form>
                           </div>
                         </div>

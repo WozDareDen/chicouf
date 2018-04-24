@@ -93,4 +93,10 @@ class UserManager extends Manager
         $insertAvatar->execute(array($target_file,$idMember));
         return $insertAvatar;
     }
+    public function eraseModo($idMember){
+        $db = $this -> dbConnect();
+        $eraseModo = $db->prepare('UPDATE members SET modo=0 WHERE idMember = ?');
+        $eraseModo->execute(array($idMember));
+        return $eraseModo;
+    }
 }

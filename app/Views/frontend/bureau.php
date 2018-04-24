@@ -78,7 +78,7 @@ if($_SESSION['modo'] >0){
 
 
 <?php
-  if(($_SESSION['id'] == 32) && ($_SESSION['modo'] == 2)){
+  if(($_SESSION['id'] == 43) && ($_SESSION['modo'] == 2)){
 
 ?>
         <li class="nav-item">
@@ -216,9 +216,9 @@ else{
 <?php
 }
 ?>
-<!-- End of Navbar -->
+<!-- END OF NAVBARS -->
 
-<!-- Modal Connection-->
+<!-- MODAL CONNECTION -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
