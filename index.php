@@ -72,7 +72,7 @@ try{
         }
         // GET CHILD TO PARENT
         elseif($_GET['action'] == 'belong'){
-            if(isset($_POST['mailCo'])){
+            if(isset($_POST['mailCo']) && isset($_GET['idChildren'])){
                 $mailCo = htmlspecialchars($_POST['mailCo']);
                 $idChild = $_GET['idChildren'];
                 $frontoffice->belong($mailCo,$idChild);
@@ -82,9 +82,9 @@ try{
             }
         }
         // CHILD VIEW
-        elseif($_GET['action'] == 'memberView'){            
-            $idMember = $_GET['idMember'];     
-            if(isset($_SESSION['id'])){          
+        elseif($_GET['action'] == 'memberView'){                          
+            if(isset($_SESSION['id'])){
+                $idMember = $_GET['idMember'];            
                 if($_SESSION['id'] === $idMember){
                     $frontoffice->goToMember($idMember);
                 }
@@ -179,12 +179,17 @@ try{
         }
         // GO TO UPDATE CHILD VIEW
         elseif($_GET['action'] == 'goToUpdateChild'){
-            $idChild = $_GET['idChildren'];
-            $frontoffice->goToUpdateChild($idChild);
+            if(isset($_GET['idChildren']) && isset($_SESSION['id'])){
+                $idChild = $_GET['idChildren'];
+                $frontoffice->goToUpdateChild($idChild);
+            }
+            else{
+                throw new \Exception('cette page n\'existe pas');
+            }
         }
         // UPDATE CHILD
         elseif($_GET['action'] == 'updateChild'){
-            if(isset($_SESSION['id'])){
+            if(isset($_SESSION['id']) && isset($_POST['lastNameCo']) && isset($_POST['firstNameCo']) && isset($_POST['birthDateCo']) && isset($_POST['parent1Co'])){
                 $username = $_SESSION['firstname'];
                 $idMember = $_SESSION['id'];
                 $idChildren = $_GET['idChildren'];
@@ -211,9 +216,19 @@ try{
         }
         // GO TO FAMILY VIEW
         elseif($_GET['action'] == 'familyLink'){
-            $idFamily = $_GET['id'];
-            $idMember = $_SESSION['id'];
-            $frontoffice->goToFamily($idFamily,$idMember);
+            if(isset($_GET['id'])){
+                if($_SESSION['family'] == $_GET['id']){
+                    $idFamily = $_GET['id'];
+                    $idMember = $_SESSION['id'];
+                    $frontoffice->goToFamily($idFamily,$idMember);
+                }
+                else{
+                    throw new \Exception('il ne s\'agit pas de votre famille');
+                }
+            }
+            else{
+                throw new \Exception('cette page n\'existe pas');
+            }
         }
         // BANN MEMBER
         elseif($_GET['action'] == 'bann'){
@@ -257,23 +272,28 @@ try{
             $frontoffice->goAbout();
         }
         // GO TO PROFILE VIEW
-        elseif($_GET['action'] == 'profileView'){
-            $idMember = $_GET['idMember'];
-            $frontoffice->goToMemberBoard($idMember);
-        }
-        // GO TO PROFILE VIEW
         elseif ($_GET['action'] == 'recoverUser'){
-            $idMember = $_SESSION['id'];
-            $frontoffice->recoverUser($idMember);      
+            if(isset($_SESSION['id']) && isset($_GET['id']) && $_SESSION['id'] == $_GET['id']){              
+                $idMember = $_SESSION['id'];
+                $frontoffice->recoverUser($idMember);    
+            }
+            else{
+                throw new \Exception('cette page n\'existe pas');
+            }  
         }
         // UPDATE PROFILE
         elseif ($_GET['action'] == 'changeProfile'){ 
-            $idMember = $_SESSION['id'];
-            $name = htmlspecialchars($_POST['surnameCo']);
-            $mail = htmlspecialchars($_POST['mailCo']);
-            $birthdate = htmlspecialchars($_POST['birthdateCo']);
-            $city = htmlspecialchars($_POST['cityCo']);
-            $frontoffice->changeProfile($name, $mail, $birthdate, $city, $idMember);
+            if(isset($_POST['surnameCo']) && isset($_POST['mailCo']) && isset($_POST['birthdateCo']) && isset($_POST['cityCo'])){
+                $idMember = $_SESSION['id'];
+                $name = htmlspecialchars($_POST['surnameCo']);
+                $mail = htmlspecialchars($_POST['mailCo']);
+                $birthdate = htmlspecialchars($_POST['birthdateCo']);
+                $city = htmlspecialchars($_POST['cityCo']);
+                $frontoffice->changeProfile($name, $mail, $birthdate, $city, $idMember);
+            }
+            else{
+                throw new \Exception('cette page n\'existe pas');
+            }
         }
         // CHANGE PASS
         elseif($_GET['action'] == "changePass"){
@@ -295,22 +315,16 @@ try{
         }
         // UPDATE AVATAR
         elseif($_GET['action'] == "uploadAva"){
-            if($_SESSION['id'] == $_GET['idMember']){
-                $idMember = $_SESSION['id'];
-                $frontoffice->uploadAvatar($idMember);
+            if(isset($_SESSION['id']) && $_SESSION['id'] == $_GET['idMember']){
+                    $idMember = $_SESSION['id'];
+                    $frontoffice->uploadAvatar($idMember);
+            }
+            else{
+                throw new \Exception('page non trouvée');
             }
         }
-        elseif($_GET['action'] == "chat"){
-            $nom = $_POST['usernameCo'];                    //On récupère le pseudo et on le stocke dans une variable
-$message = $_POST['contentCo'];            //On fait de même avec le message
-$ligne = $nom.' > '.$message.'<br>';     //Le message est créé 
-$leFichier = file('ac.htm');             //On lit le fichier ac.htm et on stocke la réponse dans une variable (de type tableau)
-array_unshift($leFichier, $ligne);       //On ajoute le texte calculé dans la ligne précédente au début du tableau
-file_put_contents('ac.htm', $leFichier);
-header('Location: index.php?action=familyLink&id='.$_SESSION['family']);
-        }
         else{
-            echo 'banane';
+            throw new \Exception('page non trouvée');
         }
     }
     else{

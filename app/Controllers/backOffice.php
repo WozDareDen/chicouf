@@ -11,13 +11,6 @@ class BackOffice{
 
         require 'app/Views/backend/dashboard.php';
     }
-    function watchMembers(){
-        $adminManager = new \Src\Models\AdminManager();
-        $data = $adminManager -> watchAllMembers();
-        $useAll = $adminManager -> userStats();
-        $userInfos = $adminManager -> lastStatUser();
-        require 'app/Views/backend/membersView.php';
-    }
     function watchFamilies(){
         $adminManager = new \Src\Models\AdminManager();
         $data = $adminManager -> watchAllFamilies();
@@ -44,13 +37,17 @@ class BackOffice{
         $dataMsg6 = $adminManager -> getMails3();
         require 'app/Views/backend/msgView.php';
     }
-
-
-
-
-
-
-
-
-
+    function watchMembers(){
+        $adminManager = new \Src\Models\AdminManager();
+        $useAll = $adminManager -> userStats();
+        $userInfos = $adminManager -> lastStatUser();
+        require 'app/Views/backend/membersView.php';
+    }
+    function ajaxTest(){
+        $adminManager = new \Src\Models\AdminManager();
+        $data = $adminManager -> watchAllMembers();
+        header('Content-Type: application/json');
+        $data = $data->fetchAll();
+        echo json_encode($data);
+    }
 }

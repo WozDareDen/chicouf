@@ -19,14 +19,17 @@ try{
                 $idBackFamily = htmlspecialchars($_POST['idBackFamily']);
                 $backoffice->deleteFamily($idBackFamily);
             }
-            elseif($_GET['action'] == 'membersView'){
-                $backoffice->watchMembers();
-            }
             elseif($_GET['action'] == 'familiesView'){
                 $backoffice->watchFamilies();
             }
             elseif($_GET['action'] == 'msgView'){
                 $backoffice->msgView();
+            }
+            elseif ($_GET['action'] == "membersView") {
+                $backoffice->watchMembers();
+            }
+            elseif($_GET['action'] == 'ajaxTest'){
+                $backoffice->ajaxTest();
             }
             else{
                 throw new \Exception ('cette page n\'existe pas');

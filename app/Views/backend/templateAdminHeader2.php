@@ -31,7 +31,7 @@
                     </a>
                 </li>                                                       
                 <li class="darkerli">
-                    <a href="#">
+                    <a href="admin.php?action=m2">
                     <i class="fa fa-desktop fa-lg"></i>
                     <span class="nav-text">Statistiques</span>
                     </a>

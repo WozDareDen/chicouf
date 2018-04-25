@@ -7,7 +7,7 @@ class AdminManager extends Manager
     //GET CHILD THROUGH MEMBER
     public function watchAllMembers(){
         $db = $this -> dbConnect(); 
-        $data = $db->query('SELECT * FROM members');
+        $data = $db->query('SELECT idMember,surname,firstname,city,registrationDate FROM members');
         return $data;
     }
     public function watchAllFamilies(){
