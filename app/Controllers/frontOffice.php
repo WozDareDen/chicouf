@@ -212,7 +212,7 @@ class FrontOffice{
     }
 }    
     // ADD CHILD
-    function addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies){
+    function addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds,$poso, $allergies){
         $childManager = new \Src\Models\ChildManager();
         $upDateUser = $_SESSION['firstname'];
         $infos1 = $childManager -> addNewChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2,$upDateUser);
@@ -220,7 +220,7 @@ class FrontOffice{
         $idChild111 = $infos11->fetch();
         $idChild = $idChild111[0];
         $infos2 = $childManager -> addNewMeal($favMeal, $hatedMeal,$idChild);
-        $infos3 = $childManager -> addNewHealth($meds, $allergies,$idChild);
+        $infos3 = $childManager -> addNewHealth($meds, $poso,$allergies,$idChild);
         $idMember = $_SESSION['id'];
         $infoJoin = $childManager -> addToMyParent($idChild,$idMember);
         $userManager = new \Src\Models\UserManager();
@@ -233,11 +233,11 @@ class FrontOffice{
         header('Location: index.php?action=memberView&idMember='.$idMember);
     }
     // UPDATE CHILD
-    function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $allergies){            
+    function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $poso,$allergies){            
         $childManager = new \Src\Models\ChildManager();
         $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChildren,$username);
         $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChildren);
-        $infos3 = $childManager -> updateOldHealth($meds, $allergies, $idChildren);
+        $infos3 = $childManager -> updateOldHealth($meds, $poso, $allergies, $idChildren);
         if($_SESSION['firstname'] == $parent1 || $_SESSION['firstname'] == $parent2){           
             header('Location: index.php?action=memberView&idMember='.$idMember);
         }
@@ -450,4 +450,33 @@ function uploadAvatar($idMember){
             throw new \Exception('votre mot de passe doit comporter des lettres majuscules, minuscules ET des chiffres entre 8 et 16 caractères');
         }
     }
+    function ajaxMeds(){
+        $childManager = new \Src\Models\ChildManager();
+        $data = $childManager -> getAllMeds();
+        header('Content-Type: application/json');
+        $data = $data->fetchAll();
+        echo json_encode($data);
+    }
+
+
+
+    // // GET MEDS TO DB
+    // function getMeds(){
+
+    //     $getMeds = json_decode(file_get_contents('data/medicaments.json'),true);
+    //     /* création fichier si inexistant et ouverture flux */
+    //     $file = fopen("import_meds.sql", "w");
+    //     /* création string */
+    //     $string_to_write = "insert into meds (title) values";
+    //     foreach($getMeds as $meds){
+    //         $string_to_write .= PHP_EOL.'("'.str_replace('"',"'",$meds["title"]).'"),';
+    //     }
+    //     /* suppression , finale -> ; */
+    //     $string_to_write = substr($string_to_write,0,strlen($string_to_write)-1).";";
+
+    //     /* écriture dans fichier */
+    //     fwrite($file, $string_to_write);
+    //     /* fermeture flux fichier */
+    //     fclose($file);
+    // }
 }

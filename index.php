@@ -323,6 +323,10 @@ try{
                 throw new \Exception('page non trouvée');
             }
         }
+        // GET ALL MEDS
+        elseif($_GET['action'] == "ajaxMeds"){
+            $frontoffice->ajaxMeds();
+        }
         else{
             throw new \Exception('page non trouvée');
         }

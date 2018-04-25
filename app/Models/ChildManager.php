@@ -42,9 +42,9 @@ class ChildManager extends Manager
         $infos2->execute(array($favMeal,$hatedMeal,$idChild));
         return $infos2;
     }
-    public function addNewHealth($meds,$allergies,$idChild){
+    public function addNewHealth($meds,$poso,$allergies,$idChild){
         $db = $this -> dbConnect();
-        $infos3 = $db->prepare('INSERT INTO health(meds,allergies,idChildren) VALUES(?,?,?)');
+        $infos3 = $db->prepare('INSERT INTO health(meds,posology,allergies,idChildren) VALUES(?,?,?,?)');
         $infos3->execute(array($meds,$allergies,$idChild));
         return $infos3;
     }
@@ -67,10 +67,10 @@ class ChildManager extends Manager
         $infos2->execute(array($favMeal,$hatedMeal,$idChildren));
         return $infos2;
     }
-    public function updateOldHealth($meds,$allergies,$idChildren){
+    public function updateOldHealth($meds,$poso,$allergies,$idChildren){
         $db = $this -> dbConnect();
-        $infos3 = $db->prepare('UPDATE health SET meds=?, allergies=? WHERE idChildren=?');
-        $infos3->execute(array($meds,$allergies,$idChildren));
+        $infos3 = $db->prepare('UPDATE health SET meds=?, posology=?, allergies=? WHERE idChildren=?');
+        $infos3->execute(array($meds,$poso,$allergies,$idChildren));
         return $infos3;
     }
     // DELETE CHILD
@@ -131,5 +131,11 @@ class ChildManager extends Manager
         $request = $db->prepare('INSERT INTO family_children(idFamily, idChildren) VALUES(?,?)');
         $request->execute(array($idFamily,$idChild));
         return $request;
+    }
+    // GET ALL MEDS
+    public function getAllMeds(){
+        $db = $this -> dbConnect();
+        $data = $db->query('SELECT title FROM meds');
+        return $data;
     }
 }

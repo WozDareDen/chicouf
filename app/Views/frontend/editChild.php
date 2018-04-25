@@ -73,7 +73,11 @@ $newConnex3 = $connex3->fetch()
             <h2>TRAITEMENT</h2>
             <div class="form-group col-lg-12 ">
             <label for="meds">Médicaments</label><br />
-            <textarea id="meds" name="medsCo" rows="5" cols="30" ><?= $newConnex3['meds'] ?></textarea>
+            <input type="search" id="meds" name="medsCo" value="<?= $newConnex3['meds'] ?>" placeholder="choisissez" />
+            </div>
+            <div class="form-group col-lg-12 ">
+            <label for="poso">Posologie</label><br />
+            <textarea id="poso" name="posoCo" rows="5" cols="30" ><?= $newConnex3['meds'] ?></textarea>
             </div>
             <div class="form-group col-lg-12 ">
             <label for="allergies">Allergies</label><br />

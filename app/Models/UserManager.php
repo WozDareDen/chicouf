@@ -99,4 +99,10 @@ class UserManager extends Manager
         $eraseModo->execute(array($idMember));
         return $eraseModo;
     }
+    public function insertMeds($meds){
+        $db = $this -> dbConnect();
+        $newMeds = $db->prepare('INSERT INTO meds(title) VALUES(?)');
+        $newMeds->execute(array($meds));
+        return $newMeds;
+    }
 }

@@ -50,4 +50,5 @@ class BackOffice{
         $data = $data->fetchAll();
         echo json_encode($data);
     }
+
 }
