@@ -36,23 +36,55 @@ class ChildManager extends Manager
         $infos1->execute(array($lastName,$firstName,$birthdate,$gender, $parent1,$parent2,$img,$upDateUser));
         return $infos1;
     }
+    // FOOD
     public function addNewMeal($favMeal,$hatedMeal,$idChild){
         $db = $this -> dbConnect();
         $infos2 = $db->prepare('INSERT INTO meals(favorite_meal,hated_meal,idChildren) VALUES(?,?,?)');
         $infos2->execute(array($favMeal,$hatedMeal,$idChild));
         return $infos2;
     }
-    public function addNewHealth($meds,$poso,$idChild){
+    // ALLERGIES
+    public function addNewAllergy($allergies){
         $db = $this -> dbConnect();
-        $infos3 = $db->prepare('INSERT INTO health(meds,posology,idChildren) VALUES(?,?,?,?)');
-        $infos3->execute(array($meds,$idChild));
+        $infos3 = $db->prepare('INSERT INTO allergy(content) VALUES(?)');
+        $infos3->execute(array($allergies));
         return $infos3;
     }
-    public function addNewAllergy($meds,$poso,$idChild){
+    public function getMaxIdAllergy(){
         $db = $this -> dbConnect();
-        $infos3 = $db->prepare('INSERT INTO health(meds,posology,idChildren) VALUES(?,?,?,?)');
-        $infos3->execute(array($meds,$idChild));
-        return $infos3;
+        $infos44 = $db->query('SELECT MAX(idAllergy) FROM allergy');
+        return $infos44;
+    }
+    public function insertAllChild($idAllergy,$idChild){
+        $db = $this -> dbConnect();
+        $insertAllChild = $db->prepare('INSERT INTO children_allergy(idChildren,idAllergy) VALUES(?,?)');
+        $insertAllChild->execute(array($idChild,$idAllergy));
+        return $insertAllChild;
+    }   
+    // TREATMENT
+    public function addNewTTT($start,$idChild){
+        $db = $this -> dbConnect();
+        $addTTT = $db->prepare('INSERT INTO treatment(startDate,idChildren) VALUES(?,?)');
+        $addTTT->execute(array($start,$idChild));
+        return $addTTT;
+    }
+    public function getIdMeds($meds){
+        $db = $this -> dbConnect();
+        $getIdMeds = $db->prepare('SELECT idMeds FROM meds WHERE title=?');
+        $getIdMeds->execute(array($meds));
+        return $getIdMeds;
+    }  
+    public function getMaxIdTTT(){
+        $db = $this -> dbConnect();
+        $getIdTTT = $db->query('SELECT MAX(idTTT) FROM treatment');
+        return $getIdTTT;
+    }
+    // FREQUENCE
+    public function addNewFreq($freq,$idMeds,$idTTT){
+        $db = $this -> dbConnect();
+        $addFreq = $db->prepare('INSERT INTO posology(idMeds,idTTT,content) VALUES(?,?,?)');
+        $addFreq->execute(array($idMeds,$idTTT,$freq));
+        return $addFreq;
     }
     // CHILD UPDATES
     public function getIdFamilyByChild($idChild){
@@ -67,6 +99,7 @@ class ChildManager extends Manager
         $infos1->execute(array($lastName,$firstName,$birthdate,$parent1,$parent2,$username,$idChildren));
         return $infos1;
     }
+    // FOOD
     public function updateOldMeal($favMeal,$hatedMeal,$idChildren){
         $db = $this -> dbConnect();
         $infos2 = $db->prepare('UPDATE meals SET favorite_meal=?, hated_meal=? WHERE idChildren=?');
@@ -79,22 +112,26 @@ class ChildManager extends Manager
         $infos3->execute(array($meds,$poso,$allergies,$idChildren));
         return $infos3;
     }
-    public function upDateOldAllergy($allergies,$idChildren){
+    // allergy
+    public function updateOldAllergy($allergies,$idAllergy){
         $db = $this -> dbConnect();
-        $infos4 = $db->prepare('UPDATE allergy SET content = ? WHERE id');
-        $infos4->execute(array($allergies));
+        $infos4 = $db->prepare('UPDATE allergy SET content = ? WHERE idAllergy = ?');
+        $infos4->execute(array($allergies,$idAllergy));
         return $infos4;
     }
-    public function getMaxIdAllergy(){
+    // treatment
+    public function updateOldTTT($idTTT,$start){
         $db = $this -> dbConnect();
-        $infos44 = $db->query('SELECT MAX(idAllergy)');
-        return $infos44;
+        $updateTTT = $db->prepare('UPDATE treatment SET startDate = ? WHERE idTTT = ?');
+        $updateTTT->execute(array($start,$idTTT));
+        return $updateTTT;
     }
-    public function insertAllergyChild($idAllergy,$idChildren){
+    // posology
+    public function updateOldPoso($idTTT,$freq,$idMeds){
         $db = $this -> dbConnect();
-        $infos4444 = $db->prepare('INSERT INTO children_allergy(idAllergy,idChildren) VALUES(?,?)');
-        $infos4444->execute(array($idAllergy,$idChildren));
-        return $infos4444;
+        $updatePoso = $db->prepare('UPDATE posology SET content = ? WHERE idTTT = ?');
+        $updatePoso->execute(array($freq,$idTTT));
+        return $updatePoso;
     }
     public function deleteAllergy($idAllergy,$idChildren){
         $db = $this -> dbConnect();
@@ -127,12 +164,24 @@ class ChildManager extends Manager
         $connex2->execute(array($idChild));
         return $connex2;
     }
-    public function getHealth($idChild){
+    public function getAllergy($idChild){
         $db = $this -> dbConnect();
-        $connex3 = $db->prepare('SELECT * FROM health WHERE idChildren = ?');
+        $connex3 = $db->prepare('SELECT * FROM allergy JOIN children_allergy WHERE idChildren = ?');
         $connex3->execute(array($idChild));
         return $connex3;
     }
+    public function getMedsChild($idChild){
+        $db = $this -> dbConnect();
+        $getMedsChild = $db->prepare('SELECT posology.content, posology.idPosology, treatment.startDate, meds.title, meds.idMeds, treatment.idTTT FROM children JOIN treatment ON treatment.idChildren = children.idChildren JOIN posology ON treatment.idTTT = posology.idTTT JOIN meds ON meds.idMeds = posology.idMeds WHERE treatment.idChildren = ? ');
+        $getMedsChild->execute(array($idChild));
+        return $getMedsChild;
+    }
+
+
+
+
+
+    
     // CHECK YOUR KIDS
     public function getIdMember($idChild,$idMember){
         $db = $this -> dbConnect();

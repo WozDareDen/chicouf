@@ -10,7 +10,7 @@
 <?php 
 $newData = $data->fetch()
 ?>
-        <form method="post" autocomplete="off" class="childForm" action="index.php?action=updateChild&idChildren=<?= $newData['idChildren'] ?>">
+        <form method="post" autocomplete="off" action="index.php?action=updateChild&idChildren=<?= $newData['idChildren'] ?>">
           <h1>MODIFICATION D'UNE FICHE ENFANT</h1>      
           <article>
             <p>Vous et vos proches pouvaient à tout moment modifier la fiche de renseignement de votre enfant.</p>
@@ -68,32 +68,43 @@ $newConnex2 = $connex2->fetch()
             <textarea id="hatedMeal" name="hatedMealCo" rows="5" cols="30"><?= $newConnex2['hated_meal']; ?></textarea>
             </div>
 <?php 
-$newConnex3 = $connex3->fetch()
+$newMeds = $getMedsChild->fetchAll()
 ?>
             <h2>TRAITEMENT</h2>
 
+            <div class="autocomplete ui-front form-group col-lg-12" >
+              <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> <div class="btn btn-info" id="addMeds">Ajouter</div>
+            </div>
+<?php
+foreach($newMeds as $meds){
 
-
-  <div class="autocomplete ui-front form-group col-lg-12" >
-    <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> <div class="btn btn-info" id="addMeds">Ajouter</div>
-  </div>
- 
-
-            <div class="form-group col-lg-12 posology ">
+?>
+            <div class="form-group col-lg-12 posology2">
             <label for="meds">Médicaments</label><br />
-            <input type="search" id="meds1" name="medsCo" value="" />
+            <input type="hidden" name="idMedsCo" value="<?= $meds['idMeds'] ?>" />
+            <input type="hidden" name="idTTTCo" value="<?= $meds['idTTT'] ?>" />
+            <input type="search" id="meds1" name="medsCo" value="<?= $meds['title']?>" />
             </div>
-            <div class="form-group col-lg-12 posology">
+
+            <div class="form-group col-lg-12 posology2">
             <label for="poso">Fréquences/prises</label><br />
-            <textarea id="poso" name="posoCo" rows="3" cols="30" ></textarea>
+            <input type="hidden" name="idPosoCo" value="<?= $meds['idPosology'] ?>" />
+            <textarea id="poso" name="posoCo" rows="2" cols="30" ><?= $meds['content']?></textarea>
             </div>
-            <div class="form-group col-lg-12 posology">
+            <div class="form-group col-lg-12 posology2">
             <label for="startDate">Date de début du traitement</label><br />
-            <input type="date"id="startDate" name="startDateCo"  value=""><br />
+            <input type="date"id="startDate" name="startDateCo"  value="<?= $meds['startDate']?>"><br />
             </div>
+
+<?php 
+}
+$newConnex3 = $connex3->fetch()
+?>            
+            <h2>ALLERGIES</h2>
             <div class="form-group col-lg-12 ">
             <label for="allergies">Allergies</label><br />
-            <textarea id="allergies" name="allergiesCo" rows="3" cols="30" ></textarea>
+            <input type="hidden" name="idAllCo" value="<?= $newConnex3['idAllergy'] ?>" />
+            <textarea id="allergies" name="allergiesCo" rows="2" cols="30" ><?= $newConnex3['content'] ?></textarea>
             </div>         
           <div class="form-check col-lg-12">
             <input class="btn btn-primary" type="submit" name="updateChild" value="Valider" />

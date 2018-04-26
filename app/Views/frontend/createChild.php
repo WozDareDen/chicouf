@@ -66,15 +66,13 @@
             <textarea id="poso" name="posoCo" rows="3" cols="30" ></textarea>
             </div>
             <div class="form-group col-lg-12 posology">
-            <label for="startDate">Date de début</label><br />
-            <input type="date"id="startDate" name="startDateCo"  value=""><br />
-            <label for="endDate">Date de fin</label><br />
-            <input type="date" id="endDate" name="endDateCo"  value="">
+            <label for="startDate">Date de début (si nécessaire)</label><br />
+            <input type="date"id="startDate" name="startDateCo"  ><br />
             </div>
             <div id="resume<?= sdf?>"></div>
             <div class="form-group col-lg-12 ">
             <label for="allergies">Allergies</label><br />
-            <textarea id="allergies" name="allergiesCo" rows="3" cols="30" ></textarea>
+            <textarea id="allergies" name="allergiesCo" rows="3" cols="30" >Aucune allergie connue</textarea>
             </div>         
           <div class="form-check col-lg-12">
             <input class="btn btn-primary" type="submit" name="updateChild" value="Valider" />

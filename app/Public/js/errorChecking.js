@@ -111,3 +111,7 @@ $('#addMeds').on('click',function(){
     $('.posology').css("display","block");
     $('#meds1').val($('#myInput').val())
 })
+
+$('#addMeds').on('click',function(){
+    $('.posology2').val($('#myInput').val())
+})

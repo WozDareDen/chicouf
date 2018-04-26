@@ -212,7 +212,7 @@ class FrontOffice{
     }
 }    
     // ADD CHILD
-    function addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds,$poso, $allergies){
+    function addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds,$freq, $start, $allergies){
         $childManager = new \Src\Models\ChildManager();
         $upDateUser = $_SESSION['firstname'];
         $infos1 = $childManager -> addNewChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2,$upDateUser);
@@ -220,7 +220,23 @@ class FrontOffice{
         $idChild111 = $infos11->fetch();
         $idChild = $idChild111[0];
         $infos2 = $childManager -> addNewMeal($favMeal, $hatedMeal,$idChild);
-        $infos3 = $childManager -> addNewHealth($meds, $poso,$allergies,$idChild);
+        // allergy
+        $addAllergy = $childManager -> addNewAllergy($allergies);
+        $getIdAllergy = $childManager -> getMaxIdAllergy();
+        $newGetIdAllergy = $getIdAllergy->fetch();
+        $idAllergy = $newGetIdAllergy[0];
+        $insertAllChild = $childManager -> insertAllChild($idAllergy,$idChild);
+        // treatment
+        $addTTT = $childManager -> addNewTTT($start,$idChild);
+        $getIdTTT = $childManager -> getMaxIdTTT();
+        $newGetIdTTT = $getIdTTT->fetch();
+        $idTTT = $newGetIdTTT[0];
+        // frequence
+        $getIdMeds = $childManager -> getIdMeds($meds);
+        $newGetIdMeds = $getIdMeds->fetch();
+        $idMeds = $newGetIdMeds[0];
+        $addFreq = $childManager -> addNewFreq($freq,$idMeds,$idTTT);
+
         $idMember = $_SESSION['id'];
         $infoJoin = $childManager -> addToMyParent($idChild,$idMember);
         $userManager = new \Src\Models\UserManager();
@@ -233,21 +249,17 @@ class FrontOffice{
         header('Location: index.php?action=memberView&idMember='.$idMember);
     }
     // UPDATE CHILD
-    function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $freq, $start, $end,$allergies){            
+    function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $freq, $start, $idTTT, $idMeds, $idPoso, $idAllergy, $allergies){            
         $childManager = new \Src\Models\ChildManager();
         $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChildren,$username);
         $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChildren);
-        $infos3 = $childManager -> updateOldHealth($meds, $freq, $start, $end, $idChildren);
-        $infos4 = $childManager -> upDateOldAllergy($allergies);
-        $infos44 = $childManager -> getMaxIdAllergy();
-        $infos444 = $infos44->fetch();
-        if(isset($infos444)){
-            $idAllergy = $infos444['idAllergy'];
-            $infos4444 = $childManager -> insertAllergyChild($idAllergy,$idChildren);
-        }
-        else{
-            $infos44444 = $childManager -> deleteAllergy($idAllergy,$idChildren);
-        }
+         // allergy
+        $infos4 = $childManager -> updateOldAllergy($allergies,$idAllergy);
+        // TTT
+        $updateTTT = $childManager -> updateOldTTT($idTTT,$start);
+        // poso
+        $updatePoso = $childManager -> updateOldPoso($idTTT,$freq,$idMeds);
+
         if($_SESSION['firstname'] == $parent1 || $_SESSION['firstname'] == $parent2){           
             header('Location: index.php?action=memberView&idMember='.$idMember);
         }
@@ -262,10 +274,12 @@ class FrontOffice{
         $childManager = new \Src\Models\ChildManager();
         $data = $childManager -> getChild($idChild);
         $connex2 = $childManager -> getMeals($idChild);
-        $connex3 = $childManager -> getHealth($idChild);
+        // allergy
+        $connex3 = $childManager -> getAllergy($idChild);
         $idMember = $_SESSION['id'];
-        // $connex4 = $childManager -> getIdMember($idChild,$idMember);
-        // $newConnex4 = $connex4->fetch();
+        // meds
+        $getMedsChild = $childManager ->getMedsChild($idChild);
+
         $connex5 = $childManager -> getIdFamilyByChild($idChild);
         $newConnex5 = $connex5->fetch();
             if(isset($_SESSION['id'])){

@@ -205,8 +205,12 @@ try{
                 $meds = htmlspecialchars($_POST['medsCo']);
                 $freq = htmlspecialchars($_POST['posoCo']);
                 $start = htmlspecialchars($_POST['startDateCo']);
+                $idTTT = htmlspecialchars($_POST['idTTTCo']);
+                $idMeds = htmlspecialchars($_POST['idMedsCo']);
+                $idPoso = htmlspecialchars($_POST['idPosoCo']);
+                $idAllergy = htmlspecialchars($_POST['idAllCo']);
                 $allergies = htmlspecialchars($_POST['allergiesCo']);                   
-                    $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $freq, $start, $allergies);                 
+                    $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $freq, $start, $idTTT, $idMeds, $idPoso,$idAllergy, $allergies);                 
             }
             else{
                 throw new \Exception('Vous devez être connecté');
