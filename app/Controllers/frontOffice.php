@@ -233,11 +233,21 @@ class FrontOffice{
         header('Location: index.php?action=memberView&idMember='.$idMember);
     }
     // UPDATE CHILD
-    function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $poso,$allergies){            
+    function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $freq, $start, $end,$allergies){            
         $childManager = new \Src\Models\ChildManager();
         $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChildren,$username);
         $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChildren);
-        $infos3 = $childManager -> updateOldHealth($meds, $poso, $allergies, $idChildren);
+        $infos3 = $childManager -> updateOldHealth($meds, $freq, $start, $end, $idChildren);
+        $infos4 = $childManager -> upDateOldAllergy($allergies);
+        $infos44 = $childManager -> getMaxIdAllergy();
+        $infos444 = $infos44->fetch();
+        if(isset($infos444)){
+            $idAllergy = $infos444['idAllergy'];
+            $infos4444 = $childManager -> insertAllergyChild($idAllergy,$idChildren);
+        }
+        else{
+            $infos44444 = $childManager -> deleteAllergy($idAllergy,$idChildren);
+        }
         if($_SESSION['firstname'] == $parent1 || $_SESSION['firstname'] == $parent2){           
             header('Location: index.php?action=memberView&idMember='.$idMember);
         }
@@ -450,9 +460,9 @@ function uploadAvatar($idMember){
             throw new \Exception('votre mot de passe doit comporter des lettres majuscules, minuscules ET des chiffres entre 8 et 16 caractères');
         }
     }
-    function ajaxMeds(){
+    function ajaxMeds($autoC){
         $childManager = new \Src\Models\ChildManager();
-        $data = $childManager -> getAllMeds();
+        $data = $childManager -> getAllMeds($autoC);
         header('Content-Type: application/json');
         $data = $data->fetchAll();
         echo json_encode($data);

@@ -164,8 +164,10 @@ try{
                 $favMeal = htmlspecialchars($_POST['favoriteMealCo']);
                 $hatedMeal = htmlspecialchars($_POST['hatedMealCo']);
                 $meds = htmlspecialchars($_POST['medsCo']);
+                $freq = htmlspecialchars($_POST['posoCo']);
+                $start = htmlspecialchars($_POST['startDateCo']);
                 $allergies = htmlspecialchars($_POST['allergiesCo']);
-                $frontoffice->addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $allergies);
+                $frontoffice->addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $freq, $start, $allergies);
             }
             else{
                 throw new \Exception('Vous devez être connecté');
@@ -201,8 +203,10 @@ try{
                 $favMeal = htmlspecialchars($_POST['favoriteMealCo']);
                 $hatedMeal = htmlspecialchars($_POST['hatedMealCo']);
                 $meds = htmlspecialchars($_POST['medsCo']);
+                $freq = htmlspecialchars($_POST['posoCo']);
+                $start = htmlspecialchars($_POST['startDateCo']);
                 $allergies = htmlspecialchars($_POST['allergiesCo']);                   
-                    $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $allergies);                 
+                    $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $freq, $start, $allergies);                 
             }
             else{
                 throw new \Exception('Vous devez être connecté');
@@ -325,7 +329,8 @@ try{
         }
         // GET ALL MEDS
         elseif($_GET['action'] == "ajaxMeds"){
-            $frontoffice->ajaxMeds();
+            $autoC = $_GET['search'];
+            $frontoffice->ajaxMeds($autoC);
         }
         else{
             throw new \Exception('page non trouvée');

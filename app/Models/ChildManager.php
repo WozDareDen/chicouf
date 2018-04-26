@@ -42,10 +42,16 @@ class ChildManager extends Manager
         $infos2->execute(array($favMeal,$hatedMeal,$idChild));
         return $infos2;
     }
-    public function addNewHealth($meds,$poso,$allergies,$idChild){
+    public function addNewHealth($meds,$poso,$idChild){
         $db = $this -> dbConnect();
-        $infos3 = $db->prepare('INSERT INTO health(meds,posology,allergies,idChildren) VALUES(?,?,?,?)');
-        $infos3->execute(array($meds,$allergies,$idChild));
+        $infos3 = $db->prepare('INSERT INTO health(meds,posology,idChildren) VALUES(?,?,?,?)');
+        $infos3->execute(array($meds,$idChild));
+        return $infos3;
+    }
+    public function addNewAllergy($meds,$poso,$idChild){
+        $db = $this -> dbConnect();
+        $infos3 = $db->prepare('INSERT INTO health(meds,posology,idChildren) VALUES(?,?,?,?)');
+        $infos3->execute(array($meds,$idChild));
         return $infos3;
     }
     // CHILD UPDATES
@@ -72,6 +78,29 @@ class ChildManager extends Manager
         $infos3 = $db->prepare('UPDATE health SET meds=?, posology=?, allergies=? WHERE idChildren=?');
         $infos3->execute(array($meds,$poso,$allergies,$idChildren));
         return $infos3;
+    }
+    public function upDateOldAllergy($allergies,$idChildren){
+        $db = $this -> dbConnect();
+        $infos4 = $db->prepare('UPDATE allergy SET content = ? WHERE id');
+        $infos4->execute(array($allergies));
+        return $infos4;
+    }
+    public function getMaxIdAllergy(){
+        $db = $this -> dbConnect();
+        $infos44 = $db->query('SELECT MAX(idAllergy)');
+        return $infos44;
+    }
+    public function insertAllergyChild($idAllergy,$idChildren){
+        $db = $this -> dbConnect();
+        $infos4444 = $db->prepare('INSERT INTO children_allergy(idAllergy,idChildren) VALUES(?,?)');
+        $infos4444->execute(array($idAllergy,$idChildren));
+        return $infos4444;
+    }
+    public function deleteAllergy($idAllergy,$idChildren){
+        $db = $this -> dbConnect();
+        $infos44444 = $db->prepare('DELETE FROM allergy WHERE idChildren = ?');
+        $infos44444->execute(array($idChildren));
+        return $infos44444;
     }
     // DELETE CHILD
     public function eraseChild($idChildren){
@@ -133,9 +162,11 @@ class ChildManager extends Manager
         return $request;
     }
     // GET ALL MEDS
-    public function getAllMeds(){
+    public function getAllMeds($autoC){
+        $autoComp = $autoC."%";
         $db = $this -> dbConnect();
-        $data = $db->query('SELECT title FROM meds');
+        $data = $db->prepare('SELECT title FROM meds WHERE title LIKE ? ORDER BY title LIMIT 8');
+        $data->execute(array($autoComp));
         return $data;
     }
 }

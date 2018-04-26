@@ -52,21 +52,35 @@
 
             <h2>TRAITEMENT</h2>
 
-            <div class="form-group col-lg-12 ">
+            <div class="autocomplete ui-front form-group col-lg-12" >
+    <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> <div class="btn btn-info" id="addMeds">Ajouter</div>
+  </div>
+ 
+
+            <div class="form-group col-lg-12 posology ">
             <label for="meds">Médicaments</label><br />
-            <textarea id="meds" name="medsCo" rows="5" cols="30" placeholder="aucun traitement en cours" ></textarea>
+            <input type="search" id="meds1" name="medsCo" value="" />
             </div>
+            <div class="form-group col-lg-12 posology">
+            <label for="poso">Fréquences/prises</label><br />
+            <textarea id="poso" name="posoCo" rows="3" cols="30" ></textarea>
+            </div>
+            <div class="form-group col-lg-12 posology">
+            <label for="startDate">Date de début</label><br />
+            <input type="date"id="startDate" name="startDateCo"  value=""><br />
+            <label for="endDate">Date de fin</label><br />
+            <input type="date" id="endDate" name="endDateCo"  value="">
+            </div>
+            <div id="resume<?= sdf?>"></div>
             <div class="form-group col-lg-12 ">
             <label for="allergies">Allergies</label><br />
-            <textarea id="allergies" name="allergiesCo" rows="5" cols="30" placeholder="aucune allergie connue" ></textarea>
-            </div>
-
-            <small id="formHelp" class="form-text text-muted">Vous pourrez modifier toutes ces informations ultérieurement.</small>
-         
+            <textarea id="allergies" name="allergiesCo" rows="3" cols="30" ></textarea>
+            </div>         
           <div class="form-check col-lg-12">
-            <input class="btn btn-primary " type="submit" name="addChild" value="Valider" />
+            <input class="btn btn-primary" type="submit" name="updateChild" value="Valider" />
+            
           </div>
-</div>          
+</div>
 </form>
 
 </div>

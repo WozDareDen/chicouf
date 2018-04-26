@@ -12,17 +12,4 @@
         });
     });
 
-    $(document).ready(function(){
-        $.ajax({
-            url:'index.php?action=ajaxMeds',
-            type: 'GET',
-            datatype: 'json'
-        }).done(function(bite){
-            var container=$(".table .table_body");
-            bite.forEach(function($members) {
 
-                
-                container.append(templateRow)
-            })
-        });
-    });

@@ -80,3 +80,34 @@ function myFunction2() {
 //    var percent = $(document).scrollTop() / ($(document).height() - $(window).height());
 //    divs.css('opacity', 1 - percent);
 // });
+
+
+
+
+
+
+
+
+$('#myInput').autocomplete({
+    source : function(req,reponse){ // la fonction anonyme permet de maintenir une requête AJAX directement dans le plugin
+    $.ajax({
+            url : 'index.php?action=ajaxMeds&search='+encodeURI(req.term), // on appelle le script JSON
+            type : 'GET',
+            dataType : 'json', // on spécifie bien que le type de données est en JSON
+
+            success : function(donnee){
+                console.log(donnee);
+                reponse(donnee.map(function(d) {
+                    return {label:d.title, value: d.title}
+                })) 
+                // on se prépare à renvoyer les données réceptionnées grâce à l'évènement de succès 
+            }
+        });
+    },
+    delay:300
+})
+
+$('#addMeds').on('click',function(){
+    $('.posology').css("display","block");
+    $('#meds1').val($('#myInput').val())
+})
