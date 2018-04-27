@@ -24,7 +24,7 @@ class ChildManager extends Manager
         return $connex3;
     }
     // CHILD CREATION
-    public function addNewChild($lastName,$firstName,$birthdate,$gender,$parent1,$parent2,$upDateUser){
+    public function addChild($lastName,$firstName,$birthdate,$gender,$parent1,$parent2,$upDateUser){
         if($gender == 0){
             $img = 'app/Public/uploads/avatarBoy.png';
         }

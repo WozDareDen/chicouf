@@ -212,7 +212,7 @@ class FrontOffice{
     }
 }    
     // ADD CHILD
-    function addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds,$freq, $start, $allergies){
+    function add0Child($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds,$freq, $start, $allergies){
         $childManager = new \Src\Models\ChildManager();
         $upDateUser = $_SESSION['firstname'];
         $infos1 = $childManager -> addNewChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2,$upDateUser);
@@ -482,8 +482,8 @@ function uploadAvatar($idMember){
         echo json_encode($data);
     }
     function addNewChild($children){
-        $upDateUser = $_SESSION['firstname'];
-        $newChild = json_decode($children);
+        $idMember = $_SESSION['firstname'];
+        $newChild = json_decode($children,true);
         $lastname = htmlspecialchars($newChild['lastname']);
         $firstname = htmlspecialchars($newChild['firstname']);
         $birthdate = htmlspecialchars($newChild['birthdate']);
@@ -494,14 +494,13 @@ function uploadAvatar($idMember){
         $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
         $allergies = htmlspecialchars($newChild['allergies']);
 
-
-
         $childManager = new \Src\Models\ChildManager();
-        
-        $addNewChild = $childManager -> addNewChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2,$upDateUser);
+        // identity       
+        $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $parent2,$idMember);
         $getIdChild = $childManager -> getMaxIdChild();
         $getIdChild = $getIdChild->fetch();
         $idChild = $getIdChild[0];
+        // food
         $addNewMeal = $childManager -> addNewMeal($favMeal, $hatedMeal,$idChild);
         // allergy
         $addAllergy = $childManager -> addNewAllergy($allergies);
@@ -519,7 +518,7 @@ function uploadAvatar($idMember){
             $infos4 = $childManager -> addToMyFamily($idChild,$idFamily);
         }
 
-        header('Location: index.php?action=memberView&idMember='.$upDateUser);
+       return $children;
     }
 
 

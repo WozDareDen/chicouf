@@ -19,7 +19,7 @@
     </div>
     <div class="form-group col-lg-12"> 
       <label for="firstname">Prénom</label><br />
-      <input type="text" id="firstname" name="firstNameCo" required="valid" cols="30" placeholder="entrez son prénom" > 
+      <input type="text" id="firstname1" name="firstNameCo" required="valid" cols="30" placeholder="entrez son prénom" > 
     </div>
     <div class="form-group col-lg-12">
       <label for="birthdate">Date de Naissance</label><br />

@@ -139,7 +139,7 @@ var NewChildren = Children;
 
 $('#submitChildren').on('click',function(){
     NewChildren.lastname = $('#lastname').val();
-    NewChildren.firstname = $('#firstname').val();
+    NewChildren.firstname = $('#firstname1').val();
     NewChildren.birthdate = $('#birthdate').val();
     NewChildren.gender = $('input[name=genderCo]:checked',"#gender").val();
     NewChildren.parent1 = $('#parent1').val();
@@ -149,15 +149,14 @@ $('#submitChildren').on('click',function(){
     NewChildren.parent2 = $('#parent2').val();
 
     var childrenString = JSON.stringify(NewChildren);
-    console.log(childrenString);
 
 $.ajax({
     url: "index.php",
     data: {data:childrenString,action:"addNewChild"},
     method: "POST",
     success: function(data){
-        console.log('banane');
-        return data;
+        console.log(data);
+        // window.location.assign("http://index.php");
     },
     error: function(e){
         console.log('baneeeane');
