@@ -70,48 +70,102 @@ function myFunction2() {
             y.type = "password";
         }
 }
-// $(".photoChild").on("click",function(e){
-//     $(e.target).css("transform","rotate(1turn)");
-//     console.log(e.target);
-//  });
- 
-// var divs = $('.social');
-// $(window).scroll(function(){
-//    var percent = $(document).scrollTop() / ($(document).height() - $(window).height());
-//    divs.css('opacity', 1 - percent);
-// });
 
-
-
-
-
-
-
-
+// AUTOCOMPLETE
 $('#myInput').autocomplete({
-    source : function(req,reponse){ // la fonction anonyme permet de maintenir une requête AJAX directement dans le plugin
+    source : function(req,reponse){ 
     $.ajax({
-            url : 'index.php?action=ajaxMeds&search='+encodeURI(req.term), // on appelle le script JSON
+            url : 'index.php?action=ajaxMeds&search='+encodeURI(req.term), 
             type : 'GET',
-            dataType : 'json', // on spécifie bien que le type de données est en JSON
-
+            dataType : 'json', 
             success : function(donnee){
-                console.log(donnee);
                 reponse(donnee.map(function(d) {
                     return {label:d.title, value: d.title}
-                })) 
-                // on se prépare à renvoyer les données réceptionnées grâce à l'évènement de succès 
+                }))  
             }
         });
     },
     delay:300
 })
 
+// CREATE BLOCKS FOR MEDS
+var i = 0;
 $('#addMeds').on('click',function(){
-    $('.posology').css("display","block");
-    $('#meds1').val($('#myInput').val())
+    i++;
+
+    var m = $('<div class="form-group col-lg-12"><label for="meds">Médicament</label></div>');
+    var m2 = $('<input type="search" />');
+    $(m2).attr('id', "medsCo"+i);
+    $(m2).attr('name', "medsCo"+i);
+    $(m2).val($('#myInput').val());
+   
+    var f = $('<div class="form-group col-lg-12><label for="poso">Fréquences/prises</label></div>')
+    var f2 = $('<br /><textarea rows="2" cols="30" ></textarea>');
+    $(f2).attr('id', "posoCo"+i);
+    $(f2).attr('name', "posoCo"+i);
+    
+    var d = $('<div class="form-group col-lg-12 "><label for="startDate">Date de début du traitement</label></div>')
+    var d2 = $('<br /><input type="date" id="startDate" name="startDateCo" ><br />');
+    $(d2).attr('id', "startDate"+i);
+    $(d2).attr('name', "startDate"+i);
+
+    $(m).append(m2);
+    $('.lampost').before(m);
+    $(f).append(f2);
+    $('.lampost').before(f);
+    $(d).append(d2);
+    $('.lampost').before(d);
+
+    $('#myInput').val("");
 })
 
-$('#addMeds').on('click',function(){
-    $('.posology2').val($('#myInput').val())
+// OBJECT CHILDREN
+var Children = {
+    lastname : "",
+    firstname :"" , 
+    birthdate :"" , 
+    gender :"" , 
+    parent1 :"" , 
+    parent2 :"" , 
+    favMeal :"" , 
+    hatedMeal :"" , 
+    allergies :"" 
+
+}
+var NewChildren = Children;
+
+
+
+
+$('#submitChildren').on('click',function(){
+    NewChildren.lastname = $('#lastname').val();
+    NewChildren.firstname = $('#firstname').val();
+    NewChildren.birthdate = $('#birthdate').val();
+    NewChildren.gender = $('input[name=genderCo]:checked',"#gender").val();
+    NewChildren.parent1 = $('#parent1').val();
+    NewChildren.allergies = $('#allergies').val();  
+    NewChildren.favMeal = $('#favoriteMeal').val();
+    NewChildren.hatedMeal = $('#hatedMeal').val();
+    NewChildren.parent2 = $('#parent2').val();
+
+    var childrenString = JSON.stringify(NewChildren);
+    console.log(childrenString);
+
+$.ajax({
+    url: "index.php",
+    data: {data:childrenString,action:"addNewChild"},
+    method: "POST",
+    success: function(data){
+        console.log('banane');
+        return data;
+    },
+    error: function(e){
+        console.log('baneeeane');
+        console.log(e.message);
+    }
+
+    });
+
+
+
 })

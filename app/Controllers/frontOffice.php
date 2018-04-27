@@ -481,7 +481,46 @@ function uploadAvatar($idMember){
         $data = $data->fetchAll();
         echo json_encode($data);
     }
+    function addNewChild($children){
+        $upDateUser = $_SESSION['firstname'];
+        $newChild = json_decode($children);
+        $lastname = htmlspecialchars($newChild['lastname']);
+        $firstname = htmlspecialchars($newChild['firstname']);
+        $birthdate = htmlspecialchars($newChild['birthdate']);
+        $gender = htmlspecialchars($newChild['gender']);
+        $parent1 = htmlspecialchars($newChild['parent1']);
+        $parent2 = htmlspecialchars($newChild['parent2']);
+        $favMeal = htmlspecialchars($newChild['favMeal']);
+        $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
+        $allergies = htmlspecialchars($newChild['allergies']);
 
+
+
+        $childManager = new \Src\Models\ChildManager();
+        
+        $addNewChild = $childManager -> addNewChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2,$upDateUser);
+        $getIdChild = $childManager -> getMaxIdChild();
+        $getIdChild = $getIdChild->fetch();
+        $idChild = $getIdChild[0];
+        $addNewMeal = $childManager -> addNewMeal($favMeal, $hatedMeal,$idChild);
+        // allergy
+        $addAllergy = $childManager -> addNewAllergy($allergies);
+        $getIdAllergy = $childManager -> getMaxIdAllergy();
+        $newGetIdAllergy = $getIdAllergy->fetch();
+        $idAllergy = $newGetIdAllergy[0];
+        $insertAllChild = $childManager -> insertAllChild($idAllergy,$idChild);
+        // add parents & family
+        $infoJoin = $childManager -> addToMyParent($idChild,$idMember);
+        $userManager = new \Src\Models\UserManager();
+        $infosParent = $userManager -> getFamilyId($idMember);
+        $infosParent2 = $infosParent->fetch();
+        if(!(empty($infosParent2))){
+            $idFamily = $infosParent2['idFamily'];
+            $infos4 = $childManager -> addToMyFamily($idChild,$idFamily);
+        }
+
+        header('Location: index.php?action=memberView&idMember='.$upDateUser);
+    }
 
 
     // // GET MEDS TO DB

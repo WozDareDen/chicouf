@@ -79,30 +79,14 @@ $newMeds = $getMedsChild->fetchAll()
 foreach($newMeds as $meds){
 
 ?>
-            <div class="form-group col-lg-12 posology2">
-            <label for="meds">Médicaments</label><br />
-            <input type="hidden" name="idMedsCo" value="<?= $meds['idMeds'] ?>" />
-            <input type="hidden" name="idTTTCo" value="<?= $meds['idTTT'] ?>" />
-            <input type="search" id="meds1" name="medsCo" value="<?= $meds['title']?>" />
-            </div>
-
-            <div class="form-group col-lg-12 posology2">
-            <label for="poso">Fréquences/prises</label><br />
-            <input type="hidden" name="idPosoCo" value="<?= $meds['idPosology'] ?>" />
-            <textarea id="poso" name="posoCo" rows="2" cols="30" ><?= $meds['content']?></textarea>
-            </div>
-            <div class="form-group col-lg-12 posology2">
-            <label for="startDate">Date de début du traitement</label><br />
-            <input type="date"id="startDate" name="startDateCo"  value="<?= $meds['startDate']?>"><br />
-            </div>
+  
 
 <?php 
 }
 $newConnex3 = $connex3->fetch()
 ?>            
-            <h2>ALLERGIES</h2>
+            <h2 class="lampost">ALLERGIES</h2>
             <div class="form-group col-lg-12 ">
-            <label for="allergies">Allergies</label><br />
             <input type="hidden" name="idAllCo" value="<?= $newConnex3['idAllergy'] ?>" />
             <textarea id="allergies" name="allergiesCo" rows="2" cols="30" ><?= $newConnex3['content'] ?></textarea>
             </div>         
@@ -218,9 +202,7 @@ function autocomplete(inp, arr) {
 }
 
 </script>
-<style>
- 
-</style>
+
 
 
 

@@ -4,6 +4,10 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 try{
     $frontoffice = new \Src\Controllers\FrontOffice();
+    if (isset($_POST['action']) && $_POST['action'] =="addNewChild") {
+        $children = $_POST['data'];
+        $frontoffice->addNewChild($children);
+    }
     if (isset($_GET['action'])) {
         //ADD NEW USER
         if ($_GET['action'] == 'addUser'){
@@ -172,7 +176,7 @@ try{
             else{
                 throw new \Exception('Vous devez être connecté');
             }
-        }            
+        }          
         // ADD CHILDREN AVATAR
         elseif($_GET['action'] == 'uploadPic'){
             $idMember = $_GET['idMember'];
@@ -340,6 +344,7 @@ try{
             throw new \Exception('page non trouvée');
         }
     }
+    
     else{
         $frontoffice->homeView();
     }

@@ -10,7 +10,7 @@
 
     
 
-  <form method="post" class="childForm" action="index.php?action=addChild&idMember=<?= $_SESSION['id']; ?>" style="border:1px solid black;">
+  <form method="post" class="childForm" style="border:1px solid black;">
   <h1>CREATION D'UNE FICHE ENFANT</h1>       
     <div class="form-group  col-lg-12" >
       <h2>IDENTITE</h2>
@@ -25,10 +25,10 @@
       <label for="birthdate">Date de Naissance</label><br />
       <input type="date" id="birthdate" name="birthDateCo" required="valid" cols="30" placeholder="entrez sa date de naissance">
     </div>
-    <div class="form-group col-lg-12">
+    <div class="form-group col-lg-12" id="gender">
       <label for="sexe">Sexe de l'enfant</label><br />
-      <input type="radio" name="genderCo" value="0" checked> Garçon<br>
-      <input type="radio" name="genderCo" value="1"> Fille<br>
+      <input type="radio" name="genderCo" class="genderCo" value="0" checked> Garçon<br>
+      <input type="radio" name="genderCo" class="genderCo" value="1"> Fille<br>
     </div>
     <div class="form-group col-lg-12">
       <label for="parent1">Parent 1</label><br />
@@ -53,29 +53,15 @@
             <h2>TRAITEMENT</h2>
 
             <div class="autocomplete ui-front form-group col-lg-12" >
-    <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> <div class="btn btn-info" id="addMeds">Ajouter</div>
-  </div>
+              <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> <div class="btn btn-info" id="addMeds">Ajouter</div>
+            </div>
  
-
-            <div class="form-group col-lg-12 posology ">
-            <label for="meds">Médicaments</label><br />
-            <input type="search" id="meds1" name="medsCo" value="" />
-            </div>
-            <div class="form-group col-lg-12 posology">
-            <label for="poso">Fréquences/prises</label><br />
-            <textarea id="poso" name="posoCo" rows="3" cols="30" ></textarea>
-            </div>
-            <div class="form-group col-lg-12 posology">
-            <label for="startDate">Date de début (si nécessaire)</label><br />
-            <input type="date"id="startDate" name="startDateCo"  ><br />
-            </div>
-            <div id="resume<?= sdf?>"></div>
+            <h2 class="lampost">ALLERGIES</h2>
             <div class="form-group col-lg-12 ">
-            <label for="allergies">Allergies</label><br />
             <textarea id="allergies" name="allergiesCo" rows="3" cols="30" >Aucune allergie connue</textarea>
             </div>         
           <div class="form-check col-lg-12">
-            <input class="btn btn-primary" type="submit" name="updateChild" value="Valider" />
+            <a class="btn btn-primary"  id="submitChildren" >Valider</a>
             
           </div>
 </div>
@@ -92,16 +78,6 @@
 
 
 
-
-<style>
-  .childMain{
-    display:flex;
-    flex-direction: column; 
-    align-items:center;
-    border:1px solid black;
-  }
-
-</style>
 
 <?php $content = ob_get_clean(); ?>
 <!--template.php-->

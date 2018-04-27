@@ -1,4 +1,5 @@
-    $(document).ready(function(){
+// INSERT MEMBERS IN DASHBOARD
+$(document).ready(function(){
         $.ajax({
             url:'admin.php?action=ajaxTest',
             type: 'GET',
@@ -11,5 +12,3 @@
             })
         });
     });
-
-
