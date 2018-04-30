@@ -351,9 +351,6 @@ a.dropdown-item:hover{
   background-color: DodgerBlue !important; 
   color: #ffffff; 
 }
-.posology{
-    display:none;
-}
-.posology2{
-    display:block;
+.startDate{
+    display: none;
 }

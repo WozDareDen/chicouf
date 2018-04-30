@@ -104,18 +104,12 @@ $('#addMeds').on('click',function(){
     $(f2).attr('id', "posoCo"+i);
     $(f2).attr('name', "posoCo"+i);
     
-    var d = $('<div class="form-group col-lg-12 "><label for="startDate">Date de début du traitement</label></div>')
-    var d2 = $('<br /><input type="date" id="startDate" name="startDateCo" ><br />');
-    $(d2).attr('id', "startDate"+i);
-    $(d2).attr('name', "startDate"+i);
-
     $(m).append(m2);
     $('.lampost').before(m);
     $(f).append(f2);
     $('.lampost').before(f);
-    $(d).append(d2);
-    $('.lampost').before(d);
 
+    $('.startDate').css('display','block');
     $('#myInput').val("");
 })
 
@@ -129,7 +123,10 @@ var Children = {
     parent2 :"" , 
     favMeal :"" , 
     hatedMeal :"" , 
-    allergies :"" 
+    allergies :"",
+    meds: "",
+    poso: "",
+    startDate: "", 
 
 }
 var NewChildren = Children;
@@ -147,7 +144,9 @@ $('#submitChildren').on('click',function(){
     NewChildren.favMeal = $('#favoriteMeal').val();
     NewChildren.hatedMeal = $('#hatedMeal').val();
     NewChildren.parent2 = $('#parent2').val();
-
+    NewChildren.meds = $('#medsCo').val();
+    NewChildren.poso = $('#posoCo').val();
+    NewChildren.startDate = $('#startDateCo').val();
     var childrenString = JSON.stringify(NewChildren);
 
 $.ajax({
@@ -156,7 +155,42 @@ $.ajax({
     method: "POST",
     success: function(data){
         console.log(data);
-        // window.location.assign("http://index.php");
+        window.location.assign("index.php");
+    },
+    error: function(e){
+        console.log('baneeeane');
+        console.log(e.message);
+    }
+
+    });
+
+
+
+})
+
+
+
+$('#submitChildrenEdit').on('click',function(){
+    NewChildren.lastname = $('#lastname').val();
+    NewChildren.firstname = $('#firstname1').val();
+    NewChildren.birthdate = $('#birthdate').val();
+    NewChildren.parent1 = $('#parent1').val();
+    NewChildren.allergies = $('#allergies').val();  
+    NewChildren.favMeal = $('#favoriteMeal').val();
+    NewChildren.hatedMeal = $('#hatedMeal').val();
+    NewChildren.parent2 = $('#parent2').val();
+    NewChildren.meds = $('#medsCo').val();
+    NewChildren.poso = $('#posoCo').val();
+    NewChildren.startDate = $('#startDateCo').val();
+    var childrenString = JSON.stringify(NewChildren);
+
+$.ajax({
+    url: "index.php",
+    data: {data:childrenString,action:"updateChild"},
+    method: "POST",
+    success: function(data){
+        console.log(data);
+        window.location.assign("index.php");
     },
     error: function(e){
         console.log('baneeeane');

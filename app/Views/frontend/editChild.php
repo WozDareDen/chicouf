@@ -71,6 +71,11 @@ $newConnex2 = $connex2->fetch()
 $newMeds = $getMedsChild->fetchAll()
 ?>
             <h2>TRAITEMENT</h2>
+            <div class="form-group col-lg-12">
+            
+            
+            </div>
+
 
             <div class="autocomplete ui-front form-group col-lg-12" >
               <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> <div class="btn btn-info" id="addMeds">Ajouter</div>
@@ -97,7 +102,7 @@ $newConnex3 = $connex3->fetch()
 </div>
 </form>
 
-<a href="index.php?action=deleteChild&idMember=<?= $_SESSION['id'] ?>&idChildren=<?= $newData['idChildren'] ?>"><button class="btn btn-danger" name="updateChild">Supprimer</button></a>
+<a class="btn btn-primary"  id="submitChildrenEdit" >Valider</a>
 </div>
 </div>
 

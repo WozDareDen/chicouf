@@ -8,6 +8,10 @@ try{
         $children = $_POST['data'];
         $frontoffice->addNewChild($children);
     }
+    elseif(isset($_POST['action']) && $_POST['action'] == "updateChild"){
+        $children = $_POST['data'];
+        $frontoffice->updateChild($children);
+    }
     if (isset($_GET['action'])) {
         //ADD NEW USER
         if ($_GET['action'] == 'addUser'){

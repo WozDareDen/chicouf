@@ -68,12 +68,18 @@ class ChildManager extends Manager
         $addTTT->execute(array($start,$idChild));
         return $addTTT;
     }
-    public function getIdMeds($meds){
+    public function getIdMeds($newMeds){
         $db = $this -> dbConnect();
         $getIdMeds = $db->prepare('SELECT idMeds FROM meds WHERE title=?');
-        $getIdMeds->execute(array($meds));
+        $getIdMeds->execute(array($newMeds));
         return $getIdMeds;
     }  
+    public function newPoso($idTTT,$idMeds,$newPoso){
+        $db = $this -> dbConnect();
+        $newGlobalTTT= $db->prepare('INSERT INTO posology(idMeds,idTTT,content');
+        $newGlobalTTT->execute(array($idMeds,$idTTT,$newPoso));
+        return $newGlobalTTT;
+    }
     public function getMaxIdTTT(){
         $db = $this -> dbConnect();
         $getIdTTT = $db->query('SELECT MAX(idTTT) FROM treatment');
@@ -208,6 +214,13 @@ class ChildManager extends Manager
         $db = $this -> dbConnect();
         $request = $db->prepare('INSERT INTO family_children(idFamily, idChildren) VALUES(?,?)');
         $request->execute(array($idFamily,$idChild));
+        return $request;
+    }
+    // ADD TREATMENT
+    public function addTTT($idChild,$startDate){
+        $db = $this -> dbConnect();
+        $request = $db->prepare('INSERT INTO treatment(startDate, idChildren) VALUES(?,?)');
+        $request->execute(array($startDate,$idChild));
         return $request;
     }
     // GET ALL MEDS

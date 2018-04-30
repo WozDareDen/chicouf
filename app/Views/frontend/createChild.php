@@ -55,7 +55,10 @@
             <div class="autocomplete ui-front form-group col-lg-12" >
               <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> <div class="btn btn-info" id="addMeds">Ajouter</div>
             </div>
- 
+            <div class="form-group col-lg-12 startDate" >
+              <label for="startDate">Date de début du traitement</label>
+              <input id="startDateCo" type="date" name="startDateCo" >
+            </div>
             <h2 class="lampost">ALLERGIES</h2>
             <div class="form-group col-lg-12 ">
             <textarea id="allergies" name="allergiesCo" rows="3" cols="30" >Aucune allergie connue</textarea>

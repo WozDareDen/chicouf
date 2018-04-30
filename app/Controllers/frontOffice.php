@@ -249,7 +249,7 @@ class FrontOffice{
         header('Location: index.php?action=memberView&idMember='.$idMember);
     }
     // UPDATE CHILD
-    function updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $freq, $start, $idTTT, $idMeds, $idPoso, $idAllergy, $allergies){            
+    function updateChild00($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $freq, $start, $idTTT, $idMeds, $idPoso, $idAllergy, $allergies){            
         $childManager = new \Src\Models\ChildManager();
         $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChildren,$username);
         $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChildren);
@@ -482,7 +482,7 @@ function uploadAvatar($idMember){
         echo json_encode($data);
     }
     function addNewChild($children){
-        $idMember = $_SESSION['firstname'];
+        $idMember = $_SESSION['id'];
         $newChild = json_decode($children,true);
         $lastname = htmlspecialchars($newChild['lastname']);
         $firstname = htmlspecialchars($newChild['firstname']);
@@ -493,6 +493,9 @@ function uploadAvatar($idMember){
         $favMeal = htmlspecialchars($newChild['favMeal']);
         $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
         $allergies = htmlspecialchars($newChild['allergies']);
+        $meds = htmlspecialchars($newChild['meds']);
+        $poso = htmlspecialchars($newChild['poso']);
+        $startDate = htmlspecialchars($newChild['startDate']);
 
         $childManager = new \Src\Models\ChildManager();
         // identity       
@@ -509,18 +512,46 @@ function uploadAvatar($idMember){
         $idAllergy = $newGetIdAllergy[0];
         $insertAllChild = $childManager -> insertAllChild($idAllergy,$idChild);
         // add parents & family
-        $infoJoin = $childManager -> addToMyParent($idChild,$idMember);
-        $userManager = new \Src\Models\UserManager();
-        $infosParent = $userManager -> getFamilyId($idMember);
-        $infosParent2 = $infosParent->fetch();
-        if(!(empty($infosParent2))){
-            $idFamily = $infosParent2['idFamily'];
-            $infos4 = $childManager -> addToMyFamily($idChild,$idFamily);
+        $addToMyParent = $childManager -> addToMyParent($idChild,$idMember);
+        $idFamily = $_SESSION['family'];
+        if(!(empty($idFamily))){
+            $addToMyFamily = $childManager -> addToMyFamily($idChild,$idFamily);
         }
-
+        // treatment
+        $addTTT = $childManager -> addTTT($idChild,$startDate);
+        $addTTT = $addTTT->fetchAll();
+        $idTTT = $addTTT[0];
+        // meds
+        $meds = $meds->fetchAll();
+        foreach($meds as $newMeds){
+            $addMeds = $childManager ->getIdMeds($newMeds);
+        }
+        $addMeds = $addMeds->fetchAll();
+        $poso = $poso->fetchAll();
+        // posology
+        foreach($poso as $newPoso){
+            $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$newPoso);
+        }
        return $children;
     }
+    function updateChild($children){
+        $childManager = new \Src\Models\ChildManager();
+        $newChild = json_decode($children,true);
 
+        $lastname = htmlspecialchars($newChild['lastname']);
+        $firstname = htmlspecialchars($newChild['firstname']);
+        $birthdate = htmlspecialchars($newChild['birthdate']);
+        $gender = htmlspecialchars($newChild['gender']);
+        $parent1 = htmlspecialchars($newChild['parent1']);
+        $parent2 = htmlspecialchars($newChild['parent2']);
+        $favMeal = htmlspecialchars($newChild['favMeal']);
+        $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
+        $allergies = htmlspecialchars($newChild['allergies']);
+
+        $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChildren,$username);
+        $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChildren);
+
+    }
 
     // // GET MEDS TO DB
     // function getMeds(){
