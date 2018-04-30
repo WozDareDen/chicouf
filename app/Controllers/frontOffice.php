@@ -3,7 +3,7 @@
 namespace Src\Controllers;
 
 class FrontOffice{
-// GET USER TO DB & BACK TO HOMEVIEW
+// USER CREATION
     function newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo){
         if(preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $passCo)){              
             $userManager = new \Src\Models\UserManager();
@@ -493,8 +493,6 @@ function uploadAvatar($idMember){
         $favMeal = htmlspecialchars($newChild['favMeal']);
         $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
         $allergies = htmlspecialchars($newChild['allergies']);
-        $meds = htmlspecialchars($newChild['meds']);
-        $poso = htmlspecialchars($newChild['poso']);
         $startDate = htmlspecialchars($newChild['startDate']);
 
         $childManager = new \Src\Models\ChildManager();
@@ -522,22 +520,16 @@ function uploadAvatar($idMember){
         $addTTT = $addTTT->fetchAll();
         $idTTT = $addTTT[0];
         // meds
-        $meds = $meds->fetchAll();
-        foreach($meds as $newMeds){
-            $addMeds = $childManager ->getIdMeds($newMeds);
+        foreach($newChild['meds'] as $poso) {
+            $posology = htmlspecialchars($poso['posology']) ;
+            $idMeds = $poso['id'] ;
+            $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$posology);
         }
-        $addMeds = $addMeds->fetchAll();
-        $poso = $poso->fetchAll();
-        // posology
-        foreach($poso as $newPoso){
-            $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$newPoso);
-        }
-       return $children;
+        return $children;
     }
     function updateChild($children){
         $childManager = new \Src\Models\ChildManager();
         $newChild = json_decode($children,true);
-
         $lastname = htmlspecialchars($newChild['lastname']);
         $firstname = htmlspecialchars($newChild['firstname']);
         $birthdate = htmlspecialchars($newChild['birthdate']);

@@ -71,6 +71,8 @@ function myFunction2() {
         }
 }
 
+var current_list_data = null; 
+
 // AUTOCOMPLETE
 $('#myInput').autocomplete({
     source : function(req,reponse){ 
@@ -79,39 +81,53 @@ $('#myInput').autocomplete({
             type : 'GET',
             dataType : 'json', 
             success : function(donnee){
-                reponse(donnee.map(function(d) {
-                    return {label:d.title, value: d.title}
-                }))  
-            }
+                current_list_data = donnee.map(function(d) {
+                    return {label: d.title, value: d.idMeds}
+                });
+                reponse(current_list_data);
+            }    
         });
     },
+    _renderMenu: function( ul, items ) {             
+          var that = this;
+        $.each( items, function( index, item ) {
+          that._renderItemData( ul, item );
+        });
+        $( ul ).find( "li:odd" ).addClass( "odd" );
+      },
+      select(e, i) {
+          var item = current_list_data.find(function(d) {
+            return d.title === i.label;
+        }), nb_current_meds = $('.meds_container');
+        var formGroupMeds = $('<div class="meds_container"><div class="form-group col-lg-12"><label for="meds">Médicament</label></div>');
+        var divMedsCo = $('<div class="medsCo"></div>');
+        var inputMedsCo = $('<input type="search" disabled />');
+        var inputId = $('#myInput').val();
+        $(inputMedsCo).attr('id', item.value);
+        $(inputMedsCo).attr('name',item.label);
+        $(inputMedsCo).val(item.label);
+       
+        var formGroupPoso = $('<div class="form-group col-lg-12><label for="poso">Fréquences/prises</label></div></div>')
+        var divPoso = $('<div class="posoCo"></div>')
+        var textareaPoso = $('<br /><textarea rows="2" cols="30" ></textarea>');    
+    
+        
+        $(formGroupMeds).append(divMedsCo);
+        $(divMedsCo).append(inputMedsCo);
+        $('.lampost').before(formGroupMeds);
+        $(formGroupPoso).append(divPoso);
+        $(divPoso).append(textareaPoso);
+        $('.lampost').before(formGroupPoso);
+    
+        $('.startDate').css('display','block');
+        setTimeout(function() {
+            $('#myInput').val("");
+
+        },100)
+      },
     delay:300
 })
 
-// CREATE BLOCKS FOR MEDS
-var i = 0;
-$('#addMeds').on('click',function(){
-    i++;
-
-    var m = $('<div class="form-group col-lg-12"><label for="meds">Médicament</label></div>');
-    var m2 = $('<input type="search" />');
-    $(m2).attr('id', "medsCo"+i);
-    $(m2).attr('name', "medsCo"+i);
-    $(m2).val($('#myInput').val());
-   
-    var f = $('<div class="form-group col-lg-12><label for="poso">Fréquences/prises</label></div>')
-    var f2 = $('<br /><textarea rows="2" cols="30" ></textarea>');
-    $(f2).attr('id', "posoCo"+i);
-    $(f2).attr('name', "posoCo"+i);
-    
-    $(m).append(m2);
-    $('.lampost').before(m);
-    $(f).append(f2);
-    $('.lampost').before(f);
-
-    $('.startDate').css('display','block');
-    $('#myInput').val("");
-})
 
 // OBJECT CHILDREN
 var Children = {
@@ -124,16 +140,13 @@ var Children = {
     favMeal :"" , 
     hatedMeal :"" , 
     allergies :"",
-    meds: "",
-    poso: "",
-    startDate: "", 
-
+    startDate: "",
+    meds: ""
 }
+
 var NewChildren = Children;
 
-
-
-
+// GET INPUTS FROM CREATE-CHILD-FORM
 $('#submitChildren').on('click',function(){
     NewChildren.lastname = $('#lastname').val();
     NewChildren.firstname = $('#firstname1').val();
@@ -144,28 +157,39 @@ $('#submitChildren').on('click',function(){
     NewChildren.favMeal = $('#favoriteMeal').val();
     NewChildren.hatedMeal = $('#hatedMeal').val();
     NewChildren.parent2 = $('#parent2').val();
-    NewChildren.meds = $('#medsCo').val();
-    NewChildren.poso = $('#posoCo').val();
     NewChildren.startDate = $('#startDateCo').val();
+
+    NewChildren.meds = [];
+    var fuckmyLife = $('.posoCo');
+    console.log(fuckmyLife+"toto");
+    $('.medsCo').each(function(index){
+        var meds ={
+            id : null,
+            label: null,
+            posology: null
+        },
+        input = $(this).find("input")
+        meds.id = input.val(),
+        meds.label = input.attr('id'),
+        
+        meds.posology = $(fuckmyLife)[0][index].val();
+        NewChildren.meds.push(meds);
+
+    });
+   
     var childrenString = JSON.stringify(NewChildren);
 
 $.ajax({
     url: "index.php",
     data: {data:childrenString,action:"addNewChild"},
     method: "POST",
-    success: function(data){
-        console.log(data);
-        window.location.assign("index.php");
-    },
-    error: function(e){
-        console.log('baneeeane');
-        console.log(e.message);
-    }
-
+        success: function(data){
+            window.location.assign(index.php);
+        },
+        error: function(e){
+            console.log(e.message);
+        }
     });
-
-
-
 })
 
 
@@ -189,11 +213,9 @@ $.ajax({
     data: {data:childrenString,action:"updateChild"},
     method: "POST",
     success: function(data){
-        console.log(data);
         window.location.assign("index.php");
     },
     error: function(e){
-        console.log('baneeeane');
         console.log(e.message);
     }
 

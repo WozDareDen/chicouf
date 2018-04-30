@@ -74,10 +74,10 @@ class ChildManager extends Manager
         $getIdMeds->execute(array($newMeds));
         return $getIdMeds;
     }  
-    public function newPoso($idTTT,$idMeds,$newPoso){
+    public function newPoso($idTTT,$idMeds,$posology){
         $db = $this -> dbConnect();
         $newGlobalTTT= $db->prepare('INSERT INTO posology(idMeds,idTTT,content');
-        $newGlobalTTT->execute(array($idMeds,$idTTT,$newPoso));
+        $newGlobalTTT->execute(array($idMeds,$idTTT,$posology));
         return $newGlobalTTT;
     }
     public function getMaxIdTTT(){
@@ -227,7 +227,7 @@ class ChildManager extends Manager
     public function getAllMeds($autoC){
         $autoComp = $autoC."%";
         $db = $this -> dbConnect();
-        $data = $db->prepare('SELECT title FROM meds WHERE title LIKE ? ORDER BY title LIMIT 8');
+        $data = $db->prepare('SELECT * FROM meds WHERE title LIKE ? ORDER BY title LIMIT 8');
         $data->execute(array($autoComp));
         return $data;
     }

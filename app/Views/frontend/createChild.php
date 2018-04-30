@@ -53,7 +53,7 @@
             <h2>TRAITEMENT</h2>
 
             <div class="autocomplete ui-front form-group col-lg-12" >
-              <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> <div class="btn btn-info" id="addMeds">Ajouter</div>
+              <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> 
             </div>
             <div class="form-group col-lg-12 startDate" >
               <label for="startDate">Date de début du traitement</label>
