@@ -187,6 +187,11 @@ try{
             $idChildren = $_GET['idChildren'];
             $frontoffice->uploadPic($idMember,$idChildren);
         }
+        // STOP MEDICINE
+        elseif($_GET['action'] == 'stopMeds'){
+            $idChild = $_POST['idChildCo'];
+            $frontoffice->stopMeds($idChild);
+        }
         // GO TO UPDATE CHILD VIEW
         elseif($_GET['action'] == 'goToUpdateChild'){
             if(isset($_GET['idChildren']) && isset($_SESSION['id'])){

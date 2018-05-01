@@ -21,7 +21,7 @@ if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $n
 ?>    
  
           <div class="form-group  col-lg-12">
-            <h2>IDENTITE</h2>
+            <h2>IDENTITE <a class="btn btn-danger"  href="index.php?action=deleteChild&idChildren=<?= $_GET['idChildren'] ?>" >Supprimer</a></h2>
             <label for="lastname">Nom</label><br />
             <input type="text" id="lastname" name="lastNameCo"  required="valid" cols="30" value="<?= $newData['surname']; ?>" /> 
           </div>
@@ -67,46 +67,69 @@ $newConnex2 = $connex2->fetch()
             <label for="hatedMeal">Plats détestés</label><br />
             <textarea id="hatedMeal" name="hatedMealCo" rows="5" cols="30"><?= $newConnex2['hated_meal']; ?></textarea>
             </div>
-<?php 
-$newMeds = $getMedsChild->fetchAll()
-?>
+
             <h2>TRAITEMENT</h2>
             <div class="form-group col-lg-12">
-            
-            
+
+<?php
+if($getDateTTT['idTTT'] >0){
+?>
+              <textarea cols="30" rows="6" disabled>Début du traitement : <?= $getDateTTT['new_startDate'] ?>
+
+<?php 
+$newMeds = $getAllMedsChild->fetchAll();
+             
+foreach($newMeds as $posology){    
+?>
+<?= $posology["title"] ?> : 
+<?= $posology['content'] ?>
+<?php
+}
+?>
+</textarea>
             </div>
 
 
             <div class="autocomplete ui-front form-group col-lg-12" >
-              <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> <div class="btn btn-info" id="addMeds">Ajouter</div>
+            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#stopMeds">Arrêter le traitement</a>
             </div>
+
+
+              
 <?php
 foreach($newMeds as $meds){
-
 ?>
   
 
 <?php 
 }
+}
+
 $newConnex3 = $connex3->fetch()
 ?>            
+
+            <div class="autocomplete ui-front form-group col-lg-12" >
+              <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> 
+            </div>
+
+
             <h2 class="lampost">ALLERGIES</h2>
             <div class="form-group col-lg-12 ">
             <input type="hidden" name="idAllCo" value="<?= $newConnex3['idAllergy'] ?>" />
             <textarea id="allergies" name="allergiesCo" rows="2" cols="30" ><?= $newConnex3['content'] ?></textarea>
             </div>         
+            <input hidden name="idChildCo" id="idChildCo" value="<?= $_GET['idChildren'] ?>" />
           <div class="form-check col-lg-12">
-            <input class="btn btn-primary" type="submit" name="updateChild" value="Valider" />
-            
+            <a class="btn btn-primary"  id="submitChildren2" >Valider</a>
           </div>
-</div>
+
 </form>
 
-<a class="btn btn-primary"  id="submitChildrenEdit" >Valider</a>
+
 </div>
 </div>
 
-
+</div>
 <script>
 
 function autocomplete(inp, arr) {
@@ -208,7 +231,30 @@ function autocomplete(inp, arr) {
 
 </script>
 
-
+<!-- MODAL STOP MEDS -->
+<div class="modal fade" id="stopMeds" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:green;">
+                <h5 class="modal-title" style="color:white;">Arrêter ce traitement</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="color:black;">
+            <p>Toute l'équipe de Chicouf.fr souhaite une bonne santé à vous et votre enfant ! <br /></p>
+                 <form action="index.php?action=stopMeds" method="post">
+                 
+                 <div class="form-check">
+                    <input hidden name="idChildCo" value="<?= $_GET['idChildren'] ; ?>"/>
+                    <input type="checkbox" name="choixDelCo" required /> Je confirme vouloir stopper ce traitement.</br>
+                </div>
+                <button type="submit" class="btn btn-outline-success">Valider</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <?php $content = ob_get_clean(); ?>

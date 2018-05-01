@@ -210,64 +210,8 @@ class FrontOffice{
     else {
         header('Location: index.php?action=post&id=' . $id_Chapters . '#comments');
     }
-}    
-    // ADD CHILD
-    function add0Child($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds,$freq, $start, $allergies){
-        $childManager = new \Src\Models\ChildManager();
-        $upDateUser = $_SESSION['firstname'];
-        $infos1 = $childManager -> addNewChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2,$upDateUser);
-        $infos11 = $childManager -> getMaxIdChild();
-        $idChild111 = $infos11->fetch();
-        $idChild = $idChild111[0];
-        $infos2 = $childManager -> addNewMeal($favMeal, $hatedMeal,$idChild);
-        // allergy
-        $addAllergy = $childManager -> addNewAllergy($allergies);
-        $getIdAllergy = $childManager -> getMaxIdAllergy();
-        $newGetIdAllergy = $getIdAllergy->fetch();
-        $idAllergy = $newGetIdAllergy[0];
-        $insertAllChild = $childManager -> insertAllChild($idAllergy,$idChild);
-        // treatment
-        $addTTT = $childManager -> addNewTTT($start,$idChild);
-        $getIdTTT = $childManager -> getMaxIdTTT();
-        $newGetIdTTT = $getIdTTT->fetch();
-        $idTTT = $newGetIdTTT[0];
-        // frequence
-        $getIdMeds = $childManager -> getIdMeds($meds);
-        $newGetIdMeds = $getIdMeds->fetch();
-        $idMeds = $newGetIdMeds[0];
-        $addFreq = $childManager -> addNewFreq($freq,$idMeds,$idTTT);
-
-        $idMember = $_SESSION['id'];
-        $infoJoin = $childManager -> addToMyParent($idChild,$idMember);
-        $userManager = new \Src\Models\UserManager();
-        $infosParent = $userManager -> getFamilyId($idMember);
-        $infosParent2 = $infosParent->fetch();
-        if(!(empty($infosParent2))){
-        $idFamily = $infosParent2['idFamily'];
-        $infos4 = $childManager -> addToMyFamily($idChild,$idFamily);
-        }
-        header('Location: index.php?action=memberView&idMember='.$idMember);
-    }
-    // UPDATE CHILD
-    function updateChild00($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $freq, $start, $idTTT, $idMeds, $idPoso, $idAllergy, $allergies){            
-        $childManager = new \Src\Models\ChildManager();
-        $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChildren,$username);
-        $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChildren);
-         // allergy
-        $infos4 = $childManager -> updateOldAllergy($allergies,$idAllergy);
-        // TTT
-        $updateTTT = $childManager -> updateOldTTT($idTTT,$start);
-        // poso
-        $updatePoso = $childManager -> updateOldPoso($idTTT,$freq,$idMeds);
-
-        if($_SESSION['firstname'] == $parent1 || $_SESSION['firstname'] == $parent2){           
-            header('Location: index.php?action=memberView&idMember='.$idMember);
-        }
-        else{
-            header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
-        }
-        
-    }
+    
+    }    
 
     // GO TO UPDATE CHILD
     function goToUpdateChild($idChild){
@@ -277,8 +221,13 @@ class FrontOffice{
         // allergy
         $connex3 = $childManager -> getAllergy($idChild);
         $idMember = $_SESSION['id'];
+        // treatment
+        $getDateTTT = $childManager -> getDateTTT($idChild);
+        $getDateTTT = $getDateTTT->fetch();
+        $idTTT = $getDateTTT['idTTT'];
         // meds
-        $getMedsChild = $childManager ->getMedsChild($idChild);
+        $getAllMedsChild = $childManager ->getAllMedsChild($idTTT);
+
 
         $connex5 = $childManager -> getIdFamilyByChild($idChild);
         $newConnex5 = $connex5->fetch();
@@ -481,6 +430,7 @@ function uploadAvatar($idMember){
         $data = $data->fetchAll();
         echo json_encode($data);
     }
+    //**********************CHILD CREATION***********************************
     function addNewChild($children){
         $idMember = $_SESSION['id'];
         $newChild = json_decode($children,true);
@@ -517,12 +467,13 @@ function uploadAvatar($idMember){
         }
         // treatment
         $addTTT = $childManager -> addTTT($idChild,$startDate);
-        $addTTT = $addTTT->fetchAll();
-        $idTTT = $addTTT[0];
+        $getIdTTT = $childManager -> getIdTTT();
+        $getIdTTT = $getIdTTT->fetch();
+        $idTTT = $getIdTTT[0];
         // meds
         foreach($newChild['meds'] as $poso) {
             $posology = htmlspecialchars($poso['posology']) ;
-            $idMeds = $poso['id'] ;
+            $idMeds = $poso['label'] ;
             $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$posology);
         }
         return $children;
@@ -539,12 +490,30 @@ function uploadAvatar($idMember){
         $favMeal = htmlspecialchars($newChild['favMeal']);
         $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
         $allergies = htmlspecialchars($newChild['allergies']);
+        $idChild = $newChild['idChild'];
+        $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChild,$username);
+        $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChild);
+        $upDateAllergy = $childManager -> updateOldAllergy($allergies,$idChild);
 
-        $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChildren,$username);
-        $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChildren);
-
+        // treatment
+        $addTTT = $childManager -> addTTT($idChild,$startDate);
+        $getIdTTT = $childManager -> getIdTTT();
+        $getIdTTT = $getIdTTT->fetch();
+        $idTTT = $getIdTTT[0];
+        // meds
+        foreach($newChild['meds'] as $poso) {
+            $posology = htmlspecialchars($poso['posology']) ;
+            $idMeds = $poso['label'] ;
+            $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$posology);
+        }
+        return $children;
     }
-
+    function stopMeds($idChild){
+        $childManager = new \Src\Models\ChildManager();
+        $stopMeds = $childManager -> stopMedicine($idChild);
+        header('Location: index.php?action=goToUpdateChild&idChildren='.$idChild);
+    }
+}
     // // GET MEDS TO DB
     // function getMeds(){
 
@@ -564,4 +533,3 @@ function uploadAvatar($idMember){
     //     /* fermeture flux fichier */
     //     fclose($file);
     // }
-}

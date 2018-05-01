@@ -110,8 +110,7 @@ $('#myInput').autocomplete({
         var formGroupPoso = $('<div class="form-group col-lg-12><label for="poso">Fréquences/prises</label></div></div>')
         var divPoso = $('<div class="posoCo"></div>')
         var textareaPoso = $('<br /><textarea rows="2" cols="30" ></textarea>');    
-    
-        
+            
         $(formGroupMeds).append(divMedsCo);
         $(divMedsCo).append(inputMedsCo);
         $('.lampost').before(formGroupMeds);
@@ -161,7 +160,6 @@ $('#submitChildren').on('click',function(){
 
     NewChildren.meds = [];
     var fuckmyLife = $('.posoCo');
-    console.log(fuckmyLife+"toto");
     $('.medsCo').each(function(index){
         var meds ={
             id : null,
@@ -172,9 +170,8 @@ $('#submitChildren').on('click',function(){
         meds.id = input.val(),
         meds.label = input.attr('id'),
         
-        meds.posology = $(fuckmyLife)[0][index].val();
+        meds.posology = $($(fuckmyLife)[index]).find('textarea')[0].value;
         NewChildren.meds.push(meds);
-
     });
    
     var childrenString = JSON.stringify(NewChildren);
@@ -184,7 +181,7 @@ $.ajax({
     data: {data:childrenString,action:"addNewChild"},
     method: "POST",
         success: function(data){
-            window.location.assign(index.php);
+            location.href = "index.php";
         },
         error: function(e){
             console.log(e.message);
@@ -193,34 +190,45 @@ $.ajax({
 })
 
 
-
-$('#submitChildrenEdit').on('click',function(){
+$('#submitChildren2').on('click',function(){
     NewChildren.lastname = $('#lastname').val();
     NewChildren.firstname = $('#firstname1').val();
     NewChildren.birthdate = $('#birthdate').val();
+    NewChildren.gender = $('input[name=genderCo]:checked',"#gender").val();
     NewChildren.parent1 = $('#parent1').val();
     NewChildren.allergies = $('#allergies').val();  
     NewChildren.favMeal = $('#favoriteMeal').val();
     NewChildren.hatedMeal = $('#hatedMeal').val();
     NewChildren.parent2 = $('#parent2').val();
-    NewChildren.meds = $('#medsCo').val();
-    NewChildren.poso = $('#posoCo').val();
     NewChildren.startDate = $('#startDateCo').val();
+    NewChildren.idChild = $('#idChildCo').val();
+    NewChildren.meds = [];
+    var fuckmyLife = $('.posoCo');
+    $('.medsCo').each(function(index){
+        var meds ={
+            id : null,
+            label: null,
+            posology: null
+        },
+        input = $(this).find("input")
+        meds.id = input.val(),
+        meds.label = input.attr('id'),
+        
+        meds.posology = $($(fuckmyLife)[index]).find('textarea')[0].value;
+        NewChildren.meds.push(meds);
+    });
+   
     var childrenString = JSON.stringify(NewChildren);
 
 $.ajax({
     url: "index.php",
     data: {data:childrenString,action:"updateChild"},
     method: "POST",
-    success: function(data){
-        window.location.assign("index.php");
-    },
-    error: function(e){
-        console.log(e.message);
-    }
-
+        success: function(data){
+            location.href = "index.php";
+        },
+        error: function(e){
+            console.log(e.message);
+        }
     });
-
-
-
 })
