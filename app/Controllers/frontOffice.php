@@ -145,8 +145,9 @@ class FrontOffice{
         $childManager = new \Src\Models\ChildManager();
         $data = $childManager -> watchChild($idMember);
         $connex2 = $childManager -> getMealsInfos($idMember);
-        $connex3 = $childManager -> getHealthInfos($idMember);
-
+        $connex3 = $childManager -> getMedsInfos($idMember);
+        $connex4 = $childManager -> getAllergyInfos($idMember);
+        $connex5 = $childManager -> getTTTDate($idMember);
         $familyManager = new \Src\Models\FamilyManager();
         $dataFam2 = $familyManager -> getFamilyId($idMember);
         // $connex4 = $childManager -> getParents($)
@@ -262,7 +263,7 @@ class FrontOffice{
         $belong2 = $userManager -> belongParent($idMember,$idChild);
         header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);
     }  
-    // UPLOAD CHILD AVATAR
+    //************************UPLOAD CHILD AVATAR******************************
     function uploadPic($idMember,$idChildren){
         $target_dir = "app/Public/uploads/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -303,7 +304,7 @@ class FrontOffice{
         }
         
     }
-    // UPLOAD BANNER
+    //*********************UPLOAD BANNER*****************************
     function uploadBanners($idFamily){
         $target_dir = "app/Public/uploads/banners/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -345,7 +346,7 @@ class FrontOffice{
         
     }
 
-// UPLOAD USER AVATAR
+//*************************UPLOAD USER AVATAR*********************************
 function uploadAvatar($idMember){
     $target_dir = "app/Public/uploads/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -444,10 +445,10 @@ function uploadAvatar($idMember){
         $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
         $allergies = htmlspecialchars($newChild['allergies']);
         $startDate = htmlspecialchars($newChild['startDate']);
-
+        $username = $_SESSION['firstname'];
         $childManager = new \Src\Models\ChildManager();
         // identity       
-        $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $parent2,$idMember);
+        $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $parent2,$username);
         $getIdChild = $childManager -> getMaxIdChild();
         $getIdChild = $getIdChild->fetch();
         $idChild = $getIdChild[0];
@@ -478,6 +479,7 @@ function uploadAvatar($idMember){
         }
         return $children;
     }
+    //**********************UPDATE CHILD***********************************
     function updateChild($children){
         $childManager = new \Src\Models\ChildManager();
         $newChild = json_decode($children,true);
@@ -489,11 +491,13 @@ function uploadAvatar($idMember){
         $parent2 = htmlspecialchars($newChild['parent2']);
         $favMeal = htmlspecialchars($newChild['favMeal']);
         $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
+        $idAllergy = $newChild['idAllergy'];
         $allergies = htmlspecialchars($newChild['allergies']);
         $idChild = $newChild['idChild'];
-        $infos1 = $childManager -> updateOldChild($lastName, $firstName, $birthdate, $parent1, $parent2, $idChild,$username);
+        $username = $_SESSION['firstname'];
+        $infos1 = $childManager -> updateOldChild($lastname, $firstname, $birthdate, $parent1, $parent2, $idChild,$username);
         $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChild);
-        $upDateAllergy = $childManager -> updateOldAllergy($allergies,$idChild);
+        $upDateAllergy = $childManager -> updateOldAllergy($allergies,$idAllergy);
 
         // treatment
         $addTTT = $childManager -> addTTT($idChild,$startDate);

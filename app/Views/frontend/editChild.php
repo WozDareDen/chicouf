@@ -22,12 +22,13 @@ if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $n
  
           <div class="form-group  col-lg-12">
             <h2>IDENTITE <a class="btn btn-danger"  href="index.php?action=deleteChild&idChildren=<?= $_GET['idChildren'] ?>" >Supprimer</a></h2>
-            <label for="lastname">Nom</label><br />
-            <input type="text" id="lastname" name="lastNameCo"  required="valid" cols="30" value="<?= $newData['surname']; ?>" /> 
+            <input id="idChildCo" value="<?= $_GET['idChildren'] ?>" /><br />
+            <label for="lastname1">Nom</label><br />
+            <input type="text" id="lastname1" name="lastNameCo"  required="valid" cols="30" value="<?= $newData['surname']; ?>" /> 
           </div>
           <div class="form-group col-lg-12"> 
-            <label for="firstname">Prénom</label><br />
-            <input type="text" id="firstname" name="firstNameCo" required="valid" cols="30" value="<?= $newData['firstname']; ?>" > 
+            <label for="firstname1">Prénom</label><br />
+            <input type="text" id="firstname1" name="firstNameCo" required="valid" cols="30" value="<?= $newData['firstname']; ?>" > 
           </div>
           <div class="form-group col-lg-12">
             <label for="birthdate">Date de Naissance</label><br />
@@ -46,11 +47,11 @@ if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $n
 }
 else{
   ?>
-            <input type="hidden" id="lastname" name="lastNameCo"  value="<?= $newData['surname']; ?>" /> 
-            <input type="hidden" id="firstname" name="firstNameCo"  value="<?= $newData['firstname']; ?>" > 
-            <input type="hidden" id="birthdate" name="birthDateCo" value="<?= $newData['birthdate']; ?>" >
-            <input type="hidden" id="parent1" name="parent1Co" value="<?= $newData['parent1']; ?>">
-            <input type="hidden" id="parent2" name="parent2Co" cols="30" value="<?= $newData['parent2']; ?>" >
+            <input disabled id="lastname1" name="lastNameCo"  value="<?= $newData['surname']; ?>" /> 
+            <input disabled id="firstname1" name="firstNameCo"  value="<?= $newData['firstname']; ?>" > 
+            <input disabled id="birthdate" name="birthDateCo" value="<?= $newData['birthdate']; ?>" >
+            <input disabled id="parent1" name="parent1Co" value="<?= $newData['parent1']; ?>">
+            <input disabled id="parent2" name="parent2Co" cols="30" value="<?= $newData['parent2']; ?>" >
 
 <?php
 }
@@ -71,9 +72,8 @@ $newConnex2 = $connex2->fetch()
             <h2>TRAITEMENT</h2>
             <div class="form-group col-lg-12">
 
-<?php
-if($getDateTTT['idTTT'] >0){
-?>
+
+
               <textarea cols="30" rows="6" disabled>Début du traitement : <?= $getDateTTT['new_startDate'] ?>
 
 <?php 
@@ -86,7 +86,9 @@ foreach($newMeds as $posology){
 <?php
 }
 ?>
-</textarea>
+
+
+              </textarea>
             </div>
 
 
@@ -95,15 +97,11 @@ foreach($newMeds as $posology){
             </div>
 
 
-              
-<?php
-foreach($newMeds as $meds){
-?>
+
   
 
 <?php 
-}
-}
+
 
 $newConnex3 = $connex3->fetch()
 ?>            
@@ -115,7 +113,7 @@ $newConnex3 = $connex3->fetch()
 
             <h2 class="lampost">ALLERGIES</h2>
             <div class="form-group col-lg-12 ">
-            <input type="hidden" name="idAllCo" value="<?= $newConnex3['idAllergy'] ?>" />
+            <input type="hidden" id="idAllergyCo" name="idAllCo" value="<?= $newConnex3['idAllergy'] ?>" />
             <textarea id="allergies" name="allergiesCo" rows="2" cols="30" ><?= $newConnex3['content'] ?></textarea>
             </div>         
             <input hidden name="idChildCo" id="idChildCo" value="<?= $_GET['idChildren'] ?>" />

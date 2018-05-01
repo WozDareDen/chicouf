@@ -202,33 +202,6 @@ try{
                 throw new \Exception('cette page n\'existe pas');
             }
         }
-        // UPDATE CHILD
-        elseif($_GET['action'] == 'updateChild'){
-            if(isset($_SESSION['id']) && isset($_POST['lastNameCo']) && isset($_POST['firstNameCo']) && isset($_POST['birthDateCo']) && isset($_POST['parent1Co'])){
-                $username = $_SESSION['firstname'];
-                $idMember = $_SESSION['id'];
-                $idChildren = $_GET['idChildren'];
-                $lastName = htmlspecialchars($_POST['lastNameCo']);
-                $firstName = htmlspecialchars($_POST['firstNameCo']);
-                $birthdate = htmlspecialchars($_POST['birthDateCo']);
-                $parent1 = htmlspecialchars($_POST['parent1Co']);
-                $parent2 = htmlspecialchars($_POST['parent2Co']);
-                $favMeal = htmlspecialchars($_POST['favoriteMealCo']);
-                $hatedMeal = htmlspecialchars($_POST['hatedMealCo']);
-                $meds = htmlspecialchars($_POST['medsCo']);
-                $freq = htmlspecialchars($_POST['posoCo']);
-                $start = htmlspecialchars($_POST['startDateCo']);
-                $idTTT = htmlspecialchars($_POST['idTTTCo']);
-                $idMeds = htmlspecialchars($_POST['idMedsCo']);
-                $idPoso = htmlspecialchars($_POST['idPosoCo']);
-                $idAllergy = htmlspecialchars($_POST['idAllCo']);
-                $allergies = htmlspecialchars($_POST['allergiesCo']);                   
-                    $frontoffice->updateChild($idMember, $idChildren, $lastName, $firstName, $birthdate, $parent1, $parent2, $username, $favMeal, $hatedMeal, $meds, $freq, $start, $idTTT, $idMeds, $idPoso,$idAllergy, $allergies);                 
-            }
-            else{
-                throw new \Exception('Vous devez être connecté');
-            }
-        }
         // DELETE CHILD
         elseif($_GET['action'] == 'deleteChild'){
             $idMember = htmlspecialchars($_GET['idMember']);

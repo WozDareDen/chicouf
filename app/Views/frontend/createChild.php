@@ -14,11 +14,11 @@
   <h1>CREATION D'UNE FICHE ENFANT</h1>       
     <div class="form-group  col-lg-12" >
       <h2>IDENTITE</h2>
-      <label for="lastname">Nom</label><br />
-      <input type="text" id="lastname" name="lastNameCo" required="valid" autofocus="on" cols="30"placeholder="entrez son nom" > 
+      <label for="lastname1">Nom</label><br />
+      <input type="text" id="lastname1" name="lastNameCo" required="valid" autofocus="on" cols="30"placeholder="entrez son nom" > 
     </div>
     <div class="form-group col-lg-12"> 
-      <label for="firstname">Prénom</label><br />
+      <label for="firstname1">Prénom</label><br />
       <input type="text" id="firstname1" name="firstNameCo" required="valid" cols="30" placeholder="entrez son prénom" > 
     </div>
     <div class="form-group col-lg-12">

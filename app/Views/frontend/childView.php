@@ -109,13 +109,46 @@ $newConnex2 = $connex2->fetch()
                     <p class="social">Plats préférés : <?= $newConnex2['favorite_meal']; ?></p>
                     <p class="social">Plats détestés : <?= $newConnex2['hated_meal']; ?></p>
 <!--**************************HEALTH**********************************-->        
-<?php
-$newConnex3 = $connex3->fetch()
-?>
                     <h3 class="social">TRAITEMENT</h3>
-                    <p class="social">Noms, posologies, durées : <?= $newConnex3['meds']; ?></p>
-                    <p class="social">Allergies : <?= $newConnex3['allergies']; ?></p>
-                    <p class="social">Dernière modification effectuée par <?= $newData['upDateUser'] ?>, le <?= $newData['new_upDateLog'] ?>.</p>
+
+<?php
+$newConnex3 = $connex3->fetchAll();  
+if(!(empty($newConnex3))){
+$newConnex5 = $connex5->fetch();
+?>
+
+                    <p class="social">Début du Traitement : <?= $newConnex5['new_startDate']; ?></p>
+                    <p class="social">Médicaments, posologies :</p>
+                    <p> 
+                    
+<?php                  
+foreach($newConnex3 as $medConnex3){                    
+?>                   
+
+                    <span class="ita"><?= $medConnex3['title']; ?></span> <?= $medConnex3['content']; ?><br />
+
+<?php
+}
+?>                  
+
+                    </p>
+<?php
+}
+else{
+?>
+
+                    <p>Aucun traitement en cours</p>
+
+<?php  
+}
+?>
+<?php
+$newConnex4 = $connex4->fetch()
+?>                    
+
+                    <h3 class="social">ALLERGIES </h3>
+                    <p class="social"><?= $newConnex4['content']; ?></p>
+                    <p class="social">Dernière modification effectuée par <?= $newData['updateUser'] ?>, le <?= $newData['new_updateLog'] ?>.</p>
 
     </article>
     <?php

@@ -147,7 +147,7 @@ var NewChildren = Children;
 
 // GET INPUTS FROM CREATE-CHILD-FORM
 $('#submitChildren').on('click',function(){
-    NewChildren.lastname = $('#lastname').val();
+    NewChildren.lastname = $('#lastname1').val();
     NewChildren.firstname = $('#firstname1').val();
     NewChildren.birthdate = $('#birthdate').val();
     NewChildren.gender = $('input[name=genderCo]:checked',"#gender").val();
@@ -190,20 +190,42 @@ $.ajax({
 })
 
 
+
+// OBJECT CHILDREN
+var Children2 = {
+    idChild: "",
+    lastname : "",
+    firstname :"" , 
+    birthdate :"" , 
+    gender :"" , 
+    parent1 :"" , 
+    parent2 :"" , 
+    favMeal :"" , 
+    hatedMeal :"" , 
+    allergies :"",
+    idAllergy : "",
+    startDate: "",
+    meds: ""
+}
+
+var NewChildren2 = Children2;
+
+// GET INPUTS FROM UPDATE-CHILD-FORM
 $('#submitChildren2').on('click',function(){
-    NewChildren.lastname = $('#lastname').val();
-    NewChildren.firstname = $('#firstname1').val();
-    NewChildren.birthdate = $('#birthdate').val();
-    NewChildren.gender = $('input[name=genderCo]:checked',"#gender").val();
-    NewChildren.parent1 = $('#parent1').val();
-    NewChildren.allergies = $('#allergies').val();  
-    NewChildren.favMeal = $('#favoriteMeal').val();
-    NewChildren.hatedMeal = $('#hatedMeal').val();
-    NewChildren.parent2 = $('#parent2').val();
-    NewChildren.startDate = $('#startDateCo').val();
-    NewChildren.idChild = $('#idChildCo').val();
-    NewChildren.meds = [];
-    var fuckmyLife = $('.posoCo');
+    NewChildren2.idChild = $('#idChildCo').val();
+    NewChildren2.lastname = $('#lastname1').val();
+    NewChildren2.firstname = $('#firstname1').val();
+    NewChildren2.birthdate = $('#birthdate').val();
+    NewChildren2.gender = $('input[name=genderCo]:checked',"#gender").val();
+    NewChildren2.parent1 = $('#parent1').val();
+    NewChildren2.idAllergy = $('#idAllergyCo').val();
+    NewChildren2.allergies = $('#allergies').val();  
+    NewChildren2.favMeal = $('#favoriteMeal').val();
+    NewChildren2.hatedMeal = $('#hatedMeal').val();
+    NewChildren2.parent2 = $('#parent2').val();
+    NewChildren2.startDate = $('#startDateCo').val();
+    NewChildren2.meds = [];
+    var posoPoso = $('.posoCo');
     $('.medsCo').each(function(index){
         var meds ={
             id : null,
@@ -214,11 +236,11 @@ $('#submitChildren2').on('click',function(){
         meds.id = input.val(),
         meds.label = input.attr('id'),
         
-        meds.posology = $($(fuckmyLife)[index]).find('textarea')[0].value;
-        NewChildren.meds.push(meds);
+        meds.posology = $($(posoPoso)[index]).find('textarea')[0].value;
+        NewChildren2.meds.push(meds);
     });
    
-    var childrenString = JSON.stringify(NewChildren);
+    var childrenString = JSON.stringify(NewChildren2);
 
 $.ajax({
     url: "index.php",
