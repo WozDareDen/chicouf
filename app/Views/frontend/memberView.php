@@ -17,15 +17,14 @@
 
   <section class="row justify-content-md-center">
   <?php
-$bigData = $data->fetchAll();
-if(empty($bigData)){
+if(empty($children)){
 ?>
                 <p>Vous pouvez dès à présent créer une fiche pour votre enfant, créer un Espace Famille ou en rejoindre un. Le modérateur de l'Espace Famille, c'est-à-dire celui qui est à l'origine de sa création, est le seul à pouvoir vous rattacher à cet Espace en renseignant votre email. Si dans votre entourage, aucun espace n'a été créé, soyez la première personne à le faire et devenez-en le modérateur. Rendez-vous sur l'Espace Famille, accessible dans la barre de navigation. </p>
                 <img id="logoTurn2" class="logTurn" src="app/Public/uploads/logo.png" alt="logo pleine page" title="logo pleine page" />
 <?php
 }
 else{
-foreach($bigData as $newData){
+    foreach($children as $one_child){
 ?>
 
 
@@ -33,8 +32,8 @@ foreach($bigData as $newData){
 
 
     <article class="col-sm-3 avatarBox social" >
-    <a href="#" data-toggle="modal" data-target="#exampleModal<?= $newData['idChildren'] ?>" data-whatever="@mdo" class="photoChild2" style="background-image: url(<?= $newData['img'] ?>);" title="Vous pouvez modifier la photo" ></a>
-                  <div class="modal fade" id="exampleModal<?= $newData['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <a href="#" data-toggle="modal" data-target="#exampleModal<?= $one_child['idChildren'] ?>" data-whatever="@mdo" class="photoChild2" style="background-image: url(<?= $one_child['img'] ?>);" title="Vous pouvez modifier la photo" ></a>
+                  <div class="modal fade" id="exampleModal<?= $one_child['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header" style="background-color:#6bbfb0;">
@@ -59,12 +58,12 @@ foreach($bigData as $newData){
 
   
     <article class="col-sm-7 social" >
-    <h3><?= $newData['firstname']; ?> <?= $newData['surname']; ?> </h3>
-                    <a href="index.php?action=goToUpdateChild&idChildren=<?= $newData['idChildren']; ?>" class="social"><button type="button" style="background-color:#FCD64C;color:#0B2F3D;" class="btn">Modifier cette fiche enfant</button></a>
-                    <button type="button" style="background-color:#3D91B2;color:#FFF" class="btn social" data-toggle="modal" data-target="#exampleModal2<?= $newData['idChildren'] ?>">Rattacher un parent à cet enfant</button>
+    <h3><?= $one_child['firstname']; ?> <?= $one_child['surname']; ?> </h3>
+                    <a href="index.php?action=goToUpdateChild&idChildren=<?= $one_child['idChildren']; ?>" class="social"><button type="button" style="background-color:#FCD64C;color:#0B2F3D;" class="btn">Modifier cette fiche enfant</button></a>
+                    <button type="button" style="background-color:#3D91B2;color:#FFF" class="btn social" data-toggle="modal" data-target="#exampleModal2<?= $one_child['idChildren'] ?>">Rattacher un parent à cet enfant</button>
 
 <!--***************************Modal Child-to-Parent****************************-->
-                    <div class="modal fade" id="exampleModal2<?= $newData['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+                    <div class="modal fade" id="exampleModal2<?= $one_child['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header" style="background-color:#17a2b8;">
@@ -78,7 +77,7 @@ foreach($bigData as $newData){
                               Ainsi cette personne pourra elle aussi gérer l'intégralité de cette fiche.
                             </p>
                             <p>Cependant ce parent ne sera pas automatiquement rattaché à votre Espace Famille. Seul le modérateur de celui-ci peut le faire.</p>
-                            <form action="index.php?action=belong&idChildren=<?=$newData['idChildren']; ?>" method="post">
+                            <form action="index.php?action=belong&idChildren=<?=$one_child['idChildren']; ?>" method="post">
                               <div class="form-group">
                                 <input type="mail" class="form-control" id="mailCo" name="mailCo" placeholder="Entrez son mail">
                               </div>
@@ -89,69 +88,85 @@ foreach($bigData as $newData){
                       </div>
                     </div>
 <!--*************************IDENTITY********************************-->
-                    <div class="sr-only"><?= $newData['idMember']; ?></div>
-                    <p class="social">Date de naissance : <?= $newData['new_birthdate']; ?></p>
-                    <p class="social">Parent(s) : <?= $newData['parent1']?> 
-<?php 
-if(!empty($newData['parent2'])){
-?>
-& <?= $newData['parent2']?>
-<?php
-}
+                    <div class="sr-only"><?= $one_child['idMember']; ?></div>
+                    <p class="social">Date de naissance : <?= $one_child['new_birthdate']; ?></p>
+                    <p class="social">Parent(s) : <?= $one_child['parent1']?> 
+    <?php 
+    if(!empty($one_child['parent2'])){
+    ?>
+    & <?= $one_child['parent2']?>
+    <?php
+    }
+    
 ?> 
 
 </p>
 <!--****************************FOOD**********************************-->
 <?php
-$newConnex2 = $connex2->fetch() 
-?>
-                    <h3 class="social">ALIMENTATION </h3>
-                    <p class="social">Plats préférés : <?= $newConnex2['favorite_meal']; ?></p>
-                    <p class="social">Plats détestés : <?= $newConnex2['hated_meal']; ?></p>
-<!--**************************HEALTH**********************************-->        
-                    <h3 class="social">TRAITEMENT</h3>
 
-<?php
-$newConnex3 = $connex3->fetchAll();  
-foreach($newConnex3 as $medConnex3){  
-if(!(empty($medConnex3['title']))){
-$newConnex5 = $connex5->fetch();
-?>
+    
+    foreach($one_child['meal'] as $nMeals){
 
-                    <p class="social">Début du Traitement : <?= $newConnex5['new_startDate']; ?></p>
-                    <p class="social">Médicaments, posologies :</p>
-                    <p> 
-                    
-<?php                  
-                  
-?>                   
+    ?>
+                        <h3 class="social">ALIMENTATION </h3>
+                        <p class="social">Plats préférés : <?= $nMeals['favorite_meal']; ?></p>
+                        <p class="social">Plats détestés : <?= $nMeals['hated_meal']; ?></p>
 
-                    <span class="ita"><?= $medConnex3['title']; ?></span> <?= $medConnex3['content']; ?><br />      
-                    </p>
+    <?php
+    }
+    ?>
+    <!--**************************HEALTH**********************************-->        
+                        <h3 class="social">TRAITEMENT</h3>
 
-<?php
+    <?php 
+if(!(empty($one_child['TTT']))){
+    foreach($one_child['TTT'] as $NTTT){  
+    ?>
+
+                        <p class="social">Début du Traitement : <?= $NTTT['content']; ?></p>
+                        <p class="social">Médicaments, posologies :</p>
+                        <p> 
+                        
+    <?php    
+                 
+        foreach($one_child['TTT'] as $Nmeds){                
+    ?>                   
+
+                        <span class="ita"><?= $Nmeds['title']; ?></span> <?= $Nmeds['content']; ?><br />      
+                        </p>
+
+
+
+
+                        
+
+    <?php  
+        }
+    }
 }
 else{
 ?>
-
                     <p>Aucun traitement en cours</p>
-
-<?php  
-}
-}
-?>
 <?php
-$newConnex4 = $connex4->fetch()
-?>                    
+}
+    ?>
 
-                    <h3 class="social">ALLERGIES </h3>
-                    <p class="social"><?= $newConnex4['content']; ?></p>
-                    <p class="social">Dernière modification effectuée par <?= $newData['updateUser'] ?>, le <?= $newData['new_updateLog'] ?>.</p>
-
-    </article>
+                    
     <?php
+    if(isset($one_child['allergies'])){
+    foreach($one_child['allergies'] as $Nallergies){
+    ?>
+                        <h3 class="social">ALLERGIES </h3>
+                        <p class="social"><?= $Nallergies['content']; ?></p>
+                        <p class="social">Dernière modification effectuée par <?= $one_child['updateUser'] ?>, le <?= $one_child['new_updateLog'] ?>.</p>
+
+        </article>
+        <?php
+    }
+    }
 }
 }
+
 ?>
   </section>
 

@@ -2,8 +2,8 @@
 
 namespace Src\Controllers;
 
-class FrontOffice{
-// USER CREATION
+class FrontOffice{   
+//*****************************USER CREATION***********************************
     function newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo){
         if(preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $passCo)){              
             $userManager = new \Src\Models\UserManager();
@@ -61,99 +61,70 @@ class FrontOffice{
         session_destroy();
         header('Location: index.php');
     }
-    //FAMILY BOARD
-    function goToFamily($idFamily,$idMember){
-        $familyManager = new \Src\Models\FamilyManager();
-        $dataF = $familyManager -> watchFamily($idFamily);
-        $dataF2 = $familyManager -> watchFamilyMeals($idFamily);
-        $dataF3 = $familyManager -> watchFamilyHealth($idFamily);
-        $dataF4 = $familyManager -> getFamilyName($idFamily);
-        $dataF6 = $familyManager -> getImgFamily($idFamily);
-        $dataF7 = $familyManager -> watchModo($idFamily);
-        $dataF8 = $dataF7->fetchAll();
-        
-        $dataMember = $familyManager -> watchMembersFamily($idFamily);
-        $userManager = new \Src\Models\UserManager();
-        $dataF5 = $userManager -> userById($idMember);
-        require 'app/Views/frontend/familyView.php';
-    }
-    // ADD NEW MODO
-    function addNewModo($mailNewModo){
-        $familyManager = new \Src\Models\FamilyManager();
-        $newModo = $familyManager -> insertNewModo($mailNewModo);
-        header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
-    }
-    // CHANGE MODO
-    function changeModo($idMember){
-        $idFamily = $_SESSION['family'];
-        $familyManager = new \Src\Models\FamilyManager();
-        $checkModo = $familyManager -> checkModo($idFamily);
-        $checkModo2 = $checkModo->fetchAll();
-            if(count($checkModo2)>1){ 
-                $userManager = new \Src\Models\UserManager();
-                $changeModo = $userManager -> eraseModo($idMember);
-                $_SESSION['modo'] = 0;
-                header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
-            }
-            else{
-                throw new \Exception('vous devez d\'abord désigner un nouveau modérateur');
-            }
-    }
-    // DELETE FAMILY
-    function deleteFamily($idFamily,$idMember){
-        $familyManager = new \Src\Models\FamilyManager();
-        $eraseFam = $familyManager -> eraseFamily($idFamily);       
-        $userManager = new \Src\Models\UserManager();
-        $eraseModo = $userManager -> eraseModo($idMember);
-        $_SESSION['modo'] = 0;
-        header('Location: index.php?action=memberView&idMember='.$idMember);
-    }
-    // BANN MEMBER
-    function bann($idFamily,$mailCo){
-        $userManager = new \Src\Models\UserManager();
-        $getIdModo = $userManager -> getBelongParent($mailCo);
-        $getIdModo2 = $getIdModo->fetch();
-        $idMember = $getIdModo2['idMember'];
-        $familyManager = new \Src\Models\FamilyManager();
-        $bann = $familyManager -> bannMember($idFamily,$idMember);
-        header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
-    }
-    // GO TO REGISTRATION FORM
-    function subView(){
-        require 'app/Views/frontend/registrationView.php';
-    }
-    // GO TO HOME VIEW
-    function homeView(){
-        require 'app/Views/frontend/homeView.php';
-    }
-    // GO TO MENTIONS
-    function goLegal(){
-        require 'app/Views/frontend/legalView.php';
-    }
-    // GO TO ABOUT
-    function goAbout(){
-        require 'app/Views/frontend/about.php';
-    }
-    // USER CONTACT
-    function contact($usernameContact,$mailContact,$titleContact,$contentContact){
-        $userManager = new \Src\Models\UserManager();
-        $contact = $userManager -> contactDb($usernameContact,$mailContact,$titleContact,$contentContact);
-        header('Location: index.php');
-    }
     // MEMBER BOARD
     function goToMember($idMember){
         $childManager = new \Src\Models\ChildManager();
-        $data = $childManager -> watchChild($idMember);
-        $connex2 = $childManager -> getMealsInfos($idMember);
-        $connex3 = $childManager -> getMedsInfos($idMember);
-        $connex4 = $childManager -> getAllergyInfos($idMember);
-        $connex5 = $childManager -> getTTTDate($idMember);
+        $children = $childManager -> watchChild($idMember)->fetchAll();
+
+        foreach($children as $idChild=>$one_child){
+            $meals = $childManager -> getMealsInfos($one_child['idChildren'])->fetchAll();
+            $children[$idChild]['meal'] = $meals;
+
+            $TTT = $childManager -> getTTTDate($one_child['idChildren'])->fetchAll();
+            $children[$idChild]['TTT'] = $TTT;
+
+            foreach($TTT as $id=>$one_TTT){
+                $meds = $childManager -> getMedsInfos($one_TTT['idTTT'])->fetchAll();
+                $children[$idChild]['TTT'][$id] = $meds;
+            }
+            
+            $allergies = $childManager -> getAllergyInfos($one_child['idChildren'])->fetchAll();
+            $children[$idChild]['allergies'] = $allergies;
+        }    
+        
         $familyManager = new \Src\Models\FamilyManager();
         $dataFam2 = $familyManager -> getFamilyId($idMember);
         // $connex4 = $childManager -> getParents($)
-        require 'app/Views/frontend/childView.php';
+        require 'app/Views/frontend/memberView.php';
     }
-    // GO TO FAMILY SPACE
+    // GET USER PROFILE INFOS
+    function recoverUser($idMember)
+    {
+        $userManager = new \Src\Models\UserManager();
+        $recoverUs = $userManager -> watchUser($idMember);
+        $idFamily = $_SESSION['family'];
+        $familyManager = new \Src\Models\FamilyManager();
+        $getFamilyName = $familyManager -> getFamilyName($idFamily);
+        require 'app/Views/frontend/profileView.php';
+    }
+    // UPDATE PROFILE
+    function changeProfile($name, $mail, $birthdate, $city, $idMember)
+    {
+        $userManager = new \Src\Models\UserManager();
+        $change = $userManager -> changeUser($name, $mail, $birthdate, $city, $idMember);       
+        $this->recoverUser($idMember);
+    }
+    // CHANGE USER PASS
+    function newPass($idMember,$initPass,$pass){
+        if(preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $pass)){
+            $userManager = new \Src\Models\UserManager();
+            $getUserPass = $userManager -> watchUser($idMember);
+            $oldPass = $getUserPass->fetch();   
+            $isPasswordCorrect = password_verify($initPass,$oldPass['pass']);
+                if($isPasswordCorrect){
+                    $newPass = password_hash($pass, PASSWORD_DEFAULT);
+                    $changePass = $userManager -> changePass($idMember,$newPass);
+                    $this->recoverUser($idMember);
+                }   
+                else{
+                    throw new \Exception('votre mot de passe actuel est erroné');
+                }      
+        }
+        else{
+            throw new \Exception('votre mot de passe doit comporter des lettres majuscules, minuscules ET des chiffres entre 8 et 16 caractères');
+        }
+    }
+    //*******************************GO TO FAMILY SPACE*****************************************
     function goToCreateFamily(){
         require 'app/Views/frontend/familyView.php';
     }
@@ -179,6 +150,30 @@ class FrontOffice{
         $_SESSION['modo'] = 1;
         header('Location: index.php?action=familyLink&id='.$idFamily);
     }
+    // WATCH FAMILY
+    function goToFamily($idFamily,$idMember){
+        $familyManager = new \Src\Models\FamilyManager();
+        $dataF = $familyManager -> watchFamily($idFamily);
+        $dataF2 = $familyManager -> watchFamilyMeals($idFamily);
+        $dataF3 = $familyManager -> watchFamilyHealth($idFamily);
+        $dataF4 = $familyManager -> getFamilyName($idFamily);
+        $dataF6 = $familyManager -> getImgFamily($idFamily);
+        $dataF7 = $familyManager -> watchModo($idFamily);
+        $dataF8 = $dataF7->fetchAll();        
+        $dataMember = $familyManager -> watchMembersFamily($idFamily);
+        $userManager = new \Src\Models\UserManager();
+        $dataF5 = $userManager -> userById($idMember);
+        require 'app/Views/frontend/familyView.php';
+    }
+    // DELETE FAMILY
+    function deleteFamily($idFamily,$idMember){
+        $familyManager = new \Src\Models\FamilyManager();
+        $eraseFam = $familyManager -> eraseFamily($idFamily);       
+        $userManager = new \Src\Models\UserManager();
+        $eraseModo = $userManager -> eraseModo($idMember);
+        $_SESSION['modo'] = 0;
+        header('Location: index.php?action=memberView&idMember='.$idMember);
+    }
     // BELONG PARENT TO FAMILY (and children if necessary)
     function belongFamily($idFamily,$mailCoParent){
         $familyManager = new \Src\Models\FamilyManager();
@@ -200,20 +195,98 @@ class FrontOffice{
                 throw new \Exception ('cet email ne figure pas dans notre base de données');
             }
         header('Location: index.php?action=familyLink&id='.$idFamily);
+    }   
+    //*************************ADD NEW MODO*******************************
+    function addNewModo($mailNewModo){
+        $familyManager = new \Src\Models\FamilyManager();
+        $newModo = $familyManager -> insertNewModo($mailNewModo);
+        header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
     }
-    //ADD COMMENT
-    function addComment($chatDissId, $chatMemberId, $chatComment){
-    $commentManager = new \Src\Models\CommentManager();
-    $comments = $commentManager -> postDiscussComment($chatDissId, $chatMemberId, $chatComment);
-    if ($comments === false) {
-        throw new Exception('Impossible d\'ajouter le commentaire !');
+    // CHANGE MODO
+    function changeModo($idMember){
+        $idFamily = $_SESSION['family'];
+        $familyManager = new \Src\Models\FamilyManager();
+        $checkModo = $familyManager -> checkModo($idFamily);
+        $checkModo2 = $checkModo->fetchAll();
+            if(count($checkModo2)>1){ 
+                $userManager = new \Src\Models\UserManager();
+                $changeModo = $userManager -> eraseModo($idMember);
+                $_SESSION['modo'] = 0;
+                header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
+            }
+            else{
+                throw new \Exception('vous devez d\'abord désigner un nouveau modérateur');
+            }
     }
-    else {
-        header('Location: index.php?action=post&id=' . $id_Chapters . '#comments');
+    // BANN MEMBER
+    function bann($idFamily,$mailCo){
+        $userManager = new \Src\Models\UserManager();
+        $getIdModo = $userManager -> getBelongParent($mailCo);
+        $getIdModo2 = $getIdModo->fetch();
+        $idMember = $getIdModo2['idMember'];
+        $familyManager = new \Src\Models\FamilyManager();
+        $bann = $familyManager -> bannMember($idFamily,$idMember);
+        header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
+    }
+    //*******************USER CONTACT************************
+    function contact($usernameContact,$mailContact,$titleContact,$contentContact){
+        $userManager = new \Src\Models\UserManager();
+        $contact = $userManager -> contactDb($usernameContact,$mailContact,$titleContact,$contentContact);
+        header('Location: index.php');
     }
     
-    }    
-
+    //*******************************************CREATECHILD VIEW**************************************************
+    function goToCreateChild(){
+        require 'app/Views/frontend/createChild.php';
+    }
+    // CHILD CREATION
+    function addNewChild($children){
+        $idMember = $_SESSION['id'];
+        $newChild = json_decode($children,true);
+        $lastname = htmlspecialchars($newChild['lastname']);
+        $firstname = htmlspecialchars($newChild['firstname']);
+        $birthdate = htmlspecialchars($newChild['birthdate']);
+        $gender = htmlspecialchars($newChild['gender']);
+        $parent1 = htmlspecialchars($newChild['parent1']);
+        $parent2 = htmlspecialchars($newChild['parent2']);
+        $favMeal = htmlspecialchars($newChild['favMeal']);
+        $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
+        $allergies = htmlspecialchars($newChild['allergies']);
+        $startDate = htmlspecialchars($newChild['startDate']);
+        $username = $_SESSION['firstname'];
+        $childManager = new \Src\Models\ChildManager();
+        // identity       
+        $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $parent2,$username);
+        $getIdChild = $childManager -> getMaxIdChild();
+        $getIdChild = $getIdChild->fetch();
+        $idChild = $getIdChild[0];
+        // food
+        $addNewMeal = $childManager -> addNewMeal($favMeal, $hatedMeal,$idChild);
+        // allergy
+        $addAllergy = $childManager -> addNewAllergy($allergies);
+        $getIdAllergy = $childManager -> getMaxIdAllergy();
+        $newGetIdAllergy = $getIdAllergy->fetch();
+        $idAllergy = $newGetIdAllergy[0];
+        $insertAllChild = $childManager -> insertAllChild($idAllergy,$idChild);
+        // add parents & family
+        $addToMyParent = $childManager -> addToMyParent($idChild,$idMember);
+        $idFamily = $_SESSION['family'];
+        if(!(empty($idFamily))){
+            $addToMyFamily = $childManager -> addToMyFamily($idChild,$idFamily);
+        }
+        // treatment
+        $addTTT = $childManager -> addTTT($idChild,$startDate);
+        $getIdTTT = $childManager -> getIdTTT();
+        $getIdTTT = $getIdTTT->fetch();
+        $idTTT = $getIdTTT[0];
+        // meds
+        foreach($newChild['meds'] as $poso) {
+            $posology = htmlspecialchars($poso['posology']) ;
+            $idMeds = $poso['label'] ;
+            $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$posology);
+        }
+        return $children;
+    }
     // GO TO UPDATE CHILD
     function goToUpdateChild($idChild){
         $childManager = new \Src\Models\ChildManager();
@@ -228,8 +301,6 @@ class FrontOffice{
         $idTTT = $getDateTTT['idTTT'];
         // meds
         $getAllMedsChild = $childManager ->getAllMedsChild($idTTT);
-
-
         $connex5 = $childManager -> getIdFamilyByChild($idChild);
         $newConnex5 = $connex5->fetch();
             if(isset($_SESSION['id'])){
@@ -244,10 +315,46 @@ class FrontOffice{
                 throw new \Exception('Cette page n\'existe pas !');
             }
     }
-    // CREATECHILD VIEW
-    function goToCreateChild(){
-        require 'app/Views/frontend/createChild.php';
+    //*****************************UPDATE CHILD***********************************
+    function updateChild($children){
+        $childManager = new \Src\Models\ChildManager();
+        $newChild = json_decode($children,true);
+        $lastname = htmlspecialchars($newChild['lastname']);
+        $firstname = htmlspecialchars($newChild['firstname']);
+        $birthdate = htmlspecialchars($newChild['birthdate']);
+        $gender = htmlspecialchars($newChild['gender']);
+        $parent1 = htmlspecialchars($newChild['parent1']);
+        $parent2 = htmlspecialchars($newChild['parent2']);
+        $favMeal = htmlspecialchars($newChild['favMeal']);
+        $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
+        $idAllergy = $newChild['idAllergy'];
+        $allergies = htmlspecialchars($newChild['allergies']);
+        $idChild = $newChild['idChild'];
+        $username = $_SESSION['firstname'];
+        // id, meals, allergy
+        $infos1 = $childManager -> updateOldChild($lastname, $firstname, $birthdate, $parent1, $parent2, $idChild,$username);
+        $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChild);
+        $upDateAllergy = $childManager -> updateOldAllergy($allergies,$idAllergy);
+        // treatment
+        $addTTT = $childManager -> addTTT($idChild,$startDate);
+        $getIdTTT = $childManager -> getIdTTT();
+        $getIdTTT = $getIdTTT->fetch();
+        $idTTT = $getIdTTT[0];
+        // meds
+        foreach($newChild['meds'] as $poso) {
+            $posology = htmlspecialchars($poso['posology']) ;
+            $idMeds = $poso['label'] ;
+            $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$posology);
+        }
+        return $children;
     }
+    // STOP MEDICINE
+    function stopMeds($idChild){
+        $childManager = new \Src\Models\ChildManager();
+        $stopMeds = $childManager -> stopMedicine($idChild);
+        header('Location: index.php?action=goToUpdateChild&idChildren='.$idChild);
+    }
+   
     // DELETE CHILD
     function deleteChild($idMember,$idChildren){
         $childManager = new \Src\Models\ChildManager();
@@ -263,6 +370,23 @@ class FrontOffice{
         $belong2 = $userManager -> belongParent($idMember,$idChild);
         header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);
     }  
+    //********************OTHER REQUIRES***********************************    
+    // GO TO REGISTRATION FORM
+    function subView(){
+        require 'app/Views/frontend/registrationView.php';
+    }
+    // GO TO HOME VIEW
+    function homeView(){
+        require 'app/Views/frontend/homeView.php';
+    }
+    // GO TO MENTIONS
+    function goLegal(){
+        require 'app/Views/frontend/legalView.php';
+    }
+    // GO TO ABOUT
+    function goAbout(){
+        require 'app/Views/frontend/about.php';
+    }
     //************************UPLOAD CHILD AVATAR******************************
     function uploadPic($idMember,$idChildren){
         $target_dir = "app/Public/uploads/";
@@ -345,85 +469,48 @@ class FrontOffice{
         }
         
     }
-
 //*************************UPLOAD USER AVATAR*********************************
-function uploadAvatar($idMember){
-    $target_dir = "app/Public/uploads/";
-    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    // Check if image file is a actual image or fake image
-    if(isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        if($check !== false) {
-            // Check file size
-            if ($_FILES["fileToUpload"]["size"] > 500000) {
-                echo "Désolé, votre fichier est trop volumineux. ";
-                $uploadOk = 0;
-            }
-            // Allow certain file formats
-            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" ) {
-                echo "Seuls les formats JPG, JPEG, PNG & GIF files sont authorisés. ";
-                $uploadOk = 0;
-            }
-            // Check if $uploadOk is set to 0 by an error
-            if ($uploadOk == 0) {
-                echo "Désolé, votre avatar n'a pu être envoyé.";
-            // if everything is ok, try to upload file
-            } else {
-                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    $userManager = new \Src\Models\UserManager();
-                    $insertAvatar = $userManager -> insertAvatar($target_file,$idMember);
-                    $this->recoverUser($idMember);
-                } else {
-                    echo "Désolé, une erreur est survenue dans l'envoi de votre fichier. ";
+    function uploadAvatar($idMember){
+        $target_dir = "app/Public/uploads/";
+        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        // Check if image file is a actual image or fake image
+        if(isset($_POST["submit"])) {
+            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+            if($check !== false) {
+                // Check file size
+                if ($_FILES["fileToUpload"]["size"] > 500000) {
+                    echo "Désolé, votre fichier est trop volumineux. ";
+                    $uploadOk = 0;
                 }
+                // Allow certain file formats
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" ) {
+                    echo "Seuls les formats JPG, JPEG, PNG & GIF files sont authorisés. ";
+                    $uploadOk = 0;
+                }
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) {
+                    echo "Désolé, votre avatar n'a pu être envoyé.";
+                // if everything is ok, try to upload file
+                } else {
+                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                        $userManager = new \Src\Models\UserManager();
+                        $insertAvatar = $userManager -> insertAvatar($target_file,$idMember);
+                        $this->recoverUser($idMember);
+                    } else {
+                        echo "Désolé, une erreur est survenue dans l'envoi de votre fichier. ";
+                    }
+                }
+            } else {
+                echo "Ce fichier n'est pas une image. ";
+                $uploadOk = 0;
             }
-        } else {
-            echo "Ce fichier n'est pas une image. ";
-            $uploadOk = 0;
         }
+        
     }
-    
-}
-    // GET USER PROFILE INFOS
-    function recoverUser($idMember)
-    {
-        $userManager = new \Src\Models\UserManager();
-        $recoverUs = $userManager -> watchUser($idMember);
-        $idFamily = $_SESSION['family'];
-        $familyManager = new \Src\Models\FamilyManager();
-        $getFamilyName = $familyManager -> getFamilyName($idFamily);
-        require 'app/Views/frontend/profileView.php';
-    }
-    // UPDATE PROFILE
-    function changeProfile($name, $mail, $birthdate, $city, $idMember)
-    {
-        $userManager = new \Src\Models\UserManager();
-        $change = $userManager -> changeUser($name, $mail, $birthdate, $city, $idMember);       
-        $this->recoverUser($idMember);
-    }
-    // CHANGE USER PASS
-    function newPass($idMember,$initPass,$pass){
-        if(preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $pass)){
-            $userManager = new \Src\Models\UserManager();
-            $getUserPass = $userManager -> watchUser($idMember);
-            $oldPass = $getUserPass->fetch();   
-            $isPasswordCorrect = password_verify($initPass,$oldPass['pass']);
-                if($isPasswordCorrect){
-                    $newPass = password_hash($pass, PASSWORD_DEFAULT);
-                    $changePass = $userManager -> changePass($idMember,$newPass);
-                    $this->recoverUser($idMember);
-                }   
-                else{
-                    throw new \Exception('votre mot de passe actuel est erroné');
-                }      
-        }
-        else{
-            throw new \Exception('votre mot de passe doit comporter des lettres majuscules, minuscules ET des chiffres entre 8 et 16 caractères');
-        }
-    }
+    // AJAX MEDS
     function ajaxMeds($autoC){
         $childManager = new \Src\Models\ChildManager();
         $data = $childManager -> getAllMeds($autoC);
@@ -431,96 +518,21 @@ function uploadAvatar($idMember){
         $data = $data->fetchAll();
         echo json_encode($data);
     }
-    //**********************CHILD CREATION***********************************
-    function addNewChild($children){
-        $idMember = $_SESSION['id'];
-        $newChild = json_decode($children,true);
-        $lastname = htmlspecialchars($newChild['lastname']);
-        $firstname = htmlspecialchars($newChild['firstname']);
-        $birthdate = htmlspecialchars($newChild['birthdate']);
-        $gender = htmlspecialchars($newChild['gender']);
-        $parent1 = htmlspecialchars($newChild['parent1']);
-        $parent2 = htmlspecialchars($newChild['parent2']);
-        $favMeal = htmlspecialchars($newChild['favMeal']);
-        $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
-        $allergies = htmlspecialchars($newChild['allergies']);
-        $startDate = htmlspecialchars($newChild['startDate']);
-        $username = $_SESSION['firstname'];
-        $childManager = new \Src\Models\ChildManager();
-        // identity       
-        $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $parent2,$username);
-        $getIdChild = $childManager -> getMaxIdChild();
-        $getIdChild = $getIdChild->fetch();
-        $idChild = $getIdChild[0];
-        // food
-        $addNewMeal = $childManager -> addNewMeal($favMeal, $hatedMeal,$idChild);
-        // allergy
-        $addAllergy = $childManager -> addNewAllergy($allergies);
-        $getIdAllergy = $childManager -> getMaxIdAllergy();
-        $newGetIdAllergy = $getIdAllergy->fetch();
-        $idAllergy = $newGetIdAllergy[0];
-        $insertAllChild = $childManager -> insertAllChild($idAllergy,$idChild);
-        // add parents & family
-        $addToMyParent = $childManager -> addToMyParent($idChild,$idMember);
-        $idFamily = $_SESSION['family'];
-        if(!(empty($idFamily))){
-            $addToMyFamily = $childManager -> addToMyFamily($idChild,$idFamily);
-        }
-        // treatment
-        $addTTT = $childManager -> addTTT($idChild,$startDate);
-        $getIdTTT = $childManager -> getIdTTT();
-        $getIdTTT = $getIdTTT->fetch();
-        $idTTT = $getIdTTT[0];
-        // meds
-        foreach($newChild['meds'] as $poso) {
-            $posology = htmlspecialchars($poso['posology']) ;
-            $idMeds = $poso['label'] ;
-            $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$posology);
-        }
-        return $children;
-    }
-    //**********************UPDATE CHILD***********************************
-    function updateChild($children){
-        $childManager = new \Src\Models\ChildManager();
-        $newChild = json_decode($children,true);
-        $lastname = htmlspecialchars($newChild['lastname']);
-        $firstname = htmlspecialchars($newChild['firstname']);
-        $birthdate = htmlspecialchars($newChild['birthdate']);
-        $gender = htmlspecialchars($newChild['gender']);
-        $parent1 = htmlspecialchars($newChild['parent1']);
-        $parent2 = htmlspecialchars($newChild['parent2']);
-        $favMeal = htmlspecialchars($newChild['favMeal']);
-        $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
-        $idAllergy = $newChild['idAllergy'];
-        $allergies = htmlspecialchars($newChild['allergies']);
-        $idChild = $newChild['idChild'];
-        $username = $_SESSION['firstname'];
-        $infos1 = $childManager -> updateOldChild($lastname, $firstname, $birthdate, $parent1, $parent2, $idChild,$username);
-        $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChild);
-        $upDateAllergy = $childManager -> updateOldAllergy($allergies,$idAllergy);
-
-        // treatment
-        $addTTT = $childManager -> addTTT($idChild,$startDate);
-        $getIdTTT = $childManager -> getIdTTT();
-        $getIdTTT = $getIdTTT->fetch();
-        $idTTT = $getIdTTT[0];
-        // meds
-        foreach($newChild['meds'] as $poso) {
-            $posology = htmlspecialchars($poso['posology']) ;
-            $idMeds = $poso['label'] ;
-            $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$posology);
-        }
-        return $children;
-    }
-    function stopMeds($idChild){
-        $childManager = new \Src\Models\ChildManager();
-        $stopMeds = $childManager -> stopMedicine($idChild);
-        header('Location: index.php?action=goToUpdateChild&idChildren='.$idChild);
-    }
 }
+    //ADD COMMENT
+    // function addComment($chatDissId, $chatMemberId, $chatComment){
+    // $commentManager = new \Src\Models\CommentManager();
+    // $comments = $commentManager -> postDiscussComment($chatDissId, $chatMemberId, $chatComment);
+    //      if ($comments === false) {
+    //          throw new Exception('Impossible d\'ajouter le commentaire !');
+    //      }
+    //      else{
+    //      header('Location: index.php?action=post&id=' . $id_Chapters . '#comments');
+    //      }
+    // }    
+
     // // GET MEDS TO DB
     // function getMeds(){
-
     //     $getMeds = json_decode(file_get_contents('data/medicaments.json'),true);
     //     /* création fichier si inexistant et ouverture flux */
     //     $file = fopen("import_meds.sql", "w");

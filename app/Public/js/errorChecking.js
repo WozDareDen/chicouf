@@ -71,9 +71,11 @@ function myFunction2() {
         }
 }
 
-var current_list_data = null; 
+ 
 
 // AUTOCOMPLETE
+var current_list_data = null;
+
 $('#myInput').autocomplete({
     source : function(req,reponse){ 
     $.ajax({
@@ -126,7 +128,6 @@ $('#myInput').autocomplete({
       },
     delay:300
 })
-
 
 // OBJECT CHILDREN
 var Children = {
@@ -191,7 +192,7 @@ $.ajax({
 
 
 
-// OBJECT CHILDREN
+// OBJECT CHILDREN2
 var Children2 = {
     idChild: "",
     lastname : "",

@@ -7,32 +7,32 @@ class ChildManager extends Manager
     //***************GET CHILD INFOS THROUGH MEMBER**************************
     public function watchChild($idMember){
         $db = $this -> dbConnect(); 
-        $data = $db->prepare('SELECT children.idChildren, member_children.idMember, surname, firstname, img, parent1, parent2, updateUser, DATE_FORMAT(updateLog, \'%d/%m/%Y à %Hh%i\') as new_updateLog,  DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN member_children ON member_children.idChildren = children.idChildren WHERE idMember = ? ORDER BY member_children.idChildren');
+        $data = $db->prepare('SELECT children.idChildren, member_children.idMember, surname, firstname, img, parent1, parent2, updateUser, DATE_FORMAT(updateLog, \'%d/%m/%Y à %Hh%i\') as new_updateLog,  DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN member_children ON member_children.idChildren = children.idChildren WHERE idMember = ?');
         $data->execute(array($idMember));
         return $data;
     }
-    public function getMealsInfos($idMember){
+    public function getMealsInfos($one_childId){
         $db = $this -> dbConnect();
-        $connex2 = $db->prepare('SELECT * FROM meals INNER JOIN member_children ON member_children.idChildren = meals.idChildren WHERE idMember = ? ORDER BY member_children.idChildren');
-        $connex2->execute(array($idMember));
+        $connex2 = $db->prepare('SELECT * FROM meals WHERE idChildren = ?');
+        $connex2->execute(array($one_childId));
         return $connex2;
     }
-    public function getMedsInfos($idMember){
+    public function getMedsInfos($one_TTTId){
         $db = $this -> dbConnect();
-        $connex3 = $db->prepare('SELECT title, content FROM posology INNER JOIN meds ON meds.idMeds=posology.idMeds JOIN treatment ON treatment.idTTT = posology.idTTT JOIN member_children ON member_children.idChildren = treatment.idChildren WHERE member_children.idMember = ? ORDER BY member_children.idChildren');
-        $connex3->execute(array($idMember));
+        $connex3 = $db->prepare('SELECT title, content FROM posology INNER JOIN meds ON meds.idMeds=posology.idMeds JOIN treatment ON treatment.idTTT = posology.idTTT WHERE idChildren = ?');
+        $connex3->execute(array($one_TTTId));
         return $connex3;
     }
-    public function getAllergyInfos($idMember){
+    public function getAllergyInfos($one_childId){
         $db = $this -> dbConnect();
-        $connex4 = $db->prepare('SELECT * FROM allergy INNER JOIN children_allergy ON children_allergy.idAllergy = allergy.idAllergy JOIN member_children ON member_children.idChildren = children_allergy.idChildren WHERE member_children.idMember = ?');
-        $connex4->execute(array($idMember));
+        $connex4 = $db->prepare('SELECT * FROM allergy INNER JOIN children_allergy ON children_allergy.idAllergy = allergy.idAllergy WHERE idChildren = ?');
+        $connex4->execute(array($one_childId));
         return $connex4;
     }
-    public function getTTTDate($idMember){
+    public function getTTTDate($one_childId){
         $db = $this -> dbConnect();
-        $connex5 = $db->prepare('SELECT DATE_FORMAT( startDate,\'%d/%m/%Y \') as new_startDate FROM treatment INNER JOIN member_children ON member_children.idChildren = treatment.idChildren WHERE member_children.idMember = ?');
-        $connex5->execute(array($idMember));
+        $connex5 = $db->prepare('SELECT idTTT,DATE_FORMAT( startDate,\'%d/%m/%Y \') as new_startDate FROM treatment WHERE idChildren = ?');
+        $connex5->execute(array($one_childId));
         return $connex5;
     }
     //******************CHILD CREATION*********************
