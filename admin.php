@@ -11,6 +11,9 @@ try{
             if($_GET['action'] == 'dashboard'){
                 $backoffice->goToDashboard();
             }
+            if($_GET['action'] == 'famPage'){
+                $backoffice->goToFam();
+            }
             elseif($_GET['action'] == 'deleteMember'){
                 $idBackMember = htmlspecialchars($_POST['idBackMember']);
                 $backoffice->deleteMember($idBackMember);

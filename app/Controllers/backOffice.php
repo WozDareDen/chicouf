@@ -5,10 +5,10 @@ namespace Src\Controllers;
 class BackOffice{
     function goToDashboard(){
         $adminManager = new \Src\Models\AdminManager();
-        $dataMsg = $adminManager -> watchAllMsg();
-        $dataMsg1 = $adminManager -> watchAllMsg1();
-        $dataMsg2 = $adminManager -> watchAllMsg2();
-
+        $msgAll = $adminManager -> getAllMails()->fetch();
+        $famAll = $adminManager -> familyStats()->fetch();
+        $useAll = $adminManager -> userStats()->fetch();
+        $childrenAll = $adminManager -> childrenStats()->fetch();
         require 'app/Views/backend/dashboard.php';
     }
     function watchFamilies(){
@@ -50,5 +50,10 @@ class BackOffice{
         $data = $data->fetchAll();
         echo json_encode($data);
     }
-
+    function goToFam(){
+        $adminManager = new \Src\Models\AdminManager();
+        $data = $adminManager -> watchAllFamilies();
+        $famAll = $adminManager -> familyStats();
+        require 'app/Views/backend/famPage.php';
+    }
 }

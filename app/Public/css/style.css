@@ -18,6 +18,7 @@ h5{
     } 
 .photoChild:hover, .photoChild2:hover{
     border:2px solid black;
+
 } 
 .avatarBox a, .photoChild2{
     width: 200px;
@@ -232,7 +233,30 @@ a.dropdown-item:hover{
 #logoTurn2:hover{
     animation-play-state: paused;
 }
+.titlesMV{
+    color: #8bc34a;
+}
+.writings{
 
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.updateUser{
+    color:#b80308;
+}
+.nameMV{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color:#6bbfb0;
+    font-weight: bold;
+}
+.pageMV{
+    border-radius:2%;
+}
+.pseudoF{
+    color:#ee2a7b;
+}
+.pseudoM{
+    color:#056c8e;
+}
 /*------DELETE FAMILY MODAL---------*/
 .padiday{
     background: linear-gradient(120deg, #da3e44, #AA0044);
@@ -309,6 +333,8 @@ a.dropdown-item:hover{
 .folio1, .folio2{
     margin-top:100px;
     height: 300px;
+    display:flex;
+    justify-content: center;
 }
 
 /*----------AUTOCOMPLETE--------*/

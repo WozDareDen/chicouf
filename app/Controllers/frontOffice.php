@@ -18,6 +18,7 @@ class FrontOffice{
             $_SESSION['img'] = $resultat['img'];
             $_SESSION['id'] =  $resultat['idMember'];
             $_SESSION['modo'] =  $resultat['modo'];
+            $_SESSION['gender'] =  $resultat['gender'];
                 if($_SESSION['parenthood'] == 1){
                     header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);
                 }
@@ -41,6 +42,7 @@ class FrontOffice{
                 $_SESSION['id'] =  $resultat['idMember'];
                 $_SESSION['modo'] =  $resultat['modo'];
                 $_SESSION['img'] =  $resultat['img'];
+                $_SESSION['gender'] =  $resultat['gender'];
                 $familyManager = new \Src\Models\FamilyManager();     
                 $dataFam = $familyManager ->  getfamilyId($_SESSION['id']); 
                 $_SESSION['family'] = $dataFam['idFamily'];
@@ -61,7 +63,7 @@ class FrontOffice{
         session_destroy();
         header('Location: index.php');
     }
-    // MEMBER BOARD
+    //******************************MEMBER BOARD******************************************
     function goToMember($idMember){
         $childManager = new \Src\Models\ChildManager();
         $children = $childManager -> watchChild($idMember)->fetchAll();
@@ -70,12 +72,12 @@ class FrontOffice{
             $meals = $childManager -> getMealsInfos($one_child['idChildren'])->fetchAll();
             $children[$idChild]['meal'] = $meals;
 
-            $TTT = $childManager -> getTTTDate($one_child['idChildren'])->fetchAll();
+            $TTT = $childManager -> getDateTTT($one_child['idChildren'])->fetchAll();
             $children[$idChild]['TTT'] = $TTT;
 
             foreach($TTT as $id=>$one_TTT){
-                $meds = $childManager -> getMedsInfos($one_TTT['idTTT'])->fetchAll();
-                $children[$idChild]['TTT'][$id] = $meds;
+                $meds = $childManager -> getAllMedsChild($one_TTT['idTTT'])->fetchAll();
+                $children[$idChild]['TTT'][$id]['meds'] = $meds;
             }
             
             $allergies = $childManager -> getAllergyInfos($one_child['idChildren'])->fetchAll();
@@ -322,11 +324,11 @@ class FrontOffice{
         $lastname = htmlspecialchars($newChild['lastname']);
         $firstname = htmlspecialchars($newChild['firstname']);
         $birthdate = htmlspecialchars($newChild['birthdate']);
-        $gender = htmlspecialchars($newChild['gender']);
         $parent1 = htmlspecialchars($newChild['parent1']);
         $parent2 = htmlspecialchars($newChild['parent2']);
         $favMeal = htmlspecialchars($newChild['favMeal']);
         $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
+        $startDate = htmlspecialchars($newChild['startDate']);
         $idAllergy = $newChild['idAllergy'];
         $allergies = htmlspecialchars($newChild['allergies']);
         $idChild = $newChild['idChild'];
@@ -336,15 +338,17 @@ class FrontOffice{
         $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChild);
         $upDateAllergy = $childManager -> updateOldAllergy($allergies,$idAllergy);
         // treatment
-        $addTTT = $childManager -> addTTT($idChild,$startDate);
-        $getIdTTT = $childManager -> getIdTTT();
-        $getIdTTT = $getIdTTT->fetch();
-        $idTTT = $getIdTTT[0];
+        if($startDate != null){
+            $addTTT = $childManager -> addTTT($idChild,$startDate);
+            $getIdTTT = $childManager -> getIdTTT();
+            $getIdTTT = $getIdTTT->fetch();
+            $idTTT = $getIdTTT[0];
         // meds
-        foreach($newChild['meds'] as $poso) {
-            $posology = htmlspecialchars($poso['posology']) ;
-            $idMeds = $poso['label'] ;
-            $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$posology);
+            foreach($newChild['meds'] as $poso) {
+                $posology = htmlspecialchars($poso['posology']) ;
+                $idMeds = $poso['label'] ;
+                $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$posology);
+            }
         }
         return $children;
     }

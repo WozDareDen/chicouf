@@ -22,36 +22,35 @@ if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $n
  
           <div class="form-group  col-lg-12">
             <h2>IDENTITE <a class="btn btn-danger"  href="index.php?action=deleteChild&idChildren=<?= $_GET['idChildren'] ?>" >Supprimer</a></h2>
-            <input id="idChildCo" value="<?= $_GET['idChildren'] ?>" /><br />
-            <label for="lastname1">Nom</label><br />
-            <input type="text" id="lastname1" name="lastNameCo"  required="valid" cols="30" value="<?= $newData['surname']; ?>" /> 
+            <label for="lastname1Up">Nom</label><br />
+            <input type="text" id="lastname1Up" name="lastNameCo"  required="valid" cols="30" value="<?= $newData['surname']; ?>" /> 
           </div>
           <div class="form-group col-lg-12"> 
-            <label for="firstname1">Prénom</label><br />
-            <input type="text" id="firstname1" name="firstNameCo" required="valid" cols="30" value="<?= $newData['firstname']; ?>" > 
+            <label for="firstname1Up">Prénom</label><br />
+            <input type="text" id="firstname1Up" name="firstNameCo" required="valid" cols="30" value="<?= $newData['firstname']; ?>" > 
           </div>
           <div class="form-group col-lg-12">
-            <label for="birthdate">Date de Naissance</label><br />
-            <input type="date" id="birthdate" name="birthDateCo" required="valid" cols="30" value="<?= $newData['birthdate']; ?>" >
+            <label for="birthdateUp">Date de Naissance</label><br />
+            <input type="date" id="birthdateUp" name="birthDateCo" required="valid" cols="30" value="<?= $newData['birthdate']; ?>" >
           </div>
           <div class="form-group col-lg-12">
-            <label for="parent1">Parent 1</label><br />
-            <input type="text" id="parent1" name="parent1Co" required="valid" cols="30" value="<?= $newData['parent1']; ?>">
+            <label for="parent1Up">Parent 1</label><br />
+            <input type="text" id="parent1Up" name="parent1Co" required="valid" cols="30" value="<?= $newData['parent1']; ?>">
             </div>
           <div class="form-group col-lg-12 ">
-            <label for="parent2">Parent 2</label><br />
-            <input type="text" id="parent2" name="parent2Co" cols="30" value="<?= $newData['parent2']; ?>" >
+            <label for="parent2Up">Parent 2</label><br />
+            <input type="text" id="parent2Up" name="parent2Co" cols="30" value="<?= $newData['parent2']; ?>" >
           </div>
 
 <?php
 }
 else{
   ?>
-            <input disabled id="lastname1" name="lastNameCo"  value="<?= $newData['surname']; ?>" /> 
-            <input disabled id="firstname1" name="firstNameCo"  value="<?= $newData['firstname']; ?>" > 
-            <input disabled id="birthdate" name="birthDateCo" value="<?= $newData['birthdate']; ?>" >
-            <input disabled id="parent1" name="parent1Co" value="<?= $newData['parent1']; ?>">
-            <input disabled id="parent2" name="parent2Co" cols="30" value="<?= $newData['parent2']; ?>" >
+            <input disabled id="lastname1Up" name="lastNameCo"  value="<?= $newData['surname']; ?>" /> 
+            <input disabled id="firstname1Up" name="firstNameCo"  value="<?= $newData['firstname']; ?>" > 
+            <input disabled id="birthdateUp" name="birthDateCo" value="<?= $newData['birthdate']; ?>" >
+            <input disabled id="parent1Up" name="parent1Co" value="<?= $newData['parent1']; ?>">
+            <input disabled id="parent2Up" name="parent2Co" cols="30" value="<?= $newData['parent2']; ?>" >
 
 <?php
 }
@@ -62,14 +61,18 @@ $newConnex2 = $connex2->fetch()
             <h2>ALIMENTATION</h2>
             <div class="form-group col-lg-12 ">
             <label for="favoriteMeal">Plats préférés</label><br />
-            <textarea id="favoriteMeal" name="favoriteMealCo" autofocus="on" rows="5" cols="30" ><?= $newConnex2['favorite_meal']; ?></textarea>
+            <textarea id="favoriteMealUp" name="favoriteMealCo" autofocus="on" rows="5" cols="30" ><?= $newConnex2['favorite_meal']; ?></textarea>
             </div>
             <div class="form-group col-lg-12 ">
             <label for="hatedMeal">Plats détestés</label><br />
-            <textarea id="hatedMeal" name="hatedMealCo" rows="5" cols="30"><?= $newConnex2['hated_meal']; ?></textarea>
+            <textarea id="hatedMealUp" name="hatedMealCo" rows="5" cols="30"><?= $newConnex2['hated_meal']; ?></textarea>
             </div>
 
             <h2>TRAITEMENT</h2>
+<?php
+  if($getDateTTT != NULL){
+?>
+
             <div class="form-group col-lg-12">
 
 
@@ -83,20 +86,24 @@ foreach($newMeds as $posology){
 ?>
 <?= $posology["title"] ?> : 
 <?= $posology['content'] ?>
+
 <?php
+echo "\n";
 }
-?>
-
-
+?>              
               </textarea>
             </div>
+
+
 
 
             <div class="autocomplete ui-front form-group col-lg-12" >
             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#stopMeds">Arrêter le traitement</a>
             </div>
 
-
+<?php
+  }
+?>
 
   
 
@@ -109,17 +116,19 @@ $newConnex3 = $connex3->fetch()
             <div class="autocomplete ui-front form-group col-lg-12" >
               <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> 
             </div>
-
-
+            <div class="form-group col-lg-12 startDate" >
+              <label for="startDate">Date de début du traitement</label>
+              <input id="startDateCoUp" type="date" name="startDateCo" >
+            </div>
             <h2 class="lampost">ALLERGIES</h2>
             <div class="form-group col-lg-12 ">
-            <input type="hidden" id="idAllergyCo" name="idAllCo" value="<?= $newConnex3['idAllergy'] ?>" />
-            <textarea id="allergies" name="allergiesCo" rows="2" cols="30" ><?= $newConnex3['content'] ?></textarea>
+            <input hidden id="idAllergyCoUp" name="idAllCo" value="<?= $newConnex3['idAllergy'] ?>" />
+            <input hidden name="idChildCo" id="idChildCoUp" value="<?= $_GET['idChildren'] ?>" />
+            <textarea id="allergiesUp" name="allergiesCo" rows="2" cols="30" ><?= $newConnex3['content'] ?></textarea>
             </div>         
-            <input hidden name="idChildCo" id="idChildCo" value="<?= $_GET['idChildren'] ?>" />
-          <div class="form-check col-lg-12">
-            <a class="btn btn-primary"  id="submitChildren2" >Valider</a>
-          </div>
+            <div class="form-check col-lg-12">
+              <a class="btn btn-primary"  id="submitChildren2" style="color:white;">Valider</a>
+            </div>
 
 </form>
 

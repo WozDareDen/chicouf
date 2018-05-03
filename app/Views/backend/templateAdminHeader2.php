@@ -38,9 +38,9 @@
                 </li>
 
                 <li class="darkerli">
-                    <a href="#">
+                    <a href="admin.php?action=famPage">
                     <i class="fa fa-picture-o fa-lg"></i>
-                    <span class="nav-text">Images</span>
+                    <span class="nav-text">Test</span>
                     </a>
                 </li>               
             </ul>                                  

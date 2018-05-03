@@ -7,7 +7,7 @@ class ChildManager extends Manager
     //***************GET CHILD INFOS THROUGH MEMBER**************************
     public function watchChild($idMember){
         $db = $this -> dbConnect(); 
-        $data = $db->prepare('SELECT children.idChildren, member_children.idMember, surname, firstname, img, parent1, parent2, updateUser, DATE_FORMAT(updateLog, \'%d/%m/%Y à %Hh%i\') as new_updateLog,  DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN member_children ON member_children.idChildren = children.idChildren WHERE idMember = ?');
+        $data = $db->prepare('SELECT children.idChildren, member_children.idMember, surname, firstname, img, parent1, parent2, updateUser, children.gender,DATE_FORMAT(updateLog, \'%d/%m/%Y à %Hh%i\') as new_updateLog,  DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN member_children ON member_children.idChildren = children.idChildren WHERE idMember = ?');
         $data->execute(array($idMember));
         return $data;
     }
@@ -31,7 +31,7 @@ class ChildManager extends Manager
     }
     public function getTTTDate($one_childId){
         $db = $this -> dbConnect();
-        $connex5 = $db->prepare('SELECT idTTT,DATE_FORMAT( startDate,\'%d/%m/%Y \') as new_startDate FROM treatment WHERE idChildren = ?');
+        $connex5 = $db->prepare('SELECT idTTT,DATE_FORMAT(startDate,\'%d/%m/%Y \') as new_startDate FROM treatment WHERE idChildren = ?');
         $connex5->execute(array($one_childId));
         return $connex5;
     }
@@ -96,7 +96,7 @@ class ChildManager extends Manager
     public function updateOldChild($lastname,$firstname,$birthdate,$parent1,$parent2, $idChild, $username){
         $db = $this -> dbConnect();
         $infos1 = $db->prepare('UPDATE children SET surname=?, firstname=?, birthdate=?, parent1=? ,parent2=?, upDateLog=NOW(), upDateUser=? WHERE idChildren = ?');
-        $infos1->execute(array($lastName,$firstName,$birthdate,$parent1,$parent2,$username,$idChild));
+        $infos1->execute(array($lastname,$firstname,$birthdate,$parent1,$parent2,$username,$idChild));
         return $infos1;
     }
     // FOOD
@@ -112,26 +112,6 @@ class ChildManager extends Manager
         $upDateAllergy = $db->prepare('UPDATE allergy SET content = ? WHERE idAllergy = ?');
         $upDateAllergy->execute(array($allergies,$idAllergy));
         return $upDateAllergy;
-    }
-    // treatment
-    public function updateOldTTT($idTTT,$start){
-        $db = $this -> dbConnect();
-        $updateTTT = $db->prepare('UPDATE treatment SET startDate = ? WHERE idTTT = ?');
-        $updateTTT->execute(array($start,$idTTT));
-        return $updateTTT;
-    }
-    // posology
-    public function updateOldPoso($idTTT,$freq,$idMeds){
-        $db = $this -> dbConnect();
-        $updatePoso = $db->prepare('UPDATE posology SET content = ? WHERE idTTT = ?');
-        $updatePoso->execute(array($freq,$idTTT));
-        return $updatePoso;
-    }
-    public function deleteAllergy($idAllergy,$idChildren){
-        $db = $this -> dbConnect();
-        $infos44444 = $db->prepare('DELETE FROM allergy WHERE idChildren = ?');
-        $infos44444->execute(array($idChildren));
-        return $infos44444;
     }
     // DELETE CHILD
     public function eraseChild($idChildren){

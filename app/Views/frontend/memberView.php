@@ -2,11 +2,23 @@
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
 
-<div class="container" >
+<div class="container pageMV" >
 
 
-  <h1 style="text-align:center;" >Bienvenue sur votre Espace Membre <?= $_SESSION['firstname'] ?>&nbsp;!</h1>
+<?php
+if($_SESSION["gender"]==0){
+?>
 
+  <span class="pseudoM"><h1 style="text-align:center;" >Bienvenue sur votre Espace Membre <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
+
+<?php
+}
+else{
+?>
+  <span class="pseudoF"><h1 style="text-align:center;" >Bienvenue sur votre Espace Membre <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
+<?php
+}
+?>
   <article class="row justify-content-md-center" style="text-align:center;text-align:justify;"> <h5>Vous trouverez ici tous les renseignements nécessaires à la gestion des fiches de vos enfants.</h5>
   <div class="lead loco alert alert-success alert-dismissible fade show"  data-dismiss="alert" role="alert" title="Faîtes disparaitre ce message en cliquant dessus, il réapparaitra la prochaine fois que vous viendrez sur cette page ;)">
     <p> Vous pouvez les modifier et les personnaliser à loisir. Tous les membres de votre Espace Famille auront la possibilité de modifier les habitudes alimentaires et les traitements. Seuls les parents peuvent ajouter une photo de profil et modifier l'identité de la Fiche Enfant.</p> 
@@ -58,9 +70,26 @@ else{
 
   
     <article class="col-sm-7 social" >
-    <h3><?= $one_child['firstname']; ?> <?= $one_child['surname']; ?> </h3>
-                    <a href="index.php?action=goToUpdateChild&idChildren=<?= $one_child['idChildren']; ?>" class="social"><button type="button" style="background-color:#FCD64C;color:#0B2F3D;" class="btn">Modifier cette fiche enfant</button></a>
-                    <button type="button" style="background-color:#3D91B2;color:#FFF" class="btn social" data-toggle="modal" data-target="#exampleModal2<?= $one_child['idChildren'] ?>">Rattacher un parent à cet enfant</button>
+
+<?php
+if($one_child["gender"]==1){
+?>
+
+    <h3 class="pseudoF"><?= $one_child['firstname']; ?> <?= $one_child['surname']; ?> </h3>
+
+<?php
+}
+else{
+?>
+
+    <h3 class="pseudoM"><?= $one_child['firstname']; ?> <?= $one_child['surname']; ?> </h3>
+
+<?php
+}
+?>
+
+                    <a href="index.php?action=goToUpdateChild&idChildren=<?= $one_child['idChildren']; ?>" class="social"><button type="button" style="background-color:#b80308;color:white;" class="btn">Modifier cette fiche enfant</button></a>
+                    <button type="button" class="btn social btn-info" data-toggle="modal" data-target="#exampleModal2<?= $one_child['idChildren'] ?>">Rattacher un parent à cet enfant</button>
 
 <!--***************************Modal Child-to-Parent****************************-->
                     <div class="modal fade" id="exampleModal2<?= $one_child['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
@@ -89,15 +118,14 @@ else{
                     </div>
 <!--*************************IDENTITY********************************-->
                     <div class="sr-only"><?= $one_child['idMember']; ?></div>
-                    <p class="social">Date de naissance : <?= $one_child['new_birthdate']; ?></p>
-                    <p class="social">Parent(s) : <?= $one_child['parent1']?> 
+                    <p class="social">Date de naissance : <span class="writings"><?= $one_child['new_birthdate']; ?></span></p>
+                    <p class="social">Parent(s) : <span class="writings"><?= $one_child['parent1']?></span> 
     <?php 
     if(!empty($one_child['parent2'])){
     ?>
-    & <?= $one_child['parent2']?>
+    <span class="writings">& </span><span class="writings"><?= $one_child['parent2']?></span>
     <?php
-    }
-    
+    }    
 ?> 
 
 </p>
@@ -108,37 +136,31 @@ else{
     foreach($one_child['meal'] as $nMeals){
 
     ?>
-                        <h3 class="social">ALIMENTATION </h3>
-                        <p class="social">Plats préférés : <?= $nMeals['favorite_meal']; ?></p>
-                        <p class="social">Plats détestés : <?= $nMeals['hated_meal']; ?></p>
+                        <h3 class="social titlesMV">ALIMENTATION </h3>
+                        <p class="social">Plats préférés : <span class="writings"><?= $nMeals['favorite_meal']; ?></span></p>
+                        <p class="social">Plats détestés : <span class="writings"><?= $nMeals['hated_meal']; ?></p>
 
     <?php
     }
     ?>
     <!--**************************HEALTH**********************************-->        
-                        <h3 class="social">TRAITEMENT</h3>
+                        <h3 class="social titlesMV">TRAITEMENT</h3>
 
-    <?php 
+<?php        
 if(!(empty($one_child['TTT']))){
-    foreach($one_child['TTT'] as $NTTT){  
-    ?>
+    foreach($one_child['TTT'] as $newTTT){
+?>
 
-                        <p class="social">Début du Traitement : <?= $NTTT['content']; ?></p>
+                        <p class="social" >Début du Traitement : <?= $newTTT['new_startDate']; ?></p>
                         <p class="social">Médicaments, posologies :</p>
                         <p> 
                         
-    <?php    
-                 
-        foreach($one_child['TTT'] as $Nmeds){                
-    ?>                   
+<?php                     
+        foreach($newTTT['meds'] as $Nmeds){                
+?>                   
 
-                        <span class="ita"><?= $Nmeds['title']; ?></span> <?= $Nmeds['content']; ?><br />      
+                        <span class="ita"><?= $Nmeds['title']; ?></span> (<?= $Nmeds['content']; ?>)<br />      
                         </p>
-
-
-
-
-                        
 
     <?php  
         }
@@ -146,32 +168,37 @@ if(!(empty($one_child['TTT']))){
 }
 else{
 ?>
-                    <p>Aucun traitement en cours</p>
+
+                    <p class="writings">Aucun traitement en cours</p>
+
 <?php
 }
-    ?>
-
-                    
-    <?php
+?>              
+<?php
     if(isset($one_child['allergies'])){
     foreach($one_child['allergies'] as $Nallergies){
     ?>
-                        <h3 class="social">ALLERGIES </h3>
-                        <p class="social"><?= $Nallergies['content']; ?></p>
-                        <p class="social">Dernière modification effectuée par <?= $one_child['updateUser'] ?>, le <?= $one_child['new_updateLog'] ?>.</p>
+
+                        <h3 class="social titlesMV">ALLERGIES </h3>
+                        <p class="social writings"><?= $Nallergies['content']; ?></p>
+                        <p class="social">Dernière modification effectuée par <span class="updateUser"><?= $one_child['updateUser'] ?></span>, le <?= $one_child['new_updateLog'] ?>.</p>
 
         </article>
-        <?php
+<?php
     }
     }
 }
 }
-
 ?>
+
   </section>
 
 </div>
 
+<script>
+if()
+
+  </script>
 
 <?php $content = ob_get_clean(); ?>
 <!--template.php-->

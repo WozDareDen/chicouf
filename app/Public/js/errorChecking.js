@@ -198,7 +198,6 @@ var Children2 = {
     lastname : "",
     firstname :"" , 
     birthdate :"" , 
-    gender :"" , 
     parent1 :"" , 
     parent2 :"" , 
     favMeal :"" , 
@@ -213,18 +212,17 @@ var NewChildren2 = Children2;
 
 // GET INPUTS FROM UPDATE-CHILD-FORM
 $('#submitChildren2').on('click',function(){
-    NewChildren2.idChild = $('#idChildCo').val();
-    NewChildren2.lastname = $('#lastname1').val();
-    NewChildren2.firstname = $('#firstname1').val();
-    NewChildren2.birthdate = $('#birthdate').val();
-    NewChildren2.gender = $('input[name=genderCo]:checked',"#gender").val();
-    NewChildren2.parent1 = $('#parent1').val();
-    NewChildren2.idAllergy = $('#idAllergyCo').val();
-    NewChildren2.allergies = $('#allergies').val();  
-    NewChildren2.favMeal = $('#favoriteMeal').val();
-    NewChildren2.hatedMeal = $('#hatedMeal').val();
-    NewChildren2.parent2 = $('#parent2').val();
-    NewChildren2.startDate = $('#startDateCo').val();
+    NewChildren2.idChild = $('#idChildCoUp').val();
+    NewChildren2.lastname = $('#lastname1Up').val();
+    NewChildren2.firstname = $('#firstname1Up').val();
+    NewChildren2.birthdate = $('#birthdateUp').val();
+    NewChildren2.parent1 = $('#parent1Up').val();
+    NewChildren2.idAllergy = $('#idAllergyCoUp').val();
+    NewChildren2.allergies = $('#allergiesUp').val();  
+    NewChildren2.favMeal = $('#favoriteMealUp').val();
+    NewChildren2.hatedMeal = $('#hatedMealUp').val();
+    NewChildren2.parent2 = $('#parent2Up').val();
+    NewChildren2.startDate = $('#startDateCoUp').val();
     NewChildren2.meds = [];
     var posoPoso = $('.posoCo');
     $('.medsCo').each(function(index){
@@ -247,7 +245,8 @@ $.ajax({
     url: "index.php",
     data: {data:childrenString,action:"updateChild"},
     method: "POST",
-        success: function(data){
+        success: function(data){          
+            
             location.href = "index.php";
         },
         error: function(e){

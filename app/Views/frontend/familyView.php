@@ -232,13 +232,10 @@ else{
 
    </div>
 
-<?php    
-}
-if($newDataMember['parenthood'] == 0){
-?>        
+       
 
     <h3 class="loco">Les grand-parents</h3>
-    <div class="row" style="border:1px solid black;"> 
+    <div class="row"> 
 
 <?php
 }   
