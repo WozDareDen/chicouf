@@ -160,7 +160,7 @@ $('#submitChildren').on('click',function(){
     NewChildren.startDate = $('#startDateCo').val();
 
     NewChildren.meds = [];
-    var fuckmyLife = $('.posoCo');
+    var getTextArea = $('.posoCo');
     $('.medsCo').each(function(index){
         var meds ={
             id : null,
@@ -171,7 +171,7 @@ $('#submitChildren').on('click',function(){
         meds.id = input.val(),
         meds.label = input.attr('id'),
         
-        meds.posology = $($(fuckmyLife)[index]).find('textarea')[0].value;
+        meds.posology = $($(getTextArea)[index]).find('textarea')[0].value;
         NewChildren.meds.push(meds);
     });
    

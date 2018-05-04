@@ -15,7 +15,7 @@ if($_SESSION["gender"]==0){
 }
 else{
 ?>
-  <span class="pseudoF"><h1 style="text-align:center;" >Bienvenue sur votre Espace Membre <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
+  <span class="pseudoF"><h1 style="text-align:center;" >Bienvenue sur votre Espace Membre, <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
 <?php
 }
 ?>
@@ -131,10 +131,8 @@ else{
 </p>
 <!--****************************FOOD**********************************-->
 <?php
-
     
     foreach($one_child['meal'] as $nMeals){
-
     ?>
                         <h3 class="social titlesMV">ALIMENTATION </h3>
                         <p class="social">Plats préférés : <span class="writings"><?= $nMeals['favorite_meal']; ?></span></p>
@@ -195,12 +193,8 @@ else{
 
 </div>
 
-<script>
-if()
 
-  </script>
 
 <?php $content = ob_get_clean(); ?>
 <!--template.php-->
 <?php require 'templateHeadScripts.php'; ?>
-

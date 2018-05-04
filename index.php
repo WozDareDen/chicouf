@@ -57,6 +57,9 @@ try{
                 $contentContact = htmlspecialchars($_POST['contentContact']);
                 $frontoffice->contact($usernameContact,$mailContact,$titleContact,$contentContact);
             }
+            else{
+                throw new \Exception('tous les champs ne sont pas remplis');
+            }
         }
         // USER RECORD
         elseif ($_GET['action'] == 'record'){
@@ -240,23 +243,6 @@ try{
             $idFamily = htmlspecialchars($_POST['idFamilyCo']);
             $frontoffice->uploadBanners($idFamily);
         }
-        // DISCUSSION
-        elseif ($_GET['action'] == 'addComment') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $chatDissId = htmlspecialchars($_GET['id']); 
-                $chatMemberId = htmlspecialchars($_POST['chatMemberId']);
-                $chatComment = htmlspecialchars($_POST['chatComment']);
-                if (!empty($chatMemberId) && !empty($chatComment)) {
-                    addComment($chatDissId, $chatMemberId, $chatComment);
-                }
-                else {
-                    throw new Exception('tous les champs ne sont pas remplis');
-                }
-            }
-            else {
-                throw new Exception('vous devez être connecté');
-            }
-        }
         // GO TO MENTIONS INFOS
         elseif($_GET['action'] == 'legal'){
             $frontoffice->goLegal();
@@ -332,5 +318,5 @@ try{
     }
 }
 catch(Exception $e){
-    echo $e->getMessage();
+  require('app/Views/frontend/errorView.php');
 }
