@@ -105,7 +105,24 @@ if(empty($_SESSION['firstname'])){
 else{
 ?>
 <a class="icone" href="index.php?action=recoverUser&id=<?= $_SESSION['id'] ?>" style="background-image:url(<?= $_SESSION['img'] ?>);"> </a>
-<span>Bonjour <?= $_SESSION['firstname'] ?>&nbsp; </span>
+
+<?php
+if($_SESSION['gender']==1){
+?>
+
+Bonjour <span class="pseudoF">&nbsp;<?= $_SESSION['firstname'] ?>&nbsp; </span>
+
+<?php
+}
+else{
+?>
+
+Bonjour <span class="pseudoM">&nbsp;<?= $_SESSION['firstname'] ?>&nbsp; </span>
+
+<?php
+}
+?>
+
 <a href="index.php?action=deco"><button type="button" style="background-color:#fa164b;color:#FFF;" class="btn my-2 my-sm-0 btnConnex" data-toggle="modal" >Déconnexion</button></a>
 
 <?php 
@@ -163,7 +180,24 @@ if(empty($_SESSION['firstname'])){
 else{
 ?>
 <a class="icone" href="index.php?action=recoverUser&id=<?= $_SESSION['id'] ?>" style="background-image:url(<?= $_SESSION['img'] ?>);"> </a>
-<span>Bonjour <?= $_SESSION['firstname'] ?>&nbsp; </span>
+
+<?php
+if($_SESSION['gender']==1){
+?>
+
+Bonjour <span class="pseudoF">&nbsp;<?= $_SESSION['firstname'] ?>&nbsp; </span>
+
+<?php
+}
+else{
+?>
+
+Bonjour <span class="pseudoM">&nbsp;<?= $_SESSION['firstname'] ?>&nbsp; </span>
+
+<?php
+}
+?>
+
 <a href="index.php?action=deco"><button type="button" class="btn btn-danger my-2 my-sm-0 btnConnex" data-toggle="modal" >
   Déconnexion
 </button></a>

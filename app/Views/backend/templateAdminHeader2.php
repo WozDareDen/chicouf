@@ -13,13 +13,13 @@
                     </a>
                 </li>                  
                 <li>                                 
-                    <a href="admin.php?action=membersView">
+                    <a href="admin.php?action=membersList">
                     <i class="fa fa-user fa-lg"></i>
                     <span class="nav-text">Membres</span>
                     </a>
                 </li>   
                 <li>                                 
-                    <a href="admin.php?action=familiesView">
+                    <a href="admin.php?action=familiesList">
                     <i class="fa fa-users fa-lg"></i>
                     <span class="nav-text">Familles</span>
                     </a>
@@ -31,7 +31,7 @@
                     </a>
                 </li>                                                       
                 <li class="darkerli">
-                    <a href="admin.php?action=m2">
+                    <a href="admin.php?action=membersList">
                     <i class="fa fa-desktop fa-lg"></i>
                     <span class="nav-text">Statistiques</span>
                     </a>

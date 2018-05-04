@@ -11,10 +11,27 @@ class BackOffice{
         $childrenAll = $adminManager -> childrenStats()->fetch();
         require 'app/Views/backend/dashboard.php';
     }
-    function watchFamilies(){
+    function membersList($cPage){
         $adminManager = new \Src\Models\AdminManager();
-        $data = $adminManager -> watchAllFamilies();
+        $numPage = $adminManager->nbPage();
+        if( !($cPage>0 && $cPage<=$numPage)){
+            $cPage = 1;
+        }
+    $data = $adminManager->watchAllMembers($cPage);
+    $useAll = $adminManager -> userStats();
+    $userInfos = $adminManager -> lastStatUser();
+    require('app/Views/backend/membersView.php');
+    }
+    function familiesList($cPage){
+        $adminManager = new \Src\Models\AdminManager();
+        $numPage = $adminManager->nbPage2();
+        if( !($cPage>0 && $cPage<=$numPage)){
+            $cPage = 1;
+        }
+        $data = $adminManager -> watchAllFamilies($cPage);
         $famAll = $adminManager -> familyStats();
+        // $nbMembers = $adminManager -> nbMembers();
+        // $nbChildren = $adminManager -> nbChildren();
         require 'app/Views/backend/familiesView.php';
     }
     function deleteMember($idBackMember){
@@ -37,23 +54,11 @@ class BackOffice{
         $dataMsg6 = $adminManager -> getMails3();
         require 'app/Views/backend/msgView.php';
     }
-    function watchMembers(){
-        $adminManager = new \Src\Models\AdminManager();
-        $useAll = $adminManager -> userStats();
-        $userInfos = $adminManager -> lastStatUser();
-        require 'app/Views/backend/membersView.php';
-    }
-    function ajaxTest(){
-        $adminManager = new \Src\Models\AdminManager();
-        $data = $adminManager -> watchAllMembers();
-        header('Content-Type: application/json');
-        $data = $data->fetchAll();
-        echo json_encode($data);
-    }
-    function goToFam(){
-        $adminManager = new \Src\Models\AdminManager();
-        $data = $adminManager -> watchAllFamilies();
-        $famAll = $adminManager -> familyStats();
-        require 'app/Views/backend/famPage.php';
-    }
+    // function ajaxTest(){
+    //     $adminManager = new \Src\Models\AdminManager();
+    //     $data = $adminManager -> watchAllMembers();
+    //     header('Content-Type: application/json');
+    //     $data = $data->fetchAll();
+    //     echo json_encode($data);
+    // }
 }

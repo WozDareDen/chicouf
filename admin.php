@@ -11,7 +11,25 @@ try{
             if($_GET['action'] == 'dashboard'){
                 $backoffice->goToDashboard();
             }
-            if($_GET['action'] == 'famPage'){
+            elseif ($_GET['action'] == 'membersList') {
+                if(isset($_GET['p'])){
+                    $cPage = $_GET['p'];
+                }
+                else{
+                    $cPage = 1;
+                }
+                $backoffice->membersList($cPage);
+            }
+            elseif ($_GET['action'] == 'familiesList') {
+                if(isset($_GET['p'])){
+                    $cPage = $_GET['p'];
+                }
+                else{
+                    $cPage = 1;
+                }
+                $backoffice->familiesList($cPage);
+            }
+            elseif($_GET['action'] == 'famPage'){
                 $backoffice->goToFam();
             }
             elseif($_GET['action'] == 'deleteMember'){
@@ -22,14 +40,8 @@ try{
                 $idBackFamily = htmlspecialchars($_POST['idBackFamily']);
                 $backoffice->deleteFamily($idBackFamily);
             }
-            elseif($_GET['action'] == 'familiesView'){
-                $backoffice->watchFamilies();
-            }
             elseif($_GET['action'] == 'msgView'){
                 $backoffice->msgView();
-            }
-            elseif ($_GET['action'] == "membersView") {
-                $backoffice->watchMembers();
             }
             elseif($_GET['action'] == 'ajaxTest'){
                 $backoffice->ajaxTest();
@@ -37,8 +49,8 @@ try{
             else{
                 throw new \Exception ('cette page n\'existe pas');
             }
+        }
     }
-}
     else{
         header('Location: index.php');
     }

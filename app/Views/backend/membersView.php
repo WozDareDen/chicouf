@@ -21,10 +21,35 @@ $userAll = $useAll->fetch();
             </tr>
             </thead>
             <tbody class="table_body">
+            <?php
+while ($members = $data->fetch())
+{
+?>            
+            <tr><td><span id='idUser'><?=$members['idMember'] ?></span></td><td><span id='names'><?= $members['surname'] ?> <?=$members['firstname'] ?></span></td><td><span id='cities'><?= $members['city'] ?></span></td><td><span id='regDate'><?=$members['new_regDate']?></span></td></tr>
+           
+<?php
+}
+?>      
 
             </tbody>
-        </table>
-        
+        </table>   
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+
+    <?php
+for($i=1;$i<=$numPage;$i++){
+    echo "<li class='page-item'><a class='page-link' href=\"admin.php?action=membersList&p=$i\">$i </a></li>";
+}
+
+?>
+
+
+  </ul>
+</nav>
+
+
+
 <?php 
 $userInfo = $userInfos->fetch();
 ?>

@@ -5,15 +5,48 @@ namespace Src\Models;
 class AdminManager extends Manager
 {   
     //*************MEMBER CONTROLS***********************/
-    public function watchAllMembers(){
+    private $perPage = 10;
+    private $cPage = 1;
+
+    public function nbPage(){
+        $db = $this->dbConnect();
+        $reqPage = $db->query('SELECT COUNT(*) AS total FROM members');
+        $result = $reqPage->fetch();
+        $total = $result['total'];
+        $nbPage = ceil($total/$this->perPage);
+        return $nbPage;
+    }
+    public function nbPage2(){
+        $db = $this->dbConnect();
+        $reqPage = $db->query('SELECT COUNT(*) AS total FROM family');
+        $result = $reqPage->fetch();
+        $total = $result['total'];
+        $nbPage = ceil($total/$this->perPage);
+        return $nbPage;
+    }
+    public function watchAllMembers($cPage){
+        $this->cPage = $cPage;
         $db = $this -> dbConnect(); 
-        $data = $db->query('SELECT idMember,surname,firstname,city,registrationDate FROM members');
+        $data = $db->query("SELECT idMember,surname,firstname,city, DATE_FORMAT(registrationDate, \"%d/%m/%Y\") as new_regDate FROM members ORDER BY idMember ASC LIMIT ".(($this->cPage-1)*$this->perPage).", $this->perPage");
         return $data;
     }
-    public function watchAllFamilies(){
+    public function watchAllFamilies($cPage){
+        $this->cPage = $cPage;
         $db = $this -> dbConnect(); 
-        $data = $db->query('SELECT * FROM family');
+        $data = $db->query("SELECT * FROM family ORDER BY idFamily ASC LIMIT ".(($this->cPage-1)*$this->perPage).", $this->perPage");
         return $data;
+    }
+    public function nbMembers($idFamily){
+        $db = $this -> dbConnect();
+        $nbMembers = $db-prepare('SELECT COUNT(idMember) FROM member_family WHERE idFamily=?');
+        $nbMembers->execute(array($idFamily));
+        return $nbMembers;
+    }
+    public function nbChildren($idFamily){
+        $db = $this -> dbConnect();
+        $nbChildren = $db-prepare('SELECT COUNT(idChildren) FROM member_family WHERE idFamily=?');
+        $nbChildren->execute(array($idFamily));
+        return $nbChildren;
     }
     public function eraseMember($idBackMember){
         $db = $this -> dbConnect();
