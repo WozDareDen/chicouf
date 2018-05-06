@@ -25,6 +25,11 @@
       <label for="birthdate">Date de Naissance</label><br />
       <input type="date" id="birthdate" name="birthDateCo" required="valid" cols="30" placeholder="entrez sa date de naissance">
     </div>
+    <div class="form-group col-lg-12">
+      <label for="weight">Poids en Kg</label><br />
+      <input type="text" id="weightCo" name="weightCo" cols="30" placeholder="entrez son poids">
+      <input type="date" id="weightDateCo" name="weightDateCo" />
+    </div>
     <div class="form-group col-lg-12" id="gender">
       <label for="sexe">Sexe de l'enfant</label><br />
       <input type="radio" name="genderCo" class="genderCo" value="0" checked> Garçon<br>

@@ -155,9 +155,25 @@ class FrontOffice{
     // WATCH FAMILY
     function goToFamily($idFamily,$idMember){
         $familyManager = new \Src\Models\FamilyManager();
-        $dataF = $familyManager -> watchFamily($idFamily);
-        $dataF2 = $familyManager -> watchFamilyMeals($idFamily);
-        $dataF3 = $familyManager -> watchFamilyHealth($idFamily);
+        $children = $familyManager -> watchFamily($idFamily)->fetchAll();
+
+        $childManager = new \Src\Models\ChildManager();
+
+        foreach($children as $idChild=>$one_child){
+        $meals = $childManager -> getMealsInfos($one_child['idChildren'])->fetchAll();
+        $children[$idChild]['meal'] = $meals;
+
+        $TTT = $childManager -> getDateTTT($one_child['idChildren'])->fetchAll();
+            $children[$idChild]['TTT'] = $TTT;
+
+            foreach($TTT as $id=>$one_TTT){
+                $meds = $childManager -> getAllMedsChild($one_TTT['idTTT'])->fetchAll();
+                $children[$idChild]['TTT'][$id]['meds'] = $meds;
+            }
+            
+            $allergies = $childManager -> getAllergyInfos($one_child['idChildren'])->fetchAll();
+            $children[$idChild]['allergies'] = $allergies;
+        }        
         $dataF4 = $familyManager -> getFamilyName($idFamily);
         $dataF6 = $familyManager -> getImgFamily($idFamily);
         $dataF7 = $familyManager -> watchModo($idFamily);
@@ -248,6 +264,8 @@ class FrontOffice{
         $lastname = htmlspecialchars($newChild['lastname']);
         $firstname = htmlspecialchars($newChild['firstname']);
         $birthdate = htmlspecialchars($newChild['birthdate']);
+        $bulk = htmlspecialchars($newChild['bulk']);
+        $bulkDate = htmlspecialchars($newChild['bulkDate']);
         $gender = htmlspecialchars($newChild['gender']);
         $parent1 = htmlspecialchars($newChild['parent1']);
         $parent2 = htmlspecialchars($newChild['parent2']);
@@ -258,7 +276,7 @@ class FrontOffice{
         $username = $_SESSION['firstname'];
         $childManager = new \Src\Models\ChildManager();
         // identity       
-        $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $parent2,$username);
+        $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $parent2,$username, $bulk,$bulkDate);
         $getIdChild = $childManager -> getMaxIdChild();
         $getIdChild = $getIdChild->fetch();
         $idChild = $getIdChild[0];
@@ -277,15 +295,17 @@ class FrontOffice{
             $addToMyFamily = $childManager -> addToMyFamily($idChild,$idFamily);
         }
         // treatment
-        $addTTT = $childManager -> addTTT($idChild,$startDate);
-        $getIdTTT = $childManager -> getIdTTT();
-        $getIdTTT = $getIdTTT->fetch();
-        $idTTT = $getIdTTT[0];
-        // meds
-        foreach($newChild['meds'] as $poso) {
-            $posology = htmlspecialchars($poso['posology']) ;
-            $idMeds = $poso['label'] ;
-            $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$posology);
+        if($startDate != NULL){
+            $addTTT = $childManager -> addTTT($idChild,$startDate);
+            $getIdTTT = $childManager -> getIdTTT();
+            $getIdTTT = $getIdTTT->fetch();
+            $idTTT = $getIdTTT[0];
+            // meds
+            foreach($newChild['meds'] as $poso) {
+                $posology = htmlspecialchars($poso['posology']) ;
+                $idMeds = $poso['label'] ;
+                $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$posology);
+            }
         }
         return $children;
     }
@@ -324,6 +344,8 @@ class FrontOffice{
         $lastname = htmlspecialchars($newChild['lastname']);
         $firstname = htmlspecialchars($newChild['firstname']);
         $birthdate = htmlspecialchars($newChild['birthdate']);
+        $bulk = htmlspecialchars($newChild['bulk']);
+        $bulkDate = htmlspecialchars($newChild['bulkDate']);
         $parent1 = htmlspecialchars($newChild['parent1']);
         $parent2 = htmlspecialchars($newChild['parent2']);
         $favMeal = htmlspecialchars($newChild['favMeal']);
@@ -334,7 +356,7 @@ class FrontOffice{
         $idChild = $newChild['idChild'];
         $username = $_SESSION['firstname'];
         // id, meals, allergy
-        $infos1 = $childManager -> updateOldChild($lastname, $firstname, $birthdate, $parent1, $parent2, $idChild,$username);
+        $infos1 = $childManager -> updateOldChild($lastname, $firstname, $birthdate, $parent1, $parent2, $idChild,$username,$bulk,$bulkDate);
         $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChild);
         $upDateAllergy = $childManager -> updateOldAllergy($allergies,$idAllergy);
         // treatment

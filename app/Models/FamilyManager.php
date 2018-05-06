@@ -19,7 +19,7 @@ class FamilyManager extends Manager{
     }
     public function watchFamily($idFamily){
         $db = $this -> dbConnect(); 
-        $dataF = $db->prepare('SELECT children.idChildren, family_children.idFamily, surname, firstname, img, parent1, parent2, DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN family_children ON family_children.idChildren = children.idChildren WHERE idFamily = ? ORDER BY family_children.idChildren');
+        $dataF = $db->prepare('SELECT children.idChildren, family_children.idFamily, surname, firstname, img, parent1, parent2, gender, bulk, DATE_FORMAT(bulkDate,\'%d/%m/%Y\')  as new_bulkDate,DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN family_children ON family_children.idChildren = children.idChildren WHERE idFamily = ? ORDER BY family_children.idChildren');
         $dataF->execute(array($idFamily));
         return $dataF;
     }

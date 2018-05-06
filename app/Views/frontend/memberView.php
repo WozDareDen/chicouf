@@ -119,6 +119,7 @@ else{
 <!--*************************IDENTITY********************************-->
                     <div class="sr-only"><?= $one_child['idMember']; ?></div>
                     <p class="social">Date de naissance : <span class="writings"><?= $one_child['new_birthdate']; ?></span></p>
+                    <p class="social">Poids : <span class="writings"><?= $one_child['bulk']; ?> Kg</span> en date du <?= $one_child['new_bulkDate'] ?></p>
                     <p class="social">Parent(s) : <span class="writings"><?= $one_child['parent1']?></span> 
     <?php 
     if(!empty($one_child['parent2'])){

@@ -134,6 +134,8 @@ var Children = {
     lastname : "",
     firstname :"" , 
     birthdate :"" , 
+    bulk :"",
+    bulkDate :"",
     gender :"" , 
     parent1 :"" , 
     parent2 :"" , 
@@ -151,6 +153,8 @@ $('#submitChildren').on('click',function(){
     NewChildren.lastname = $('#lastname1').val();
     NewChildren.firstname = $('#firstname1').val();
     NewChildren.birthdate = $('#birthdate').val();
+    NewChildren.bulk = $('#weightCo').val();
+    NewChildren.bulk = $('#weightDateCo').val();
     NewChildren.gender = $('input[name=genderCo]:checked',"#gender").val();
     NewChildren.parent1 = $('#parent1').val();
     NewChildren.allergies = $('#allergies').val();  
@@ -198,6 +202,8 @@ var Children2 = {
     lastname : "",
     firstname :"" , 
     birthdate :"" , 
+    bulk :"",
+    bulkDate :"",
     parent1 :"" , 
     parent2 :"" , 
     favMeal :"" , 
@@ -216,6 +222,8 @@ $('#submitChildren2').on('click',function(){
     NewChildren2.lastname = $('#lastname1Up').val();
     NewChildren2.firstname = $('#firstname1Up').val();
     NewChildren2.birthdate = $('#birthdateUp').val();
+    NewChildren2.bulk = $('#weightUp').val();
+    NewChildren2.bulkDate = $('#weightDateUp').val();
     NewChildren2.parent1 = $('#parent1Up').val();
     NewChildren2.idAllergy = $('#idAllergyCoUp').val();
     NewChildren2.allergies = $('#allergiesUp').val();  

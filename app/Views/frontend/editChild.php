@@ -11,9 +11,9 @@
 $newData = $data->fetch()
 ?>
         <form method="post" autocomplete="off" action="index.php?action=updateChild&idChildren=<?= $newData['idChildren'] ?>">
-          <h1>MODIFICATION D'UNE FICHE ENFANT</h1>      
+          <h2>MODIFICATION D'UNE FICHE ENFANT</h2>      
           <article>
-            <p>Vous et vos proches pouvaient à tout moment modifier la fiche de renseignement de votre enfant.</p>
+            <p>Vous et vos proches pouvaient à tout moment modifier la fiche de renseignement d'un enfant.</p>
             <p>Seuls les parents peuvent mettre à jour l'identité et la photo de leur enfant.</p> </article>
 
 <?php
@@ -21,7 +21,7 @@ if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $n
 ?>    
  
           <div class="form-group  col-lg-12">
-            <h2>IDENTITE <a class="btn btn-danger"  href="index.php?action=deleteChild&idChildren=<?= $_GET['idChildren'] ?>" >Supprimer</a></h2>
+            <h4>IDENTITE <a class="btn btn-danger"  href="index.php?action=deleteChild&idChildren=<?= $_GET['idChildren'] ?>" >Supprimer</a></h4>
             <label for="lastname1Up">Nom</label><br />
             <input type="text" id="lastname1Up" name="lastNameCo"  required="valid" cols="30" value="<?= $newData['surname']; ?>" /> 
           </div>
@@ -32,6 +32,11 @@ if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $n
           <div class="form-group col-lg-12">
             <label for="birthdateUp">Date de Naissance</label><br />
             <input type="date" id="birthdateUp" name="birthDateCo" required="valid" cols="30" value="<?= $newData['birthdate']; ?>" >
+          </div>
+          <div class="form-group col-lg-12">
+            <label for="weightUp">Poids (en Kg)</label><br />
+            <input type="text" id="weightUp" name="weightUp" cols="30" value="<?= $newData['bulk'] ?>" />
+            <input type="date" id="weightDateUp" name="weightDateUp" value="<?= $newData['bulkDate'] ?>" />
           </div>
           <div class="form-group col-lg-12">
             <label for="parent1Up">Parent 1</label><br />
@@ -46,11 +51,12 @@ if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $n
 }
 else{
   ?>
-            <input disabled id="lastname1Up" name="lastNameCo"  value="<?= $newData['surname']; ?>" /> 
-            <input disabled id="firstname1Up" name="firstNameCo"  value="<?= $newData['firstname']; ?>" > 
-            <input disabled id="birthdateUp" name="birthDateCo" value="<?= $newData['birthdate']; ?>" >
-            <input disabled id="parent1Up" name="parent1Co" value="<?= $newData['parent1']; ?>">
-            <input disabled id="parent2Up" name="parent2Co" cols="30" value="<?= $newData['parent2']; ?>" >
+            <h1><?= $newData['firstname'] ?> <?= $newData['surname'] ?></h1>
+            <input hidden id="lastname1Up" name="lastNameCo"  value="<?= $newData['surname']; ?>" /> 
+            <input hidden id="firstname1Up" name="firstNameCo"  value="<?= $newData['firstname']; ?>" > 
+            <input hidden id="birthdateUp" name="birthDateCo" value="<?= $newData['birthdate']; ?>" >
+            <input hidden id="parent1Up" name="parent1Co" value="<?= $newData['parent1']; ?>">
+            <input hidden id="parent2Up" name="parent2Co" cols="30" value="<?= $newData['parent2']; ?>" >
 
 <?php
 }
@@ -58,7 +64,7 @@ else{
 <?php 
 $newConnex2 = $connex2->fetch()  
 ?>
-            <h2>ALIMENTATION</h2>
+            <h4>ALIMENTATION</h4>
             <div class="form-group col-lg-12 ">
             <label for="favoriteMeal">Plats préférés</label><br />
             <textarea id="favoriteMealUp" name="favoriteMealCo" autofocus="on" rows="5" cols="30" ><?= $newConnex2['favorite_meal']; ?></textarea>
@@ -68,7 +74,7 @@ $newConnex2 = $connex2->fetch()
             <textarea id="hatedMealUp" name="hatedMealCo" rows="5" cols="30"><?= $newConnex2['hated_meal']; ?></textarea>
             </div>
 
-            <h2>TRAITEMENT</h2>
+            <h4>TRAITEMENT</h4>
 <?php
   if($getDateTTT != NULL){
 ?>
@@ -120,7 +126,7 @@ $newConnex3 = $connex3->fetch()
               <label for="startDate">Date de début du traitement</label>
               <input id="startDateCoUp" type="date" name="startDateCo" >
             </div>
-            <h2 class="lampost">ALLERGIES</h2>
+            <h4 class="lampost">ALLERGIES</h4>
             <div class="form-group col-lg-12 ">
             <input hidden id="idAllergyCoUp" name="idAllCo" value="<?= $newConnex3['idAllergy'] ?>" />
             <input hidden name="idChildCo" id="idChildCoUp" value="<?= $_GET['idChildren'] ?>" />
