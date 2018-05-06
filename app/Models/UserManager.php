@@ -36,7 +36,14 @@ class UserManager extends Manager
         $req->execute(array($firstname,$surname));
         return $req;
     }
-    // HET IDMEMBER THROUGH MAIL
+    // DELETE ACCOUNT
+    public function eraseMember($idMember){
+        $db = $this -> dbConnect();
+        $deleteAccount = $db->prepare('DELETE FROM members WHERE idMember = ?');
+        $deleteAccount->execute(array($idMember));
+        return $deleteAccount;
+    }
+    // GET IDMEMBER THROUGH MAIL
     public function getBelongParent($mailCo){
         $db = $this -> dbConnect();
         $belong0 = $db->prepare('SELECT idMember FROM members WHERE mail = ?');
@@ -104,5 +111,17 @@ class UserManager extends Manager
         $newMeds = $db->prepare('INSERT INTO meds(title) VALUES(?)');
         $newMeds->execute(array($meds));
         return $newMeds;
+    }
+    public function checkParent($one_child){
+        $db = $this -> dbConnect();
+        $checkParent = $db->prepare('SELECT idMember FROM member_children WHERE idChildren=?');
+        $checkParent->execute(array($one_child));
+        return $checkParent;
+    }
+    public function checkChildren($idMember){
+        $db = $this -> dbConnect();
+        $checkChildren = $db->prepare('SELECT children.idChildren FROM children INNER JOIN member_children ON member_children.idChildren=children.idChildren WHERE idMember = ?');
+        $checkChildren->execute(array($idMember));
+        return $checkChildren;
     }
 }

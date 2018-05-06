@@ -81,6 +81,10 @@ try{
         elseif($_GET['action'] == 'subView'){
             $frontoffice->subView();
         }
+        // DELETE MEMBER
+        elseif($_GET['action'] == 'deleteMember'){
+            $frontoffice->deleteMember();
+        }
         // GET CHILD TO PARENT
         elseif($_GET['action'] == 'belong'){
             if(isset($_POST['mailCo']) && isset($_GET['idChildren'])){

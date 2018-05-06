@@ -126,6 +126,25 @@ class FrontOffice{
             throw new \Exception('votre mot de passe doit comporter des lettres majuscules, minuscules ET des chiffres entre 8 et 16 caractères');
         }
     }
+    // DELETE ACCOUNT
+    function deleteMember(){
+        $userManager = new \Src\Models\UserManager();
+        $idMember = $_SESSION['id'];
+        $checkChildren = $userManager -> checkChildren($idMember)->fetchAll();
+        
+        foreach($checkChildren as $one_child){           
+            $checkParent = $userManager -> checkParent($one_child[0]);
+            $checkParent2 = $checkParent->fetch();
+            var_dump($checkParent);
+            if(count($checkParent2)<2){ 
+                $childManager = new \Src\Models\ChildManager();
+                $deleteChildren = $childManager -> eraseChild($one_child[0]);               
+            }
+        }
+        // $deleteAccount = $userManager -> eraseMember($idMember);
+        // header('Location: index.php');
+    }
+
     //*******************************GO TO FAMILY SPACE*****************************************
     function goToCreateFamily(){
         require 'app/Views/frontend/familyView.php';

@@ -21,7 +21,7 @@ if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $n
 ?>    
  
           <div class="form-group  col-lg-12">
-            <h4>IDENTITE <a class="btn btn-danger"  href="index.php?action=deleteChild&idChildren=<?= $_GET['idChildren'] ?>" >Supprimer</a></h4>
+            <h4>IDENTITE <a class="btn btn-danger" data-toggle="modal" data-target="#modalDeleteChild" href="#" >Supprimer</a></h4>
             <label for="lastname1Up">Nom</label><br />
             <input type="text" id="lastname1Up" name="lastNameCo"  required="valid" cols="30" value="<?= $newData['surname']; ?>" /> 
           </div>
@@ -171,6 +171,37 @@ $newConnex3 = $connex3->fetch()
         </div>
     </div>
 </div>
+
+<!-- MODAL DELETE CHILD-->
+<div class="modal fade" id="modalDeleteChild" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header padiday">
+                <h5 class="modal-title" style="color:black;">Supprimer une fiche Enfant</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="color:black;">
+                <p>En validant, vous supprimez définitivement toutes les données concernant votre Enfant. Vous pouvez en recréer une nouvelle à tout moment. <br /></p>
+                 <form action="index.php?action=index.php?action=deleteChild&idChildren=<?= $_GET['idChildren'] ?>" method="post">
+                 <div class="form-group">
+                        
+                    </div>
+                 <div class="form-check">
+                    <input type="checkbox" name="choixDelCo" required /> Je confirme supprimer cette fiche Enfant.</br>
+                </div>
+                <button type="submit" class="btn btn-outline-danger">Valider</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
 
 <?php $content = ob_get_clean(); ?>

@@ -79,7 +79,8 @@ if($_SESSION['parenthood'] == 0){
         </article>
         <article class="col-sm-6">
             <form action="index.php?action=changeProfile&id" method="post">
-                <button type="button" class="btn btn-info"  class="btn social" data-toggle="modal" data-target="#modalChangePass">Changer votre mot de passe</button><br />
+                <button type="button" class="btn btn-info"  class="btn social" data-toggle="modal" data-target="#modalChangePass">Changer votre mot de passe</button>
+                <button type="button" class="btn btn-danger"  class="btn social" data-toggle="modal" data-target="#modalQuit">Supprimer mon compte</button><br />
          
 <?php
 // CHANGE SURNAME FOR MISSES
@@ -159,7 +160,31 @@ else{
 
 
 
-
+<!-- MODAL DELETE MEMBER-->
+<div class="modal fade" id="modalQuit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header padiday">
+                <h5 class="modal-title" style="color:black;">Supprimer mon compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="color:black;">
+                <p>En validant, vous supprimez <strong>définitivement</strong> toutes les données vous concernant ainsi que celles de <strong>vos enfants</strong> sauf s'il reste un parent attaché à cet enfant. Vous pouvez vous réinscrire à tout moment. <br /></p>
+                 <form action="index.php?action=deleteMember" method="post">
+                 <div class="form-group">
+                        
+                    </div>
+                 <div class="form-check">
+                    <input type="checkbox" name="choixDelCo" required /> Je confirme supprimer mon compte.</br>
+                </div>
+                <button type="submit" class="btn btn-outline-danger">Valider</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
