@@ -395,3 +395,6 @@ a.dropdown-item:hover{
 .ui-helper-hidden-accessible{
     display:none;
 }
+#footer{
+    margin-top:100px;
+}

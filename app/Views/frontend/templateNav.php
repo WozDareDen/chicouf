@@ -32,21 +32,23 @@ Espace Enfant
 </li>
 
 <?php
-if(!(isset($_SESSION['family']))){
+if(isset($_SESSION['family'])){
 ?>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Espace Famille</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="index.php?action=familyLink&id=<?= $_SESSION['family'] ?>">Rejoindre mon espace Famille</a>
-                <a class="dropdown-item" href="index.php?action=goToCreateFamily" >Créer un Espace Famille</a>      
-                </div>
-            </li>
+           <li class="nav-item">
+<a class="nav-link" href="index.php?action=familyLink&id=<?= $_SESSION['family'] ?>">Espace Famille</a>
+</li>
 <?php
 }
 else{
-?>        <li class="nav-item">
-<a class="nav-link" href="index.php?action=familyLink&id=<?= $_SESSION['family'] ?>">Espace Famille</a>
-</li>
+?>        
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?action=goToCreateFamily&id">Espace Famille</a>
+            </li>
+
+
+
+
+
 
 <?php
 }
@@ -56,7 +58,9 @@ else{
         <li class="nav-item">
             <div class="nav-link contactMouse" data-toggle="modal" data-target="#ModalContact" >Nous contacter</div>
         </li>
-        <?php
+
+        
+<?php
 if($_SESSION['modo'] >0){
   ?>
   <li class="nav-item dropdown">

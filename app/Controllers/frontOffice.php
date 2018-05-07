@@ -94,9 +94,11 @@ class FrontOffice{
     {
         $userManager = new \Src\Models\UserManager();
         $recoverUs = $userManager -> watchUser($idMember);
-        $idFamily = $_SESSION['family'];
-        $familyManager = new \Src\Models\FamilyManager();
-        $getFamilyName = $familyManager -> getFamilyName($idFamily);
+        if(isset($_SESSION['family'])){       
+            $idFamily = $_SESSION['family'];
+            $familyManager = new \Src\Models\FamilyManager();
+            $getFamilyName = $familyManager -> getFamilyName($idFamily);
+        }
         require 'app/Views/frontend/profileView.php';
     }
     // UPDATE PROFILE
@@ -131,20 +133,31 @@ class FrontOffice{
         $userManager = new \Src\Models\UserManager();
         $idMember = $_SESSION['id'];
         $checkChildren = $userManager -> checkChildren($idMember)->fetchAll();
-        
-        foreach($checkChildren as $one_child){           
-            $checkParent = $userManager -> checkParent($one_child[0]);
-            $checkParent2 = $checkParent->fetch();
-            var_dump($checkParent);
-            if(count($checkParent2)<2){ 
-                $childManager = new \Src\Models\ChildManager();
-                $deleteChildren = $childManager -> eraseChild($one_child[0]);               
+        $familyManager = new \Src\Models\FamilyManager();
+        $idFamily = $_SESSION['family'];
+        $checkModo = $familyManager -> checkModo($idFamily);
+        $checkModo2 = $checkModo->fetchAll();
+            if(count($checkModo2)>1){ 
+                $_SESSION['modo'] = 0;
             }
-        }
-        // $deleteAccount = $userManager -> eraseMember($idMember);
-        // header('Location: index.php');
+            else{
+                throw new \Exception('vous devez d\'abord désigner un nouveau modérateur de votre Espace Famille');
+            }
+        foreach($checkChildren as $one_child){
+            $idChild = $one_child['idChildren'];           
+            $checkParent = $userManager -> checkParent($idChild);
+            $checkParent2 = $checkParent->fetch();
+            var_dump(count($checkParent2));
+            var_dump(count($checkChildren));
+            $childManager = new \Src\Models\ChildManager();           
+                if(count($checkParent2['idMember'])==1){ 
+                    $deleteChildren = $childManager -> eraseChild($idChild);    
+                }                      
+        }      
+        header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);
+        $deleteAccount = $userManager -> eraseMember($idMember);
+        $this->disconnected();
     }
-
     //*******************************GO TO FAMILY SPACE*****************************************
     function goToCreateFamily(){
         require 'app/Views/frontend/familyView.php';
@@ -164,7 +177,7 @@ class FrontOffice{
         if(!empty($getChildId2)){
             foreach($getChildId2 as $getChildId3){
                 $idChild = $getChildId3['idChildren'];
-                $addToMyFamily = $childManager -> AddToMyFamily($idChild,$idFamily);
+                $addToMyFamily = $childManager -> addToMyFamily($idChild,$idFamily);
             }
         }
         $_SESSION['family'] = $idFamily;
@@ -221,10 +234,10 @@ class FrontOffice{
             $dataParent3 = $familyManager -> belongParent($idMember,$idFamily);
             $dataParent4 = $familyManager -> getChildParent($idMember);
             $dataParent6 = $dataParent4->fetchAll();
-                if(empty($dataParent6)){
+                if(!(empty($dataParent6))){
                     foreach($dataParent6 as $dataParent7){
-                    $idChild = $dataParent7['idChildren'];
-                    $dataParent5 = $familyManager -> belongChild($idFamily,$idChild);
+                        $idChild = $dataParent7['idChildren'];
+                        $dataParent5 = $familyManager -> belongChild($idFamily,$idChild);
                     }
                 }
             }
@@ -260,6 +273,10 @@ class FrontOffice{
         $userManager = new \Src\Models\UserManager();
         $getIdModo = $userManager -> getBelongParent($mailCo);
         $getIdModo2 = $getIdModo->fetch();
+        $modo = $getIdModo2['modo'];
+        if($modo == 1){
+            throw new \Exception('vous ne pouvez bannir ce membre car il est aussi modérateur de cette famille');
+        }
         $idMember = $getIdModo2['idMember'];
         $familyManager = new \Src\Models\FamilyManager();
         $bann = $familyManager -> bannMember($idFamily,$idMember);
@@ -295,7 +312,7 @@ class FrontOffice{
         $username = $_SESSION['firstname'];
         $childManager = new \Src\Models\ChildManager();
         // identity       
-        $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $parent2,$username, $bulk,$bulkDate);
+        $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $parent2,$username, $bulk, $bulkDate);
         $getIdChild = $childManager -> getMaxIdChild();
         $getIdChild = $getIdChild->fetch();
         $idChild = $getIdChild[0];
@@ -345,12 +362,12 @@ class FrontOffice{
         $connex5 = $childManager -> getIdFamilyByChild($idChild);
         $newConnex5 = $connex5->fetch();
             if(isset($_SESSION['id'])){
-                if($_SESSION['family'] === $newConnex5['idFamily']){
+                // if($_SESSION['family'] === $newConnex5['idFamily']){
                     require 'App/Views/frontend/editChild.php';
-                }
-                else{
-                    throw new \Exception('Cette page n\'existe pas !');
-                }
+                // }
+                // else{
+                //     throw new \Exception('cette page n\'existe pas !');
+                // }
             }
             else{
                 throw new \Exception('Cette page n\'existe pas !');
@@ -409,10 +426,16 @@ class FrontOffice{
     // BELONG PARENT TO CHILD
     function belong($mailCo,$idChild){
         $userManager = new \Src\Models\UserManager();
+        $childManager = new \Src\Models\ChildManager();
         $belong0 = $userManager -> getBelongParent($mailCo);
         $belong1 = $belong0->fetch();
         $idMember = $belong1['idMember'];
-        $belong2 = $userManager -> belongParent($idMember,$idChild);
+        $belong2 = $childManager -> addToMyParent($idChild,$idMember);
+        $getFamilyId = $userManager -> getFamilyId($idMember)->fetch();
+        if($getFamilyId != NULL){       
+            $idFamily = $getFamilyId['idFamily'];
+            $addToMyFamily = $childManager -> addToMyFamily($idChild, $idFamily);
+        }
         header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);
     }  
     //********************OTHER REQUIRES***********************************    

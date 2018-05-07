@@ -25,8 +25,14 @@ L’enveloppe Soleau, du nom de son créateur, est un moyen de preuve simple et 
         </article>
     </section>
 
-<!--********REGISTRATION FORM****************-->    
-<?php require 'registrationView.php';
+<!--********REGISTRATION FORM****************-->
+
+<?php 
+if(isset($_SESSION['id'])){
+}
+else{
+    require 'registrationView.php';
+}
 ?>
 
 </div>

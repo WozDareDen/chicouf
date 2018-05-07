@@ -54,6 +54,11 @@ class BackOffice{
         $dataMsg6 = $adminManager -> getMails3();
         require 'app/Views/backend/msgView.php';
     }
+    function deleteMail($idMail){
+        $adminManager = new \Src\Models\AdminManager();
+        $deleteMail = $adminManager -> deleteContact($idMail);
+        header('Location: admin.php?action=msgView');
+    }
     // function ajaxTest(){
     //     $adminManager = new \Src\Models\AdminManager();
     //     $data = $adminManager -> watchAllMembers();

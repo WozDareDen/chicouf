@@ -27,7 +27,7 @@ else{
         <h1 class="mbr-section-title" style="text-align:center;">Modifier votre profil <?= $modif['firstname'] ?></h1>
 
 <?php
-if($getFamilyName['familyName']==true){
+if(isset($getFamilyName['familyName'])==true){
 ?>
         <h4 style="text-align:center;">Vous êtes membre de la Famille <?= $getFamilyName['familyName'] ?></h4>
 <?php
@@ -136,7 +136,7 @@ else{
                     <input type="password" id="initPass" name="initPassCo" required placeholder="mot de passe actuel"><br />
                     <input type="password" id="regFormPass" class="champ2 champPass" name="passCo"
                         autocomplete="off" placeholder="nouveau mot de passe" required>
-                    <input type="checkbox" onclick="myFunction()" name="pass2Co">Afficher le mot de passe <br>
+                    <input type="checkbox" onclick="watchPW()" name="pass2Co">Afficher le mot de passe <br>
                     <div id="pop">
                     <!--Button trigger modal-->
                         <div id="buttonPassword" class="btn" data-toggle="modal" data-target="#exampleModalCenter">

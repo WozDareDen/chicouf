@@ -50,7 +50,7 @@ foreach($bigDataMsg as $newDataMsg){
 
 
                 <tr>
-                    <th scope="row"><?= $newDataMsg['idContact'] ?></th>
+                <th scope="row"><a href="admin.php?action=deleteMail&id=<?= $newDataMsg['idContact'] ?>"><?= $newDataMsg['idContact'] ?></th>
                     <td><?= $newDataMsg['nameContact'] ?></td>
                     <td><?= $newDataMsg['msg'] ?></td>
                     <td><?= $newDataMsg['mailContact'] ?></td>
@@ -100,7 +100,7 @@ foreach($bigDataMsg1 as $newDataMsg1){
        
 
                 <tr>
-                    <th scope="row"><?= $newDataMsg1['idContact'] ?></th>
+                    <th scope="row"><a href="admin.php?action=deleteMail&id=<?= $newDataMsg1['idContact'] ?>"><?= $newDataMsg1['idContact'] ?></th>
                     <td><?= $newDataMsg1['nameContact'] ?></td>
                     <td><?= $newDataMsg1['msg'] ?></td>
                     <td><?= $newDataMsg1['mailContact'] ?></td>
@@ -148,7 +148,7 @@ foreach($bigDataMsg2 as $newDataMsg2){
 ?>
       
                 <tr>
-                    <th scope="row"><?= $newDataMsg2['idContact'] ?></th>
+                <th scope="row"><a href="admin.php?action=deleteMail&id=<?= $newDataMsg2['idContact'] ?>"><?= $newDataMsg2['idContact'] ?></th>
                     <td><?= $newDataMsg2['nameContact'] ?></td>
                     <td><?= $newDataMsg2['msg'] ?></td>
                     <td><?= $newDataMsg2['mailContact'] ?></td>

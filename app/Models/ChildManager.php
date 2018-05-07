@@ -44,7 +44,7 @@ class ChildManager extends Manager
             $img = 'app/Public/uploads/avatarGirl.png';
         }    
         $db = $this -> dbConnect();
-        $infos1 = $db->prepare('INSERT INTO children(surname,firstname,birthdate,gender,parent1,parent2,img,updateLog,updateUser,bulk,bulkDate) VALUES(?,?,?,?,?,?,?,NOW(),?,?)');
+        $infos1 = $db->prepare('INSERT INTO children(surname,firstname,birthdate,gender,parent1,parent2,img,updateLog,updateUser,bulk,bulkDate) VALUES(?,?,?,?,?,?,?,NOW(),?,?,?)');
         $infos1->execute(array($lastname,$firstname,$birthdate,$gender, $parent1,$parent2,$img,$username,$bulk,$bulkDate));
         return $infos1;
     }

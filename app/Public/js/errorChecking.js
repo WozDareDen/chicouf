@@ -53,7 +53,6 @@ $('#regFormPass2').on('keyup',function(){
 
 // SHOW/HIDE PASSWORD 1
 function watchPW() {
-    console.log(x);
     var x = document.getElementById("regFormPass"); 
         if (x.type === "password") {
             x.type = "text";
@@ -154,7 +153,7 @@ $('#submitChildren').on('click',function(){
     NewChildren.firstname = $('#firstname1').val();
     NewChildren.birthdate = $('#birthdate').val();
     NewChildren.bulk = $('#weightCo').val();
-    NewChildren.bulk = $('#weightDateCo').val();
+    NewChildren.bulkDate = $('#weightDateCo').val();
     NewChildren.gender = $('input[name=genderCo]:checked',"#gender").val();
     NewChildren.parent1 = $('#parent1').val();
     NewChildren.allergies = $('#allergies').val();  
@@ -180,7 +179,7 @@ $('#submitChildren').on('click',function(){
     });
    
     var childrenString = JSON.stringify(NewChildren);
-
+    console.log(NewChildren);
 $.ajax({
     url: "index.php",
     data: {data:childrenString,action:"addNewChild"},

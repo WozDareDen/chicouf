@@ -26,7 +26,7 @@
       <input type="date" id="birthdate" name="birthDateCo" required="valid" cols="30" placeholder="entrez sa date de naissance">
     </div>
     <div class="form-group col-lg-12">
-      <label for="weight">Poids en Kg</label><br />
+      <label for="weightCo">Poids en Kg</label><br />
       <input type="text" id="weightCo" name="weightCo" cols="30" placeholder="entrez son poids">
       <input type="date" id="weightDateCo" name="weightDateCo" />
     </div>

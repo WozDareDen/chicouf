@@ -117,4 +117,10 @@ class AdminManager extends Manager
         $dataMsg2 = $db->query('SELECT * FROM contact WHERE title=2');
         return $dataMsg2;
     }
+    public function deleteContact($idMail){
+        $db = $this -> dbConnect();
+        $deleteMail = $db->prepare('DELETE FROM contact WHERE idContact = ?');
+        $deleteMail->execute(array($idMail));
+        return $deleteMail;
+    }
 }

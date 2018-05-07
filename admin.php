@@ -43,6 +43,12 @@ try{
             elseif($_GET['action'] == 'msgView'){
                 $backoffice->msgView();
             }
+            elseif($_GET['action'] == 'deleteMail'){
+                if(isset($_GET['id'])){
+                    $idMail = $_GET['id'];   
+                    $backoffice->deleteMail($idMail);
+                }
+            }
             elseif($_GET['action'] == 'ajaxTest'){
                 $backoffice->ajaxTest();
             }
