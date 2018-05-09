@@ -9,7 +9,7 @@
 if($_SESSION["gender"]==0){
 ?>
 
-  <span class="pseudoM"><h1 style="text-align:center;" >Bienvenue sur votre Espace Membre <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
+  <span class="pseudoM"><h1 style="text-align:center;" >Bienvenue sur votre Espace Membre, <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
 
 <?php
 }

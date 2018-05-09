@@ -29,20 +29,28 @@ class BackOffice{
             $cPage = 1;
         }
         $data = $adminManager -> watchAllFamilies($cPage);
+        $allFamiliesId = $adminManager -> getFamilies();
+        $dataFamily = $allFamiliesId->fetchAll();
+        $nbMembers = [];
+        $nbChildren = [];           
+        foreach($dataFamily as $one_family){
+            $idFamily = $one_family['idFamily'];
+           array_push($nbMembers,  $adminManager -> nbMembers($idFamily)->fetch())  ;
+           array_push($nbChildren,  $adminManager -> nbChildren($idFamily)->fetch())  ;                   
+        }
         $famAll = $adminManager -> familyStats();
-        // $nbMembers = $adminManager -> nbMembers();
-        // $nbChildren = $adminManager -> nbChildren();
+        
         require 'app/Views/backend/familiesView.php';
     }
     function deleteMember($idBackMember){
         $adminManager = new \Src\Models\AdminManager();
         $deleteMember = $adminManager -> eraseMember($idBackMember);
-        require 'app/Views/backend/dashboard.php';
+        header('Location: admin.php?action=dashboard');
     }
     function deleteFamily($idBackFamily){
         $adminManager = new \Src\Models\AdminManager();
         $deleteFamily = $adminManager -> eraseFamily($idBackFamily);
-        require 'app/Views/backend/dashboard.php';
+        header('Location: admin.php?action=dashboard');
     }
     function msgView(){
         $adminManager = new \Src\Models\AdminManager();
@@ -58,6 +66,24 @@ class BackOffice{
         $adminManager = new \Src\Models\AdminManager();
         $deleteMail = $adminManager -> deleteContact($idMail);
         header('Location: admin.php?action=msgView');
+    }
+    function goToWriteStuff(){
+        $adminManager = new \Src\Models\AdminManager();
+        $getStuff = $adminManager -> getStuff()->fetchAll();
+        require 'app/Views/backend/aReminder.php';
+    }
+    function addNewTips($writings){
+        $idAdmin = $_SESSION['id'];
+        $content = json_decode($writings,true);
+        $tips = $content['contentA'];
+        $adminManager = new \Src\Models\AdminManager();
+        $inserTips = $adminManager -> inserTips($tips,$idAdmin);
+        return $writings;
+    }
+    function deleteNote($idNote){
+        $adminManager = new \Src\Models\AdminManager();
+        $deleteNote = $adminManager -> eraseNote($idNote);
+        header('Location: admin.php?action=goToWriteStuff');
     }
     // function ajaxTest(){
     //     $adminManager = new \Src\Models\AdminManager();

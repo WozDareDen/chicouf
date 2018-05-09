@@ -69,7 +69,10 @@ function myFunction2() {
             y.type = "password";
         }
 }
-
+// (UN)-MASK NOTES
+$('#mask').click(function(){
+    $('.reminder').slideToggle("fast")
+});
  
 
 // AUTOCOMPLETE
@@ -179,7 +182,6 @@ $('#submitChildren').on('click',function(){
     });
    
     var childrenString = JSON.stringify(NewChildren);
-    console.log(NewChildren);
 $.ajax({
     url: "index.php",
     data: {data:childrenString,action:"addNewChild"},
@@ -261,3 +263,4 @@ $.ajax({
         }
     });
 })
+

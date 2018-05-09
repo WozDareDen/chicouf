@@ -335,6 +335,15 @@ a.dropdown-item:hover{
     display:flex;
     justify-content: center;
 }
+.spanDash{
+    font-size:24px;
+    border-radius:10%;
+    background-color:white;
+    font-weight: bold;
+}
+#mask{
+    cursor:pointer;
+}
 
 /*----------AUTOCOMPLETE--------*/
 .childMain{
@@ -397,4 +406,71 @@ a.dropdown-item:hover{
 }
 #footer{
     margin-top:100px;
+}
+
+
+
+
+/*-------MEDIA QUERIES---------*/
+@media screen and (min-width: 593px){
+    .jumbo,.jumbo2{
+        position: relative;
+    }
+    .zipThead{
+        display: none;
+    }
+
+}
+@media screen and (max-width: 592px){
+    .jumbo{
+        font-size:12px;
+        position: absolute;
+        margin-left:10%;
+        
+    }
+    .yop{
+        display: none;
+    }
+    .jumbo2{
+        position: absolute;
+        max-width: 80%;
+        margin-left: 10%;
+        overflow: hidden;
+    }
+    .msgR td{
+        margin-left:-8%;
+    }
+    .col3mv{
+        display: none;
+    }
+    .deLink{
+       position: absolute;
+       left:0 !important;
+    }
+    #test,#test2{
+        font-size: 26px;        
+    }
+    #test2{
+        margin-left: 20% !important;
+    }
+    .testP{
+        margin-left: 20%;
+    }
+    .zip{
+        display: none;
+    }
+    #accordion{
+        display: flex;
+        flex-direction: column;
+    }
+    .msgR{
+        display: flex;
+        flex-direction: column;
+    }
+    .zipThead{
+        color:#c85d7b;
+    }
+    .eraseThD{
+        display:none;
+    }
 }

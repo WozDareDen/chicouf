@@ -1,23 +1,23 @@
 <?php $title = "Tableau de Bord" ?>
 <?php ob_start(); ?>	
   <div class="container">
-<?php require 'templateAdminHeader2.php' ?>
+<?php require 'templateAdminHeader.php' ?>
 <?php
 $newDataMsg4 = $dataMsg4->fetch();
 $newDataMsg5 = $dataMsg5->fetch();
 $newDataMsg6 = $dataMsg6->fetch();
 ?>
-<div class="jumbotron">
+<div class="jumbotron jumbo2">
 
-  <h1 class="display-4">Boîte de réception</h1>
-<div class="col-sm-12">
+  <h1 class="display-4" id="test">Boîte de réception</h1>
+<div class="col-sm-12 ">
 
-<div id="accordion">
+<div id="accordion KCmsg">
   <div class="card">
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
         <button class="btn collasped" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="background-color:#f56a67;">
-          Fonctionnement <span class="badge badge-light"> <?= $newDataMsg4[0] ?></span>
+          Site <span class="badge badge-light"> <?= $newDataMsg4[0] ?></span>
         </button> 
       </h5>
     </div>
@@ -33,8 +33,8 @@ if(empty($bigDataMsg)){
 }
 else{
 ?>  
-  <table class="table table-hover">
-                <thead class="thead-dark">
+  <table class="table table-hover ">
+                <thead class="thead-dark eraseThD">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Noms</th>
@@ -49,11 +49,11 @@ foreach($bigDataMsg as $newDataMsg){
       
 
 
-                <tr>
+                <tr class="msgR">
                 <th scope="row"><a href="admin.php?action=deleteMail&id=<?= $newDataMsg['idContact'] ?>"><?= $newDataMsg['idContact'] ?></th>
-                    <td><?= $newDataMsg['nameContact'] ?></td>
-                    <td><?= $newDataMsg['msg'] ?></td>
-                    <td><?= $newDataMsg['mailContact'] ?></td>
+                    <td><div class="zipThead">Nom </div> <?= $newDataMsg['nameContact'] ?></td>
+                    <td><div class="zipThead">Message </div> <?= $newDataMsg['msg'] ?></td>
+                    <td><div class="zipThead">Mail </div> <?= $newDataMsg['mailContact'] ?></td>
                 </tr>
 <?php
 }
@@ -85,7 +85,7 @@ if(empty($bigDataMsg1)){
 else{
 ?>  
   <table class="table table-hover">
-                <thead class="thead-dark">
+                <thead class="thead-dark eraseThD">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Noms</th>
@@ -99,11 +99,11 @@ foreach($bigDataMsg1 as $newDataMsg1){
 ?>
        
 
-                <tr>
+                <tr class="msgR">
                     <th scope="row"><a href="admin.php?action=deleteMail&id=<?= $newDataMsg1['idContact'] ?>"><?= $newDataMsg1['idContact'] ?></th>
-                    <td><?= $newDataMsg1['nameContact'] ?></td>
-                    <td><?= $newDataMsg1['msg'] ?></td>
-                    <td><?= $newDataMsg1['mailContact'] ?></td>
+                    <td><div class="zipThead">Nom </div> <?= $newDataMsg1['nameContact'] ?></td>
+                    <td><div class="zipThead">Message </div> <?= $newDataMsg1['msg'] ?></td>
+                    <td><div class="zipThead">Mail </div> <?= $newDataMsg1['mailContact'] ?></td>
                 </tr>
 <?php
 }
@@ -134,7 +134,7 @@ if(empty($bigDataMsg2)){
 else{
 ?>  
   <table class="table table-hover">
-                <thead class="thead-dark">
+                <thead class="thead-dark eraseThD">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Noms</th>
@@ -147,11 +147,11 @@ else{
 foreach($bigDataMsg2 as $newDataMsg2){
 ?>
       
-                <tr>
+                <tr class="msgR">
                 <th scope="row"><a href="admin.php?action=deleteMail&id=<?= $newDataMsg2['idContact'] ?>"><?= $newDataMsg2['idContact'] ?></th>
-                    <td><?= $newDataMsg2['nameContact'] ?></td>
-                    <td><?= $newDataMsg2['msg'] ?></td>
-                    <td><?= $newDataMsg2['mailContact'] ?></td>
+                    <td><div class="zipThead">Nom </div> <?= $newDataMsg2['nameContact'] ?></td>
+                    <td><div class="zipThead">Message </div> <?= $newDataMsg2['msg'] ?></td>
+                    <td><div class="zipThead">Mail </div> <?= $newDataMsg2['mailContact'] ?></td>
                 </tr>
 <?php
 }

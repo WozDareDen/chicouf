@@ -5,7 +5,7 @@ namespace Src\Models;
 class AdminManager extends Manager
 {   
     //*************MEMBER CONTROLS***********************/
-    private $perPage = 10;
+    private $perPage = 8;
     private $cPage = 1;
 
     public function nbPage(){
@@ -27,7 +27,7 @@ class AdminManager extends Manager
     public function watchAllMembers($cPage){
         $this->cPage = $cPage;
         $db = $this -> dbConnect(); 
-        $data = $db->query("SELECT idMember,surname,firstname,city, DATE_FORMAT(registrationDate, \"%d/%m/%Y\") as new_regDate FROM members ORDER BY idMember ASC LIMIT ".(($this->cPage-1)*$this->perPage).", $this->perPage");
+        $data = $db->query("SELECT idMember,surname,firstname,city, DATE_FORMAT(registrationDate, \"%d.%m.%Y\") as new_regDate FROM members ORDER BY idMember ASC LIMIT ".(($this->cPage-1)*$this->perPage).", $this->perPage");
         return $data;
     }
     public function watchAllFamilies($cPage){
@@ -36,15 +36,20 @@ class AdminManager extends Manager
         $data = $db->query("SELECT * FROM family ORDER BY idFamily ASC LIMIT ".(($this->cPage-1)*$this->perPage).", $this->perPage");
         return $data;
     }
+    public function getFamilies(){
+        $db = $this -> dbConnect();
+        $allFamiliesId = $db->query('SELECT idFamily FROM family');
+        return $allFamiliesId;
+    }
     public function nbMembers($idFamily){
         $db = $this -> dbConnect();
-        $nbMembers = $db-prepare('SELECT COUNT(idMember) FROM member_family WHERE idFamily=?');
+        $nbMembers = $db->prepare('SELECT COUNT(idMember) FROM member_family WHERE idFamily=?');
         $nbMembers->execute(array($idFamily));
         return $nbMembers;
     }
     public function nbChildren($idFamily){
         $db = $this -> dbConnect();
-        $nbChildren = $db-prepare('SELECT COUNT(idChildren) FROM member_family WHERE idFamily=?');
+        $nbChildren = $db->prepare('SELECT COUNT(idChildren) FROM family_children WHERE idFamily=?');
         $nbChildren->execute(array($idFamily));
         return $nbChildren;
     }
@@ -122,5 +127,23 @@ class AdminManager extends Manager
         $deleteMail = $db->prepare('DELETE FROM contact WHERE idContact = ?');
         $deleteMail->execute(array($idMail));
         return $deleteMail;
+    }
+    //*******************************TIPS*************************************/
+    public function inserTips($tips,$idAdmin){
+        $db = $this -> dbConnect();
+        $inserTips = $db->prepare('INSERT INTO reminders (content,reminderDate,idMember) VALUES(?,NOW(),?)');
+        $inserTips->execute(array($tips,$idAdmin));
+        return $inserTips;
+    }
+    public function getStuff(){
+        $db = $this -> dbConnect();
+        $getStuff = $db->query('SELECT * FROM reminders ORDER BY reminderDate DESC');
+        return $getStuff;
+    }
+    public function eraseNote($idNote){
+        $db = $this -> dbConnect();
+        $deleteNote = $db->prepare('DELETE FROM reminders WHERE idReminder=?');
+        $deleteNote->execute(array($idNote));
+        return $deleteNote;
     }
 }

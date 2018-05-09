@@ -1,22 +1,22 @@
 <?php $title = "Tableau de Bord" ?>
 <?php ob_start(); ?>	
 
-<div class="container">
+<div class="container mvContain">
 
-<?php require 'templateAdminHeader2.php' ?>
+<?php require 'templateAdminHeader.php' ?>
 <?php
 $userAll = $useAll->fetch(); 
 ?>
 <!--JUMBOTRON-->
-    <div class="jumbotron">
+    <div class="jumbotron jumbo">
         <h1 class="display-4" id="test">Liste des <?= $userAll[0] ?> membres</h1>
     <!-- MEMBERS TABLE-->
-        <table class="table table-hover">
+        <table class="table table-hover table-sm">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Noms</th>
-                <th scope="col">Villes</th>
+                <th scope="col" class="col3mv">Villes</th>
                 <th scope="col">Inscription</th>
             </tr>
             </thead>
@@ -25,7 +25,7 @@ $userAll = $useAll->fetch();
 while ($members = $data->fetch())
 {
 ?>            
-            <tr><td><span id='idUser'><?=$members['idMember'] ?></span></td><td><span id='names'><?= $members['surname'] ?> <?=$members['firstname'] ?></span></td><td><span id='cities'><?= $members['city'] ?></span></td><td><span id='regDate'><?=$members['new_regDate']?></span></td></tr>
+            <tr><td><span id='idUser'><?=$members['idMember'] ?></span></td><td><span id='names'><?= $members['surname'] ?> <?=$members['firstname'] ?></span></td><td class="col3mv"><span id='cities'><?= $members['city'] ?></span></td><td><span id='regDate'><?=$members['new_regDate']?></span></td></tr>
            
 <?php
 }
@@ -56,8 +56,8 @@ $userInfo = $userInfos->fetch();
 <!--DELETE MEMBER BUTTON-->
         <p><br />
         L'utilisateur enregistré le plus récent est <span class="fatRed"><?= $userInfo['firstname'] ?> <?= $userInfo['surname'] ?></span>, le <?=$userInfo['reg_date'] ?>.<br />
-        </p>
-        <a href="#" data-toggle="modal" data-target="#modalDeleteMember"><button class="btn btn-danger">Supprimer un utilisateur</button></a> 
+        
+        <a href="#" data-toggle="modal" class="deLink" data-target="#modalDeleteMember"><button class="btn btn-danger deLink">Supprimer un utilisateur</button></a> </p>
     </div>
 </div>
 <?php $content = ob_get_clean(); ?>

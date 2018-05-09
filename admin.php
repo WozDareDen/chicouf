@@ -4,7 +4,11 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 try{
     $backoffice = new \Src\Controllers\BackOffice();
-
+    if (isset($_POST['action']) && $_POST['action'] =="writeStuff") {
+        $writings = $_POST['data'];
+        var_dump($writings);
+        $backoffice->addNewTips($writings);
+    }
     if (isset($_GET['action'])) {
         if(isset($_SESSION['id']) && $_SESSION['modo'] == 2){       
        
@@ -29,8 +33,8 @@ try{
                 }
                 $backoffice->familiesList($cPage);
             }
-            elseif($_GET['action'] == 'famPage'){
-                $backoffice->goToFam();
+            elseif($_GET['action'] == 'goToWriteStuff'){
+                $backoffice->goToWriteStuff();
             }
             elseif($_GET['action'] == 'deleteMember'){
                 $idBackMember = htmlspecialchars($_POST['idBackMember']);
@@ -47,6 +51,12 @@ try{
                 if(isset($_GET['id'])){
                     $idMail = $_GET['id'];   
                     $backoffice->deleteMail($idMail);
+                }
+            }
+            elseif($_GET['action'] == 'deleteNote'){
+                if(isset($_GET['id'])){
+                    $idNote = $_GET['id'];
+                    $backoffice->deleteNote($idNote);
                 }
             }
             elseif($_GET['action'] == 'ajaxTest'){

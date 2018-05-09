@@ -3,33 +3,39 @@
 
 <div class="container">
 
-<?php require 'templateAdminHeader2.php' ?>
+<?php require 'templateAdminHeader.php' ?>
 <?php
 $newFamAll = $famAll->fetch()
 ?>
 <!--JUMBOTRON-->
-  <div class="jumbotron">
-    <h1 class="display-4">Liste des <?= $newFamAll[0] ?> familles</h1>
+  <div class="jumbotron jumbo">
+    <h1 class="display-4" id="test">Liste des <?= $newFamAll[0] ?> familles</h1>
     <!-- MEMBERS TABLE-->
-    <table class="table table-hover">
+    <table class="table table-striped table-sm">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Id</th>
           <th scope="col">Noms</th>
+          <th scope="col">M<span class="zip">em</span>b<span class="zip">re</span>s</th>
+          <th scope="col">Enf<span class="zip">ants</span></th>
         </tr>
       </thead>
       <tbody>
 
 <?php
+$i = 0;
 while ($newData = $data->fetch() ){
 ?>
 
         <tr>
           <td><?= $newData['idFamily'] ?></td>
           <td><?= $newData['familyName'] ?></td>
+          <td><?= $nbMembers[$i][0] ?></td>
+          <td><?= $nbChildren[$i][0] ?></td>
         </tr>
 
 <?php
+$i++;
 }
 ?>    
       </tbody>
