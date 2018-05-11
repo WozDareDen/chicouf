@@ -76,10 +76,10 @@ class UserManager extends Manager
         return $req;
     }
 
-    public  function changeUser($name, $mail, $birthdate, $city, $idMember){
+    public  function changeUser($name, $mail, $birthdate, $city, $idMember,$words){
         $db = $this -> dbConnect();
-        $ins = $db->prepare('UPDATE members SET surname = ?, mail = ?, birthdate = ?, city = ? WHERE idMember = ?');
-        $ins->execute(array($name, $mail, $birthdate, $city, $idMember));
+        $ins = $db->prepare('UPDATE members SET surname = ?, mail = ?, birthdate = ?, city = ?, words = ? WHERE idMember = ?');
+        $ins->execute(array($name, $mail, $birthdate, $city, $words,$idMember));
         return $ins;
     }
     public function contactDb($usernameContact,$mailContact,$titleContact,$contentContact){
@@ -116,6 +116,12 @@ class UserManager extends Manager
         $db = $this -> dbConnect();
         $checkParent = $db->prepare('SELECT idMember FROM member_children WHERE idChildren=?');
         $checkParent->execute(array($one_child));
+        return $checkParent;
+    }
+    public function checkParent2($one_child,$idFamily){
+        $db = $this -> dbConnect();
+        $checkParent = $db->prepare('SELECT member_children.idMember FROM member_children JOIN member_family ON member_family.idMember = member_children.idMember WHERE idChildren=? AND idFamily = ?');
+        $checkParent->execute(array($one_child,$idFamily));
         return $checkParent;
     }
     public function checkChildren($idMember){

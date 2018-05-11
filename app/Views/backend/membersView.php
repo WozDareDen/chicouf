@@ -21,7 +21,8 @@ $userAll = $useAll->fetch();
             </tr>
             </thead>
             <tbody class="table_body">
-            <?php
+
+<?php
 while ($members = $data->fetch())
 {
 ?>            
@@ -37,18 +38,14 @@ while ($members = $data->fetch())
 <nav aria-label="Page navigation example">
   <ul class="pagination">
 
-    <?php
+<?php
 for($i=1;$i<=$numPage;$i++){
     echo "<li class='page-item'><a class='page-link' href=\"admin.php?action=membersList&p=$i\">$i </a></li>";
 }
-
 ?>
-
 
   </ul>
 </nav>
-
-
 
 <?php 
 $userInfo = $userInfos->fetch();
@@ -60,6 +57,7 @@ $userInfo = $userInfos->fetch();
         <a href="#" data-toggle="modal" class="deLink" data-target="#modalDeleteMember"><button class="btn btn-danger deLink">Supprimer un utilisateur</button></a> </p>
     </div>
 </div>
+
 <?php $content = ob_get_clean(); ?>
 <!--template.php-->
 <?php require('templateAdmin.php'); ?>

@@ -14,13 +14,13 @@ class BackOffice{
     function membersList($cPage){
         $adminManager = new \Src\Models\AdminManager();
         $numPage = $adminManager->nbPage();
-        if( !($cPage>0 && $cPage<=$numPage)){
-            $cPage = 1;
-        }
-    $data = $adminManager->watchAllMembers($cPage);
-    $useAll = $adminManager -> userStats();
-    $userInfos = $adminManager -> lastStatUser();
-    require('app/Views/backend/membersView.php');
+            if( !($cPage>0 && $cPage<=$numPage)){
+                $cPage = 1;
+            }
+        $data = $adminManager->watchAllMembers($cPage);
+        $useAll = $adminManager -> userStats();
+        $userInfos = $adminManager -> lastStatUser();
+        require 'app/Views/backend/membersView.php';
     }
     function familiesList($cPage){
         $adminManager = new \Src\Models\AdminManager();

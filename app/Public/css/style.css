@@ -47,6 +47,9 @@ h5{
 .iconeSpan{
     position:relative;
 }
+.h1Fam{
+    text-align:center;
+}
 /*--------REGISTRATION VIEW------------*/
 .regForm{
     margin-bottom:100px;
@@ -407,10 +410,21 @@ a.dropdown-item:hover{
 #footer{
     margin-top:100px;
 }
-
-
-
-
+.fatRed{
+    font-weight: bold;
+    color:red;
+}
+.ita2{
+    font-style: italic;
+    font-size:18px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.centerCol{
+    text-align:center;
+}
+#modoMemList{
+    display:flex;
+}
 /*-------MEDIA QUERIES---------*/
 @media screen and (min-width: 593px){
     .jumbo,.jumbo2{
@@ -456,6 +470,9 @@ a.dropdown-item:hover{
     .testP{
         margin-left: 20%;
     }
+    .testP3{
+        margin-left: 10%;
+    }
     .zip{
         display: none;
     }
@@ -473,4 +490,16 @@ a.dropdown-item:hover{
     .eraseThD{
         display:none;
     }
+    .h1Fam{
+        font-size:3.5rem;
+    }
+    .tableModo{
+       display:flex;
+       flex-direction: column;
+    }
+    #modoMemList table{
+         
+       
+    }
+
 }

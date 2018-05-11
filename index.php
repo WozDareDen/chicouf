@@ -23,7 +23,7 @@ try{
                 $mailCo = htmlspecialchars($_POST['mailCo']);
                 $parentCo = htmlspecialchars($_POST['parentCo']);
                 $genderCo = htmlspecialchars($_POST['genderCo']);
-                    if($parentCo == 1 || $parentCo == 2){
+                    if($parentCo == 0 || $parentCo == 1){
                         if($passCo == $pass2Co){
                             if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){                        
                                 $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo);
@@ -99,7 +99,7 @@ try{
         // CHILD VIEW
         elseif($_GET['action'] == 'memberView'){                          
             if(isset($_SESSION['id'])){
-                $idMember = $_GET['idMember'];            
+                $idMember = $_SESSION['id'];            
                 if($_SESSION['id'] === $idMember){
                     $frontoffice->goToMember($idMember);
                 }
@@ -218,17 +218,42 @@ try{
         // GO TO FAMILY VIEW
         elseif($_GET['action'] == 'familyLink'){
             if(isset($_GET['id'])){
-                if($_SESSION['family'] == $_GET['id']){
-                    $idFamily = $_GET['id'];
-                    $idMember = $_SESSION['id'];
-                    $frontoffice->goToFamily($idFamily,$idMember);
+                if(isset($_SESSION['family'])){                    
+                    if($_SESSION['family'] == $_GET['id']){
+                        $idFamily = $_GET['id'];
+                        $idMember = $_SESSION['id'];
+                        if(isset($_GET['p'])){
+                            $cPage = $_GET['p'];
+                        }
+                        else{
+                            $cPage = 1;
+                        }
+                        $frontoffice->goToFamily($idFamily,$idMember,$cPage);
+                    }
+                    else{
+                        throw new \Exception('il ne s\'agit pas de votre famille');
+                    }
                 }
                 else{
-                    throw new \Exception('il ne s\'agit pas de votre famille');
+                    $frontoffice->goToCreateFamily();
                 }
             }
             else{
                 throw new \Exception('cette page n\'existe pas');
+            }
+        }
+        // GO TO MODO VIEW
+        elseif($_GET['action'] == "goToModo"){
+            if(isset($_GET['id'])){
+                if($_SESSION['family'] == $_GET['id']) {
+                    $idFamily = $_SESSION['family'];
+                    if (isset($_GET['p'])) {
+                        $cPage = $_GET['p'];
+                    } else {
+                        $cPage = 1;
+                    }
+                    $frontoffice->goToModo($idFamily,$cPage);
+                }
             }
         }
         // BANN MEMBER
@@ -269,11 +294,12 @@ try{
         elseif ($_GET['action'] == 'changeProfile'){ 
             if(isset($_POST['surnameCo']) && isset($_POST['mailCo']) && isset($_POST['birthdateCo']) && isset($_POST['cityCo'])){
                 $idMember = $_SESSION['id'];
+                $words = htmlspecialchars($_POST['wordsCo']);
                 $name = htmlspecialchars($_POST['surnameCo']);
                 $mail = htmlspecialchars($_POST['mailCo']);
                 $birthdate = htmlspecialchars($_POST['birthdateCo']);
                 $city = htmlspecialchars($_POST['cityCo']);
-                $frontoffice->changeProfile($name, $mail, $birthdate, $city, $idMember);
+                $frontoffice->changeProfile($name, $mail, $birthdate, $city, $idMember,$words);
             }
             else{
                 throw new \Exception('cette page n\'existe pas');
@@ -312,6 +338,10 @@ try{
             $autoC = $_GET['search'];
             $frontoffice->ajaxMeds($autoC);
         }
+        // GET WEIGHTS
+        // elseif($_GET['action'] == "getWeight"){
+        //     $frontoffice->getWeight();
+        // }
         else{
             throw new \Exception('page non trouvée');
         }

@@ -3,7 +3,7 @@
 namespace Src\Controllers;
 
 class FrontOffice{   
-//*****************************USER CREATION***********************************
+//*****************************USER CONNECTION***********************************
     function newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo){
         if(preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,16}$/", $passCo)){              
             $userManager = new \Src\Models\UserManager();
@@ -102,10 +102,10 @@ class FrontOffice{
         require 'app/Views/frontend/profileView.php';
     }
     // UPDATE PROFILE
-    function changeProfile($name, $mail, $birthdate, $city, $idMember)
+    function changeProfile($name, $mail, $birthdate, $city, $idMember,$words)
     {
         $userManager = new \Src\Models\UserManager();
-        $change = $userManager -> changeUser($name, $mail, $birthdate, $city, $idMember);       
+        $change = $userManager -> changeUser($name, $mail, $birthdate, $city, $idMember,$words);       
         $this->recoverUser($idMember);
     }
     // CHANGE USER PASS
@@ -144,11 +144,10 @@ class FrontOffice{
                 throw new \Exception('vous devez d\'abord désigner un nouveau modérateur de votre Espace Famille');
             }
         foreach($checkChildren as $one_child){
-            $idChild = $one_child['idChildren'];           
+            $idChild = $one_child['idChildren'];    
+            $idFamily = $_SESSION['family'];       
             $checkParent = $userManager -> checkParent($idChild);
             $checkParent2 = $checkParent->fetch();
-            var_dump(count($checkParent2));
-            var_dump(count($checkChildren));
             $childManager = new \Src\Models\ChildManager();           
                 if(count($checkParent2['idMember'])==1){ 
                     $deleteChildren = $childManager -> eraseChild($idChild);    
@@ -185,31 +184,38 @@ class FrontOffice{
         header('Location: index.php?action=familyLink&id='.$idFamily);
     }
     // WATCH FAMILY
-    function goToFamily($idFamily,$idMember){
+    function goToFamily($idFamily,$idMember,$cPage){
         $familyManager = new \Src\Models\FamilyManager();
+        $idFamily = $_SESSION['family'];
         $children = $familyManager -> watchFamily($idFamily)->fetchAll();
-
+        $feWords = $familyManager -> feWords($idFamily);
+        $neWords = $feWords->fetchAll();
+        shuffle($neWords);  
+        foreach ($neWords as $words) {
+            $getWords = $words[0];            
+        } 
         $childManager = new \Src\Models\ChildManager();
-
         foreach($children as $idChild=>$one_child){
         $meals = $childManager -> getMealsInfos($one_child['idChildren'])->fetchAll();
         $children[$idChild]['meal'] = $meals;
-
         $TTT = $childManager -> getDateTTT($one_child['idChildren'])->fetchAll();
             $children[$idChild]['TTT'] = $TTT;
-
             foreach($TTT as $id=>$one_TTT){
                 $meds = $childManager -> getAllMedsChild($one_TTT['idTTT'])->fetchAll();
                 $children[$idChild]['TTT'][$id]['meds'] = $meds;
-            }
-            
+            }            
             $allergies = $childManager -> getAllergyInfos($one_child['idChildren'])->fetchAll();
             $children[$idChild]['allergies'] = $allergies;
         }        
         $dataF4 = $familyManager -> getFamilyName($idFamily);
         $dataF6 = $familyManager -> getImgFamily($idFamily);
         $dataF7 = $familyManager -> watchModo($idFamily);
-        $dataF8 = $dataF7->fetchAll();        
+        $dataF8 = $dataF7->fetchAll();   
+        $numPage = $familyManager->nbPage($idFamily);
+            if( !($cPage>0 && $cPage<=$numPage)){
+                $cPage = 1;
+            } 
+        $dataModo = $familyManager -> getMembers($idFamily,$cPage);    
         $dataMember = $familyManager -> watchMembersFamily($idFamily);
         $userManager = new \Src\Models\UserManager();
         $dataF5 = $userManager -> userById($idMember);
@@ -237,7 +243,10 @@ class FrontOffice{
                 if(!(empty($dataParent6))){
                     foreach($dataParent6 as $dataParent7){
                         $idChild = $dataParent7['idChildren'];
-                        $dataParent5 = $familyManager -> belongChild($idFamily,$idChild);
+                        $dataParent8 = $familyManager -> checkFamChild($idFamily,$idChild)->fetch();
+                        if(empty($dataParent8)){
+                            $dataParent5 = $familyManager -> belongChild($idFamily, $idChild);
+                        }
                     }
                 }
             }
@@ -251,6 +260,16 @@ class FrontOffice{
         $familyManager = new \Src\Models\FamilyManager();
         $newModo = $familyManager -> insertNewModo($mailNewModo);
         header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
+    }
+    function goToModo($idFamily,$cPage){
+        $familyManager = new \Src\Models\FamilyManager();
+        $numPage = $familyManager->nbPage($idFamily);
+            if( !($cPage>0 && $cPage<=$numPage)){
+                $cPage = 1;
+            } 
+        $dataF4 = $familyManager -> getFamilyName($idFamily);
+        $dataModo = $familyManager -> getMembers($idFamily,$cPage);    
+        require 'app/Views/frontend/modoView.php';
     }
     // CHANGE MODO
     function changeModo($idMember){
@@ -276,9 +295,21 @@ class FrontOffice{
         $modo = $getIdModo2['modo'];
         if($modo == 1){
             throw new \Exception('vous ne pouvez bannir ce membre car il est aussi modérateur de cette famille');
-        }
+        }      
         $idMember = $getIdModo2['idMember'];
         $familyManager = new \Src\Models\FamilyManager();
+        $dataParent4 = $familyManager -> getChildParent($idMember);
+        $dataParent6 = $dataParent4->fetchAll();
+            if(!(empty($dataParent6))){
+                foreach($dataParent6 as $dataParent7){
+                    $one_child = $dataParent7['idChildren'];
+                    $checkParent  = $userManager -> checkParent2($one_child,$idFamily)->fetchAll();
+                    var_dump($checkParent);
+                    if(count($checkParent) == 1) {                                            
+                            $bannChildren = $familyManager -> bannChildren($idFamily, $one_child);                       
+                    }
+                }
+            }
         $bann = $familyManager -> bannMember($idFamily,$idMember);
         header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
     }
@@ -586,6 +617,14 @@ class FrontOffice{
         $data = $data->fetchAll();
         echo json_encode($data);
     }
+    // AJAX WEIGHTS
+    // function getWeight(){
+    //     $childManager = new \Src\Models\ChildManager();
+    //     $getWeight = $childManager -> getPounds();
+    //     header('Content-Type: application/json');
+    //     $data = $getWeight->fetchAll();
+    //     echo json_encode($data);
+    // }
 }
     //ADD COMMENT
     // function addComment($chatDissId, $chatMemberId, $chatComment){

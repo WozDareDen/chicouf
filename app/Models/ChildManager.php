@@ -216,4 +216,10 @@ class ChildManager extends Manager
         $data->execute(array($autoComp));
         return $data;
     }
+    // GET POUNDS
+    // public function getWeight(){
+    //     $db = $this -> dbConnect();
+    //     $getWeight = $db->query('SELECT * FROM children');
+    //     return $getWeight;
+    // }
 }

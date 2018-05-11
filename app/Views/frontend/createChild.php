@@ -11,18 +11,19 @@
     
 
   <form method="post" class="childForm" style="border:1px solid black;">
-  <h1>CREATION D'UNE FICHE ENFANT</h1>       
+  <h1>CREATION D'UNE FICHE ENFANT</h1>      
+  <small>Seuls les champs marqués d'un astérisque sont obligatoires.</small> 
     <div class="form-group  col-lg-12" >
       <h2>IDENTITE</h2>
-      <label for="lastname1">Nom</label><br />
+      <label for="lastname1">Nom<span class="fatRed">*</span></label><br />
       <input type="text" id="lastname1" name="lastNameCo" required="valid" autofocus="on" cols="30"placeholder="entrez son nom" > 
     </div>
     <div class="form-group col-lg-12"> 
-      <label for="firstname1">Prénom</label><br />
+      <label for="firstname1">Prénom<span class="fatRed">*</span></label><br />
       <input type="text" id="firstname1" name="firstNameCo" required="valid" cols="30" placeholder="entrez son prénom" > 
     </div>
     <div class="form-group col-lg-12">
-      <label for="birthdate">Date de Naissance</label><br />
+      <label for="birthdate">Date de Naissance<span class="fatRed">*</span></label><br />
       <input type="date" id="birthdate" name="birthDateCo" required="valid" cols="30" placeholder="entrez sa date de naissance">
     </div>
     <div class="form-group col-lg-12">
@@ -31,12 +32,12 @@
       <input type="date" id="weightDateCo" name="weightDateCo" />
     </div>
     <div class="form-group col-lg-12" id="gender">
-      <label for="sexe">Sexe de l'enfant</label><br />
+      <label for="sexe">Sexe de l'enfant<span class="fatRed">*</span></label><br />
       <input type="radio" name="genderCo" class="genderCo" value="0" checked> Garçon<br>
       <input type="radio" name="genderCo" class="genderCo" value="1"> Fille<br>
     </div>
     <div class="form-group col-lg-12">
-      <label for="parent1">Parent 1</label><br />
+      <label for="parent1">Parent 1<span class="fatRed">*</span></label><br />
       <input type="text" id="parent1" name="parent1Co" required="valid" cols="30" placeholder="entrez le nom du 1er parent">
       </div>
     <div class="form-group col-lg-12 ">

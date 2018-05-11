@@ -27,7 +27,7 @@ else{
 if(empty($dataF4)){
 ?>
 
-<h1 class="mbr-section-title display-3" style="text-align:center;">Bienvenue dans l'Espace Famille</h1>
+<h1 class="mbr-section-title display-3 h1Fam" >Bienvenue dans l'Espace Famille</h1>
     <div class="row justify-content-md-center">
         <div class="col-md-10 col-md-offset-2 text-xs-center">
             <div class="lead"><p>Vous pouvez d'ores et déjà créer un nouvel Espace pour votre famille. Vous en serez alors le modérateur. Différentes options de paramétrage s'offrent à vous.<p>
@@ -95,7 +95,16 @@ else{
             à rattacher un membre à celle-ci.
             Un modérateur peut également bannir un membre ou supprimer cet Espace. Il peut aussi décider de <strong>donner les droits de modération</strong> à l'un d'entre vous. Enfin, il peut modifier la bannière qui décore cet Espace. 
             <p>Pour lire les informations de chaque enfant, il suffit de cliquer sur sa photo. </p>
-        </div>        
+        </div>      
+<?php
+if($getWords != NULL){
+?>
+
+        <p>L'humeur du jour : <span class='ita2'>"<?= $getWords ?>"</span></p>     
+
+<?php
+}
+?>
     </div>
 
     <div class="row"> 
@@ -284,6 +293,8 @@ else{
 
 
 <h3 class="loco">Les grand-parents</h3>
+<div class="row">
+
 <?php
 }   
 foreach($bigDataMember as $newDataMember){ 
@@ -336,7 +347,10 @@ else{
 
 <?php
 }
-}
+
+}?>
+</div>
+<?php
 }
 ?>
 

@@ -102,7 +102,7 @@ else{
                             </button>
                           </div>
                           <div class="modal-body" style="color:black;">
-                            <p>Pour rattacher cette fiche Enfant à un autre Parent, il vous suffit de renseigner son adresse mail. <br />
+                            <p>Pour rattacher cette fiche Enfant à un autre Parent, il vous suffit de <span class="ita">renseigner son adresse mail</span> ET de <span class="ita">rajouter son prénom dans la case "Parents"</span> de l'enfant.<br />
                               Ainsi cette personne pourra elle aussi gérer l'intégralité de cette fiche.
                             </p>
                             <p>Cependant ce parent ne sera pas automatiquement rattaché à votre Espace Famille. Seul le modérateur de celui-ci peut le faire.</p>

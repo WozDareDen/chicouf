@@ -3,6 +3,10 @@
 namespace Src\Models;
 //FamilyObject :
 class FamilyManager extends Manager{
+
+    private $perPage = 5;
+    private $cPage = 1;
+
     public function getfamilyId($idMember){
         $db = $this -> dbConnect();
         $dataFam = $db->prepare('SELECT idFamily FROM member_family WHERE idMember = ?');
@@ -54,6 +58,22 @@ class FamilyManager extends Manager{
         $dataF7->execute(array($idFamily));
         return $dataF7;
     }
+    public function getMembers($idFamily,$cPage){
+        $this->cPage = $cPage;
+        $db = $this -> dbConnect();
+        $dataModo = $db->prepare('SELECT firstname, surname, mail FROM members INNER JOIN member_family ON member_family.idMember = members.idMember WHERE idFamily = ? ORDER BY birthdate ASC LIMIT '.(($this->cPage-1)*$this->perPage).", $this->perPage");
+        $dataModo->execute(array($idFamily));
+        return $dataModo;
+    }
+    public function nbPage($idFamily){
+        $db = $this->dbConnect();
+        $reqPage = $db->prepare('SELECT COUNT(*) AS total FROM members INNER JOIN member_family ON member_family.idMember = members.idMember WHERE idFamily = ? ');
+        $reqPage->execute(array($idFamily));
+        $result = $reqPage->fetch();
+        $total = $result['total'];
+        $nbPage = ceil($total/$this->perPage);
+        return $nbPage;
+    }
     // ADD PARENT AND CHILDREN TO FAMILY
     public function getParentId($mailCoParent){
         $db = $this -> dbConnect();    
@@ -79,6 +99,12 @@ class FamilyManager extends Manager{
         $dataParent5->execute(array($idFamily,$idChild));
         return $dataParent5;
     }
+    public function checkFamChild($idFamily,$idChild){
+        $db = $this -> dbConnect();
+        $dataParent7 = $db->prepare('SELECT * FROM family_children WHERE idFamily = ? AND idChildren = ?');
+        $dataParent7->execute(array($idFamily,$idChild));
+        return $dataParent7;
+    }
     // CREATE FAMILY
     public function newFamily($familyName){
         $db = $this -> dbConnect();
@@ -97,6 +123,12 @@ class FamilyManager extends Manager{
         $newFamily = $db->prepare('INSERT INTO member_family(idMember, idFamily) VALUES(?,?)');
         $newFamily->execute(array($idMember,$idFamily));
         return $newFamily;
+    }
+    public function feWords($idFamily){
+        $db = $this -> dbConnect();
+        $feWords = $db->prepare('SELECT words FROM members JOIN member_family ON member_family.idMember = members.idMember WHERE member_family.idFamily = ?');
+        $feWords->execute(array($idFamily));
+        return $feWords;
     }
     // FIRST MODO
     public function newModo($idMember){
@@ -125,7 +157,13 @@ class FamilyManager extends Manager{
         $bann = $db->prepare('DELETE FROM member_family WHERE idFamily = ? AND idMember = ?');
         $bann->execute(array($idFamily,$idMember));
         return $bann;
-
+    }
+    // BANN CHILDREN
+    public function bannChildren($idFamily, $one_child){
+        $db = $this -> dbConnect();
+        $bannChildren = $db->prepare('DELETE FROM family_children WHERE idFamily = ? AND idChildren = ?');
+        $bannChildren->execute(array($idFamily, $one_child));
+        return $bannChildren;
     }
     // DELETE FAMILY
     public function eraseFamily($idFamily){

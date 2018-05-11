@@ -10,6 +10,7 @@ $newDataMsg6 = $dataMsg6->fetch();
 <div class="jumbotron jumbo2">
 
   <h1 class="display-4" id="test">Boîte de réception</h1>
+  <p>Cliquer sur l'ID du message pour le supprimer. Aucun avertissement avant la suppression de celui-ci.</p>
 <div class="col-sm-12 ">
 
 <div id="accordion KCmsg">

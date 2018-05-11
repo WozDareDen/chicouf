@@ -4,9 +4,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 try{
     $backoffice = new \Src\Controllers\BackOffice();
-    if (isset($_POST['action']) && $_POST['action'] =="writeStuff") {
+    if (isset($_POST['action']) && $_POST['action'] =="writeStuff"){
         $writings = $_POST['data'];
-        var_dump($writings);
         $backoffice->addNewTips($writings);
     }
     if (isset($_GET['action'])) {

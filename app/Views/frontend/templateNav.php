@@ -32,7 +32,7 @@ Espace Enfant
 </li>
 
 <?php
-if(isset($_SESSION['family'])){
+if(isset($_SESSION['family']) && $_SESSION['family'] != NULL){
 ?>
            <li class="nav-item">
 <a class="nav-link" href="index.php?action=familyLink&id=<?= $_SESSION['family'] ?>">Espace Famille</a>
@@ -69,6 +69,7 @@ if($_SESSION['modo'] >0){
             <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddParent" >Rattacher un membre à votre famille</a>
             <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddBanner" >Modifier la bannière</a>
             <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddModo" >Ajouter un modérateur</a>
+            <a href="index.php?action=goToModo&id=<?=$_SESSION['family'] ?>" class="btn dropdown-item kitDel" id="modoFamList" >Afficher la liste des membres</a>
             <div class="dropdown-divider"></div>
             <a href="#" class="btn dropdown-item kitDel4" data-toggle="modal" data-target="#modalStopModo">Quitter la modération</a>
             <a href="#" class="btn dropdown-item kitDel4" data-toggle="modal" data-target="#modalBann">Bannir un membre de cette famille</a>

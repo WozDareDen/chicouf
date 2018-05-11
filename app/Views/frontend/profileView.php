@@ -100,7 +100,9 @@ else{
 <?php
 }
 ?>                                     
-
+                    <label for="wordsCo">Votre humeur du jour</label><br/>
+                        <input type="text" id="wordsCo" name="wordsCo" value="<?= $modif['words'] ?>"><br />
+                        <small>Votre humeur du moment apparaîtra de manière aléatoire dans votre Espace Famille mais sans dévoiler votre nom. A vous de devinez quels auteurs se cachent derrière ces phrases...</small>
                     <label for="mail">Modifier votre email</label><br/>
                         <input type="email" id="mailCo" name="mailCo" value="<?= $modif['mail'] ?>"><br />
                     <div id="popMail">
