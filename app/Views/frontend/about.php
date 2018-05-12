@@ -4,22 +4,11 @@
 require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
+<style>body{background-color:#dbe7f7;}</style>
 <div class="container">
 <!--********BANNER************-->
     <div class="bannerBox">
-<?php
-if(isset($dataF6['banner'])){
-?>
-        <a href="#" class="row bannerFamily" style="background-image: url( <?= $dataF6['banner'] ?>);" data-toggle="modal" data-target="#modalAddBanner" ></a>
-<?php
-}
-else{
-?>          
-        <a href="#" class="row bannerFamily" style="background-image: url('app/Public/uploads/banners/banniere.png');" data-toggle="modal" data-target="#modalAddBanner" ></a> 
-<?php
-}
-?>
-
+        <a href="#" class="row bannerFamily" style="background-image: url('app/Public/uploads/banners/banniere.png');" ></a> 
     </div>
         
 

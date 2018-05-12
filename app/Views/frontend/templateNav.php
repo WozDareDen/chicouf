@@ -66,15 +66,16 @@ if($_SESSION['modo'] >0){
   <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle" id="navbarDropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Modération</a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+            <a href="index.php?action=goToModo&id=<?=$_SESSION['family'] ?>" class="btn dropdown-item kitDel" id="modoFamList" >Tableau de bord</a>
+            <div class="dropdown-divider"></div>
             <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddParent" >Rattacher un membre à votre famille</a>
             <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddBanner" >Modifier la bannière</a>
             <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddModo" >Ajouter un modérateur</a>
-            <a href="index.php?action=goToModo&id=<?=$_SESSION['family'] ?>" class="btn dropdown-item kitDel" id="modoFamList" >Afficher la liste des membres</a>
             <div class="dropdown-divider"></div>
             <a href="#" class="btn dropdown-item kitDel4" data-toggle="modal" data-target="#modalStopModo">Quitter la modération</a>
-            <a href="#" class="btn dropdown-item kitDel4" data-toggle="modal" data-target="#modalBann">Bannir un membre de cette famille</a>
+            <a href="#" class="btn dropdown-item kitDel4" data-toggle="modal" data-target="#modalBann">Bannir un membre de votre famille</a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="btn dropdown-item kitDel5" data-toggle="modal" data-target="#modalDeleteFamily">Supprimer cet Espace Famille</a>
+            <a href="#" class="btn dropdown-item kitDel5" data-toggle="modal" data-target="#modalDeleteFamily">Supprimer votre Espace Famille</a>
   </div>
 </li>
 <?php

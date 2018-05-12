@@ -4,6 +4,7 @@
 require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
+<style>body{background-color:#dbe7f7;}</style>
 <div class="container">
 <!--********BANNER************-->
     <div class="bannerBox">

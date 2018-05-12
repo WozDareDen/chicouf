@@ -4,18 +4,19 @@
 require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
+<style>body{background-color:#dbe7f7;}</style>
 <div class="container">
 <!--********BANNER************-->
     <div class="bannerBox">
 <?php
 if(isset($dataF6['banner'])){
 ?>
-        <a href="#" class="row bannerFamily" style="background-image: url( <?= $dataF6['banner'] ?>);" data-toggle="modal" data-target="#modalAddBanner" ></a>
+        <a href="#" class="row bannerFamily" style="background-image: url( <?= $dataF6['banner'] ?>);"  ></a>
 <?php
 }
 else{
 ?>          
-        <a href="#" class="row bannerFamily" style="background-image: url('app/Public/uploads/banners/banniere.png');" data-toggle="modal" data-target="#modalAddBanner" ></a> 
+        <a href="#" class="row bannerFamily" style="background-image: url('app/Public/uploads/banners/banniere.png');" ></a> 
 <?php
 }
 ?>
@@ -75,7 +76,7 @@ if((count($dataF8)) > 1){
 foreach($dataF8 as $newDataF8){       
 ?>
 
-                <span style="color:blue;font-weight:bold;"><?=  $newDataF8['firstname'];?></span>,
+                <span class="modoName"><?=  $newDataF8['firstname'];?></span>,
 
 <?php
 }?>
@@ -110,20 +111,20 @@ if($getWords != NULL){
     <div class="row"> 
 
 <!--*************GRANDCHILDREN**************-->
-    <h3 class="loco col-sm-12" >Les petits-enfants</h3>
+    <h3 class="loco col-sm-12 titleFam" >Les petits-enfants</h3>
     <div class="row" > 
 <?php
 
 foreach($children as $one_child){
 ?>
 <!--**************AVATAR********************-->
-        <section class="col-sm-4" >
+        <section class="col-sm-4 cardFam" >
             <div>
-                <article class="col-sm-4 avatarBox">
-                    <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$one_child['img'] ?>)" href="#collapseExample<?= $one_child['idChildren']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                <article class="col-sm-3 avatarBox ">
+                    <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$one_child['img'] ?>)" href="#collapseExample<?= $one_child['idChildren']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample" ></a>
                     <h3 class="childName"> <?= $one_child['firstname']; ?></h3>
                 </article>
-                <!-- ID MEMBER CHECK PARENT -->
+                
                 <div class="collapse" id="collapseExample<?= $one_child['idChildren']; ?>">
                     <p><?= $one_child['new_birthdate']; ?></p>
                     <p>Poids : <?= $one_child['bulk']; ?> Kg
@@ -227,9 +228,9 @@ else{
 <?php    
 if(isset($dataMember)){
 ?>
- <h3 class="loco">Les parents</h3>
+ <h3 class="loco titleFam">Les parents</h3>
 
-    <div class="row parents" style="background-color:#6bbfb0;">
+    <div class="row parents">
 <?php
 $bigDataMember = $dataMember->fetchAll();
 if(!(empty($bigDataMember))){    
@@ -238,7 +239,7 @@ foreach($bigDataMember as $newDataMember){
     if($newDataMember['parenthood'] ==1){
 ?>
        
-            <article class="col-sm-3 avatarBox" >
+            <article class="col-sm-3 avatarBox cardFamP" >
                 <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$newDataMember['img'] ?>)" href="#collapseExample<?= $newDataMember['idMember']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
                 <h3 class="childName"> <?= $newDataMember['firstname']; ?> <?= $newDataMember['surname']; ?></h3>
             
@@ -292,7 +293,7 @@ else{
 
 
 
-<h3 class="loco">Les grand-parents</h3>
+<h3 class="loco titleFam">Les grand-parents</h3>
 <div class="row">
 
 <?php
@@ -301,7 +302,7 @@ foreach($bigDataMember as $newDataMember){
     if($newDataMember['parenthood'] == 0){
 ?>
 
-            <article class="col-sm-3 avatarBox" >
+            <article class="col-sm-3 avatarBox cardFamGP" >
                 <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$newDataMember['img'] ?>);" href="#collapseExample<?= $newDataMember['idMember']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
                 <h3 class="childName"> <?= $newDataMember['firstname']; ?> <?= $newDataMember['surname']; ?></h3>
                 <div class="collapse" id="collapseExample<?= $newDataMember['idMember']; ?>">

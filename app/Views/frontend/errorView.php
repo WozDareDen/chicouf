@@ -1,7 +1,7 @@
 <?php $title = 'Espace Membre' ?>
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
-
+<style>body{background-color:#dbe7f7;}</style>
 <div class="container-fluid">
 <div class="bannerBox">
        

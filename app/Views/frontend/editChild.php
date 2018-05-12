@@ -1,16 +1,17 @@
 <?php $title = 'Modif Fiche Enfant' ?>
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
+<style>body{background-color:#dbe7f7;overflow-x:hidden;}</style>
 <div class="container-fluid childMain">
           <!--***********************MENU & SECTION********************-->
-          <div class="row">    
+          <div class="row formCrEd">    
 
 
      
 <?php 
 $newData = $data->fetch()
 ?>
-        <form method="post" autocomplete="off" action="index.php?action=updateChild&idChildren=<?= $newData['idChildren'] ?>">
+        <form method="post" autocomplete="off" class="editForm" action="index.php?action=updateChild&idChildren=<?= $newData['idChildren'] ?>">
           <h2>MODIFICATION D'UNE FICHE ENFANT</h2>      
           <article>
             <p>Vous et vos proches pouvaient à tout moment modifier la fiche de renseignement d'un enfant.</p>

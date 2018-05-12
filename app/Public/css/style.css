@@ -2,6 +2,7 @@
 
 body{
     font-family: 'Roboto', sans-serif;
+    background-color: #dbe7f7;
 }
 h5{
     color:black;
@@ -18,7 +19,20 @@ h5{
     } 
 .photoChild:hover, .photoChild2:hover{
     border:2px solid black;
-} 
+}
+.childForm, .editForm{
+    padding-bottom:50px;
+}
+.modoName{
+   color:blue;
+   font-weight:bold;
+}
+.formCrEd{
+    background-color:#b9e2d0;
+    padding:0 5%;
+    margin-top:50px;
+    border-radius:2%;
+}
 .avatarBox a, .photoChild2{
     width: 200px;
     height: 200px;
@@ -29,6 +43,32 @@ h5{
 }
 .avatarBox{
     color:black;
+}
+.cardFam, .cardFamP, .cardFamGP{
+    border-radius: 5%;
+    border:4px solid #6bbfb0;
+}
+.cardFam{  
+    background-color: #aedbc4;
+}
+.cardFamP{
+    background-color: #d57b7a;
+}
+.cardFamGP{
+    background-color: #b38fbb;
+}
+.cardFam:hover, .cardFamP:hover, .cardFamGP:hover{
+    background-color: #6bbfb0;
+
+}
+.cardFam:hover{  
+    border:4px solid#aedbc4;
+}
+.cardFamP:hover{
+    border:4px solid #d57b7a;
+}
+.cardFamGP:hover{
+    border:4px solid #b38fbb;
 }
 .fly p{
     font-style: italic;
@@ -57,7 +97,7 @@ h5{
     padding: 30px;
 }
 .h1Home{
-    margin: 100px 0;
+    margin: 100px 0 80px 0;
     text-align:center;
     width: 50%;
     font-size: 4rem;
@@ -152,7 +192,9 @@ a.dropdown-item:hover{
 .photoChild{
     margin-right:250px;
 }
-
+.photoChild:hover{
+    background-color: white;
+}
 @keyframes blurFadeIn {
 	0% {
 		opacity: 0;
@@ -185,7 +227,12 @@ a.dropdown-item:hover{
 .frame5 span{
     animation: blurFadeInOut 1s ease-in backwards;
 }
-
+.loco{
+    border-radius: 2% !important;
+}
+.titleFam{
+    font-size:30px;
+}
 .frame6 span{
     animation: blurFadeInOut 1s ease-in 0.3s backwards;
 }
@@ -341,19 +388,22 @@ a.dropdown-item:hover{
 .spanDash{
     font-size:24px;
     border-radius:10%;
-    background-color:white;
     font-weight: bold;
+    color: purple;
 }
 #mask{
     cursor:pointer;
 }
-
+.ita3{
+    font-size:36px;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
 /*----------AUTOCOMPLETE--------*/
 .childMain{
     display:flex;
     flex-direction: column; 
-    align-items:center;
-    border:1px solid black;
+    align-items:center;    
   }
 
 .autocomplete {
@@ -491,7 +541,8 @@ a.dropdown-item:hover{
         display:none;
     }
     .h1Fam{
-        font-size:3.5rem;
+        font-size:3rem;
+        margin-left:-10%;
     }
     .tableModo{
        display:flex;
