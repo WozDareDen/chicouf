@@ -103,7 +103,7 @@ $('#myInput').autocomplete({
           var item = current_list_data.find(function(d) {
             return d.title === i.label;
         }), nb_current_meds = $('.meds_container');
-        var formGroupMeds = $('<div class="meds_container"><div class="form-group col-lg-12"><label for="meds">Médicament</label></div>');
+        var formGroupMeds = $('<div class="meds_container"><div class="form-group col-lg-12"><label for="meds">Médicament</label></div></div>');
         var divMedsCo = $('<div class="medsCo"></div>');
         var inputMedsCo = $('<input type="search" disabled />');
         var inputId = $('#myInput').val();

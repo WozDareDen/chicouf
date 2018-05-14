@@ -1,7 +1,7 @@
 <?php $title = 'Modif Fiche Enfant' ?>
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
-<style>body{background-color:#dbe7f7;overflow-x:hidden;}</style>
+<style>body{background-image:url(app/Public/Backgrounds/backg-bois-bleu.jpg);background-repeat:no-repeat;}</style>
 <div class="container-fluid childMain">
           <!--***********************MENU & SECTION********************-->
           <div class="row formCrEd">    
@@ -12,17 +12,17 @@
 $newData = $data->fetch()
 ?>
         <form method="post" autocomplete="off" class="editForm" action="index.php?action=updateChild&idChildren=<?= $newData['idChildren'] ?>">
-          <h2>MODIFICATION D'UNE FICHE ENFANT</h2>      
+          <h1 class="h1Create" style="text-align:center;">MODIFICATION D'UNE FICHE ENFANT</h1>      
           <article>
-            <p>Vous et vos proches pouvaient à tout moment modifier la fiche de renseignement d'un enfant.</p>
-            <p>Seuls les parents peuvent mettre à jour l'identité et la photo de leur enfant.</p> </article>
+            <p class="editP2">Vous et vos proches pouvaient à tout moment modifier la fiche de renseignement d'un enfant.</p>
+            <p class="editP2">Seuls les parents peuvent mettre à jour l'identité et la photo de leur enfant.</p> </article>
 
 <?php
 if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $newData['parent2']){
 ?>    
- 
+        <div class="col-xs-8 col-sm-12">
           <div class="form-group  col-lg-12">
-            <h4>IDENTITE <a class="btn btn-danger" data-toggle="modal" data-target="#modalDeleteChild" href="#" >Supprimer</a></h4>
+            <h2 class="h2Create">IDENTITE</h2>
             <label for="lastname1Up">Nom</label><br />
             <input type="text" id="lastname1Up" name="lastNameCo"  required="valid" cols="30" value="<?= $newData['surname']; ?>" /> 
           </div>
@@ -65,22 +65,23 @@ else{
 <?php 
 $newConnex2 = $connex2->fetch()  
 ?>
-            <h4>ALIMENTATION</h4>
             <div class="form-group col-lg-12 ">
+            <h2 class="h2Create">ALIMENTATION</h2>
+            
             <label for="favoriteMeal">Plats préférés</label><br />
-            <textarea id="favoriteMealUp" name="favoriteMealCo" autofocus="on" rows="5" cols="30" ><?= $newConnex2['favorite_meal']; ?></textarea>
+            <textarea id="favoriteMealUp" name="favoriteMealCo" autofocus="on" rows="5" cols="20" ><?= $newConnex2['favorite_meal']; ?></textarea>
             </div>
             <div class="form-group col-lg-12 ">
             <label for="hatedMeal">Plats détestés</label><br />
-            <textarea id="hatedMealUp" name="hatedMealCo" rows="5" cols="30"><?= $newConnex2['hated_meal']; ?></textarea>
+            <textarea id="hatedMealUp" name="hatedMealCo" rows="5" cols="20"><?= $newConnex2['hated_meal']; ?></textarea>
             </div>
-
-            <h4>TRAITEMENT</h4>
+<div class="form-group col-lg-12">
+            <h2 class="h2Create">TRAITEMENT</h2>
 <?php
   if($getDateTTT != NULL){
 ?>
 
-            <div class="form-group col-lg-12">
+            
 
 
 
@@ -127,16 +128,18 @@ $newConnex3 = $connex3->fetch()
               <label for="startDate">Date de début du traitement</label>
               <input id="startDateCoUp" type="date" name="startDateCo" >
             </div>
-            <h4 class="lampost">ALLERGIES</h4>
+            
             <div class="form-group col-lg-12 ">
+              <h2  class="h2Create lampost" >ALLERGIES</h2>
             <input hidden id="idAllergyCoUp" name="idAllCo" value="<?= $newConnex3['idAllergy'] ?>" />
             <input hidden name="idChildCo" id="idChildCoUp" value="<?= $_GET['idChildren'] ?>" />
-            <textarea id="allergiesUp" name="allergiesCo" rows="2" cols="30" ><?= $newConnex3['content'] ?></textarea>
+            <textarea id="allergiesUp" name="allergiesCo" rows="2" cols="20" ><?= $newConnex3['content'] ?></textarea>
             </div>         
             <div class="form-check col-lg-12">
               <a class="btn btn-primary"  id="submitChildren2" style="color:white;">Valider</a>
             </div>
-
+            <a class="social delPV" data-toggle="modal" data-target="#modalDeleteChild" href="#" >Supprimer cette Fiche</a>
+</div>
 </form>
 
 

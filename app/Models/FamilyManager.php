@@ -23,7 +23,7 @@ class FamilyManager extends Manager{
     }
     public function watchFamily($idFamily){
         $db = $this -> dbConnect(); 
-        $dataF = $db->prepare('SELECT children.idChildren, family_children.idFamily, surname, firstname, img, parent1, parent2, gender, bulk, DATE_FORMAT(bulkDate,\'%d/%m/%Y\')  as new_bulkDate,DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN family_children ON family_children.idChildren = children.idChildren WHERE idFamily = ? ORDER BY family_children.idChildren');
+        $dataF = $db->prepare('SELECT children.idChildren, family_children.idFamily, surname, firstname, img, parent1, parent2, gender, bulk, DATE_FORMAT(bulkDate,\'%d/%m/%Y\')  as new_bulkDate,DATE_FORMAT(birthdate, \'%d/%m/%Y\') as new_birthdate FROM children INNER JOIN family_children ON family_children.idChildren = children.idChildren WHERE idFamily = ? ORDER BY children.birthdate');
         $dataF->execute(array($idFamily));
         return $dataF;
     }
@@ -178,5 +178,18 @@ class FamilyManager extends Manager{
         $insertPicture = $db->prepare('UPDATE family SET img=? WHERE idFamily= ?');
         $insertPicture->execute(array($target_file, intval($idFamily)));
         return $insertPicture;
+    }
+    // MODO STATS
+    public function countUsers($idFamily){
+        $db = $this -> dbConnect();
+        $dataModoFam = $db->prepare('SELECT COUNT(idMember) FROM member_family WHERE idFamily=?');
+        $dataModoFam->execute(array($idFamily));
+        return $dataModoFam;
+    }
+    public function countKids($idFamily){
+        $db = $this -> dbConnect();
+        $dataModoFam2 = $db->prepare('SELECT COUNT(idChildren) FROM family_children WHERE idFamily=?');
+        $dataModoFam2->execute(array($idFamily));
+        return $dataModoFam2;
     }
 }

@@ -18,6 +18,7 @@ class FrontOffice{
             $_SESSION['img'] = $resultat['img'];
             $_SESSION['id'] =  $resultat['idMember'];
             $_SESSION['modo'] =  $resultat['modo'];
+            $_SESSION['mail'] = $resultat['mail'];
             $_SESSION['gender'] =  $resultat['gender'];
                 if($_SESSION['parenthood'] == 1){
                     header('Location: index.php?action=memberView&idMember='.$_SESSION['id']);
@@ -268,7 +269,9 @@ class FrontOffice{
                 $cPage = 1;
             } 
         $dataF4 = $familyManager -> getFamilyName($idFamily);
-        $dataModo = $familyManager -> getMembers($idFamily,$cPage);    
+        $dataModo = $familyManager -> getMembers($idFamily,$cPage);  
+        $dataModoFam = $familyManager -> countUsers($idFamily)->fetch();  
+        $dataModoFam2 = $familyManager -> countKids($idFamily)->fetch();
         require 'app/Views/frontend/modoView.php';
     }
     // CHANGE MODO
@@ -329,80 +332,92 @@ class FrontOffice{
         $idMember = $_SESSION['id'];
         $newChild = json_decode($children,true);
         $lastname = htmlspecialchars($newChild['lastname']);
-        $firstname = htmlspecialchars($newChild['firstname']);
-        $birthdate = htmlspecialchars($newChild['birthdate']);
-        $bulk = htmlspecialchars($newChild['bulk']);
-        $bulkDate = htmlspecialchars($newChild['bulkDate']);
-        $gender = htmlspecialchars($newChild['gender']);
-        $parent1 = htmlspecialchars($newChild['parent1']);
-        $parent2 = htmlspecialchars($newChild['parent2']);
-        $favMeal = htmlspecialchars($newChild['favMeal']);
-        $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
-        $allergies = htmlspecialchars($newChild['allergies']);
-        $startDate = htmlspecialchars($newChild['startDate']);
-        $username = $_SESSION['firstname'];
-        $childManager = new \Src\Models\ChildManager();
-        // identity       
-        $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $parent2,$username, $bulk, $bulkDate);
-        $getIdChild = $childManager -> getMaxIdChild();
-        $getIdChild = $getIdChild->fetch();
-        $idChild = $getIdChild[0];
-        // food
-        $addNewMeal = $childManager -> addNewMeal($favMeal, $hatedMeal,$idChild);
-        // allergy
-        $addAllergy = $childManager -> addNewAllergy($allergies);
-        $getIdAllergy = $childManager -> getMaxIdAllergy();
-        $newGetIdAllergy = $getIdAllergy->fetch();
-        $idAllergy = $newGetIdAllergy[0];
-        $insertAllChild = $childManager -> insertAllChild($idAllergy,$idChild);
-        // add parents & family
-        $addToMyParent = $childManager -> addToMyParent($idChild,$idMember);
-        $idFamily = $_SESSION['family'];
-        if(!(empty($idFamily))){
-            $addToMyFamily = $childManager -> addToMyFamily($idChild,$idFamily);
+        if(empty($lastname)){
+            require 'app/Views/frontend/createChild.php';
         }
-        // treatment
-        if($startDate != NULL){
-            $addTTT = $childManager -> addTTT($idChild,$startDate);
-            $getIdTTT = $childManager -> getIdTTT();
-            $getIdTTT = $getIdTTT->fetch();
-            $idTTT = $getIdTTT[0];
-            // meds
-            foreach($newChild['meds'] as $poso) {
-                $posology = htmlspecialchars($poso['posology']) ;
-                $idMeds = $poso['label'] ;
-                $newGlobalTTT = $childManager->newPoso($idTTT,$idMeds,$posology);
+        else{
+            $firstname = htmlspecialchars($newChild['firstname']);
+            $birthdate = htmlspecialchars($newChild['birthdate']);
+            $bulk = htmlspecialchars($newChild['bulk']);
+            $bulkDate = htmlspecialchars($newChild['bulkDate']);
+            $gender = htmlspecialchars($newChild['gender']);
+            $parent1 = htmlspecialchars($newChild['parent1']);
+            $parent2 = htmlspecialchars($newChild['parent2']);
+            $favMeal = htmlspecialchars($newChild['favMeal']);
+            $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
+            $allergies = htmlspecialchars($newChild['allergies']);
+            $startDate = htmlspecialchars($newChild['startDate']);
+            $username = $_SESSION['firstname'];
+            $childManager = new \Src\Models\ChildManager();
+            // identity
+            $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $parent2, $username, $bulk, $bulkDate);
+            $getIdChild = $childManager -> getMaxIdChild();
+            $getIdChild = $getIdChild->fetch();
+            $idChild = $getIdChild[0];
+            // food
+            $addNewMeal = $childManager -> addNewMeal($favMeal, $hatedMeal, $idChild);
+            // allergy
+            $addAllergy = $childManager -> addNewAllergy($allergies);
+            $getIdAllergy = $childManager -> getMaxIdAllergy();
+            $newGetIdAllergy = $getIdAllergy->fetch();
+            $idAllergy = $newGetIdAllergy[0];
+            $insertAllChild = $childManager -> insertAllChild($idAllergy, $idChild);
+            // add parents & family
+            $addToMyParent = $childManager -> addToMyParent($idChild, $idMember);
+            $idFamily = $_SESSION['family'];
+            if (!(empty($idFamily))) {
+                $addToMyFamily = $childManager -> addToMyFamily($idChild, $idFamily);
             }
+            // treatment
+            if ($startDate != null) {
+                $addTTT = $childManager -> addTTT($idChild, $startDate);
+                $getIdTTT = $childManager -> getIdTTT();
+                $getIdTTT = $getIdTTT->fetch();
+                $idTTT = $getIdTTT[0];
+                // meds
+                foreach ($newChild['meds'] as $poso) {
+                    $posology = htmlspecialchars($poso['posology']) ;
+                    $idMeds = $poso['label'] ;
+                    $newGlobalTTT = $childManager->newPoso($idTTT, $idMeds, $posology);
+                }
+            }
+            return $children;
         }
-        return $children;
     }
     // GO TO UPDATE CHILD
     function goToUpdateChild($idChild){
+        $idMember = strval($_SESSION['id']);        
+        $userManager = new \Src\Models\UserManager();
+        $checkParent = $userManager -> checkParent($idChild)->fetchAll();
+        $checkParent2 = [];
+        foreach($checkParent as $parent){
+            array_push($checkParent2, $parent[0]);
+        } 
         $childManager = new \Src\Models\ChildManager();
-        $data = $childManager -> getChild($idChild);
-        $connex2 = $childManager -> getMeals($idChild);
-        // allergy
-        $connex3 = $childManager -> getAllergy($idChild);
-        $idMember = $_SESSION['id'];
-        // treatment
-        $getDateTTT = $childManager -> getDateTTT($idChild);
-        $getDateTTT = $getDateTTT->fetch();
-        $idTTT = $getDateTTT['idTTT'];
-        // meds
-        $getAllMedsChild = $childManager ->getAllMedsChild($idTTT);
         $connex5 = $childManager -> getIdFamilyByChild($idChild);
         $newConnex5 = $connex5->fetch();
-            if(isset($_SESSION['id'])){
-                // if($_SESSION['family'] === $newConnex5['idFamily']){
-                    require 'App/Views/frontend/editChild.php';
-                // }
-                // else{
-                //     throw new \Exception('cette page n\'existe pas !');
-                // }
+        if(isset($_SESSION['id'])) {
+            if(in_array($idMember,$checkParent2) || $_SESSION['family'] === $newConnex5['idFamily']) {           
+                $data = $childManager -> getChild($idChild);
+                $connex2 = $childManager -> getMeals($idChild);
+                // allergy
+                $connex3 = $childManager -> getAllergy($idChild);
+                $idMember = $_SESSION['id'];
+                // treatment
+                $getDateTTT = $childManager -> getDateTTT($idChild);
+                $getDateTTT = $getDateTTT->fetch();
+                $idTTT = $getDateTTT['idTTT'];
+                // meds
+                $getAllMedsChild = $childManager ->getAllMedsChild($idTTT);
+                require 'App/Views/frontend/editChild.php';
             }
             else{
                 throw new \Exception('Cette page n\'existe pas !');
-            }
+            }           
+        } 
+        else{
+            throw new \Exception('Cette page n\'existe pas !');
+        }
     }
     //*****************************UPDATE CHILD***********************************
     function updateChild($children){

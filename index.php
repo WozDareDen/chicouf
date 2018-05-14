@@ -211,9 +211,14 @@ try{
         }
         // DELETE CHILD
         elseif($_GET['action'] == 'deleteChild'){
-            $idMember = htmlspecialchars($_GET['idMember']);
-            $idChildren = htmlspecialchars($_GET['idChildren']);
-            $frontoffice->deleteChild($idMember,$idChildren);
+            if(isset($_GET['idChildren'])) {
+                $idMember = htmlspecialchars($_SESSION['idMember']);
+                $idChildren = htmlspecialchars($_GET['idChildren']);
+                $frontoffice->deleteChild($idMember, $idChildren);
+            }
+            else{
+                throw new \Exception('cette page vous est inaccessible');
+            }
         }
         // GO TO FAMILY VIEW
         elseif($_GET['action'] == 'familyLink'){
@@ -245,7 +250,7 @@ try{
         // GO TO MODO VIEW
         elseif($_GET['action'] == "goToModo"){
             if(isset($_GET['id'])){
-                if($_SESSION['family'] == $_GET['id']) {
+                if($_SESSION['family'] == $_GET['id'] && $_SESSION['modo'] == 1) {
                     $idFamily = $_SESSION['family'];
                     if (isset($_GET['p'])) {
                         $cPage = $_GET['p'];
@@ -254,8 +259,17 @@ try{
                     }
                     $frontoffice->goToModo($idFamily,$cPage);
                 }
+                else{
+                    throw new \Exception('vous n\'avez pas accès à cette page');
+                }
             }
         }
+        // LEAVE FAMILY
+        // elseif($_GET['action'] == 'getMeOuttaHere'){
+        //     $idFamily = $_SESSION['family'];
+        //     $mailCo = $_SESSION['mail'];
+        //     $frontoffice->bann($idFamily,$mailCo);
+        // }
         // BANN MEMBER
         elseif($_GET['action'] == 'bann'){
             if(isset($_POST['mailCoModo'])){
@@ -343,7 +357,7 @@ try{
         //     $frontoffice->getWeight();
         // }
         else{
-            throw new \Exception('page non trouvée');
+            throw new \Exception('page inaccessible');
         }
     }
     

@@ -11,16 +11,13 @@
     <section>
         <article id="mainContent">
             <h2>Qu'est-ce que c'est ?</h2>
-            <p>C'est l'expression de tendresse par laquelle les grands-parents désignent les progénitures de leurs progénitures. Elle vous permet de vous constituer une preuve de création et de donner une date certaine à votre idée ou votre projet.</p>
+            <p>C'est l'expression de tendresse par laquelle les grands-parents désignent les progénitures de leurs progénitures. Toujours ravis de les accueillir et de partager du temps avec eux, les grands-parents n'en sont pas moins soulagés aux moments des Adieux !</p>
 
-            <p>L’enveloppe Soleau vous identifie comme auteur. Le droit d’auteur protège les œuvres littéraires, les créations musicales, graphiques et plastiques, mais aussi les logiciels, les créations de l’art appliqué, les créations de mode, etc. Les artistes-interprètes, les producteurs de vidéogrammes et de phonogrammes ainsi que les entreprises de communication audiovisuelle ont également des droits voisins du droit d’auteur.</p>
+            <p>Chicouf.fr propose de mettre en relation parents et grand-parents. En effet, il n'est pas toujours aisé de se tenir à jour des habitudes alimentaires et autres caprices de chaque enfant. Surtout quand leur nombre croît. Chicouf.fr vous propose une interface d'échange permettant de mettre à jour et de se tenir au courant de ces variations. Vous pouvez également notifier les traitements médicaux éventuels pour chacun des enfants ainsi que les allergies. </p>
         </article>
         <article>
-            <h2>L'enveloppe Soleau</h2>
-            <p>L’enveloppe Soleau est un moyen de preuve de création dont les formalités de dépôt à l’INPI sont peu contraignantes.
-            Qui peut la déposer ? Toute personne (auteur, créateur, inventeur, etc.) voulant se constituer une preuve de création. Plusieurs personnes peuvent déposer ensemble une enveloppe Soleau.
-            Quand la déposer ? Vous pouvez effectuer votre dépôt à tout moment. Mais pour que vous puissiez vous en servir comme preuve, il est recommandé de le faire dès la réalisation de votre création.
-            Où se la procurer ? vous pouvez la commander en ligne, vous pouvez, depuis le 15 décembre 2016, déposer en quelques clics vos créations. Une démarche en ligne rapide et sécurisée proposant une solution d'archivage certifiée à valeur probatoire.</p>
+            <h2>Concrètement...</h2>
+            <p>En s'inscrivant sur le site, un utilisateur est amené dans un premier temps à créer une fiche pour son enfant. Ensuite, pour partager ces renseignements, il créé ou rejoint un Espace Famille où tous les utilisateurs de cette Famille (grand-parents, oncles, tantes...) pourront lire et modifier les informations de l'Enfant. Un Espace Famille peut contenir autant d'adultes et d'enfants que nécessaires. </p>
         </article>
     </section>
 <!--********REGISTRATION FORM****************-->

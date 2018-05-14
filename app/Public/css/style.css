@@ -7,6 +7,9 @@ body{
 h5{
     color:black;
 }
+li{
+    list-style-type: none;
+}
 .childName{
     animation: cssName 2s 1 ease forwards;
     -webkit-animation: cssName 2s 1 ease forwards;
@@ -28,10 +31,11 @@ h5{
    font-weight:bold;
 }
 .formCrEd{
-    background-color:#b9e2d0;
-    padding:0 5%;
     margin-top:50px;
-    border-radius:2%;
+    background-color:white;
+    padding:30px 0;
+    border-radius:30px;
+    box-shadow:  0 0 30px #212121;
 }
 .avatarBox a, .photoChild2{
     width: 200px;
@@ -282,9 +286,7 @@ a.dropdown-item:hover{
 #logoTurn2:hover{
     animation-play-state: paused;
 }
-.titlesMV{
 
-}
 .writings{
 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -470,10 +472,79 @@ a.dropdown-item:hover{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .centerCol{
-    text-align:center;
+    text-align:left;
+}
+.tableModo{
+    border: 3px solid #6bbfb0 ;
+    box-shadow: 10px 5px 5px #6bbfb0;
+    margin-top: 30px;
+}
+.thead-light{
+    border-bottom: 3px solid #6bbfb0;
 }
 #modoMemList{
     display:flex;
+}
+.leaveOut{
+    margin-top:100px;
+}
+.btnLeaveOut{
+    background-color: #d57b7a;
+    color: black;
+}
+.btnLeaveOut:hover{
+    background-color: #d57b7a;
+    color: white;
+    font-weight: bold;
+}
+.mainPV{
+    background-color:white;
+    padding:30px 0;
+    border-radius:30px;
+    box-shadow:  0 0 30px #212121;
+}
+
+.proForm .label1{
+    padding-right:100px;
+}
+.proForm .label2{
+    padding-right:10px;
+}
+.proForm .label3{
+    padding-right:40px;
+}
+.proForm input,textarea{
+    border-radius:5px;
+}
+#wordsCo{
+    width:400px;
+}
+.delPV{
+    float: right;
+    color:red;
+    font-size: 13px;
+    padding-top:15px;
+    opacity: 85%;
+}
+.delPV:hover{
+    color:red;
+}
+#small{
+    margin:0 0 12px 20px;
+    font-size:12px;
+}
+.reducePCC{
+    font-size:14px;
+    margin:0 20px;
+}
+.medsCo li{
+    font-size:10px;
+}
+.meds_container{
+    font-size:10px;
+}
+.editP2{
+    margin: 0 20px;
 }
 /*-------MEDIA QUERIES---------*/
 @media screen and (min-width: 593px){
@@ -544,13 +615,50 @@ a.dropdown-item:hover{
         font-size:3rem;
         margin-left:-10%;
     }
+    .h1Create{
+        font-size:1.8rem;
+    }
+    .h2Create{
+        font-size: 1.5rem;
+    }
     .tableModo{
        display:flex;
        flex-direction: column;
-    }
-    #modoMemList table{
-         
-       
+       border: 4px solid black !important;
     }
 
+    #wordsCo{
+        width:240px;
+    } 
+    .proForm input, .proForm textarea{
+        margin-left: 4px;
+    }   
+    .proForm .label2, .label3{
+        padding-top:15px;
+        padding-bottom: -20px;
+    }    
+    .delPV{
+        margin-top:80px;
+        margin-right:50px;
+    }
+    .reduceP{
+        margin:0 20px;
+    }
+    .reducePCC{
+        
+        text-align: center;
+    }
+       #small{
+        margin: 0 5px 15px 5px;
+        text-align: justify;
+    }
+    .childForm{
+        margin-left:10px;
+    }
+    .editP{
+        margin-left:0 20px;
+    }
+    .editP2{
+        margin-bottom: 15px;
+    }
 }

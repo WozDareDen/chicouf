@@ -68,12 +68,12 @@ if($_SESSION['modo'] >0){
   <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
             <a href="index.php?action=goToModo&id=<?=$_SESSION['family'] ?>" class="btn dropdown-item kitDel" id="modoFamList" >Tableau de bord</a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddParent" >Rattacher un membre à votre famille</a>
+            <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddParent" >Rattacher un membre <span class="eraseThD">à votre famille</span></a>
             <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddBanner" >Modifier la bannière</a>
             <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddModo" >Ajouter un modérateur</a>
             <div class="dropdown-divider"></div>
             <a href="#" class="btn dropdown-item kitDel4" data-toggle="modal" data-target="#modalStopModo">Quitter la modération</a>
-            <a href="#" class="btn dropdown-item kitDel4" data-toggle="modal" data-target="#modalBann">Bannir un membre de votre famille</a>
+            <a href="#" class="btn dropdown-item kitDel4" data-toggle="modal" data-target="#modalBann">Bannir un membre<span class="eraseThD"> de votre famille</span></a>
             <div class="dropdown-divider"></div>
             <a href="#" class="btn dropdown-item kitDel5" data-toggle="modal" data-target="#modalDeleteFamily">Supprimer votre Espace Famille</a>
   </div>
@@ -303,7 +303,7 @@ else{
         </button>
       </div>
       <div class="modal-body">
-      <p>Cette action entrainera la <strong>suppression définitive</strong> de cet Espace Famille. Par la suite, vous pourrez créer un nouvel Espace Famille.</p>
+      <p>Cette action entrainera la <strong>suppression définitive</strong> de cet Espace Famille. Par la suite, vous pourrez recréer un nouvel Espace Famille.</p>
         <form action="index.php?action=deleteFamily&id=<?= $_SESSION['family'] ?>" method="post">
           <div class="form-check">
           <input type="checkbox" name="choixDelCo" required="valid" /> Je confirme vouloir supprimer cet Espace Famille.</br>
@@ -398,7 +398,7 @@ else{
                 </button>
             </div>
             <div class="modal-body" style="color:black;">
-                <p>En validant, vous resterez membre de votre Espace Famille mais vous n'en serez plus le modérateur. <br /></p>
+                <p>En validant, vous resterez membre de votre Espace Famille mais vous n'en serez plus le modérateur. Au préalable, vous devez avoir désigné un successeur. <br /></p>
                  <form action="index.php?action=changeModo" method="post">
                  
                  <div class="form-check">

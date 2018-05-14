@@ -118,9 +118,9 @@ if($getWords != NULL){
 foreach($children as $one_child){
 ?>
 <!--**************AVATAR********************-->
-        <section class="col-sm-4 cardFam" >
+        <section class="col-sm-3 cardFam" >
             <div>
-                <article class="col-sm-3 avatarBox ">
+                <article class="col-sm-3 avatarBox">
                     <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$one_child['img'] ?>)" href="#collapseExample<?= $one_child['idChildren']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample" ></a>
                     <h3 class="childName"> <?= $one_child['firstname']; ?></h3>
                 </article>
@@ -354,7 +354,9 @@ else{
 <?php
 }
 ?>
-
+<!-- <p class="leaveOut">Pour ne plus faire partie de cet Espace Famille, cliquez sur le bouton :
+<a href="index.php?action=getMeOuttaHere"><button class="btn btnLeaveOut">Partir</button></a>
+</p> -->
    </div>
 
 

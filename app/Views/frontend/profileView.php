@@ -4,8 +4,8 @@
 require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
-<style>body{background-color:#dbe7f7;}</style>
-<div class="container">
+<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-repeat:no-repeat;}</style>
+<div class="container" >
 <!--********BANNER************-->
     <div class="bannerBox">
 <?php
@@ -24,7 +24,7 @@ else{
     </div>
         
 <?php $modif = $recoverUs->fetch() ?>
-
+<div class="mainPV" >
         <h1 class="mbr-section-title" style="text-align:center;">Modifier votre profil <?= $modif['firstname'] ?></h1>
 
 <?php
@@ -35,8 +35,8 @@ if(isset($getFamilyName['familyName'])==true){
 }
 ?>
 
-<div class="row justify-content-md-center">   
-       <p>Vous pouvez gérer ici les informations vous concernant. Pour modifier votre photo de profil, cliquez dessus.</p>
+<div class="row justify-content-sm-center">   
+       <p class="reduceP">Vous pouvez gérer ici les informations vous concernant. </p>
        
 <?php
 if($_SESSION['parenthood'] == 0){
@@ -53,8 +53,8 @@ if($_SESSION['parenthood'] == 0){
 ?>
 
     </div>
-    <div class="row justify-content-md-center">
-        <article class="col-sm-3 avatarBox social" >
+    <div class="row justify-content-sm-center">
+        <article class="col-xs-12 col-sm-6 col-md-3 avatarBox social boxProfil" >
             <a href="#" data-toggle="modal" data-target="#userModal<?= $modif['idMember'] ?>" data-whatever="@mdo" class="photoChild2" style="background-image: url(<?= $modif['img'] ?>);" title="Vous pouvez modifier la photo" ></a>
                         <div class="modal fade" id="userModal<?= $modif['idMember'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -77,18 +77,22 @@ if($_SESSION['parenthood'] == 0){
                             </div>
                         </div>
                         </div>
+                        
+                
         </article>
-        <article class="col-sm-6">
-            <form action="index.php?action=changeProfile&id" method="post">
-                <button type="button" class="btn btn-info"  class="btn social" data-toggle="modal" data-target="#modalChangePass">Changer votre mot de passe</button>
-                <button type="button" class="btn btn-danger"  class="btn social" data-toggle="modal" data-target="#modalQuit">Supprimer mon compte</button><br />
+        <article class="col-xs-12 col-md-6">
+            <form action="index.php?action=changeProfile&id" class="proForm" method="post" >
+            <label for="wordsCo" >Votre humeur du jour&nbsp;<a href="#small" data-toggle="collapse" aria-expanded="false" aria-controls="#small"><i class="fa fa-info-circle"></i></a></label><br/>
+            <div class="collapse" id="small">Ceci apparaîtra de manière aléatoire et anonyme dans votre Espace Famille. A vous de devinez quels auteurs se cachent derrière ces lignes...</div>
+                        <input type="text" id="wordsCo" name="wordsCo" value="<?= $modif['words'] ?>"><br />
+                        <hr>
          
 <?php
 // CHANGE SURNAME FOR MISSES
 if($modif['gender'] == 1){      
 ?>
 
-                    <label for="surnameCo">Modifier votre nom</label><br />
+                    <label for="surnameCo" class="label1">Nom</label>
                         <input type="text" id='surnameCo'  name="surnameCo" value="<?= $modif["surname"] ?>" > <br /> 
 
 <?php
@@ -96,25 +100,27 @@ if($modif['gender'] == 1){
 else{
 ?>
 
-                        <input type="hidden" id='surnameCo'  name="surnameCo" value="<?= $modif["surname"] ?>" > <br /> 
+                        <input type="hidden" id='surnameCo'  name="surnameCo" value="<?= $modif["surname"] ?>" > 
 
 <?php
 }
 ?>                                     
-                    <label for="wordsCo">Votre humeur du jour</label><br/>
-                        <input type="text" id="wordsCo" name="wordsCo" value="<?= $modif['words'] ?>"><br />
-                        <small>Votre humeur du moment apparaîtra de manière aléatoire dans votre Espace Famille mais sans dévoiler votre nom. A vous de devinez quels auteurs se cachent derrière ces phrases...</small>
-                    <label for="mail">Modifier votre email</label><br/>
+                    
+                    <label for="mail" class="label1">Email</label>
                         <input type="email" id="mailCo" name="mailCo" value="<?= $modif['mail'] ?>"><br />
                     <div id="popMail">
                         <p>Votre mail n'est pas conforme.</p>
                     </div>               
-                    <label>Modifier votre date de naissance</label><br />
-                        <input type="date" id="birthdateCo" name="birthdateCo"  value="<?= $modif['birthdate'] ?>"><br />       
-                    <label>Modifier votre Adresse</label><br />
+                    <label for="birthDateCo" class="label2">Date de naissance</label>
+                        <input type="date" id="birthdateCo" name="birthdateCo"  value="<?= $modif['birthdate'] ?>"><br />
+                    <label for="mdpCoCo" class="label3">Mot de passe</label>
+                    <button type="button" class="btn btn-outline-info"  class="btn social" data-toggle="modal" data-target="#modalChangePass">Modifier</button>
+                        <hr >       
+                    <label for="cityCo" id="adressPV">Adresse</label><br />
                         <textarea id="cityCo" name="cityCo"  rows="3" ><?= $modif['city'] ?></textarea><br />
-                        <input class="btn" style="background-color:#6bbfb0;color:white;" id="registration" type="submit" name="updateUser" value="Envoyer" />
-            </form>
+                        <input class="btn" style="background-color:#6bbfb0;color:white;margin-top:10px;" id="registration" type="submit" name="updateUser" value="Envoyer" />
+            <a href="#" class="social delPV" data-toggle="modal" data-target="#modalQuit" >Supprimer mon compte</a></form>
+            
     </div>
 </article>
 
@@ -182,11 +188,12 @@ else{
                  <div class="form-check">
                     <input type="checkbox" name="choixDelCo" required /> Je confirme supprimer mon compte.</br>
                 </div>
-                <button type="submit" class="btn btn-outline-danger">Valider</button>
+                <button type="submit" class="btn btn-outline-danger">Valider</button>              
                 </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 
