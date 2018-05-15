@@ -38,7 +38,7 @@ li{
     box-shadow:  0 0 30px #212121;
 }
 .avatarBox a, .photoChild2{
-    width: 200px;
+    min-width: 200px;
     height: 200px;
     border-radius:50%;
     background-size:contain;
@@ -63,7 +63,6 @@ li{
 }
 .cardFam:hover, .cardFamP:hover, .cardFamGP:hover{
     background-color: #6bbfb0;
-
 }
 .cardFam:hover{  
     border:4px solid#aedbc4;
@@ -73,6 +72,26 @@ li{
 }
 .cardFamGP:hover{
     border:4px solid #b38fbb;
+}
+.cardFamX{
+    border:8px solid #f4d3b8;
+    border-radius: 20px !important;
+    box-shadow: 6px 6px 20px #212121;
+    background-color: white;
+}
+.cardFamX:last-child{
+    margin-top:2rem !important;
+}
+.cardFamX:hover{
+    border:8px solid #89654f;
+    box-shadow: 6px 6px 20px #212121;
+}
+.cardFamX h2{
+    margin-top:10px;
+    margin-left:10px ;
+}
+.cardFamX p{
+    margin-left: 10px;
 }
 .fly p{
     font-style: italic;
@@ -377,6 +396,7 @@ a.dropdown-item:hover{
 /*-----------ADMIN------------*/
 .jumbotron{
     margin-top: 100px;
+    background-color: white !important;
 }
 .main-menu{
     z-index:10000;
@@ -387,11 +407,15 @@ a.dropdown-item:hover{
     display:flex;
     justify-content: center;
 }
-.spanDash{
-    font-size:24px;
-    border-radius:10%;
+.spanDashX{
     font-weight: bold;
-    color: purple;
+    color:#89654f;
+    float: right;
+}
+.spanDashXX{
+    font-weight: bold;
+    color:red;
+    font-size:24px;
 }
 #mask{
     cursor:pointer;
@@ -537,14 +561,16 @@ a.dropdown-item:hover{
     font-size:14px;
     margin:0 20px;
 }
-.medsCo li{
-    font-size:10px;
-}
-.meds_container{
-    font-size:10px;
-}
+
 .editP2{
     margin: 0 20px;
+}
+.ui-menu-item:hover{
+    cursor: pointer;
+    background-color: rgb(185, 181, 181);
+}
+.marginB{
+    margin-bottom: 20px;
 }
 /*-------MEDIA QUERIES---------*/
 @media screen and (min-width: 593px){
@@ -560,8 +586,7 @@ a.dropdown-item:hover{
     .jumbo{
         font-size:12px;
         position: absolute;
-        margin-left:10%;
-        
+        margin-left:10%;        
     }
     .yop{
         display: none;
@@ -583,7 +608,10 @@ a.dropdown-item:hover{
        left:0 !important;
     }
     #test,#test2{
-        font-size: 26px;        
+        font-size: 26px;    
+    }
+    #test{
+        margin-bottom:2rem !important;
     }
     #test2{
         margin-left: 20% !important;
@@ -644,8 +672,7 @@ a.dropdown-item:hover{
     .reduceP{
         margin:0 20px;
     }
-    .reducePCC{
-        
+    .reducePCC{        
         text-align: center;
     }
        #small{

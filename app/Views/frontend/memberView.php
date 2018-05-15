@@ -55,7 +55,7 @@ else{
                         </button>
                       </div>
                       <div class="modal-body">
-                        <form action="index.php?action=uploadPic&idMember=<?= $newData['idMember'] ?>&idChildren=<?= $newData['idChildren'] ?>" method="post" enctype="multipart/form-data">
+                        <form action="index.php?action=uploadPic&idMember=<?= $_GET['idMember'] ?>&idChildren=<?= $one_child['idChildren'] ?>" method="post" enctype="multipart/form-data">
                             <fieldset>
                             <input type="file" name="fileToUpload" id="fileToUpload" /> 
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

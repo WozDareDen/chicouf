@@ -118,9 +118,9 @@ if($getWords != NULL){
 foreach($children as $one_child){
 ?>
 <!--**************AVATAR********************-->
-        <section class="col-sm-3 cardFam" >
+        <section class="col-xs-4 col-sm-6 col-md-4 col-lg-3 cardFam" >
             <div>
-                <article class="col-sm-3 avatarBox">
+                <article class="col-sm-6 col-md-9 avatarBox">
                     <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$one_child['img'] ?>)" href="#collapseExample<?= $one_child['idChildren']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample" ></a>
                     <h3 class="childName"> <?= $one_child['firstname']; ?></h3>
                 </article>
@@ -210,7 +210,7 @@ else{
 
 
                         </div>
-<a href="index.php?action=goToUpdateChild&idChildren=<?= $one_child['idChildren']; ?>"><button type="button" class="btn btn-warning">Modifier cette fiche</button></a>
+<a href="index.php?action=goToUpdateChild&idChildren=<?= $one_child['idChildren']; ?>"><button type="button" class="btn btn-warning marginB">Modifier cette fiche</button></a>
                     </div>
 
                 </div>
@@ -230,7 +230,7 @@ if(isset($dataMember)){
 ?>
  <h3 class="loco titleFam">Les parents</h3>
 
-    <div class="row parents">
+    <div class="row">
 <?php
 $bigDataMember = $dataMember->fetchAll();
 if(!(empty($bigDataMember))){    
@@ -239,7 +239,7 @@ foreach($bigDataMember as $newDataMember){
     if($newDataMember['parenthood'] ==1){
 ?>
        
-            <article class="col-sm-3 avatarBox cardFamP" >
+            <article class="col-xs-4 col-sm-6 col-md-4 col-lg-3 avatarBox cardFamP" >
                 <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$newDataMember['img'] ?>)" href="#collapseExample<?= $newDataMember['idMember']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
                 <h3 class="childName"> <?= $newDataMember['firstname']; ?> <?= $newDataMember['surname']; ?></h3>
             
@@ -302,7 +302,7 @@ foreach($bigDataMember as $newDataMember){
     if($newDataMember['parenthood'] == 0){
 ?>
 
-            <article class="col-sm-3 avatarBox cardFamGP" >
+            <article class="col-xs-4 col-sm-6 col-md-4 col-lg-3  avatarBox cardFamGP" >
                 <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$newDataMember['img'] ?>);" href="#collapseExample<?= $newDataMember['idMember']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
                 <h3 class="childName"> <?= $newDataMember['firstname']; ?> <?= $newDataMember['surname']; ?></h3>
                 <div class="collapse" id="collapseExample<?= $newDataMember['idMember']; ?>">

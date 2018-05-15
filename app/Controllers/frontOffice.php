@@ -331,17 +331,17 @@ class FrontOffice{
     function addNewChild($children){
         $idMember = $_SESSION['id'];
         $newChild = json_decode($children,true);
-        $lastname = htmlspecialchars($newChild['lastname']);
-        if(empty($lastname)){
+        $lastname = htmlspecialchars($newChild['lastname']); 
+        $firstname = htmlspecialchars($newChild['firstname']);
+        $birthdate = htmlspecialchars($newChild['birthdate']);
+        $parent1 = htmlspecialchars($newChild['parent1']);
+        if($lastname === "" || $firstname === "" || $parent1 ==="" ){
             require 'app/Views/frontend/createChild.php';
         }
-        else{
-            $firstname = htmlspecialchars($newChild['firstname']);
-            $birthdate = htmlspecialchars($newChild['birthdate']);
+        else{    
             $bulk = htmlspecialchars($newChild['bulk']);
             $bulkDate = htmlspecialchars($newChild['bulkDate']);
-            $gender = htmlspecialchars($newChild['gender']);
-            $parent1 = htmlspecialchars($newChild['parent1']);
+            $gender = htmlspecialchars($newChild['gender']);          
             $parent2 = htmlspecialchars($newChild['parent2']);
             $favMeal = htmlspecialchars($newChild['favMeal']);
             $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
@@ -381,7 +381,8 @@ class FrontOffice{
                     $newGlobalTTT = $childManager->newPoso($idTTT, $idMeds, $posology);
                 }
             }
-            return $children;
+            return $children;   
+            
         }
     }
     // GO TO UPDATE CHILD
@@ -513,18 +514,18 @@ class FrontOffice{
             if($check !== false) {
                 // Check file size
                 if ($_FILES["fileToUpload"]["size"] > 500000) {
-                    echo "Désolé, votre fichier est trop volumineux. ";
+                    throw new \Exception("Désolé, votre fichier est trop volumineux. ");
                     $uploadOk = 0;
                 }
                 // Allow certain file formats
                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif" ) {
-                    echo "Seuls les formats JPG, JPEG, PNG & GIF files sont authorisés. ";
+                    throw new \Exception("Seuls les formats JPG, JPEG, PNG & GIF files sont authorisés. ");
                     $uploadOk = 0;
                 }
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) {
-                    echo "Désolé, votre avatar n'a pu être envoyé.";
+                    throw new \Exception("Désolé, votre avatar n'a pu être envoyé.");
                 // if everything is ok, try to upload file
                 } else {
                     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -532,11 +533,11 @@ class FrontOffice{
                         $insertPicture = $childManager -> uploadPicture($target_file,$idChildren);
                         header('Location: index.php?action=memberView&idMember='.$idMember);
                     } else {
-                        echo "Désolé, une erreur est survenue dans l'envoi de votre fichier. ";
+                        throw new \Exception("Désolé, une erreur est survenue dans l'envoi de votre fichier. ");
                     }
                 }
             } else {
-                echo "Ce fichier n'est pas une image. ";
+                throw new \Exception("Ce fichier n'est pas une image. ");
                 $uploadOk = 0;
             }
         }
@@ -554,18 +555,18 @@ class FrontOffice{
             if($check !== false) {
                 // Check file size
                 if ($_FILES["fileToUpload"]["size"] > 500000) {
-                    echo "Désolé, votre fichier est trop volumineux. ";
+                    throw new \Exception("Désolé, votre fichier est trop volumineux. ");
                     $uploadOk = 0;
                 }
                 // Allow certain file formats
                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif" ) {
-                    echo "Seuls les formats JPG, JPEG, PNG & GIF files sont authorisés. ";
+                    throw new \Exception("Seuls les formats JPG, JPEG, PNG & GIF files sont authorisés. ");
                     $uploadOk = 0;
                 }
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) {
-                    echo "Désolé, votre avatar n'a pu être envoyé.";
+                    throw new \Exception("Désolé, votre avatar n'a pu être envoyé.");
                 // if everything is ok, try to upload file
                 } else {
                     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -573,11 +574,11 @@ class FrontOffice{
                         $insertPicture = $familyManager -> uploadBanner($target_file,$idFamily);
                         header('Location: index.php?action=familyLink&id='.$idFamily);
                     } else {
-                        echo "Désolé, une erreur est survenue dans l'envoi de votre fichier. ";
+                        throw new \Exception("Désolé, une erreur est survenue dans l'envoi de votre fichier. ");
                     }
                 }
             } else {
-                echo "Ce fichier n'est pas une image. ";
+                throw new \Exception("Ce fichier n'est pas une image. ");
                 $uploadOk = 0;
             }
         }
@@ -595,18 +596,18 @@ class FrontOffice{
             if($check !== false) {
                 // Check file size
                 if ($_FILES["fileToUpload"]["size"] > 500000) {
-                    echo "Désolé, votre fichier est trop volumineux. ";
+                    throw new \Exception("Désolé, votre fichier est trop volumineux. ");
                     $uploadOk = 0;
                 }
                 // Allow certain file formats
                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif" ) {
-                    echo "Seuls les formats JPG, JPEG, PNG & GIF files sont authorisés. ";
+                    throw new \Exception("Seuls les formats JPG, JPEG, PNG & GIF files sont authorisés. ");
                     $uploadOk = 0;
                 }
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) {
-                    echo "Désolé, votre avatar n'a pu être envoyé.";
+                    throw new \Exception("Désolé, votre avatar n'a pu être envoyé.");
                 // if everything is ok, try to upload file
                 } else {
                     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -614,11 +615,11 @@ class FrontOffice{
                         $insertAvatar = $userManager -> insertAvatar($target_file,$idMember);
                         $this->recoverUser($idMember);
                     } else {
-                        echo "Désolé, une erreur est survenue dans l'envoi de votre fichier. ";
+                        throw new \Exception("Désolé, une erreur est survenue dans l'envoi de votre fichier. ");
                     }
                 }
             } else {
-                echo "Ce fichier n'est pas une image. ";
+                throw new \Exception("Ce fichier n'est pas une image. ");
                 $uploadOk = 0;
             }
         }

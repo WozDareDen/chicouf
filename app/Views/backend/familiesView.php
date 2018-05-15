@@ -8,8 +8,8 @@
 $newFamAll = $famAll->fetch()
 ?>
 <!--JUMBOTRON-->
-  <div class="jumbotron jumbo">
-    <h1 class="display-4" id="test">Liste des <?= $newFamAll[0] ?> familles</h1>
+  <div class="jumbotron jumbo cardFamX">
+  <h1 class="display-5" id="test" style="margin-bottom:2rem;text-align:center;">Liste des <?= $newFamAll[0] ?> familles</h1>
     <!-- MEMBERS TABLE-->
     <table class="table table-striped table-sm">
       <thead class="thead-dark">

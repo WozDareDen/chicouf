@@ -11,9 +11,9 @@
     <section>
         <article id="mainContent">
             <h2>Qu'est-ce que c'est ?</h2>
-            <p>C'est l'expression de tendresse par laquelle les grands-parents désignent les progénitures de leurs progénitures. Toujours ravis de les accueillir et de partager du temps avec eux, les grands-parents n'en sont pas moins soulagés aux moments des Adieux !</p>
+            <p>C'est l'expression de tendresse par laquelle les grands-parents désignent les progénitures de leurs progénitures. Toujours ravis de les accueillir et de partager du temps avec eux, les grands-parents n'en sont pas moins soulagés aux moments des adieux !</p>
 
-            <p>Chicouf.fr propose de mettre en relation parents et grand-parents. En effet, il n'est pas toujours aisé de se tenir à jour des habitudes alimentaires et autres caprices de chaque enfant. Surtout quand leur nombre croît. Chicouf.fr vous propose une interface d'échange permettant de mettre à jour et de se tenir au courant de ces variations. Vous pouvez également notifier les traitements médicaux éventuels pour chacun des enfants ainsi que les allergies. </p>
+            <p>Chicouf.fr propose de mettre en relation parents et grand-parents. En effet, il n'est pas toujours aisé de se tenir à jour des habitudes alimentaires et autres caprices de chaque enfant. Surtout quand leur nombre croît. Chicouf.fr vous propose une interface d'échange permettant de mettre à jour et de se tenir au courant de ces variations. Vous pouvez également notifier les traitements médicaux éventuels pour chacun des enfants et d'autres choses encore. </p>
         </article>
         <article>
             <h2>Concrètement...</h2>

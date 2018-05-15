@@ -138,7 +138,16 @@ $newConnex3 = $connex3->fetch()
             <div class="form-check col-lg-12">
               <a class="btn btn-primary"  id="submitChildren2" style="color:white;">Valider</a>
             </div>
+
+<?php
+if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $newData['parent2']){
+?>              
             <a class="social delPV" data-toggle="modal" data-target="#modalDeleteChild" href="#" >Supprimer cette Fiche</a>
+<?php
+}
+?>
+
+
 </div>
 </form>
 
@@ -188,10 +197,7 @@ $newConnex3 = $connex3->fetch()
             </div>
             <div class="modal-body" style="color:black;">
                 <p>En validant, vous supprimez définitivement toutes les données concernant votre Enfant. Vous pouvez en recréer une nouvelle à tout moment. <br /></p>
-                 <form action="index.php?action=index.php?action=deleteChild&idChildren=<?= $_GET['idChildren'] ?>" method="post">
-                 <div class="form-group">
-                        
-                    </div>
+                 <form action="index.php?action=deleteChild&idChildren=<?= $_GET['idChildren'] ?>" method="post">
                  <div class="form-check">
                     <input type="checkbox" name="choixDelCo" required /> Je confirme supprimer cette fiche Enfant.</br>
                 </div>
