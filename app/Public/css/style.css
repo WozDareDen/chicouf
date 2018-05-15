@@ -543,6 +543,9 @@ a.dropdown-item:hover{
 #wordsCo{
     width:400px;
 }
+#humor{
+    margin-bottom:50px;
+}
 .delPV{
     float: right;
     color:red;
@@ -571,6 +574,9 @@ a.dropdown-item:hover{
 }
 .marginB{
     margin-bottom: 20px;
+}
+.testP{
+    text-align: center;
 }
 /*-------MEDIA QUERIES---------*/
 @media screen and (min-width: 593px){
@@ -603,10 +609,7 @@ a.dropdown-item:hover{
     .col3mv{
         display: none;
     }
-    .deLink{
-       position: absolute;
-       left:0 !important;
-    }
+
     #test,#test2{
         font-size: 26px;    
     }

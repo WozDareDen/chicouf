@@ -220,6 +220,8 @@ class FrontOffice{
         $dataMember = $familyManager -> watchMembersFamily($idFamily);
         $userManager = new \Src\Models\UserManager();
         $dataF5 = $userManager -> userById($idMember);
+        $idFamily2 = $idFamily;
+        $getUrl = $familyManager -> getUrl($idFamily,$idFamily2)->fetchAll();
         require 'app/Views/frontend/familyView.php';
     }
     // DELETE FAMILY

@@ -54,7 +54,7 @@ $userInfo = $userInfos->fetch();
         <p><br />
         L'utilisateur enregistré le plus récent est <span class="fatRed"><?= $userInfo['firstname'] ?> <?= $userInfo['surname'] ?></span>, le <?=$userInfo['reg_date'] ?>.<br />
         
-        <a href="#" data-toggle="modal" class="deLink" data-target="#modalDeleteMember"><button class="btn btn-danger deLink">Supprimer un utilisateur</button></a> </p>
+        <a href="#" data-toggle="modal" class="deLink" data-target="#modalDeleteMember"><button class="btn btn-danger deLink">Supprimer</button></a> </p>
     </div>
 </div>
 

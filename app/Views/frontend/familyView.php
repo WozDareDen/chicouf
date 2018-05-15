@@ -101,11 +101,29 @@ else{
 if($getWords != NULL){
 ?>
 
-        <p>L'humeur du jour : <span class='ita2'>"<?= $getWords ?>"</span></p>     
-
+        <p id="humor">L'humeur du jour : <span class='ita2'>"<?= $getWords ?>"</span></p>     
+        
 <?php
 }
 ?>
+
+
+            <div class="photopile-wrapper">
+            <ul class="photopile">
+            <?php
+            foreach ($getUrl as $one_img) {
+                ?>
+                <li>
+                <a href="<?= $one_img['img']?>">
+                    <img src="<?= $one_img['img']?>" alt="Image description" ... /><?= $one_img['firstname']?>
+                </a>
+                </li>
+            <?php
+            }
+            ?>    
+                <!-- Add as many list items as you require for your gallery :) -->
+            </ul>
+            </div>
     </div>
 
     <div class="row"> 

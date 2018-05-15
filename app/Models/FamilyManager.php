@@ -74,6 +74,12 @@ class FamilyManager extends Manager{
         $nbPage = ceil($total/$this->perPage);
         return $nbPage;
     }
+    public function getUrl($idFamily,$idFamily2){
+        $db = $this->dbConnect();
+        $getUrl = $db->prepare('SELECT img,firstname FROM members JOIN member_family ON member_family.idMember = members.idMember WHERE idFamily = ? UNION SELECT img,firstname FROM children JOIN family_children ON family_children.idChildren = children.idChildren WHERE idFamily = ?');
+        $getUrl->execute(array($idFamily,$idFamily2));
+        return $getUrl;
+    }
     // ADD PARENT AND CHILDREN TO FAMILY
     public function getParentId($mailCoParent){
         $db = $this -> dbConnect();    
