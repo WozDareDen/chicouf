@@ -6,11 +6,11 @@
 
 <main role="main">
 <!--***************Main jumbotron**************-->
-    <div class="jumbotron cardFamX ">
-        <div class="container offset-lg-2 col-lg-8">
-            <h1 class="display-3" id="test2"style="text-align:center;">Pense-bête</h1>
-            <p class="testP">Vous pouvez utiliser cet Espace Ecriture pour noter toutes vos idées.</p>
-            <p id="mask" class="testP"><button class="btn btn-info">Masquer/afficher <span class="eraseThD">les notes</span></button></p>
+    <div class="jumbotron cardFamX cardJumbo">
+        <div class="container col-xs-12 col-lg-10">
+            <h1 class="display-3" id="test2" style="text-align:center;">Pense-bête</h1>
+            <p>Vous pouvez utiliser cet Espace Ecriture pour noter toutes vos idées.</p>
+            <p id="mask"><button class="btn btn-info">Masquer/afficher <span class="eraseThD">les notes</span></button></p>
             
 <?php
 $i = 1;
@@ -18,8 +18,8 @@ foreach($getStuff as $oneStuff){
 ?>
 
             <a href="admin.php?action=deleteNote&id=<?= $oneStuff['idReminder'] ?>" >#<?= $i ?></a>    
-            <div class="alert alert-success alert-dismissible fade show reminder testP3" data-dismiss="alert" role="alert"><p class="firstP"><?= $oneStuff['reminderDate'] ?></p>
-            <hr><p class="mb-0" class="secondP"><?= $oneStuff['content'] ?></p></div>
+            <div class="alert alert-success alert-dismissible fade show reminder " data-dismiss="alert" role="alert"><p><?= $oneStuff['reminderDate'] ?></p>
+            <hr><p class="mb-0" ><?= $oneStuff['content'] ?></p></div>
 
 <?php
 $i++;
@@ -27,8 +27,10 @@ $i++;
 ?>
 
             <form method="post">
-                <textarea id="writeStuff" name="writeStuff" rows="8"cols="25"></textarea><br />
-                <a class="btn btn-info" id="entry">Valider</a>
+                <div class="form-group col-sm-12">
+                    <textarea class="form-control" id="writeStuff" name="writeStuff" rows="8" ></textarea><br />
+                    <a class="btn btn-info" id="entry">Valider</a>
+                </div>
             </form>
         </div>
     </div>

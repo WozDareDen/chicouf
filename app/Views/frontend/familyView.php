@@ -4,19 +4,24 @@
 require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
-<style>body{background-color:#dbe7f7;}</style>
+<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;}</style>
 <div class="container">
 <!--********BANNER************-->
     <div class="bannerBox">
+
 <?php
 if(isset($dataF6['banner'])){
 ?>
+
         <a href="#" class="row bannerFamily" style="background-image: url( <?= $dataF6['banner'] ?>);"  ></a>
+
 <?php
 }
 else{
 ?>          
+
         <a href="#" class="row bannerFamily" style="background-image: url('app/Public/uploads/banners/banniere.png');" ></a> 
+
 <?php
 }
 ?>
@@ -28,29 +33,29 @@ else{
 if(empty($dataF4)){
 ?>
 
-<h1 class="mbr-section-title display-3 h1Fam" >Bienvenue dans l'Espace Famille</h1>
-    <div class="row justify-content-md-center">
-        <div class="col-md-10 col-md-offset-2 text-xs-center">
-            <div class="lead"><p>Vous pouvez d'ores et déjà créer un nouvel Espace pour votre famille. Vous en serez alors le modérateur. Différentes options de paramétrage s'offrent à vous.<p>
-            <p>Tout d'abord, sachez que vos enfants seront <strong>automatiquement</strong> rattachés à cet Espace famille. Ensuite, la principale action qui s'offre à vous est de <strong>rattacher les utilisateurs</strong> au sein de cet espace. Pour cela, rien de plus simple, il vous suffit de renseigner les adresses mails utilisées par ces derniers pour s'inscrire. Ils seront automatiquement rajoutés ainsi que leurs enfants le cas échéant.</p>
-            <p>Vous allez pouvoir, en plus de donner <strong>un nom</strong> à cette famille, lui définir <strong>une bannière</strong>.</p>
-            <p>Seul le nom est obligatoire dans un premier temps. Vous pourrez rajouter une bannière ultérieurement.</p>
+    <h1 class="mbr-section-title display-3 h1Fam" >Bienvenue dans l'Espace Famille</h1>
+        <div class="row justify-content-md-center">
+            <div class="col-md-10 col-md-offset-2 text-xs-center">
+                <div class="lead"><p>Vous pouvez d'ores et déjà créer un nouvel Espace pour votre famille. Vous en serez alors le modérateur. Différentes options de paramétrage s'offrent à vous.<p>
+                <p>Tout d'abord, sachez que vos enfants seront <strong>automatiquement</strong> rattachés à cet Espace famille. Ensuite, la principale action qui s'offre à vous est de <strong>rattacher les utilisateurs</strong> au sein de cet espace. Pour cela, rien de plus simple, il vous suffit de renseigner les adresses mails utilisées par ces derniers pour s'inscrire. Ils seront automatiquement rajoutés ainsi que leurs enfants le cas échéant.</p>
+                <p>Vous allez pouvoir, en plus de donner <strong>un nom</strong> à cette famille, lui définir <strong>une bannière</strong>.</p>
+                <p>Seul le nom est obligatoire dans un premier temps. Vous pourrez rajouter une bannière ultérieurement.</p>
+                </div>
+            </div>
+            <div class="col-md-10 col-md-offset-2 text-xs-center">
+                <div class="lead justify-content-md-center">
+                    <form action="index.php?action=createNewFamily" class="justify-content-md-center" method="post">
+                        <div class="form-group col-lg-12">
+                            <label for="familyNameCo">Nom de votre Espace Famille</label><br />
+                            <input type="text" id="familyName" name="familyNameCo" required="valid" placeholder="entrez le nom" >
+                        </div>
+                        <div class="justify-content-md-center">
+                        <input class="btn btn-primary"  type="submit" name="createNewFamily" value="CREER UN NOUVEL ESPACE FAMILLE" />
+                        </div>
+                    </form>
+                </div>  
             </div>
         </div>
-        <div class="col-md-10 col-md-offset-2 text-xs-center">
-            <div class="lead justify-content-md-center">
-                <form action="index.php?action=createNewFamily" class="justify-content-md-center" method="post">
-                    <div class="form-group col-lg-12">
-                        <label for="familyNameCo">Nom de votre Espace Famille</label><br />
-                        <input type="text" id="familyName" name="familyNameCo" required="valid" placeholder="entrez le nom" >
-                    </div>
-                    <div class="justify-content-md-center">
-                    <input class="btn btn-primary"  type="submit" name="createNewFamily" value="CREER UN NOUVEL ESPACE FAMILLE" />
-                    </div>
-                </form>
-            </div>  
-        </div>
-    </div>
 
 <?php
         } 
@@ -63,7 +68,7 @@ if(empty($dataF4)){
             <h3 class="mbr-section-title display-3 frame5" style="text-align:center"><span>Bienvenue dans votre Espace</span> </h3>
             <h3 class="mbr-section-title display-3 frame6" style="text-align:center"><span>Famille <?= $dataF4['familyName'] ?></span></h3>
         </div>
-        <div class="lead loco alert alert-success alert-dismissible fade show"  data-dismiss="alert" role="alert" title="Faîtes disparaitre ce message en cliquant dessus, il réapparaitra la prochaine fois que vous viendrez sur cette page ;)">
+        <div class="lead loco alert alert-light alert-dismissible fade show"  data-dismiss="alert" role="alert" title="Faîtes disparaitre ce message en cliquant dessus, il réapparaitra la prochaine fois que vous viendrez sur cette page ;)">
             <p>Retrouvez tous vos proches au sein de cet Espace. <strong>L'ensemble des membres </strong>de cette famille peut modifier les habitudes alimentaires et les traitements de tous les enfants présents.</p>
 
 <?php
@@ -101,33 +106,36 @@ else{
 if($getWords != NULL){
 ?>
 
-        <p id="humor">L'humeur du jour : <span class='ita2'>"<?= $getWords ?>"</span></p>     
+        <p id="humor" class="col-lg-12">L'humeur du jour : <span class='ita2'>"<?= $getWords ?>"</span></p><br />     
         
 <?php
 }
 ?>
 
-
+        <div>
             <div class="photopile-wrapper">
-            <ul class="photopile">
-            <?php
-            foreach ($getUrl as $one_img) {
-                ?>
-                <li>
-                <a href="<?= $one_img['img']?>">
-                    <img src="<?= $one_img['img']?>" alt="Image description" ... /><?= $one_img['firstname']?>
-                </a>
-                </li>
-            <?php
-            }
-            ?>    
-                <!-- Add as many list items as you require for your gallery :) -->
-            </ul>
+                <ul class="photopile">
+
+<?php
+foreach ($getUrl as $one_img) {
+?>
+
+                    <li>
+                        <a href="<?= $one_img['img']?>">
+                            <img src="<?= $one_img['img']?>" alt="<?= $one_img['firstname']?>" ... /><?= $one_img['firstname']?>
+                        </a>
+                    </li>
+
+<?php
+}
+?>    
+            
+                </ul>
             </div>
+        </div>
     </div>
 
     <div class="row"> 
-
 <!--*************GRANDCHILDREN**************-->
     <h3 class="loco col-sm-12 titleFam" >Les petits-enfants</h3>
     <div class="row" > 
@@ -136,7 +144,7 @@ if($getWords != NULL){
 foreach($children as $one_child){
 ?>
 <!--**************AVATAR********************-->
-        <section class="col-xs-4 col-sm-6 col-md-4 col-lg-3 cardFam" >
+        <section class="col-xs-4 col-sm-6 col-md-6 col-lg-3 cardFam" >
             <div>
                 <article class="col-sm-6 col-md-9 avatarBox">
                     <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$one_child['img'] ?>)" href="#collapseExample<?= $one_child['idChildren']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample" ></a>
@@ -160,7 +168,7 @@ if(!empty($one_child['parent2'])){
 foreach($one_child['meal'] as $nMeals){
 ?>
 
-<hr>
+                <hr>
 <!--*************FOOD*****************-->
                     <div class="englobe">
                         <div class="fly">
@@ -168,76 +176,70 @@ foreach($one_child['meal'] as $nMeals){
                             <h5>Plats préférés :</h5> <p class="fav"><?= $nMeals['favorite_meal']; ?></p>
                             <h5>Plats détestés :</h5><p class="hate"><?= $nMeals['hated_meal']; ?></p>
                         </div>
+
 <?php
 }
 ?>
-
                         
-<hr>
+                <hr>
 <!--*************HEALTH***************-->
                         <div class="fly">
-                        <h3>TRAITEMENT</h3>
+                            <h3>TRAITEMENT</h3>
 
 <?php        
 if(!(empty($one_child['TTT']))){
     foreach($one_child['TTT'] as $newTTT){
 ?>
 
-                        <p class="social" >Début du Traitement : <?= $newTTT['new_startDate']; ?></p>
-                        <p class="social">Médicaments, posologies :</p>
-                        <p> 
+                            <p class="social" >Début du Traitement : <?= $newTTT['new_startDate']; ?></p>
+                            <p class="social">Médicaments, posologies :</p>
+                            <p> 
                         
 <?php                     
         foreach($newTTT['meds'] as $Nmeds){                
 ?>                   
 
-                        <span class="ita"><?= $Nmeds['title']; ?></span> (<?= $Nmeds['content']; ?>)<br />      
-                        </p>
+                                <span class="ita"><?= $Nmeds['title']; ?></span> (<?= $Nmeds['content']; ?>)<br />      
+                            </p>
 
-    <?php  
+<?php  
         }
     }
 }
 else{
 ?>
 
-                    <p class="writings">Aucun traitement en cours</p>
+                            <p class="writings">Aucun traitement en cours</p>
 
 <?php
 }
 ?>        
 
-
-
                         </div>
                         <div class="fly">
-                        <?php
-    if(isset($one_child['allergies'])){
-    foreach($one_child['allergies'] as $Nallergies){
-    ?>
 
-                        <h3 class="social titlesMV">ALLERGIES </h3>
-                        <p class="social writings"><?= $Nallergies['content']; ?></p>
-                       
-   
-    
 <?php
-    }
-    }
+if(isset($one_child['allergies'])){
+foreach($one_child['allergies'] as $Nallergies){
 ?>
 
+                            <h3 class="social titlesMV">ALLERGIES </h3>
+                            <p class="social writings"><?= $Nallergies['content']; ?></p>
+                       
+<?php
+}
+}
+?>
 
                         </div>
-<a href="index.php?action=goToUpdateChild&idChildren=<?= $one_child['idChildren']; ?>"><button type="button" class="btn btn-warning marginB">Modifier cette fiche</button></a>
+                        <a href="index.php?action=goToUpdateChild&idChildren=<?= $one_child['idChildren']; ?>"><button type="button" class="btn btn-warning marginB">Modifier cette fiche</button></a>
                     </div>
-
                 </div>
             </div>   
         </section>
         
 <?php
 }
-
 ?>
 
     </div>
@@ -246,9 +248,10 @@ else{
 <?php    
 if(isset($dataMember)){
 ?>
- <h3 class="loco titleFam">Les parents</h3>
 
+    <h3 class="loco titleFam">Les parents</h3>
     <div class="row">
+
 <?php
 $bigDataMember = $dataMember->fetchAll();
 if(!(empty($bigDataMember))){    
@@ -257,9 +260,9 @@ foreach($bigDataMember as $newDataMember){
     if($newDataMember['parenthood'] ==1){
 ?>
        
-            <article class="col-xs-4 col-sm-6 col-md-4 col-lg-3 avatarBox cardFamP" >
-                <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$newDataMember['img'] ?>)" href="#collapseExample<?= $newDataMember['idMember']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
-                <h3 class="childName"> <?= $newDataMember['firstname']; ?> <?= $newDataMember['surname']; ?></h3>
+        <article class="col-xs-4 col-sm-6 col-md-4 col-lg-3 avatarBox cardFamP" >
+            <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$newDataMember['img'] ?>)" href="#collapseExample<?= $newDataMember['idMember']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+            <h3 class="childName"> <?= $newDataMember['firstname']; ?> <?= $newDataMember['surname']; ?></h3>
             
             <div class="collapse" id="collapseExample<?= $newDataMember['idMember']; ?>">
                 <h5>Adresse : </h5>
@@ -298,7 +301,9 @@ else{
 ?>          
                 <p>Inscrit le <?= $newDataMember['new_regDate'] ?>.</p>
 
-            </div></article>
+            </div>
+        </article>
+
 <?php
 }
 }
@@ -306,13 +311,8 @@ else{
 ?>
 
    </div>
-
-       
-
-
-
-<h3 class="loco titleFam">Les grand-parents</h3>
-<div class="row">
+    <h3 class="loco titleFam">Les grand-parents</h3>
+    <div class="row">
 
 <?php
 }   
@@ -320,10 +320,10 @@ foreach($bigDataMember as $newDataMember){
     if($newDataMember['parenthood'] == 0){
 ?>
 
-            <article class="col-xs-4 col-sm-6 col-md-4 col-lg-3  avatarBox cardFamGP" >
-                <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$newDataMember['img'] ?>);" href="#collapseExample<?= $newDataMember['idMember']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
-                <h3 class="childName"> <?= $newDataMember['firstname']; ?> <?= $newDataMember['surname']; ?></h3>
-                <div class="collapse" id="collapseExample<?= $newDataMember['idMember']; ?>">
+        <article class="col-xs-4 col-sm-6 col-md-4 col-lg-3  avatarBox cardFamGP" >
+            <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$newDataMember['img'] ?>);" href="#collapseExample<?= $newDataMember['idMember']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+            <h3 class="childName"> <?= $newDataMember['firstname']; ?> <?= $newDataMember['surname']; ?></h3>
+            <div class="collapse" id="collapseExample<?= $newDataMember['idMember']; ?>">
                 <h5>Adresse : </h5>
 
 <?php
@@ -360,33 +360,21 @@ else{
 ?>          
                 <p>Inscrit le <?= $newDataMember['new_regDate'] ?>.</p>
 
-                </div>
-            </article>
-    
+            </div>
+        </article>
 
 <?php
 }
+}
+?>
 
-}?>
 </div>
+
 <?php
 }
 ?>
-<!-- <p class="leaveOut">Pour ne plus faire partie de cet Espace Famille, cliquez sur le bouton :
-<a href="index.php?action=getMeOuttaHere"><button class="btn btnLeaveOut">Partir</button></a>
-</p> -->
-   </div>
-
-
-    
-
-     
-
-
    
+</div>
 <!--********END OF PAGE*************-->
-
-
 <?php $content = ob_get_clean(); ?>
-
 <?php require 'templateHeadScripts.php' ?>

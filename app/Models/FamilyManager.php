@@ -181,7 +181,7 @@ class FamilyManager extends Manager{
     // UPLOAD BANNER
     public function uploadBanner($target_file,$idFamily){
         $db = $this -> dbConnect();
-        $insertPicture = $db->prepare('UPDATE family SET img=? WHERE idFamily= ?');
+        $insertPicture = $db->prepare('UPDATE family SET banner=? WHERE idFamily= ?');
         $insertPicture->execute(array($target_file, intval($idFamily)));
         return $insertPicture;
     }

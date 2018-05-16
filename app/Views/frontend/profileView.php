@@ -4,7 +4,7 @@
 require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
-<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-repeat:no-repeat;}</style>
+<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;}</style>
 <div class="container" >
 <!--********BANNER************-->
     <div class="bannerBox">
@@ -17,6 +17,7 @@ if(isset($dataF6['banner'])){
 else{
 ?>          
         <a href="#" class="row bannerFamily" style="background-image: url('app/Public/uploads/banners/banniere.png');"></a> 
+
 <?php
 }
 ?>
@@ -36,7 +37,7 @@ if(isset($getFamilyName['familyName'])==true){
 ?>
 
 <div class="row justify-content-sm-center">   
-       <p class="reduceP">Vous pouvez gérer ici les informations vous concernant. </p>
+       <p class="reduceP">Vous pouvez gérer ici les informations vous concernant </p>
        
 <?php
 if($_SESSION['parenthood'] == 0){
@@ -55,43 +56,44 @@ if($_SESSION['parenthood'] == 0){
     </div>
     <div class="row justify-content-sm-center">
         <article class="col-xs-12 col-sm-6 col-md-3 avatarBox social boxProfil" >
-            <a href="#" data-toggle="modal" data-target="#userModal<?= $modif['idMember'] ?>" data-whatever="@mdo" class="photoChild2" style="background-image: url(<?= $modif['img'] ?>);" title="Vous pouvez modifier la photo" ></a>
-                        <div class="modal fade" id="userModal<?= $modif['idMember'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header" style="background-color:#6bbfb0;">
-                                <h5 class="modal-title" id="exampleModalLabel" >Modifier votre photo de profil</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="index.php?action=uploadAva&idMember=<?= $modif['idMember'] ?>" method="post" enctype="multipart/form-data">
-                                    <fieldset>
-                                    <input type="file" name="fileToUpload" id="fileToUpload" /> 
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                    <input type="submit" class="btn" style="background-color:#6bbfb0;" value="Envoyer" name="submit" />
-                                    </fieldset>
-                                </form>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                        
-                
+            <a href="#" data-toggle="modal" data-target="#userModal<?= $modif['idMember'] ?>" data-whatever="@mdo" class="photoChild2 photoMD" style="background-image: url(<?= $modif['img'] ?>);" title="Vous pouvez modifier la photo" ></a>
+            <div class="modal fade" id="userModal<?= $modif['idMember'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header" style="background-color:#6bbfb0;">
+                        <h5 class="modal-title" id="exampleModalLabel" >Modifier votre photo de profil</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="index.php?action=uploadAva&idMember=<?= $modif['idMember'] ?>" method="post" enctype="multipart/form-data">
+                            <fieldset>
+                            <input type="file" name="fileToUpload" id="fileToUpload" /> 
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <input type="submit" class="btn" style="background-color:#6bbfb0;" value="Envoyer" name="submit" />
+                            </fieldset>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>            
         </article>
         <article class="col-xs-12 col-md-6">
             <form action="index.php?action=changeProfile&id" class="proForm" method="post" >
-            <label for="wordsCo" >Votre humeur du jour&nbsp;<a href="#small" data-toggle="collapse" aria-expanded="false" aria-controls="#small"><i class="fa fa-info-circle"></i></a></label><br/>
-            <div class="collapse" id="small">Ceci apparaîtra de manière aléatoire et anonyme dans votre Espace Famille. A vous de devinez quels auteurs se cachent derrière ces lignes...</div>
-                        <input type="text" id="wordsCo" name="wordsCo" value="<?= $modif['words'] ?>"><br />
+                <div class="form-group col-lg-12">
+                    <label for="wordsCo" >Votre humeur du jour&nbsp;<a href="#small" data-toggle="collapse" aria-expanded="false" aria-controls="#small"><i class="fa fa-info-circle"></i></a></label>
+                    <div class="collapse form-group col-lg-12" id="small">Ceci apparaîtra de manière aléatoire et anonyme dans votre Espace Famille. A vous de devinez quels auteurs se cachent derrière ces lignes...
+                    </div>
+                </div>
+            <div class="form-group col-lg-12" >
+                        <input type="text" id="wordsCo" name="wordsCo" value="<?= $modif['words'] ?>">
                         <hr>
          
 <?php
 // CHANGE SURNAME FOR MISSES
 if($modif['gender'] == 1){      
 ?>
-
                     <label for="surnameCo" class="label1">Nom</label>
                         <input type="text" id='surnameCo'  name="surnameCo" value="<?= $modif["surname"] ?>" > <br /> 
 
@@ -106,19 +108,24 @@ else{
 }
 ?>                                     
                     
+                    
                     <label for="mail" class="label1">Email</label>
                         <input type="email" id="mailCo" name="mailCo" value="<?= $modif['mail'] ?>"><br />
                     <div id="popMail">
                         <p>Votre mail n'est pas conforme.</p>
-                    </div>               
+                    </div>        
+       
                     <label for="birthDateCo" class="label2">Date de naissance</label>
                         <input type="date" id="birthdateCo" name="birthdateCo"  value="<?= $modif['birthdate'] ?>"><br />
                     <label for="mdpCoCo" class="label3">Mot de passe</label>
                     <button type="button" class="btn btn-outline-info"  class="btn social" data-toggle="modal" data-target="#modalChangePass">Modifier</button>
-                        <hr >       
+                    </div>
+                        <hr >  
+                        <div class="form-group col-lg-12" >     
                     <label for="cityCo" id="adressPV">Adresse</label><br />
                         <textarea id="cityCo" name="cityCo"  rows="3" ><?= $modif['city'] ?></textarea><br />
                         <input class="btn" style="background-color:#6bbfb0;color:white;margin-top:10px;" id="registration" type="submit" name="updateUser" value="Envoyer" />
+</div>
             <a href="#" class="social delPV" data-toggle="modal" data-target="#modalQuit" >Supprimer mon compte</a></form>
             
     </div>

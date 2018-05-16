@@ -35,13 +35,7 @@
                     <i class="fa fa-envelope-o fa-lg"></i>
                     <span class="nav-text">Messages</span>
                     </a>
-                </li>                                                      
-                <li class="darkerli">
-                    <a href="admin.php?action=membersList">
-                    <i class="fa fa-desktop fa-lg"></i>
-                    <span class="nav-text">Test</span>
-                    </a>
-                </li>            
+                </li>                                                           
             </ul>                                  
             <ul class="logout">
                 <li>

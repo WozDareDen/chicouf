@@ -13,7 +13,7 @@ $newDataMsg6 = $dataMsg6->fetch();
   <p style="text-align:center">Cliquer sur l'ID du message pour le supprimer. Aucun avertissement avant la suppression de celui-ci.</p>
 <div class="col-sm-12 ">
 
-<div id="accordion KCmsg">
+<div id="accordion">
   <div class="card">
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">

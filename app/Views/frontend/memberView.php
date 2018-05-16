@@ -9,21 +9,21 @@
 if($_SESSION["gender"]==0){
 ?>
 
-  <span class="pseudoM"><h1 style="text-align:center;" >Bienvenue sur votre Espace Membre, <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
+  <span class="pseudoM h1Fam"><h1 style="text-align:center;" >Bienvenue sur votre Espace Membre, <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
 
 <?php
 }
 else{
 ?>
-  <span class="pseudoF"><h1 style="text-align:center;" >Bienvenue sur votre Espace Membre, <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
+  <span class="pseudoF h1Fam"><h1 style="text-align:center;" >Bienvenue sur votre Espace Membre, <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
 <?php
 }
 ?>
-  <article class="row justify-content-md-center" style="text-align:center;text-align:justify;"> <h5>Vous trouverez ici tous les renseignements nécessaires à la gestion des fiches de vos enfants.</h5>
+  <article class="row justify-content-md-center" style="text-align:center;text-align:justify;"> <h5 class="h5Mem">Vous trouverez ici tous les renseignements nécessaires à la gestion des fiches de vos enfants.</h5>
   <div class="lead loco alert alert-success alert-dismissible fade show"  data-dismiss="alert" role="alert" title="Faîtes disparaitre ce message en cliquant dessus, il réapparaitra la prochaine fois que vous viendrez sur cette page ;)">
-    <p> Vous pouvez les modifier et les personnaliser à loisir. Tous les membres de votre Espace Famille auront la possibilité de modifier les habitudes alimentaires et les traitements. Seuls les parents peuvent ajouter une photo de profil et modifier l'identité de la Fiche Enfant.</p> 
-    <p>Pour ajouter une photo de profil à votre enfant, il vous suffit de cliquer sur celle-ci. Une fenêtre s'ouvrira alors. Il en va de même pour votre profil personnel, accessible en haut à gauche de la barre de navigation.</p>  
-    <p>L'Espace Famille permet de regrouper tous les enfants, parents et grand-parents. Deux options s'offrent à vous : créer cet Espace ou en rejoindre un existant. Le modérateur de l'Espace Famille est le seul à pouvoir vous inviter. </p>
+    <p class="pMem"> Vous pouvez les modifier et les personnaliser à loisir. Tous les membres de votre Espace Famille auront la possibilité de modifier les habitudes alimentaires et les traitements. Seuls les parents peuvent ajouter une photo de profil et modifier l'identité de la Fiche Enfant.</p> 
+    <p class="pMem">Pour ajouter une photo de profil à votre enfant, il vous suffit de cliquer sur celle-ci. Une fenêtre s'ouvrira alors. Il en va de même pour votre profil personnel, accessible en haut à gauche de la barre de navigation.</p>  
+    <p class="pMem">L'Espace Famille permet de regrouper tous les enfants, parents et grand-parents. Deux options s'offrent à vous : créer cet Espace ou en rejoindre un existant. Le modérateur de l'Espace Famille est le seul à pouvoir vous inviter. </p>
   </article>
 
 

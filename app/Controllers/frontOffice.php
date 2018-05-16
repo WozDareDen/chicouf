@@ -507,7 +507,7 @@ class FrontOffice{
     //************************UPLOAD CHILD AVATAR******************************
     function uploadPic($idMember,$idChildren){
         $target_dir = "app/Public/uploads/";
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $target_file = $target_dir . $idChildren . basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         // Check if image file is a actual image or fake image
@@ -548,7 +548,7 @@ class FrontOffice{
     //*********************UPLOAD BANNER*****************************
     function uploadBanners($idFamily){
         $target_dir = "app/Public/uploads/banners/";
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $target_file = $target_dir . $idFamily . basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         // Check if image file is a actual image or fake image
@@ -589,7 +589,7 @@ class FrontOffice{
 //*************************UPLOAD USER AVATAR*********************************
     function uploadAvatar($idMember){
         $target_dir = "app/Public/uploads/";
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $target_file = $target_dir . $idMember. basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         // Check if image file is a actual image or fake image

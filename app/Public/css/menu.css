@@ -4,7 +4,8 @@ body
   padding:0px;
 	font-family: "Open Sans", arial;
 	background-image:url(../../../app/Public/Backgrounds/backg-bois-rouge.jpg) !important;
-	color:#fff;
+  background-attachment: fixed;
+  color:#fff;
 	font-weight:300;
 
 }

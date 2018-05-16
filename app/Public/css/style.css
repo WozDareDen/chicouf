@@ -38,6 +38,7 @@ li{
     box-shadow:  0 0 30px #212121;
 }
 .avatarBox a, .photoChild2{
+    margin-top:10px;
     min-width: 200px;
     height: 200px;
     border-radius:50%;
@@ -48,36 +49,41 @@ li{
 .avatarBox{
     color:black;
 }
-.cardFam, .cardFamP, .cardFamGP{
+.cardFam{
     border-radius: 5%;
-    border:4px solid #6bbfb0;
+    border:3px solid #f67280 ;
 }
-.cardFam{  
-    background-color: #aedbc4;
-}
-.cardFamP{
-    background-color: #d57b7a;
-}
-.cardFamGP{
-    background-color: #b38fbb;
+ .cardFamP{
+    border-radius: 5%;
+    border:3px solid #c06c84;
+ } 
+ .cardFamGP{
+    border-radius: 5%;
+    border:3px solid #355c7d;
+ }
+.cardFam, .cardFamP, .cardFamGP{
+    background-color: white;
 }
 .cardFam:hover, .cardFamP:hover, .cardFamGP:hover{
-    background-color: #6bbfb0;
+    background-color: #f8b195;
 }
 .cardFam:hover{  
-    border:4px solid#aedbc4;
+    border:2px solid#f8b195;
 }
 .cardFamP:hover{
-    border:4px solid #d57b7a;
+    border:2px solid #f67280;
 }
 .cardFamGP:hover{
-    border:4px solid #b38fbb;
+    border:2px solid #c06c84;
 }
 .cardFamX{
     border:8px solid #f4d3b8;
     border-radius: 20px !important;
     box-shadow: 6px 6px 20px #212121;
     background-color: white;
+}
+.cardXX{
+    margin-left: 6%;
 }
 .cardFamX:last-child{
     margin-top:2rem !important;
@@ -109,6 +115,7 @@ li{
 }
 .iconeSpan{
     position:relative;
+    margin-left:30px;
 }
 .h1Fam{
     text-align:center;
@@ -245,22 +252,31 @@ a.dropdown-item:hover{
 	}
 }
 .bannerFamily{
-    animation:blurFadeIn 1s ease-in 0.3s backwards;
+    animation:blurFadeIn 0.5s ease-in 0.3s backwards;
 }
 .frame5 span{
-    animation: blurFadeInOut 1s ease-in backwards;
+    animation: blurFadeInOut 0.5s ease-in backwards;
+    font-family: 'Caveat Brush', cursive;
 }
 .loco{
     border-radius: 2% !important;
 }
+.h5Mem{
+    padding:10px 20px;
+}
 .titleFam{
     font-size:30px;
+    margin-top: 30px;
 }
 .frame6 span{
-    animation: blurFadeInOut 1s ease-in 0.3s backwards;
+    animation: blurFadeInOut 0.5s ease-in 0.3s backwards;
+    font-family: 'Caveat Brush', cursive;
+}
+.noFrame{
+    font-family: 'Caveat Brush', cursive;
 }
 .avatarBox .photoChild, .loco{
-    animation: blurFadeIn 1s ease-in 0.6s backwards;
+    animation: blurFadeIn 0.5s ease-in 0.3s backwards;
 }
 .avatarBox .photoChild:nth-child(2){
     animation: blurFadeIn 1s ease-in 0.7s backwards;
@@ -392,7 +408,9 @@ a.dropdown-item:hover{
     background-color:#fa164b !important;
     color:#fff !important;
 }
-
+.photoMD{
+    margin-left:0;
+}
 /*-----------ADMIN------------*/
 .jumbotron{
     margin-top: 100px;
@@ -429,7 +447,9 @@ a.dropdown-item:hover{
 .childMain{
     display:flex;
     flex-direction: column; 
-    align-items:center;    
+    align-items:center;   
+
+
   }
 
 .autocomplete {
@@ -499,8 +519,11 @@ a.dropdown-item:hover{
     text-align:left;
 }
 .tableModo{
-    border: 3px solid #6bbfb0 ;
-    box-shadow: 10px 5px 5px #6bbfb0;
+    background-color: white;
+    padding:30px 0;
+    border-top: 8px solid #f4d3b8;
+    border-radius:30px;
+    box-shadow:  0 0 30px #212121;
     margin-top: 30px;
 }
 .thead-light{
@@ -524,10 +547,15 @@ a.dropdown-item:hover{
 .mainPV{
     background-color:white;
     padding:30px 0;
+    border: 8px solid #f4d3b8;
     border-radius:30px;
     box-shadow:  0 0 30px #212121;
 }
-
+.h1Create{
+    font-size:3rem;
+    text-align: center;
+    font-family: 'Caveat Brush', cursive;
+}
 .proForm .label1{
     padding-right:100px;
 }
@@ -537,14 +565,16 @@ a.dropdown-item:hover{
 .proForm .label3{
     padding-right:40px;
 }
-.proForm input,textarea{
+input,textarea{
     border-radius:5px;
 }
 #wordsCo{
-    width:400px;
+    width:80%;
 }
 #humor{
     margin-bottom:50px;
+    text-align: center;
+    font-size:20px;
 }
 .delPV{
     float: right;
@@ -576,9 +606,22 @@ a.dropdown-item:hover{
     margin-bottom: 20px;
 }
 .testP{
-    text-align: center;
+    text-align: left;
 }
 /*-------MEDIA QUERIES---------*/
+@media screen and (max-width: 320px){
+    #mask{
+        margin-left:-10px;
+    }
+    /* #wordsCo{
+        width:200px !important;
+    } */
+}
+@media screen and (max-width: 568px){
+    body{
+        overflow-x: hidden;
+    }
+}
 @media screen and (min-width: 593px){
     .jumbo,.jumbo2{
         position: relative;
@@ -586,7 +629,6 @@ a.dropdown-item:hover{
     .zipThead{
         display: none;
     }
-
 }
 @media screen and (max-width: 592px){
     .jumbo{
@@ -609,21 +651,14 @@ a.dropdown-item:hover{
     .col3mv{
         display: none;
     }
-
+    .pMem{
+        font-size:18px;
+    }
     #test,#test2{
         font-size: 26px;    
     }
     #test{
         margin-bottom:2rem !important;
-    }
-    #test2{
-        margin-left: 20% !important;
-    }
-    .testP{
-        margin-left: 20%;
-    }
-    .testP3{
-        margin-left: 10%;
     }
     .zip{
         display: none;
@@ -657,10 +692,6 @@ a.dropdown-item:hover{
        flex-direction: column;
        border: 4px solid black !important;
     }
-
-    #wordsCo{
-        width:240px;
-    } 
     .proForm input, .proForm textarea{
         margin-left: 4px;
     }   
@@ -673,14 +704,14 @@ a.dropdown-item:hover{
         margin-right:50px;
     }
     .reduceP{
-        margin:0 20px;
+        margin:0 20px 20px 20px;
     }
     .reducePCC{        
         text-align: center;
     }
-       #small{
-        margin: 0 5px 15px 5px;
-        text-align: justify;
+    #small{
+    margin: 0 5px 15px 5px;
+    text-align: justify;
     }
     .childForm{
         margin-left:10px;
@@ -691,4 +722,46 @@ a.dropdown-item:hover{
     .editP2{
         margin-bottom: 15px;
     }
+    .cardJumbo{
+        margin-left: 50px;
+    }
+    .frame5 span{
+        font-size:50px;
+    }
+    .frame6 span{
+        font-size:50px;
+    }
+
 }
+@media screen and (max-width: 768px){
+    .cardChild{
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .cardM{
+        margin-left: 6%;
+    }
+    .eraseThD{
+        margin-left:-5%;
+    }
+}
+@media screen and (min-width: 768px){
+    .photoMD{
+       margin-left: -30px;
+    }
+}
+@media screen and (min-width: 992px){
+    .photoMD{
+       margin-left: 10px !important;
+    }
+}
+@media screen and (min-width: 992px){
+    .iconeSpan{
+       margin-left:60px;
+    }
+}
+/* @media screen and (max-width:1066px){
+    .iconeSpan{
+       margin-left:60px;
+    }
+} */

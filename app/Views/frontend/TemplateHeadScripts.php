@@ -11,7 +11,7 @@
         <meta property="og:url" content="" />
         <meta property="og:site_name" content="chicouf.fr" />
         <meta property="og:description" content="Chicouf, service de gestion de contenu familial" />
-        <meta property="og:image" content="public/images/charlesfav.png" />
+        <meta property="og:image" content="app/Public/uploads/logo.png" />
 <!--******************Meta Twitter**************-->             
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Chicouf, service de gestion de contenu familial" />
@@ -21,15 +21,16 @@
         <title><?= $title ?></title>
         <link href="app/Public/css/style.css" rel="stylesheet" /> 
         <link href="app/Public/css/photopile.css" rel="stylesheet" /> 
+
+<link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet">
+
         <link rel="icon" type="image/png" href="app/Public/uploads/logo.png" />
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-
-
     </head> 
     <body>
-    <?php 
+
+<?php 
 //VIEWS COUNT
 if(file_exists('data/compteur_pages_vues.txt'))
 {
@@ -45,7 +46,6 @@ $compte++;
 fseek($compteur_f, 0);
 fputs($compteur_f, $compte);
 fclose($compteur_f); 
-
 //VISITS COUNT
 if(file_exists('data/compteur_visites.txt'))
 {
@@ -66,21 +66,18 @@ if(!isset($_SESSION['compteur_de_visite']))
 }
 fclose($compteur_f2);
 ?>
-
-        
+    
         <?= $content ?>
-
         <?php require 'templateFooter.php' ?>
+
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="app/Public/js/jquery-3.3.1.js"></script>
         <script src="app\Public\js\jquery-ui-1.12.1.custom\jquery-ui.min.js"></script>
-        <script src="app/Public/js/errorChecking.js"></script>
+        <script src="jquery.ui.touch-punch.min"></script>
+        <script src="app/Public/js/script.js"></script>
         <script src="app/Public/js/photopile.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
-
-        
-
     </body>
 </html>

@@ -1,10 +1,11 @@
 <?php $title = 'Modif Fiche Enfant' ?>
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
-<style>body{background-image:url(app/Public/Backgrounds/backg-bois-bleu.jpg);background-repeat:no-repeat;}</style>
-<div class="container-fluid childMain">
+
+<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;}</style>
+<div class="container-fluid childMain ">
           <!--***********************MENU & SECTION********************-->
-          <div class="row formCrEd">    
+          <div class="row formCrEd mainPV">    
 
 
      
@@ -12,7 +13,7 @@
 $newData = $data->fetch()
 ?>
         <form method="post" autocomplete="off" class="editForm" action="index.php?action=updateChild&idChildren=<?= $newData['idChildren'] ?>">
-          <h1 class="h1Create" style="text-align:center;">MODIFICATION D'UNE FICHE ENFANT</h1>      
+          <h1 class="h1Create">MODIFICATION D'UNE FICHE ENFANT</h1>      
           <article>
             <p class="editP2">Vous et vos proches pouvaient à tout moment modifier la fiche de renseignement d'un enfant.</p>
             <p class="editP2">Seuls les parents peuvent mettre à jour l'identité et la photo de leur enfant.</p> </article>
@@ -21,7 +22,7 @@ $newData = $data->fetch()
 if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $newData['parent2']){
 ?>    
         <div class="col-xs-8 col-sm-12">
-          <div class="form-group  col-lg-12">
+          <div class="form-group col-lg-12">
             <h2 class="h2Create">IDENTITE</h2>
             <label for="lastname1Up">Nom</label><br />
             <input type="text" id="lastname1Up" name="lastNameCo"  required="valid" cols="30" value="<?= $newData['surname']; ?>" /> 
@@ -76,7 +77,7 @@ $newConnex2 = $connex2->fetch()
             <textarea id="hatedMealUp" name="hatedMealCo" rows="5" cols="20"><?= $newConnex2['hated_meal']; ?></textarea>
             </div>
 <div class="form-group col-lg-12">
-            <h2 class="h2Create">TRAITEMENT</h2>
+            <h2 class="h2Create">TRAITEMENT <a href="#smallC" data-toggle="collapse" aria-expanded="false" aria-controls="#smallC"><i class="fa fa-info-circle"></i></a></h2> <div id="smallC" class="collapse col-sm-6">Sélectionnez le médicament en cliquant dessus lorsque la liste s'affichera au fur et à mesure de vos entrées</div>
 <?php
   if($getDateTTT != NULL){
 ?>

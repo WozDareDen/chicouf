@@ -250,7 +250,7 @@ try{
         // GO TO MODO VIEW
         elseif($_GET['action'] == "goToModo"){
             if(isset($_GET['id'])){
-                if($_SESSION['family'] == $_GET['id'] && $_SESSION['modo'] == 1) {
+                if($_SESSION['family'] == $_GET['id'] && $_SESSION['modo'] > 0) {
                     $idFamily = $_SESSION['family'];
                     if (isset($_GET['p'])) {
                         $cPage = $_GET['p'];
@@ -283,7 +283,7 @@ try{
         }
         // UPLOAD BANNER
         elseif($_GET['action'] == 'uploadBanner'){
-            $idFamily = htmlspecialchars($_POST['idFamilyCo']);
+            $idFamily = htmlspecialchars($_SESSION['family']);
             $frontoffice->uploadBanners($idFamily);
         }
         // GO TO MENTIONS INFOS

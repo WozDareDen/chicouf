@@ -1,13 +1,13 @@
 <?php $title = 'Fiche Enfant' ?>
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
-<style>body{background-image:url(app/Public/Backgrounds/backg-bois-violet.jpg);background-repeat:no-repeat;}</style>
 
+<style>body{background-image:url(app/Public/Backgrounds/backg-bois-bleu.jpg);background-repeat:no-repeat;background-attachment:fixed;}</style>
 <div class="container-fluid childMain">
   <div class="row formCrEd">    
         <!--***********************FORM********************-->
     <form method="post" class="childForm" >
-      <h1 class="h1Create" id="inkCreate">CREATION D'UNE FICHE ENFANT</h1>      
+      <h1 class="h1Create" id="inkCreate"style="padding:0 30px;">CREATION D'UNE FICHE ENFANT</h1>      
       <div class="reducePCC">Seuls les champs marqués d'un astérisque sont obligatoires.</div> 
         <!--***********************IDENTITY********************-->
         <div class="col-xs-8 col-sm-12">
@@ -54,7 +54,7 @@
         </div><hr>
         <!--***********************HEALTH********************-->                
           <div class="autocomplete ui-front form-group col-xs-8 col-lg-12" ><h2 class="h2Create">TRAITEMENT <a href="#smallC" data-toggle="collapse" aria-expanded="false" aria-controls="#smallC"><i class="fa fa-info-circle"></i></a></h2>
-          <div id="smallC" class="collapse col-sm-6">Sélectionnez le médicament en cliquant dessus lorsque la liste s'affichera au fur et à mesure de vos entrées</div><br /> 
+          <div id="smallC" class="collapse col-sm-6">Sélectionnez le médicament en cliquant dessus lorsque la liste s'affichera au fur et à mesure de vos entrées</div> 
             <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments">
           </div>
           <div class="form-group col-lg-12 startDate" >
