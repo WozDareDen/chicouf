@@ -69,7 +69,7 @@ $('#mask').click(function(){
 });
 // AUTOCOMPLETE
 var current_list_data = null;
-$('#myInput').autocomplete({
+$('#myInput').length && $('#myInput').autocomplete({
     source : function(req,reponse){ 
     $.ajax({
             url : 'index.php?action=ajaxMeds&search='+encodeURI(req.term), 
@@ -139,7 +139,7 @@ var Children = {
     meds: "",
     idChild: "",
     idAllergy : "",
-    startDate: "",
+    startDate: ""
 }
 var NewChildren = Children;
 
