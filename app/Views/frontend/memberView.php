@@ -1,9 +1,9 @@
 <?php $title = 'Espace Membre' ?>
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
-<style>body{background-color:#dbe7f7;}</style>
-<div class="container pageMV" >
 
+<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;}</style>
+<div class="container pageMV" >
 
 <?php
 if($_SESSION["gender"]==0){

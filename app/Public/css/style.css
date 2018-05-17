@@ -492,13 +492,14 @@ a.dropdown-item:hover{
 }
 .errorMsg{
     animation: errorAnim 1s infinite;
+    text-align: center;
 }
 @keyframes errorAnim{
     0%{ opacity: 0; }
     100%{opacity:1;}
 }
 .turn3{
-    max-width:80%;
+    max-width:70%;
 }
 .ui-helper-hidden-accessible{
     display:none;
@@ -527,10 +528,15 @@ a.dropdown-item:hover{
     margin-top: 30px;
 }
 .thead-light{
-    border-bottom: 3px solid #6bbfb0;
+    border-bottom: 3px solid #85562b;
 }
 #modoMemList{
     display:flex;
+}
+.nameChild{
+    font-size: 40px;
+    margin-left:30px;
+    font-family: 'Caveat Brush', cursive;
 }
 .leaveOut{
     margin-top:100px;
@@ -613,9 +619,6 @@ input,textarea{
     #mask{
         margin-left:-10px;
     }
-    /* #wordsCo{
-        width:200px !important;
-    } */
 }
 @media screen and (max-width: 568px){
     body{
@@ -744,6 +747,9 @@ input,textarea{
     .eraseThD{
         margin-left:-5%;
     }
+    .centerCol:nth-child(3), .centerCol:nth-child(4), .centerCol2{
+        display:none;
+    } 
 }
 @media screen and (min-width: 768px){
     .photoMD{

@@ -4,18 +4,18 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 try{
     $frontoffice = new \Src\Controllers\FrontOffice();
-    if (isset($_POST['action']) && $_POST['action'] =="addNewChild") {
+    if (!(empty($_POST['action'])) && $_POST['action'] =="addNewChild") {
         $children = $_POST['data'];
         $frontoffice->addNewChild($children);
     }
-    elseif(isset($_POST['action']) && $_POST['action'] == "updateChild"){
+    elseif(!(empty($_POST['action'])) && $_POST['action'] == "updateChild"){
         $children = $_POST['data'];
         $frontoffice->updateChild($children);
     }
     if (isset($_GET['action'])) {
         //ADD NEW USER
         if ($_GET['action'] == 'addUser'){
-            if(isset($_POST['firstNameCo']) && isset($_POST['lastNameCo']) && isset($_POST['passCo']) && isset($_POST['pass2Co']) && isset($_POST['mailCo']) && isset($_POST['parentCo']) && isset($_POST['genderCo'])){
+            if(!(empty($_POST['firstNameCo'])) && !(empty($_POST['lastNameCo'])) && !(empty($_POST['passCo'])) && !(empty($_POST['pass2Co'])) && !(empty($_POST['mailCo'])) && !(empty($_POST['parentCo'])) && !(empty($_POST['genderCo']))){
                 $firstNameCo = htmlspecialchars($_POST['firstNameCo']);
                 $lastNameCo = htmlspecialchars($_POST['lastNameCo']);
                 $passCo = htmlspecialchars($_POST['passCo']);
@@ -44,13 +44,9 @@ try{
                 throw new \Exception('tous les champs ne sont pas remplis');
             }
         }
-        // GO TO REGISTRATION VIEW
-        elseif($_GET['action'] == 'subView'){
-            $frontoffice->subView();
-        }
         // USER CONTACT
         elseif($_GET['action'] == 'contact'){
-            if(isset($_POST['usernameContact']) && isset($_POST['mailContact']) && isset($_POST['titleContact']) && isset($_POST['contentContact'])){
+            if(!(empty($_POST['usernameContact'])) && filter_var($_POST['mailContact'],FILTER_VALIDATE_EMAIL) && !(empty($_POST['titleContact'])) && !(empty($_POST['contentContact']))){
                 $usernameContact = htmlspecialchars($_POST['usernameContact']);
                 $mailContact = htmlspecialchars($_POST['mailContact']);
                 $titleContact = htmlspecialchars($_POST['titleContact']);
@@ -63,7 +59,7 @@ try{
         }
         // USER RECORD
         elseif ($_GET['action'] == 'record'){
-            if(isset($_POST['firstnameCo']) && isset($_POST['surnameCo']) && isset($_POST['passCo'])){
+            if(!(empty($_POST['firstnameCo'])) && !(empty($_POST['surnameCo'])) && !(empty($_POST['passCo']))){
                 $firstname = htmlspecialchars($_POST['firstnameCo']);
                 $surname = htmlspecialchars($_POST['surnameCo']);
                 $pass = htmlspecialchars($_POST['passCo']);
@@ -77,17 +73,13 @@ try{
         elseif($_GET['action'] == 'deco'){
             $frontoffice->disconnected();
         }
-        // REGISTRATION
-        elseif($_GET['action'] == 'subView'){
-            $frontoffice->subView();
-        }
-        // DELETE MEMBER
+        // AUTO-DELETE MEMBER
         elseif($_GET['action'] == 'deleteMember'){
             $frontoffice->deleteMember();
         }
         // GET CHILD TO PARENT
         elseif($_GET['action'] == 'belong'){
-            if(isset($_POST['mailCo']) && isset($_GET['idChildren'])){
+            if(!(empty($_POST['mailCo'])) && isset($_GET['idChildren'])){
                 $mailCo = htmlspecialchars($_POST['mailCo']);
                 $idChild = $_GET['idChildren'];
                 $frontoffice->belong($mailCo,$idChild);
@@ -154,7 +146,7 @@ try{
         }
         // NEW MODO
         elseif($_GET['action'] == 'newModo'){
-            if(isset($_POST['mailCoModo'])){
+            if(!(empty($_POST['mailCoModo']))){
                 $mailNewModo = htmlspecialchars($_POST['mailCoModo']);
                 $frontoffice->addNewModo($mailNewModo); 
             }
@@ -166,28 +158,7 @@ try{
         elseif($_GET['action'] == 'changeModo'){
             $idMember = $_SESSION['id'];
             $frontoffice->changeModo($idMember);
-        }
-        // ADD NEW CHILD
-        elseif($_GET['action'] == 'addChild'){
-            if(($_SESSION['id'])){
-                $lastName = htmlspecialchars($_POST['lastNameCo']);
-                $firstName = htmlspecialchars($_POST['firstNameCo']);
-                $birthdate = htmlspecialchars($_POST['birthDateCo']);
-                $gender = htmlspecialchars($_POST['genderCo']);
-                $parent1 = htmlspecialchars($_POST['parent1Co']);
-                $parent2 = htmlspecialchars($_POST['parent2Co']);
-                $favMeal = htmlspecialchars($_POST['favoriteMealCo']);
-                $hatedMeal = htmlspecialchars($_POST['hatedMealCo']);
-                $meds = htmlspecialchars($_POST['medsCo']);
-                $freq = htmlspecialchars($_POST['posoCo']);
-                $start = htmlspecialchars($_POST['startDateCo']);
-                $allergies = htmlspecialchars($_POST['allergiesCo']);
-                $frontoffice->addChild($lastName, $firstName, $birthdate, $gender, $parent1, $parent2, $favMeal, $hatedMeal, $meds, $freq, $start, $allergies);
-            }
-            else{
-                throw new \Exception('Vous devez être connecté');
-            }
-        }          
+        }    
         // ADD CHILDREN AVATAR
         elseif($_GET['action'] == 'uploadPic'){
             $idMember = $_GET['idMember'];
@@ -272,7 +243,7 @@ try{
         // }
         // BANN MEMBER
         elseif($_GET['action'] == 'bann'){
-            if(isset($_POST['mailCoModo'])){
+            if(!(empty($_POST['mailCoModo']))){
                 $idFamily = $_SESSION['family'];
                 $mailCo = htmlspecialchars($_POST['mailCoModo']);
                 $frontoffice->bann($idFamily,$mailCo);
@@ -306,7 +277,7 @@ try{
         }
         // UPDATE PROFILE
         elseif ($_GET['action'] == 'changeProfile'){ 
-            if(isset($_POST['surnameCo']) && isset($_POST['mailCo']) && isset($_POST['birthdateCo']) && isset($_POST['cityCo'])){
+            if(!(empty($_POST['surnameCo'])) && !(empty($_POST['mailCo'])) && !(empty($_POST['birthdateCo'])) && !(empty($_POST['cityCo']))){
                 $idMember = $_SESSION['id'];
                 $words = htmlspecialchars($_POST['wordsCo']);
                 $name = htmlspecialchars($_POST['surnameCo']);
@@ -321,7 +292,7 @@ try{
         }
         // CHANGE PASS
         elseif($_GET['action'] == "changePass"){
-            if(isset($_SESSION['id']) && isset($_POST['pass2Co']) && isset($_POST['passCo']) && isset($_POST['initPassCo'])){
+            if(isset($_SESSION['id']) && !(empty($_POST['pass2Co'])) && !(empty($_POST['passCo'])) && !(empty($_POST['initPassCo']))){
                 $idMember = $_SESSION['id'];
                 $pass2Co = htmlspecialchars($_POST['pass2Co']);
                 $pass = htmlspecialchars($_POST['passCo']);
@@ -359,8 +330,7 @@ try{
         else{
             throw new \Exception('page inaccessible');
         }
-    }
-    
+    } 
     else{
         $frontoffice->homeView();
     }

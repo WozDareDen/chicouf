@@ -2,7 +2,7 @@
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
 
-<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;}</style>
+<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-repeat:no-repeat;background-attachment:fixed;}</style>
 <div class="container-fluid childMain ">
           <!--***********************MENU & SECTION********************-->
           <div class="row formCrEd mainPV">    
@@ -47,13 +47,13 @@ if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $n
           <div class="form-group col-lg-12 ">
             <label for="parent2Up">Parent 2</label><br />
             <input type="text" id="parent2Up" name="parent2Co" cols="30" value="<?= $newData['parent2']; ?>" >
-          </div>
+          </div><hr>
 
 <?php
 }
 else{
   ?>
-            <h1><?= $newData['firstname'] ?> <?= $newData['surname'] ?></h1>
+            <h2 class="nameChild"><?= $newData['firstname'] ?> <?= $newData['surname'] ?></h2>
             <input hidden id="lastname1Up" name="lastNameCo"  value="<?= $newData['surname']; ?>" /> 
             <input hidden id="firstname1Up" name="firstNameCo"  value="<?= $newData['firstname']; ?>" > 
             <input hidden id="birthdateUp" name="birthDateCo" value="<?= $newData['birthdate']; ?>" >
@@ -75,7 +75,7 @@ $newConnex2 = $connex2->fetch()
             <div class="form-group col-lg-12 ">
             <label for="hatedMeal">Plats détestés</label><br />
             <textarea id="hatedMealUp" name="hatedMealCo" rows="5" cols="20"><?= $newConnex2['hated_meal']; ?></textarea>
-            </div>
+            </div><hr>
 <div class="form-group col-lg-12">
             <h2 class="h2Create">TRAITEMENT <a href="#smallC" data-toggle="collapse" aria-expanded="false" aria-controls="#smallC"><i class="fa fa-info-circle"></i></a></h2> <div id="smallC" class="collapse col-sm-6">Sélectionnez le médicament en cliquant dessus lorsque la liste s'affichera au fur et à mesure de vos entrées</div>
 <?php
@@ -128,7 +128,7 @@ $newConnex3 = $connex3->fetch()
             <div class="form-group col-lg-12 startDate" >
               <label for="startDate">Date de début du traitement</label>
               <input id="startDateCoUp" type="date" name="startDateCo" >
-            </div>
+            </div><hr>
             
             <div class="form-group col-lg-12 ">
               <h2  class="h2Create lampost" >ALLERGIES</h2>

@@ -1,4 +1,4 @@
-<?php $title = 'Espace Membre' ?>
+<?php $title = 'Page d\'erreur' ?>
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
 
@@ -9,9 +9,8 @@
         </div>
         <div class="row justify-content-md-center">
             <h2 class="errorMsg"><?= $e->getMessage(); ?></h2>           
-            <img id="logoTurn2" class="logTurn turn3" src="app/Public/uploads/logo.png" alt="logo pleine page" title="logo pleine page" />
-        </div>
-    
+            <p style="text-align:center;"><img id="logoTurn2" class="logTurn turn3" src="app/Public/uploads/logo.png" alt="logo pleine page" title="logo pleine page" /></p>
+        </div> 
 </div>
 
 <?php $content = ob_get_clean(); ?>

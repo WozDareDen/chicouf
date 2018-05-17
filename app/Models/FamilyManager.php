@@ -33,12 +33,6 @@ class FamilyManager extends Manager{
         $dataF2->execute(array($idFamily));
         return $dataF2;
     }
-    public function watchFamilyHealth($idFamily){
-        $db = $this -> dbConnect();
-        $dataF3 = $db->prepare('SELECT * FROM health INNER JOIN family_children ON family_children.idChildren = health.idChildren WHERE idFamily = ? ORDER BY family_children.idChildren');
-        $dataF3->execute(array($idFamily));
-        return $dataF3;
-    }
     public function getFamilyName($idFamily){
         $db = $this -> dbConnect();
         $dataF4 = $db->prepare('SELECT * FROM family WHERE idFamily = ?');
@@ -64,6 +58,12 @@ class FamilyManager extends Manager{
         $dataModo = $db->prepare('SELECT firstname, surname, mail FROM members INNER JOIN member_family ON member_family.idMember = members.idMember WHERE idFamily = ? ORDER BY birthdate ASC LIMIT '.(($this->cPage-1)*$this->perPage).", $this->perPage");
         $dataModo->execute(array($idFamily));
         return $dataModo;
+    }
+    public function checkMember($idFamily){
+        $db = $this -> dbConnect();
+        $checkMember = $db->prepare('SELECT mail FROM `members` INNER JOIN member_family ON member_family.idMember = members.idMember WHERE member_family.idFamily = ?');
+        $checkMember->execute(array($idFamily));
+        return $checkMember;
     }
     public function nbPage($idFamily){
         $db = $this->dbConnect();
@@ -153,7 +153,7 @@ class FamilyManager extends Manager{
     // CHECK MODO
     public function checkModo($idFamily){
         $db = $this -> dbConnect();
-        $checkModo = $db->prepare('SELECT firstname FROM members INNER JOIN member_family ON member_family.idMember = members.idMember WHERE idFamily = ? AND modo > 0');
+        $checkModo = $db->prepare('SELECT firstname,mail FROM members INNER JOIN member_family ON member_family.idMember = members.idMember WHERE idFamily = ? AND modo > 0');
         $checkModo->execute(array($idFamily));
         return $checkModo;
     }

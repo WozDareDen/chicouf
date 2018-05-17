@@ -65,6 +65,9 @@ try{
                 throw new \Exception ('cette page n\'existe pas');
             }
         }
+        else{
+            header('Location: index.php');
+        }
     }
     else{
         header('Location: index.php');

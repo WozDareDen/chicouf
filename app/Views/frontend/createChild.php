@@ -2,9 +2,9 @@
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
 
-<style>body{background-image:url(app/Public/Backgrounds/backg-bois-bleu.jpg);background-repeat:no-repeat;background-attachment:fixed;}</style>
-<div class="container-fluid childMain">
-  <div class="row formCrEd">    
+<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-repeat:no-repeat;background-attachment:fixed;}</style>
+<div class="container-fluid childMain ">
+  <div class="row formCrEd mainPV">    
         <!--***********************FORM********************-->
     <form method="post" class="childForm" >
       <h1 class="h1Create" id="inkCreate"style="padding:0 30px;">CREATION D'UNE FICHE ENFANT</h1>      

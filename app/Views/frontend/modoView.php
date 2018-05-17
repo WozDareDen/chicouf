@@ -60,13 +60,13 @@ while ($members = $dataModo->fetch())
                         <tr>
                             <td><?=$members['firstname'] ?> <?= $members['surname'] ?> </td>
                             <td><?=$members['mail']?></td>
-                            <td>
+                            <td class="centerCol2">
                                 <a href="#" class="btn kitDel" data-toggle="modal" data-target="#modalAddModo" ><button class="btn btn-info">Ajouter</button></a>
                             </td>
-                            <td>
+                            <td class="centerCol2">
                                 <a href="#" class="btn kitDel4" data-toggle="modal" data-target="#modalBann"><button class="btn btn-danger">Bannir un membre</button></a>
                             </td>
-                            </td>
+                            
                         </tr>
            
 <?php
