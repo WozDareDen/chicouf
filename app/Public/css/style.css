@@ -257,6 +257,7 @@ a.dropdown-item:hover{
 .frame5 span{
     animation: blurFadeInOut 0.5s ease-in backwards;
     font-family: 'Caveat Brush', cursive;
+    color: #056c8e;
 }
 .loco{
     border-radius: 2% !important;
@@ -271,6 +272,7 @@ a.dropdown-item:hover{
 .frame6 span{
     animation: blurFadeInOut 0.5s ease-in 0.3s backwards;
     font-family: 'Caveat Brush', cursive;
+    color: #056c8e;
 }
 .noFrame{
     font-family: 'Caveat Brush', cursive;
@@ -342,6 +344,10 @@ a.dropdown-item:hover{
 }
 .pseudoM{
     color:#056c8e;
+}
+.styleH1{
+    font-family: 'Caveat Brush', cursive;
+    font-size: 3.5rem;
 }
 /*------DELETE FAMILY MODAL---------*/
 .padiday{
@@ -606,7 +612,8 @@ input,textarea{
 }
 .ui-menu-item:hover{
     cursor: pointer;
-    background-color: rgb(185, 181, 181);
+    background-color: rgba(0, 122, 254, 0.2);
+    
 }
 .marginB{
     margin-bottom: 20px;
@@ -662,6 +669,7 @@ input,textarea{
     }
     #test{
         margin-bottom:2rem !important;
+        text-align: center;
     }
     .zip{
         display: none;

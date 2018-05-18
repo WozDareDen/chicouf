@@ -4,7 +4,8 @@
 require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
-<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;}</style>
+<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;
+overflow-x: hidden;}</style>
 <div class="container">
 <!--********BANNER************-->
     <div class="bannerBox">
@@ -81,7 +82,7 @@ if((count($dataF8)) > 1){
 foreach($dataF8 as $newDataF8){       
 ?>
 
-                <span class="modoName"><?=  $newDataF8['firstname'];?></span>,
+                <span class="modoName" style="color:#056c8e;font-weight:bold;"><?=  $newDataF8['firstname'];?></span>,
 
 <?php
 }?>
@@ -92,7 +93,7 @@ foreach($dataF8 as $newDataF8){
 else{  
 ?>
 
-            <p>Le modérateur de votre Espace Famille, <span style="color:blue;font-weight:bold;"><?= $dataF8[0]['firstname'] ?></span>, est le seul habilité 
+            <p>Le modérateur de votre Espace Famille, <span style="color:#056c8e;font-weight:bold;"><?= $dataF8[0]['firstname'] ?></span>, est le seul habilité 
 
 <?php
 }

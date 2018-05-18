@@ -46,15 +46,20 @@ try{
         }
         // USER CONTACT
         elseif($_GET['action'] == 'contact'){
-            if(!(empty($_POST['usernameContact'])) && filter_var($_POST['mailContact'],FILTER_VALIDATE_EMAIL) && !(empty($_POST['titleContact'])) && !(empty($_POST['contentContact']))){
+            if(empty($_POST['usernameContact']) && empty($_POST['titleContact']) && empty($_POST['contentContact'])){
+                throw new \Exception('tous les champs ne sont pas remplis');                
+            }
+            else{
                 $usernameContact = htmlspecialchars($_POST['usernameContact']);
                 $mailContact = htmlspecialchars($_POST['mailContact']);
                 $titleContact = htmlspecialchars($_POST['titleContact']);
                 $contentContact = htmlspecialchars($_POST['contentContact']);
-                $frontoffice->contact($usernameContact,$mailContact,$titleContact,$contentContact);
-            }
-            else{
-                throw new \Exception('tous les champs ne sont pas remplis');
+                    if(filter_var($mailContact,FILTER_VALIDATE_EMAIL)){
+                        $frontoffice->contact($usernameContact,$mailContact,$titleContact,$contentContact);
+                    }
+                    else{
+                        throw new Exception('votre adresse mail n\'est pas valide');
+                    } 
             }
         }
         // USER RECORD

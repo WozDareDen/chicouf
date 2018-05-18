@@ -2,7 +2,7 @@
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
 
-<style>body{background-color:#dbe7f7;}</style>
+<style>body{background-color:#ebe7f7;}</style>
 <div class="container">
     <div class="row">
         <h1 class="col-sm-12 h1Home">Bienvenue sur Chicouf.fr</h1>

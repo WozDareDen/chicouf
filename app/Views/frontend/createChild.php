@@ -54,7 +54,7 @@
         </div><hr>
         <!--***********************HEALTH********************-->                
           <div class="autocomplete ui-front form-group col-xs-8 col-lg-12" ><h2 class="h2Create">TRAITEMENT <a href="#smallC" data-toggle="collapse" aria-expanded="false" aria-controls="#smallC"><i class="fa fa-info-circle"></i></a></h2>
-          <div id="smallC" class="collapse col-sm-6">Sélectionnez le médicament en cliquant dessus lorsque la liste s'affichera au fur et à mesure de vos entrées</div> 
+          <div id="smallC" class="collapse col-sm-6" style="font-size:14px">Sélectionnez le médicament en cliquant dessus lorsque la liste s'affichera au fur et à mesure de vos entrées</div> 
             <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments">
           </div>
           <div class="form-group col-lg-12 startDate" >

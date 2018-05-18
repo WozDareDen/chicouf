@@ -9,7 +9,7 @@ $userAll = $useAll->fetch();
 ?>
 <!--JUMBOTRON-->
     <div class="jumbotron jumbo cardFamX">
-        <h1 class="display-5" id="test" style="margin-bottom:2rem;text-align:center;">Liste des <?= $userAll[0] ?> membres</h1>
+        <h1 class="display-5" id="test" style="text-align:center;">Liste des <?= $userAll[0] ?> membres</h1>
     <!-- MEMBERS TABLE-->
         <table class="table table-hover table-sm">
             <thead class="thead-dark">

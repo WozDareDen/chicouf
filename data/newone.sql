@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 06 Mai 2018 à 19:32
+-- Généré le :  Ven 18 Mai 2018 à 11:17
 -- Version du serveur :  5.6.21
 -- Version de PHP :  5.6.3
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `allergy` (
 `idAllergy` int(11) NOT NULL,
   `content` text
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `allergy`
@@ -44,7 +44,43 @@ INSERT INTO `allergy` (`idAllergy`, `content`) VALUES
 (98, 'Aucune allergie connue'),
 (99, 'Aucune allergie connue'),
 (100, 'Aucune allergie connue'),
-(101, 'Aucune allergie connue');
+(101, 'Aucune allergie connue'),
+(102, 'Rien'),
+(103, 'Aucune allergie connue'),
+(104, 'Rien'),
+(105, 'Rien du tout'),
+(106, 'Aucune allergie connue'),
+(107, 'Aucune allergie connue'),
+(108, 'Aucune allergie connue'),
+(109, 'Aucune allergie connue'),
+(110, 'Aucune allergie connue'),
+(111, 'Aucune allergie connue'),
+(112, 'Aucune allergie connue'),
+(113, 'Aucune allergie connue'),
+(114, 'Aucune allergie connue'),
+(115, 'Aucune allergie connue'),
+(116, 'Aucune allergie connue'),
+(117, 'Aucune allergie connue'),
+(118, 'Aucune allergie connue'),
+(119, 'Aucune allergie connue'),
+(120, 'Aucune allergie connue'),
+(121, 'Aucune allergie connue'),
+(122, 'Aucune allergie connue'),
+(123, 'Aucune allergie connue'),
+(124, 'Aucune allergie connue'),
+(125, 'Aucune allergie connue'),
+(126, 'Aucune allergie connue'),
+(127, 'Aucune allergie connue'),
+(128, 'Aucune allergie connue'),
+(129, 'Aucune allergie connue'),
+(130, 'Aucune allergie connue'),
+(131, 'Aucune allergie connue'),
+(132, 'Aucune allergie connue'),
+(133, 'Aucune allergie connue'),
+(134, 'Aucune allergie connue'),
+(135, 'Aucune allergie connue'),
+(136, 'Aucune allergie connue'),
+(137, 'Aucune allergie connue');
 
 -- --------------------------------------------------------
 
@@ -65,22 +101,29 @@ CREATE TABLE IF NOT EXISTS `children` (
   `parent2` varchar(60) DEFAULT NULL,
   `updateLog` datetime NOT NULL,
   `updateUser` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `children`
 --
 
 INSERT INTO `children` (`idChildren`, `surname`, `firstname`, `bulk`, `bulkDate`, `img`, `birthdate`, `gender`, `parent1`, `parent2`, `updateLog`, `updateUser`) VALUES
-(1, 'Sadot', 'Léa', 0, '0000-00-00', 'app/Public/uploads/lea.jpg', '2011-10-12', 0, 'Florent', 'Adèle', '2018-04-19 15:18:02', 'Florent'),
+(1, 'Sadot', 'Léa', 17, '2005-05-09', 'app/Public/uploads/lea.jpg', '2011-10-12', 0, 'Florent', 'Adèle', '2018-04-19 15:18:02', 'Florent'),
 (2, 'Sadot', 'Anna', 0, '0000-00-00', 'app/Public/uploads/anna.jpg', '2013-11-18', 0, 'Florent', 'Adèle', '2018-04-20 09:41:29', 'John'),
 (3, 'Deschiens', 'Eugene', 0, '0000-00-00', 'app/Public/uploads/pic.jpg', '2018-04-02', 0, 'Paloma', NULL, '0000-00-00 00:00:00', ''),
 (21, 'Sadot', 'Raphaël', 0, '0000-00-00', 'app/Public/uploads/avatarBoy.png', '2005-06-05', 0, 'Nicolas Sadot', 'Manon François', '2018-04-18 15:06:07', 'John'),
-(22, 'Navarro', 'Pierre', 0, '0000-00-00', 'app/Public/uploads/avatarBoy.png', '2007-12-07', 0, 'Emmanuelle Navarro', 'Mathieu Navarro', '0000-00-00 00:00:00', ''),
 (25, 'Sadot', 'Lola', 0, '0000-00-00', 'app/Public/uploads/avatarGirl.png', '2018-04-10', 1, 'Florent', '', '2018-04-19 15:18:14', 'Florent'),
-(27, 'Léran', 'Myla', 5, '2018-05-01', 'app/Public/uploads/avatarGirl.png', '2016-01-02', 1, 'Mamatte', 'Anne', '2018-05-06 16:29:01', 'Anne'),
-(70, 'Léran', 'Nathan', 0, '0000-00-00', 'app/Public/uploads/avatarBoy.png', '2010-05-18', 0, 'Anne', 'Mamatte', '2018-05-03 14:51:39', 'Anne'),
-(71, 'Léran', 'Eric', 0, '0000-00-00', 'app/Public/uploads/avatarBoy.png', '2010-05-04', 0, 'Anne', 'Mamatte', '2018-05-02 12:28:18', 'Anne');
+(73, 'Gautier', 'MiniHelene', 2, '2018-05-07', 'app/Public/uploads/ln.jpg', '2018-05-03', 1, 'Hélène', 'GGérome', '2018-05-15 09:30:12', 'Hélène'),
+(74, 'Gautier', 'John', 8, '2018-05-09', 'app/Public/uploads/javier.jpg', '2015-05-09', 0, 'GGérome', 'Hélène', '2018-05-10 15:37:32', 'GGérome'),
+(75, 'Garçon', 'Joe', 0, '0000-00-00', 'app/Public/uploads/mamatte.jpg', '2010-10-08', 0, 'Marie', '', '2018-05-11 10:23:13', 'Hélène'),
+(91, 'Sadot', 'Anna', 16, '2018-05-10', 'app/Public/uploads/anna.jpg', '2013-11-18', 1, 'Florent', '', '2018-05-18 10:27:50', 'Florent'),
+(93, 'Sadot', 'Léa', 19, '2018-05-01', 'app/Public/uploads/lea.jpg', '2011-10-12', 1, 'Florent', 'Adèle', '2018-05-18 10:18:39', 'Florent'),
+(99, 'Orange', 'Sabrina', 30, '2018-05-16', 'app/Public/uploads/sabiche.jpg', '1981-03-01', 1, 'Gérome', 'Hélène', '2018-05-17 17:01:38', 'Gérome'),
+(100, 'Moriot', 'Heidi', 0, '0000-00-00', 'app/Public/uploads/heidi.jpg', '1979-03-01', 1, 'Matthieu', 'Anne', '2018-05-16 13:14:19', 'Anne'),
+(101, 'Chapka', 'Léa', 18, '2018-05-16', 'app/Public/uploads/lea.jpg', '2011-10-12', 1, 'Mendos', 'Adèle', '2018-05-16 13:18:38', 'Adèle'),
+(102, 'Chapka', 'Anna', 16, '2018-05-15', 'app/Public/uploads/anna.jpg', '2013-11-18', 1, 'Mendos', 'Adèle', '2018-05-16 13:19:56', 'Mendos'),
+(103, 'Lescot', 'Pierrot', 0, '0000-00-00', 'app/Public/uploads/pierre.jpg', '1980-07-19', 0, 'Javier', 'Sonya', '2018-05-16 13:21:49', 'Javier'),
+(104, 'Chapdelaine', 'Marion', 0, '0000-00-00', 'app/Public/uploads/mama.jpg', '1981-01-30', 0, 'Gérome', 'Hélène', '2018-05-16 13:41:32', 'Gérome');
 
 -- --------------------------------------------------------
 
@@ -98,22 +141,17 @@ CREATE TABLE IF NOT EXISTS `children_allergy` (
 --
 
 INSERT INTO `children_allergy` (`idChildren`, `idAllergy`) VALUES
-(27, 93),
-(70, 94),
-(71, 95);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `comments`
---
-
-CREATE TABLE IF NOT EXISTS `comments` (
-`idComment` int(11) NOT NULL,
-  `content` text,
-  `comment_date` date NOT NULL,
-  `idMember` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(73, 103),
+(74, 104),
+(75, 105),
+(91, 121),
+(93, 123),
+(99, 129),
+(100, 130),
+(101, 131),
+(102, 132),
+(103, 133),
+(104, 134);
 
 -- --------------------------------------------------------
 
@@ -127,16 +165,16 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `msg` text,
   `mailContact` varchar(255) DEFAULT NULL,
   `nameContact` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `contact`
 --
 
 INSERT INTO `contact` (`idContact`, `title`, `msg`, `mailContact`, `nameContact`) VALUES
-(1, 0, 'qsdqs', 'gogol@gmail.com', 'MOI'),
-(2, 1, 'dsdfsdkjfhkshdqdqs dqsd qsd qsdq dqs qsd qsd qsd qsdqs dqs dqsd qsdqs dq\r\ndqsd qsd qs\r\nd\r\nqsd\r\n qsd qsdqskjfhkjsdhfkhj', 'gedsm@gmail.com', 'gaga'),
-(3, 0, 'Note that depending on how they are used, badges may be confusing for users of screen readers and similar assistive technologies. While the styling of badges provides a visual cue as to their purpose, these users will simply be presented with the content of the badge. Depending on the specific situation, these badges may seem like random additional words or numbers at the end of a sentence, link, or button.\r\n\r\nUnless the context is clear (as with the “Notifications” example, where it is understood that the “4” is the number of notifications), consider including additional context with a visually hidden piece of additional text.\r\nDikembe', 'wamutombo@zaire.za', 'Dikembe Mutombo');
+(9, 2, 'C''est mortel ce site !', 'macca@gmail.com', 'Paul mcCartney'),
+(10, 0, 'Bonjour,\r\nbla bla bla, test de message long car fksqdfnklsqj kljsqdlkfjlk sqhghsksn jndn kdkfjlk jlkqjdkfj kljsdkfjkdjfk jdfjk j  jdj dk jdjf kdj jf jdlkjfklsjd klj sjdlkf jkjk fjf jdlkfj kljkljfkl jdkfjlk.\r\nqskldnqslknd dsd sd', 'alain@orange.fr', 'Alain Deloin'),
+(12, 0, 'Nouveau test après l''attaque OWASP Zap', 'pablo@free.fr', 'Pablo');
 
 -- --------------------------------------------------------
 
@@ -148,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `family` (
 `idFamily` int(11) NOT NULL,
   `familyName` varchar(60) NOT NULL,
   `banner` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `family`
@@ -157,7 +195,10 @@ CREATE TABLE IF NOT EXISTS `family` (
 INSERT INTO `family` (`idFamily`, `familyName`, `banner`) VALUES
 (1, 'Sadot', 'app/Public/uploads/banners/banniere.png'),
 (2, 'Deschiens', ''),
-(3, 'TamTam', 'app/Public/uploads/banners/banniere.png');
+(3, 'TamTam', 'app/Public/uploads/banners/banniere.png'),
+(4, 'Colette', 'app/Public/uploads/banners/banniere.png'),
+(6, 'troupe', 'app/Public/uploads/banners/banniere.png'),
+(8, 'Saint-Love', 'app/Public/uploads/banners/banniere.png');
 
 -- --------------------------------------------------------
 
@@ -178,11 +219,18 @@ INSERT INTO `family_children` (`idFamily`, `idChildren`) VALUES
 (1, 1),
 (1, 2),
 (1, 21),
-(1, 22),
 (1, 25),
-(3, 27),
-(3, 70),
-(3, 71);
+(4, 73),
+(4, 74),
+(4, 75),
+(6, 91),
+(6, 93),
+(8, 99),
+(8, 100),
+(8, 101),
+(8, 102),
+(8, 103),
+(8, 104);
 
 -- --------------------------------------------------------
 
@@ -195,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `meals` (
   `favorite_meal` text,
   `hated_meal` text,
   `idChildren` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `meals`
@@ -206,10 +254,17 @@ INSERT INTO `meals` (`idMeal`, `favorite_meal`, `hated_meal`, `idChildren`) VALU
 (2, 'fraises\r\nchocolat\r\nbonbons\r\nfilet mignon', 'banane', 2),
 (3, 'glaces', 'légumes', 3),
 (10, 'Viandes\r\nglace', 'Légumes', 21),
-(11, 'Glaces', 'Haricots verts', 22),
-(111, 'chocolat', '', 27),
-(112, 'filet mignon,frites', 'petits pois', 70),
-(113, '', '', 71);
+(115, '', '', 73),
+(116, '', '', 74),
+(117, 'fraises', 'soupe de poisson', 75),
+(133, '', '', 91),
+(135, '', '', 93),
+(141, 'Poissons, soja', 'viandes', 99),
+(142, '', '', 100),
+(143, '', '', 101),
+(144, '', '', 102),
+(145, '', '', 103),
+(146, '', '', 104);
 
 -- --------------------------------------------------------
 
@@ -12588,27 +12643,40 @@ CREATE TABLE IF NOT EXISTS `members` (
   `gender` int(11) NOT NULL,
   `parenthood` varchar(60) NOT NULL,
   `modo` varchar(25) DEFAULT NULL,
-  `registrationDate` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+  `registrationDate` date NOT NULL,
+  `words` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `members`
 --
 
-INSERT INTO `members` (`idMember`, `surname`, `firstname`, `img`, `pass`, `mail`, `birthdate`, `city`, `gender`, `parenthood`, `modo`, `registrationDate`) VALUES
-(1, 'Sadot', 'Flo', 'app/Public/uploads/avatarMan.png', '', '', NULL, NULL, 0, '', NULL, '0000-00-00'),
-(5, '', 'Paloma', '', '', '', NULL, NULL, 0, '', NULL, '0000-00-00'),
-(10, 'Sadot', 'Nicolas', 'app/Public/uploads/avatarMan.png', '$2y$10$G8d3XXjO.2bh54F0G3qSguKVvwjnkn7Q8TMnpjvNpqvYuv/ut82j6', 'gogol2@gmail.com', NULL, 'Hérouville-Saint-Clair', 0, '1', NULL, '2018-04-05'),
-(32, 'Sadot', 'Florent', 'app/Public/uploads/wam.jpg', '$2y$10$vvOkHovHYXPsx1H1SFcsWeKI7jQiyg6hBdEqqGpagQOvMwTyrr9nm', 'fsadot@free.fr', '1981-08-20', 'Vannes', 0, '1', '1', '2018-04-10'),
-(34, 'Navarro', 'Mattieu', 'app/Public/uploads/avatarMan.png', '$2y$10$tRaYmc8JEAtNuqfA.DGVZ.iul.TVc3otaxGoMtqbX6qrB6RDzkik2', 'gogol@gmail.com', NULL, NULL, 0, '1', '0', '2018-04-11'),
-(37, 'Lennon', 'John', 'app/Public/uploads/avatarMan.png', '$2y$10$pIf/F/QAlqkqVWgYdBHbMuPnLR7UDV/9Jo/pZUnkSRbzePjl2Gxxm', 'beatles@free.fr', NULL, 'Vannes', 0, '1', '0', '2018-04-17'),
-(38, 'Sadot', 'Rose-Marie', 'app/Public/uploads/avatarGrandMa.jpg', '$2y$10$UtaYg8pDUnooFATYmOq2J.0Fh88alsqol69ZidNpK8Bwp7Lw/t.aS', 'rmsadot@gmail.com', NULL, '', 1, '0', '0', '2018-04-20'),
-(39, 'erze', 'zerze', 'app/Public/uploads/avatarMan.png', '$2y$10$L.dmO/SzzHtr0OE78OL3Ie9XdDVFhAh/yUTbEIcGzMzN.p4lUNBK.', 'flo@gom.fr', NULL, NULL, 0, '1', '0', '2018-04-20'),
-(40, 'Sadot', 'Eric', 'app/Public/uploads/avatarGrandPa.jpg', '$2y$10$9NDAZgpIXLIHCWbjeREnGO1wVrmYqyA4TI9G1a0BEMrnSKWQOtRJG', 'eric.sadot@gmail.com', NULL, 'Saint-Pair-Sur-Mer', 0, '0', '0', '2018-04-23'),
-(41, 'Léran', 'Matthieu', 'app/Public/uploads/avatarMan.png', '$2y$10$vIkG5JMVNiddf9gnBOO3LeNxMdWLVJ4.e0iS2i0qFMS5TFF/0I47q', 'mleran@yahoo.fr', NULL, NULL, 0, '1', '0', '2018-04-23'),
-(42, 'Leblond', 'Anne', 'app/Public/uploads/avatarWoman.png', '$2y$10$PUbamrSfxANuj5h93We.P.zvPBLb56g6MMoq85rf9F6KNJB9aJLnK', 'annele@yahoo.fr', '0000-00-00', 'Paris', 1, '1', '1', '2018-04-23'),
-(43, 'Admin', 'Florent', 'app/Public/uploads/parrain.jpg', '$2y$10$TJS/72n1pg6tJXtUL34FAeLu70Ehwsu1qd8bGgmmxmyCyHaU7EJSO', 'liamgallaghersays@gmail.com', '1981-08-20', 'Vannes', 0, '1', '2', '2018-04-24'),
-(44, 'Léran', 'Ginette', 'app/Public/uploads/avatarGrandMa.jpg', '$2y$10$jOA4RHV7iKDfcRbC370.8e9O8Qv8opKZT5rCF54nIFHRijKPMTBdG', 'ginette@free.fr', NULL, NULL, 1, '0', '0', '2018-04-24');
+INSERT INTO `members` (`idMember`, `surname`, `firstname`, `img`, `pass`, `mail`, `birthdate`, `city`, `gender`, `parenthood`, `modo`, `registrationDate`, `words`) VALUES
+(1, 'Sadot', 'Flo', 'app/Public/uploads/avatarMan.png', '', '', NULL, NULL, 0, '', '1', '0000-00-00', ''),
+(5, '', 'Paloma', '', '', '', NULL, NULL, 0, '', '1', '0000-00-00', ''),
+(10, 'Sadot', 'Nicolas', 'app/Public/uploads/avatarMan.png', '$2y$10$G8d3XXjO.2bh54F0G3qSguKVvwjnkn7Q8TMnpjvNpqvYuv/ut82j6', 'gogol2@gmail.com', NULL, 'Hérouville-Saint-Clair', 0, '1', NULL, '2018-04-05', ''),
+(32, 'Sadot', 'Florent', 'app/Public/uploads/wam.jpg', '$2y$10$vvOkHovHYXPsx1H1SFcsWeKI7jQiyg6hBdEqqGpagQOvMwTyrr9nm', 'fsadot@free.fr', '1981-08-20', 'Vannes', 0, '1', '0', '2018-04-10', ''),
+(37, 'Lennon', 'John', 'app/Public/uploads/avatarMan.png', '$2y$10$pIf/F/QAlqkqVWgYdBHbMuPnLR7UDV/9Jo/pZUnkSRbzePjl2Gxxm', 'beatles@free.fr', NULL, 'Vannes', 0, '1', '0', '2018-04-17', ''),
+(38, 'Sadot', 'Rose-Marie', 'app/Public/uploads/avatarGrandMa.jpg', '$2y$10$UtaYg8pDUnooFATYmOq2J.0Fh88alsqol69ZidNpK8Bwp7Lw/t.aS', 'rmsadot@gmail.com', NULL, '', 1, '0', '0', '2018-04-20', ''),
+(43, 'Admin', 'Florent', 'app/Public/uploads/parrain.jpg', '$2y$10$TJS/72n1pg6tJXtUL34FAeLu70Ehwsu1qd8bGgmmxmyCyHaU7EJSO', 'liamgallaghersays@gmail.com', '1981-08-20', 'Vannes', 0, '1', '2', '2018-04-24', 'keep your friends close, keep your enemies closer'),
+(44, 'Léran', 'Ginette', 'app/Public/uploads/avatarGrandMa.jpg', '$2y$10$jOA4RHV7iKDfcRbC370.8e9O8Qv8opKZT5rCF54nIFHRijKPMTBdG', 'ginette@free.fr', NULL, NULL, 1, '0', '0', '2018-04-24', ''),
+(46, 'Garçon', 'Hélène', 'app/Public/uploads/adele.jpg', '$2y$10$HTYV74ruh8RNLbqq205SbuuAI55BX9gF4RPjj8OfOVmy09oG0JN.W', 'gogol@gmail.com', '1982-04-02', 'Paris avec l''autre australopithèque', 1, '1', '1', '2018-05-07', 'la vie n''est pas un long fleuve tranquille'),
+(47, 'Gautier', 'GGérome', 'app/Public/uploads/gege.jpg', '$2y$10$L78NcRcTOJpspaTPw5HuG.RY2Xztjir99i1g49steL6TDuycxaeYC', 'free@free.fr', '1979-04-30', 'Paris', 0, '1', '0', '2018-05-10', 'j''ai rien fait'),
+(48, 'Gautier', 'Alain', 'app/Public/uploads/moi.jpg', '$2y$10$qs7g5bMqmGyBnG37vPVLTerZtegpI0pRsFZGS43gfnih6kTg.DiBy', 'alain@free.fr', '1960-05-02', 'Saint-Lô', 0, '0', '0', '2018-05-11', 'le sphincter a dit quoi ?'),
+(49, 'Gautier', 'Jeanne', 'app/Public/uploads/sonya.jpg', '$2y$10$DJ5CyR7vfy4plalb23ozF..0E3uEO2xXms5Ad4xC.p1WSOE7R2vG6', 'jeanne@free.fr', '1955-04-02', 'Saint-Lô', 1, '0', '0', '2018-05-11', 'c''est marrant ça !'),
+(50, 'Garçon', 'Jean', 'app/Public/uploads/avatarGrandPa.jpg', '$2y$10$TvR3GWNq2oF.gyUzqVCGPO3QxjtysZ3YBEJAq4Ygy8cwrNQj7lxya', 'jean@free.fr', '1956-08-31', 'Caen', 0, '0', '0', '2018-05-11', 'il déchire ce site'),
+(51, 'Garçon', 'Marie', 'app/Public/uploads/sabiche.jpg', '$2y$10$wqV8N34bRKnF.1V9gG.1q.69d6lPYYHhke8EOG21YQXOO5oV.4nnG', 'marie@free.fr', '1985-01-01', 'Vannes', 1, '1', '0', '2018-05-11', 'tu l''as vu ?'),
+(52, 'Garçon', 'Benjamin', 'app/Public/uploads/avatarMan.png', '$2y$10$OrwgCSt9nOC1ECIalmNNGO45MruxDdLjHZEvX7Njbe6//m8miuBSe', 'benja@free.fr', '1980-05-14', 'Rennes', 0, '1', '0', '2018-05-11', 'Science sans conscience n''est que ruine de l''âme'),
+(53, 'Garçon', 'Sophie', 'app/Public/uploads/mama.jpg', '$2y$10$7tq1ij5ChwiYfErZJT8JteSoY6IBIPh0I7ZlItvk5mnNt1huYA9D6', 'sophie@free.fr', '1979-11-05', 'Cherbourg', 1, '1', '0', '2018-05-11', 'mais c''est génial ce truc !'),
+(54, 'Gautier', 'Alain', 'app/Public/uploads/avatarGrandPa.jpg', '$2y$10$qs7g5bMqmGyBnG37vPVLTerZtegpI0pRsFZGS43gfnih6kTg.DiBy', 'alain@free.fr', '1960-05-02', 'Saint-Lô', 0, '0', '0', '2018-05-11', 'Ici c''est la Bretagne !'),
+(55, 'Gautier', 'Gérome', 'app/Public/uploads/gege.jpg', '$2y$10$OOxDpEZt/WRLEEKpA2rbXu8VFRCxRtS.oz/LfHW4tx61r2dyKJcdW', 'gege@yahoo.fr', '0000-00-00', '', 0, '1', '1', '2018-05-16', 'jamais sans mon picon'),
+(56, 'Cotelette', 'Hélène', 'app/Public/uploads/ln.jpg', '$2y$10$advMOTTt0citsS3u1ZDSleEUwrVQOqU.FO2c.fqE/LA8ZWx5911ve', 'ln@yahoo.fr', '0000-00-00', '', 1, '1', '1', '2018-05-16', 'le ciel, les oiseaux et Saint-Lô'),
+(57, 'Léran', 'Matthieu', 'app/Public/uploads/mamatte.jpg', '$2y$10$yR1.CHjHGS.JLoKO0794sOQwdDF8PUX9CScacnT1yRidQfcP8duDq', 'mat@yahoo.fr', NULL, NULL, 0, '1', '0', '2018-05-16', 'Avec les mots on ne se méfie jamais suffisamment'),
+(58, 'Leblond', 'Anne', 'app/Public/uploads/anne.jpg', '$2y$10$hODzH2f3hWpgQCU7ZsyS9uxdyYlkcR0emExsMgXgf1U6LnjVziKLO', 'anne@yahoo.fr', NULL, NULL, 1, '1', '0', '2018-05-16', 'En cas de morsure de vipère, sucez-vous le genou, ça fait marrer les écureuils'),
+(59, 'Chapka', 'Mendos', 'app/Public/uploads/moi.jpg', '$2y$10$jm5hRRf13/Gbn4VoPlAnoeTALxnz2FbECLnODosH.LfHaNh5r8nZu', 'mendos@yahoo.fr', '0000-00-00', '', 0, '1', '0', '2018-05-16', 'l''enfer c''est les autres'),
+(60, 'Chapka', 'Adèle', 'app/Public/uploads/adele.jpg', '$2y$10$e7Wxk7qYWkdLSXZ3vTyktOd65SA1n16l1leO4rifvbw8N3DU.aPBe', 'adele@yahoo.fr', '0000-00-00', '', 1, '1', '0', '2018-05-16', 'il n''y a pas de plaisir coupable'),
+(61, 'Lebruman', 'Javier', 'app/Public/uploads/javier.jpg', '$2y$10$ecKjs6VVnxomdChIme8eDuAAzu/7RfE89jNKCqHooHHrHkb22a7Dy', 'javier@yahoo.fr', '0000-00-00', '', 0, '1', '0', '2018-05-16', 'la mort est un manque de savoir-vivre'),
+(62, 'Luce', 'Sonya', 'app/Public/uploads/sonya.jpg', '$2y$10$/AJiJgy6q.RoO7VR8j22nuKLoIUjXsnvNIatjqP7Epi0j4hViE/zG', 'sonya@yahoo.fr', '0000-00-00', '', 1, '1', '0', '2018-05-16', 'on peut rire de tout avec tout le monde mais pas en mangeant de la semoule');
 
 -- --------------------------------------------------------
 
@@ -12630,16 +12698,26 @@ INSERT INTO `member_children` (`idMember`, `idChildren`) VALUES
 (32, 2),
 (5, 3),
 (10, 21),
-(10, 22),
-(34, 22),
 (32, 25),
-(1, 27),
-(41, 27),
-(42, 27),
-(41, 70),
-(42, 70),
-(41, 71),
-(42, 71);
+(1, 73),
+(46, 73),
+(47, 73),
+(46, 74),
+(47, 74),
+(51, 75),
+(52, 75),
+(43, 91),
+(43, 93),
+(55, 99),
+(56, 99),
+(58, 100),
+(59, 101),
+(60, 101),
+(59, 102),
+(60, 102),
+(61, 103),
+(62, 103),
+(55, 104);
 
 -- --------------------------------------------------------
 
@@ -12660,11 +12738,26 @@ INSERT INTO `member_family` (`idMember`, `idFamily`) VALUES
 (10, 1),
 (32, 1),
 (38, 1),
-(40, 1),
 (5, 2),
-(41, 3),
-(42, 3),
-(44, 3);
+(44, 3),
+(46, 4),
+(47, 4),
+(48, 4),
+(49, 4),
+(50, 4),
+(51, 4),
+(52, 4),
+(53, 4),
+(43, 6),
+(44, 8),
+(55, 8),
+(56, 8),
+(57, 8),
+(58, 8),
+(59, 8),
+(60, 8),
+(61, 8),
+(62, 8);
 
 -- --------------------------------------------------------
 
@@ -12677,32 +12770,38 @@ CREATE TABLE IF NOT EXISTS `posology` (
   `idMeds` int(11) NOT NULL,
   `idTTT` int(11) NOT NULL,
   `content` text
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `posology`
 --
 
 INSERT INTO `posology` (`idPosology`, `idMeds`, `idTTT`, `content`) VALUES
-(24, 24487, 93, '1/jour'),
-(25, 18313, 93, '4/jour si besoin'),
-(30, 24487, 106, '10/jour');
+(2, 18313, 2, '4/jour si fièvre'),
+(5, 22971, 5, '2/jour si douleur');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `posts`
+-- Structure de la table `reminders`
 --
 
-CREATE TABLE IF NOT EXISTS `posts` (
-`idPost` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `reminders` (
+`idReminder` int(11) NOT NULL,
   `content` text,
-  `image` text,
-  `title` varchar(255) DEFAULT NULL,
-  `postDate` date NOT NULL,
-  `idComment` int(11) NOT NULL,
+  `reminderDate` datetime NOT NULL,
   `idMember` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `reminders`
+--
+
+INSERT INTO `reminders` (`idReminder`, `content`, `reminderDate`, `idMember`) VALUES
+(8, 'Plugin BirthdayCalendar avec pop-up anniversaire et rappel chaque début de mois des anniversaires de la Famille.', '2018-05-09 14:59:09', 43),
+(9, 'Espace d''expression (blog) pour l''utilisateur avec la publication du billet sur la page d''accueil dans une timeline ; celui-ci décidant s''il souhaite partager cela avec l''intégralité du site ou uniquement les membres de son Espace Famille.', '2018-05-09 14:59:22', 43),
+(10, 'Un véritable Carnet de Santé virtuel (avec courbe de poids, rappels de vaccins)', '2018-05-09 15:04:17', 43),
+(13, 'Fils de discussion dans chaque Espace Famille. Possibilité de créations de fils privés (typiquement pour gérer les Kdos d''anniv).', '2018-05-09 15:21:56', 43);
 
 -- --------------------------------------------------------
 
@@ -12714,15 +12813,15 @@ CREATE TABLE IF NOT EXISTS `treatment` (
 `idTTT` int(11) NOT NULL,
   `startDate` date DEFAULT NULL,
   `idChildren` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `treatment`
 --
 
 INSERT INTO `treatment` (`idTTT`, `startDate`, `idChildren`) VALUES
-(93, '2018-05-08', 71),
-(106, '2018-05-02', 70);
+(2, '2018-05-08', 74),
+(5, '2018-05-16', 99);
 
 --
 -- Index pour les tables exportées
@@ -12745,12 +12844,6 @@ ALTER TABLE `children`
 --
 ALTER TABLE `children_allergy`
  ADD PRIMARY KEY (`idChildren`,`idAllergy`), ADD KEY `FK_children_allergy_idAllergy` (`idAllergy`);
-
---
--- Index pour la table `comments`
---
-ALTER TABLE `comments`
- ADD PRIMARY KEY (`idComment`), ADD KEY `FK_Comments_idMember` (`idMember`);
 
 --
 -- Index pour la table `contact`
@@ -12807,10 +12900,10 @@ ALTER TABLE `posology`
  ADD PRIMARY KEY (`idPosology`), ADD KEY `FK_posology_idMeds` (`idMeds`), ADD KEY `FK_posology_idTTT` (`idTTT`);
 
 --
--- Index pour la table `posts`
+-- Index pour la table `reminders`
 --
-ALTER TABLE `posts`
- ADD PRIMARY KEY (`idPost`), ADD KEY `FK_Posts_idComment` (`idComment`), ADD KEY `FK_Posts_idMember` (`idMember`);
+ALTER TABLE `reminders`
+ ADD PRIMARY KEY (`idReminder`), ADD KEY `FK_Comments_idMember` (`idMember`);
 
 --
 -- Index pour la table `treatment`
@@ -12826,32 +12919,27 @@ ALTER TABLE `treatment`
 -- AUTO_INCREMENT pour la table `allergy`
 --
 ALTER TABLE `allergy`
-MODIFY `idAllergy` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=102;
+MODIFY `idAllergy` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=138;
 --
 -- AUTO_INCREMENT pour la table `children`
 --
 ALTER TABLE `children`
-MODIFY `idChildren` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
---
--- AUTO_INCREMENT pour la table `comments`
---
-ALTER TABLE `comments`
-MODIFY `idComment` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `idChildren` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=105;
 --
 -- AUTO_INCREMENT pour la table `contact`
 --
 ALTER TABLE `contact`
-MODIFY `idContact` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `idContact` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT pour la table `family`
 --
 ALTER TABLE `family`
-MODIFY `idFamily` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `idFamily` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `meals`
 --
 ALTER TABLE `meals`
-MODIFY `idMeal` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=114;
+MODIFY `idMeal` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=147;
 --
 -- AUTO_INCREMENT pour la table `meds`
 --
@@ -12861,22 +12949,22 @@ MODIFY `idMeds` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24655;
 -- AUTO_INCREMENT pour la table `members`
 --
 ALTER TABLE `members`
-MODIFY `idMember` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
+MODIFY `idMember` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT pour la table `posology`
 --
 ALTER TABLE `posology`
-MODIFY `idPosology` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
+MODIFY `idPosology` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT pour la table `posts`
+-- AUTO_INCREMENT pour la table `reminders`
 --
-ALTER TABLE `posts`
-MODIFY `idPost` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `reminders`
+MODIFY `idReminder` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT pour la table `treatment`
 --
 ALTER TABLE `treatment`
-MODIFY `idTTT` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=107;
+MODIFY `idTTT` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- Contraintes pour les tables exportées
 --
@@ -12887,12 +12975,6 @@ MODIFY `idTTT` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=107;
 ALTER TABLE `children_allergy`
 ADD CONSTRAINT `FK_children_allergy_idAllergy` FOREIGN KEY (`idAllergy`) REFERENCES `allergy` (`idAllergy`) ON DELETE CASCADE,
 ADD CONSTRAINT `FK_children_allergy_idChildren` FOREIGN KEY (`idChildren`) REFERENCES `children` (`idChildren`) ON DELETE CASCADE;
-
---
--- Contraintes pour la table `comments`
---
-ALTER TABLE `comments`
-ADD CONSTRAINT `FK_Comments_idMember` FOREIGN KEY (`idMember`) REFERENCES `members` (`idMember`);
 
 --
 -- Contraintes pour la table `family_children`
@@ -12929,11 +13011,10 @@ ADD CONSTRAINT `FK_posology_idMeds` FOREIGN KEY (`idMeds`) REFERENCES `meds` (`i
 ADD CONSTRAINT `FK_posology_idTTT` FOREIGN KEY (`idTTT`) REFERENCES `treatment` (`idTTT`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `posts`
+-- Contraintes pour la table `reminders`
 --
-ALTER TABLE `posts`
-ADD CONSTRAINT `FK_Posts_idComment` FOREIGN KEY (`idComment`) REFERENCES `comments` (`idComment`),
-ADD CONSTRAINT `FK_Posts_idMember` FOREIGN KEY (`idMember`) REFERENCES `members` (`idMember`);
+ALTER TABLE `reminders`
+ADD CONSTRAINT `FK_Comments_idMember` FOREIGN KEY (`idMember`) REFERENCES `members` (`idMember`);
 
 --
 -- Contraintes pour la table `treatment`

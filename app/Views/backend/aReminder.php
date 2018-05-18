@@ -8,7 +8,7 @@
 <!--***************Main jumbotron**************-->
     <div class="jumbotron cardFamX cardJumbo">
         <div class="container col-xs-12 col-lg-10">
-            <h1 class="display-3" id="test2" style="text-align:center;">Pense-bête</h1>
+            <h1 class="display-5" id="test2" style="text-align:center;">Pense-bête</h1>
             <p>Vous pouvez utiliser cet Espace Ecriture pour noter toutes vos idées.</p>
             <p id="mask"><button class="btn btn-info">Masquer/afficher <span class="eraseThD">les notes</span></button></p>
             

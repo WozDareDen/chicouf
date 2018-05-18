@@ -9,13 +9,13 @@
 if($_SESSION["gender"]==0){
 ?>
 
-  <span class="pseudoM h1Fam"><h1 style="text-align:center;" >Bienvenue sur votre Espace Membre, <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
+  <span class="pseudoM h1Fam"><h1 class="styleH1" >Bienvenue sur votre Espace Membre, <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
 
 <?php
 }
 else{
 ?>
-  <span class="pseudoF h1Fam"><h1 style="text-align:center;" >Bienvenue sur votre Espace Membre, <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
+  <span class="pseudoF h1Fam"><h1 class="styleH1">Bienvenue sur votre Espace Membre, <?= $_SESSION['firstname'] ?>&nbsp;!</h1></span>
 <?php
 }
 ?>
@@ -43,7 +43,7 @@ else{
 
 
 
-    <article class="col-sm-3 avatarBox social" >
+    <article class="col-sm-3 avatarBox social newMargin" >
     <a href="#" data-toggle="modal" data-target="#exampleModal<?= $one_child['idChildren'] ?>" data-whatever="@mdo" class="photoChild2" style="background-image: url(<?= $one_child['img'] ?>);" title="Vous pouvez modifier la photo" ></a>
                   <div class="modal fade" id="exampleModal<?= $one_child['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -69,7 +69,7 @@ else{
     </article>
 
   
-    <article class="col-sm-7 social" >
+    <article class=" offset-sm-2 col-sm-7 offset-md-0 social" >
 
 <?php
 if($one_child["gender"]==1){

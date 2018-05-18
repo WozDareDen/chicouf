@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-lg-12 regContent" >
+    <div class="col-lg-12 regContent " >
         <h2 class="h2Home">Inscrivez-vous !</h2>
-        <form method="post" class="regForm offset-sm-3 col-sm-6" name="regForm" action="index.php?action=addUser">
+        <form method="post" class="regForm offset-sm-3 col-sm-6 mainPV" name="regForm" action="index.php?action=addUser">
             <div class="form-group  col-lg-12">
                 <label for="lastname">Nom</label><br />
                 <input type="text" id="lastname" class="champ" name="lastNameCo" required="valid" placeholder="entrez votre nom" >
