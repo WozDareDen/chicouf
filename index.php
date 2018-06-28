@@ -15,6 +15,10 @@ try{
         $family = $_POST['data'];
         $frontoffice->changeFamilyName($family);
     }
+    elseif(!(empty($_POST['action'])) && $_POST['action'] == "saveBlog"){
+        $memberBlog = $_POST['data'];
+        $frontoffice->saveBlog($memberBlog);
+    }
     if (isset($_GET['action'])) {
         //ADD NEW USER
         if ($_GET['action'] == 'addUser'){
@@ -251,6 +255,12 @@ try{
         // }
         elseif($_GET['action'] == 'test'){
             require 'app/Views/frontend/test3.php';
+        }
+        elseif($_GET['action'] == 'testProfile'){
+            $frontoffice->testProfile();
+        }
+        elseif($_GET['action'] == 'pageMenuBlog'){
+            require 'app/Views/frontend/testMenuBlog.php';
         }
         // BANN MEMBER
         elseif($_GET['action'] == 'bann'){

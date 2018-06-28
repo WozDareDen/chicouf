@@ -681,6 +681,27 @@ class FrontOffice
         $data = $data->fetchAll();
         echo json_encode($data);
     }
+
+    // TEST PROFILE
+    public function testProfile(){
+        $idMember = $_SESSION['id'];
+        $userManager = new \Src\Models\UserManager();
+        $recoverUs = $userManager -> userById($idMember);
+        if (isset($_SESSION['family'])) {
+            $idFamily = $_SESSION['family'];
+            $familyManager = new \Src\Models\FamilyManager();
+            $getFamilyName = $familyManager -> getFamilyName($idFamily);
+        }
+        require 'app/Views/frontend/test4.php';
+    }
+public function saveBlog($memberBlog){
+    $idMember = $_SESSION['id'];
+    $memBlog = json_decode($memberBlog, true);
+    $title = htmlspecialchars($memBlog['title']);
+    $content = htmlspecialchars($memBlog['content']);
+    $img = htmlspecialchars($memBlog['img']);
+}
+
 }
 
     // AJAX WEIGHTS

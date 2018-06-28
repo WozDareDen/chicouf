@@ -283,3 +283,30 @@ $.ajax({
         }
     });
 })
+
+
+
+let memberBlog = {
+    title:"",
+    content:"",
+    img:""
+}
+
+// SAVE BLOG FROM MEMBER DASHBOARD
+$('#idFormBlog').on('click',function(){
+    memberBlog.title = $('#blogTitle').val();
+    memberBlog.content = $('#blogContent').val();
+    memberBlog.img = $('#blogImg').val();
+    let memberBlogString = JSON.stringify(memberBlog);  
+$.ajax({  
+    url: "index.php",
+    data: {data:memberBlogString,action:"saveBlog"},
+    method: "POST",
+        success: function(data){          
+            location.href = "testProfile";
+        },
+        error: function(e){
+            console.log(e.message);
+        }
+    });
+})
