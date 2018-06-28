@@ -4,7 +4,7 @@
 require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
-<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;
+<style>body{background-image:url(app/Public/backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;
 overflow-x: hidden;}</style>
 <div class="container">
 <!--********BANNER************-->
@@ -140,12 +140,25 @@ foreach ($getUrl as $one_img) {
 <!--*************GRANDCHILDREN**************-->
     <h3 class="loco col-sm-12 titleFam" >Les petits-enfants</h3>
     <div class="row" > 
-<?php
-
-foreach($children as $one_child){
-?>
 <!--**************AVATAR********************-->
-        <section class="col-xs-4 col-sm-6 col-md-6 col-lg-3 cardFam" >
+<?php
+foreach($children as $one_child){
+if(count($children) == 1){
+?>
+
+        <section class="col-xs-4 col-sm-6 col-lg-6 cardFam" >
+
+<?php        
+}
+else{
+?>            
+
+            <section class="col-xs-4 col-sm-6 col-lg-3 cardFam" >
+
+<?php            
+}
+?>
+
             <div>
                 <article class="col-sm-6 col-md-9 avatarBox">
                     <a class="photoChild" data-toggle="collapse" style="background-image: url( <?=$one_child['img'] ?>)" href="#collapseExample<?= $one_child['idChildren']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample" ></a>

@@ -139,10 +139,10 @@ class FrontOffice
         $idFamily = $_SESSION['family'];
         $checkModo = $familyManager -> checkModo($idFamily);
         $checkModo2 = $checkModo->fetchAll();
-        if(count($checkModo2)>1) {
-            $_SESSION['modo'] = 0;
+        if(count($checkModo2)<2 && $_SESSION['modo'] == 1) {
+             throw new \Exception('vous devez d\'abord désigner un nouveau modérateur de votre Espace Famille');
         } else {
-            throw new \Exception('vous devez d\'abord désigner un nouveau modérateur de votre Espace Famille');
+            $_SESSION['modo'] = 0;
         }
         foreach ($checkChildren as $one_child) {
             $idChild = $one_child['idChildren'];
@@ -240,35 +240,42 @@ class FrontOffice
     public function belongFamily($idFamily, $mailCoParent)
     {
         $familyManager = new \Src\Models\FamilyManager();
-        $checkMember = $familyManager -> checkMember($idFamily)->fetchAll();
-        $checkMember2 = [];
-        foreach($checkMember as $one_member){
-            array_push($checkMember2,$one_member[0]);
-        }
-        if(in_array($mailCoParent,$checkMember2)){
-            throw new \Exception('ce membre fait déjà parti de votre famille');
+        $dataParent = $familyManager -> getParentId($mailCoParent); 
+        $dataParent2 = $dataParent->fetch();
+        $idMember = $dataParent2['idMember'];
+        $checkDB = $familyManager -> getFamilyId($idMember);
+        if($checkDB = false){
+            
+            throw new \Exception('Une famille est déjà enregistrée pour cet utilisateur');
         }
         else{
-            $dataParent = $familyManager -> getParentId($mailCoParent);
-            $dataParent2 = $dataParent->fetch();
-            if (!(empty($dataParent2))) {
-                $idMember = $dataParent2['idMember'];
-                $dataParent3 = $familyManager -> belongParent($idMember, $idFamily);
-                $dataParent4 = $familyManager -> getChildParent($idMember);
-                $dataParent6 = $dataParent4->fetchAll();
-                if (!(empty($dataParent6))) {
-                    foreach ($dataParent6 as $dataParent7) {
-                        $idChild = $dataParent7['idChildren'];
-                        $dataParent8 = $familyManager -> checkFamChild($idFamily, $idChild)->fetch();
-                        if (empty($dataParent8)) {
-                            $dataParent5 = $familyManager -> belongChild($idFamily, $idChild);
+            $checkMember = $familyManager -> checkMember($idFamily)->fetchAll();
+            $checkMember2 = [];
+            foreach($checkMember as $one_member){
+                array_push($checkMember2,$one_member[0]);
+            }
+            if(in_array($mailCoParent,$checkMember2)){
+                throw new \Exception('ce membre fait déjà parti de votre famille');
+            }
+            else{
+                if (!(empty($dataParent2))) {
+                    $dataParent3 = $familyManager -> belongParent($idMember, $idFamily);
+                    $dataParent4 = $familyManager -> getChildParent($idMember);
+                    $dataParent6 = $dataParent4->fetchAll();
+                    if (!(empty($dataParent6))) {
+                        foreach ($dataParent6 as $dataParent7) {
+                            $idChild = $dataParent7['idChildren'];
+                            $dataParent8 = $familyManager -> checkFamChild($idFamily, $idChild)->fetch();
+                            if (empty($dataParent8)) {
+                                $dataParent5 = $familyManager -> belongChild($idFamily, $idChild);
+                            }
                         }
                     }
+                } else {
+                    throw new \Exception('cet email ne figure pas dans notre base de données');
                 }
-            } else {
-                throw new \Exception('cet email ne figure pas dans notre base de données');
             }
-            header('Location: index.php?action=familyLink&id='.$idFamily);
+                header('Location: index.php?action=familyLink&id='.$idFamily);
         }
     }
     //**************************MODO*******************************
@@ -334,6 +341,22 @@ class FrontOffice
         $bann = $familyManager -> bannMember($idFamily, $idMember);
         header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
     }
+    // DELETE BANNER
+    public function deleteBanner($idFamily){
+        $familyManager = new \Src\Models\FamilyManager();
+        $banner = "app/Public/uploads/banners/banniere.png";
+        $deleteBanner = $familyManager -> eraseBanner($banner,$idFamily);
+        header('Location:index.php?action=familyLink&id='.$_SESSION['family']);
+    }
+    // CHANGE FAMILY NAME
+    public function changeFamilyName($family){
+        $idFamily = $_SESSION['family'];
+        $newFam = json_decode($family, true);
+        $newName = htmlspecialchars($newFam['contentB']);
+        $familyManager = new \Src\Models\FamilyManager();
+        $changeFamilyName = $familyManager -> updateFamName($newName,$idFamily);
+        return $family;
+    }
     //*******************USER CONTACT************************
     public function contact($usernameContact, $mailContact, $titleContact, $contentContact)
     {
@@ -354,14 +377,13 @@ class FrontOffice
         $lastname = htmlspecialchars($newChild['lastname']);
         $firstname = htmlspecialchars($newChild['firstname']);
         $birthdate = htmlspecialchars($newChild['birthdate']);
-        $parent1 = htmlspecialchars($newChild['parent1']);
+        $parent1 = $_SESSION['firstname'];
         if ($lastname === "" || $firstname === "" || $parent1 ==="") {
             require 'app/Views/frontend/createChild.php';
         } else {
             $bulk = htmlspecialchars($newChild['bulk']);
             $bulkDate = htmlspecialchars($newChild['bulkDate']);
             $gender = htmlspecialchars($newChild['gender']);
-            $parent2 = htmlspecialchars($newChild['parent2']);
             $favMeal = htmlspecialchars($newChild['favMeal']);
             $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
             $allergies = htmlspecialchars($newChild['allergies']);
@@ -369,7 +391,7 @@ class FrontOffice
             $username = $_SESSION['firstname'];
             $childManager = new \Src\Models\ChildManager();
             // identity
-            $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $parent2, $username, $bulk, $bulkDate);
+            $addNewChild = $childManager -> addChild($lastname, $firstname, $birthdate, $gender, $parent1, $username, $bulk, $bulkDate);
             $getIdChild = $childManager -> getMaxIdChild();
             $getIdChild = $getIdChild->fetch();
             $idChild = $getIdChild[0];
@@ -429,7 +451,7 @@ class FrontOffice
                 $idTTT = $getDateTTT['idTTT'];
                 // meds
                 $getAllMedsChild = $childManager ->getAllMedsChild($idTTT);
-                require 'App/Views/frontend/editChild.php';
+                require 'app/Views/frontend/editChild.php';
             } else {
                 throw new \Exception('Cette page n\'existe pas !');
             }
@@ -447,8 +469,6 @@ class FrontOffice
         $birthdate = htmlspecialchars($newChild['birthdate']);
         $bulk = htmlspecialchars($newChild['bulk']);
         $bulkDate = htmlspecialchars($newChild['bulkDate']);
-        $parent1 = htmlspecialchars($newChild['parent1']);
-        $parent2 = htmlspecialchars($newChild['parent2']);
         $favMeal = htmlspecialchars($newChild['favMeal']);
         $hatedMeal = htmlspecialchars($newChild['hatedMeal']);
         $startDate = htmlspecialchars($newChild['startDate']);
@@ -457,7 +477,7 @@ class FrontOffice
         $idChild = $newChild['idChild'];
         $username = $_SESSION['firstname'];
         // id, meals, allergy
-        $infos1 = $childManager -> updateOldChild($lastname, $firstname, $birthdate, $parent1, $parent2, $idChild, $username, $bulk, $bulkDate);
+        $infos1 = $childManager -> updateOldChild($lastname, $firstname, $birthdate, $idChild, $username, $bulk, $bulkDate);
         $infos2 = $childManager -> updateOldMeal($favMeal, $hatedMeal, $idChild);
         $upDateAllergy = $childManager -> updateOldAllergy($allergies, $idAllergy);
         // treatment
@@ -498,7 +518,9 @@ class FrontOffice
         $belong0 = $userManager -> getBelongParent($mailCo);
         $belong1 = $belong0->fetch();
         $idMember = $belong1['idMember'];
+        $firstname = $belong1['firstname'];
         $belong2 = $childManager -> addToMyParent($idChild, $idMember);
+        $belong3 = $childManager -> addFirstnameToChild($firstname,$idChild);
         $getFamilyId = $userManager -> getFamilyId($idMember)->fetch();
         if ($getFamilyId != null) {
             $idFamily = $getFamilyId['idFamily'];
@@ -539,7 +561,7 @@ class FrontOffice
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
             if ($check !== false) {
                 // Check file size
-                if ($_FILES["fileToUpload"]["size"] > 500000) {
+                if ($_FILES["fileToUpload"]["size"] > 1000000) {
                     throw new \Exception("Désolé, votre fichier est trop volumineux. ");
                     $uploadOk = 0;
                 }
@@ -580,7 +602,7 @@ class FrontOffice
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
             if ($check !== false) {
                 // Check file size
-                if ($_FILES["fileToUpload"]["size"] > 500000) {
+                if ($_FILES["fileToUpload"]["size"] > 1000000) {
                     throw new \Exception("Désolé, votre fichier est trop volumineux. ");
                     $uploadOk = 0;
                 }
@@ -621,7 +643,7 @@ class FrontOffice
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
             if ($check !== false) {
                 // Check file size
-                if ($_FILES["fileToUpload"]["size"] > 500000) {
+                if ($_FILES["fileToUpload"]["size"] > 1000000) {
                     throw new \Exception("Désolé, votre fichier est trop volumineux. ");
                     $uploadOk = 0;
                 }

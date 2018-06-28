@@ -2,7 +2,7 @@
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
 
-<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;}</style>
+<style>body{background-image:url(app/Public/backgrounds/backg-bois-rouge.jpg);background-attachment:fixed !important;background-repeat:no-repeat;}</style>
 <div class="container pageMV" >
 
 <?php
@@ -31,8 +31,8 @@ else{
   <?php
 if(empty($children)){
 ?>
-                <p>Vous pouvez dès à présent créer une fiche pour votre enfant, créer un Espace Famille ou en rejoindre un. Le modérateur de l'Espace Famille, c'est-à-dire celui qui est à l'origine de sa création, est le seul à pouvoir vous rattacher à cet Espace en renseignant votre email. Si dans votre entourage, aucun espace n'a été créé, soyez la première personne à le faire et devenez-en le modérateur. Rendez-vous sur l'Espace Famille, accessible dans la barre de navigation. </p>
-                <img id="logoTurn2" class="logTurn" src="app/Public/uploads/logo.png" alt="logo pleine page" title="logo pleine page" />
+                <p style="padding:10px;text-align:justify;">Vous pouvez dès à présent créer une fiche pour votre enfant, créer un Espace Famille ou en rejoindre un. Le modérateur de l'Espace Famille, c'est-à-dire celui qui est à l'origine de sa création, est le seul à pouvoir vous rattacher à cet Espace en renseignant votre email. Si dans votre entourage, aucun espace n'a été créé, soyez la première personne à le faire et devenez-en le modérateur. Rendez-vous sur l'Espace Famille, accessible dans la barre de navigation. </p>
+                <div class="col-sm-12"><img id="logoTurn2" class="logTurn col-sm-12" src="app/Public/uploads/logo.png" alt="logo pleine page" title="logo pleine page"/></div>
 <?php
 }
 else{
@@ -55,6 +55,8 @@ else{
                         </button>
                       </div>
                       <div class="modal-body">
+                      <p>Votre fichier doit obligatoirement être au format jpg, jpeg, png ou gif et ne pas dépasser 5Mo.
+                      </p>
                         <form action="index.php?action=uploadPic&idMember=<?= $_GET['idMember'] ?>&idChildren=<?= $one_child['idChildren'] ?>" method="post" enctype="multipart/form-data">
                             <fieldset>
                             <input type="file" name="fileToUpload" id="fileToUpload" /> 
@@ -89,8 +91,16 @@ else{
 ?>
 
                     <a href="index.php?action=goToUpdateChild&idChildren=<?= $one_child['idChildren']; ?>" class="social"><button type="button" style="background-color:#b80308;color:white;" class="btn">Modifier cette fiche enfant</button></a>
+
+<?php
+if(($one_child['parent2']) == NULL){
+?>
+
                     <button type="button" class="btn social btn-info" data-toggle="modal" data-target="#exampleModal2<?= $one_child['idChildren'] ?>">Rattacher un parent à cet enfant</button>
 
+<?php
+}
+?>
 <!--***************************Modal Child-to-Parent****************************-->
                     <div class="modal fade" id="exampleModal2<?= $one_child['idChildren'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
                       <div class="modal-dialog" role="document">

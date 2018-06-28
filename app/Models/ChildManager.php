@@ -36,7 +36,7 @@ class ChildManager extends Manager
         return $connex5;
     }
     //******************CHILD CREATION*********************
-    public function addChild($lastname,$firstname,$birthdate,$gender,$parent1,$parent2,$username,$bulk,$bulkDate){
+    public function addChild($lastname,$firstname,$birthdate,$gender,$parent1,$username,$bulk,$bulkDate){
         if($gender == 0){
             $img = 'app/Public/uploads/avatarBoy.png';
         }
@@ -44,8 +44,8 @@ class ChildManager extends Manager
             $img = 'app/Public/uploads/avatarGirl.png';
         }    
         $db = $this -> dbConnect();
-        $infos1 = $db->prepare('INSERT INTO children(surname,firstname,birthdate,gender,parent1,parent2,img,updateLog,updateUser,bulk,bulkDate) VALUES(?,?,?,?,?,?,?,NOW(),?,?,?)');
-        $infos1->execute(array($lastname,$firstname,$birthdate,$gender, $parent1,$parent2,$img,$username,$bulk,$bulkDate));
+        $infos1 = $db->prepare('INSERT INTO children(surname,firstname,birthdate,gender,parent1,img,updateLog,updateUser,bulk,bulkDate) VALUES(?,?,?,?,?,?,NOW(),?,?,?)');
+        $infos1->execute(array($lastname,$firstname,$birthdate,$gender, $parent1,$img,$username,$bulk,$bulkDate));
         return $infos1;
     }
     // FOOD
@@ -93,10 +93,10 @@ class ChildManager extends Manager
         return $newGlobalTTT;
     } 
     //*****************CHILD UPDATES**********************
-    public function updateOldChild($lastname,$firstname,$birthdate,$parent1,$parent2, $idChild, $username,$bulk,$bulkDate){
+    public function updateOldChild($lastname,$firstname,$birthdate,$idChild, $username,$bulk,$bulkDate){
         $db = $this -> dbConnect();
-        $infos1 = $db->prepare('UPDATE children SET surname=?, firstname=?, birthdate=?, parent1=? ,parent2=?, upDateLog=NOW(), upDateUser=?, bulk=?, bulkDate=? WHERE idChildren = ?');
-        $infos1->execute(array($lastname,$firstname,$birthdate,$parent1,$parent2,$username,$bulk, $bulkDate, $idChild));
+        $infos1 = $db->prepare('UPDATE children SET surname=?, firstname=?, birthdate=?, upDateLog=NOW(), upDateUser=?, bulk=?, bulkDate=? WHERE idChildren = ?');
+        $infos1->execute(array($lastname,$firstname,$birthdate,$username,$bulk, $bulkDate, $idChild));
         return $infos1;
     }
     // FOOD
@@ -124,6 +124,12 @@ class ChildManager extends Manager
         $db = $this -> dbConnect();
         $infos11 = $db->query('SELECT MAX(idChildren) FROM children');
         return $infos11;
+    }
+    public function addFirstnameToChild($firstname,$idChild){
+        $db = $this -> dbConnect();
+        $belong3 = $db->prepare('UPDATE children SET parent2 = ? WHERE idChildren = ?');
+        $belong3->execute(array($firstname,$idChild));
+        return $belong3;
     }
     //***************GET CHILD INFOS THROUGH CHILD******************
     public function getChild($idChild){

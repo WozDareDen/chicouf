@@ -2,7 +2,7 @@
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
 
-<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-repeat:no-repeat;background-attachment:fixed;}</style>
+<style>body{background-image:url(app/Public/backgrounds/backg-bois-rouge.jpg);background-repeat:no-repeat;background-attachment:fixed;}</style>
 <div class="container-fluid childMain ">
           <!--***********************MENU & SECTION********************-->
           <div class="row formCrEd mainPV">    
@@ -25,15 +25,15 @@ if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $n
           <div class="form-group col-lg-12">
             <h2 class="h2Create">IDENTITE</h2>
             <label for="lastname1Up">Nom</label><br />
-            <input type="text" id="lastname1Up" name="lastNameCo"  required="valid" cols="30" value="<?= $newData['surname']; ?>" /> 
+            <input type="text" id="lastname1Up" name="lastNameCo"  required cols="30" value="<?= $newData['surname']; ?>" /> 
           </div>
           <div class="form-group col-lg-12"> 
             <label for="firstname1Up">Prénom</label><br />
-            <input type="text" id="firstname1Up" name="firstNameCo" required="valid" cols="30" value="<?= $newData['firstname']; ?>" > 
+            <input type="text" id="firstname1Up" name="firstNameCo" required cols="30" value="<?= $newData['firstname']; ?>" > 
           </div>
           <div class="form-group col-lg-12">
             <label for="birthdateUp">Date de Naissance</label><br />
-            <input type="date" id="birthdateUp" name="birthDateCo" required="valid" cols="30" value="<?= $newData['birthdate']; ?>" >
+            <input type="date" id="birthdateUp" name="birthDateCo" required cols="30" value="<?= $newData['birthdate']; ?>" >
           </div>
           <div class="form-group col-lg-12">
             <label for="weightUp">Poids (en Kg)</label><br />
@@ -42,11 +42,11 @@ if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $n
           </div>
           <div class="form-group col-lg-12">
             <label for="parent1Up">Parent 1</label><br />
-            <input type="text" id="parent1Up" name="parent1Co" required="valid" cols="30" value="<?= $newData['parent1']; ?>">
+            <input type="text" id="parent1Up" name="parent1Co" required cols="30" value="<?= $newData['parent1']; ?>" disabled>
             </div>
           <div class="form-group col-lg-12 ">
             <label for="parent2Up">Parent 2</label><br />
-            <input type="text" id="parent2Up" name="parent2Co" cols="30" value="<?= $newData['parent2']; ?>" >
+            <input type="text" id="parent2Up" name="parent2Co" cols="30" value="<?= $newData['parent2']; ?>" disabled>
           </div><hr>
 
 <?php
@@ -126,7 +126,7 @@ $newConnex3 = $connex3->fetch()
               <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments"> 
             </div>
             <div class="form-group col-lg-12 startDate" >
-              <label for="startDate">Date de début du traitement</label>
+              <label for="startDate">Date de début du traitement<span class="fatRed">*</span></label>
               <input id="startDateCoUp" type="date" name="startDateCo" >
             </div><hr>
             
@@ -172,7 +172,7 @@ if($_SESSION['firstname'] == $newData['parent1'] || $_SESSION['firstname'] == $n
                 </button>
             </div>
             <div class="modal-body" style="color:black;">
-            <p>Toute l'équipe de Chicouf.fr souhaite une bonne santé à vous et votre enfant ! <br /></p>
+            <p>Toute l'équipe de Chicouf.com souhaite une bonne santé à vous et votre enfant ! <br /></p>
                  <form action="index.php?action=stopMeds" method="post">
                  
                  <div class="form-check">

@@ -4,7 +4,7 @@
 require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
-<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;}</style>
+<style>body{background-image:url(app/Public/backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;}</style>
 <div class="container">
 <!--********BANNER************-->
     <div class="bannerBox">
@@ -34,12 +34,19 @@ else{
             <div class="col-lg-12" style="text-align:center;">
                 <a href="#" data-toggle="modal" data-target="#modalAddParent" ><button class="btn kitDel" style="background-color:#a8e6cf;">Rattacher un membre</button></a>
                 <a href="#" data-toggle="modal" data-target="#modalAddBanner" ><button class="btn" style="background-color:#fdffab;">Modifier la bannière</button></a>
-                <a href="#" data-toggle="modal" data-target="#modalStopModo"><button class="btn" style="background-color:#ffd3b6;">Quitter la modération</button></a>
-                <a href="#" data-toggle="modal" data-target="#modalDeleteFamily"><button class="btn" style="background-color:#ffaaa5;">Supprimer cet Espace Famille</button></a>
+                <a href="index.php?action=deleteBanner&id=<?= $_SESSION['family'] ?>"  ><button class="btn" style="background-color:#ffd3b6;cursor:pointer;">Supprimer la bannière</button></a>
+                <a href="#" data-toggle="modal" data-target="#modalStopModo"><button class="btn" style="background-color:#ffaaa5;">Quitter la modération</button></a>
+                <a href="#" data-toggle="modal" data-target="#modalDeleteFamily"><button class="btn" style="background-color:#e7759a;">Supprimer cet Espace Famille</button></a>
             </div>
-            <div style="margin-top:20px;">
-                Cette famille est composée de <?= $dataModoFam[0] ?> utilisateurs et de <?= $dataModoFam2[0] ?> enfants.
-            </div>            
+            <div class="form-group col-lg-12">
+                <div style="margin-top:20px;">
+                    Cette famille est composée de <?= $dataModoFam[0] ?> utilisateurs et de <?= $dataModoFam2[0] ?> enfants.
+                </div>    
+                <div style="margin-top:20px;">               
+                    <label for="familyNameModo">Changer le nom de votre famille</label>
+                    <input type="text" id="familyNameModo" class="champ" name="familyNameModo" required="valid" value="<?=$dataF4['familyName'] ?>" ><button id="validNameModo" class="btn btn-info">OK</button>
+                </div>
+            </div>
             <div id="modoMemList">                
                 <table class="table table-hover tableModo table-sm-responsive">
                     <thead class="thead-light">

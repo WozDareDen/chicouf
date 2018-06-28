@@ -2,7 +2,7 @@
 <?php ob_start(); ?>
 <?php require 'templateNav.php' ?>
 
-<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-repeat:no-repeat;background-attachment:fixed;}</style>
+<style>body{background-image:url(app/Public/backgrounds/backg-bois-rouge.jpg);background-repeat:no-repeat;background-attachment:fixed;}</style>
 <div class="container-fluid childMain ">
   <div class="row formCrEd mainPV">    
         <!--***********************FORM********************-->
@@ -14,15 +14,15 @@
         <div class="form-group col-lg-12" >
           <h2 class="h2Create">IDENTITE</h2>
           <label for="lastname1">Nom<span class="fatRed">*</span></label><br />
-          <input type="text" id="lastname1" name="lastNameCo" required="valid" autofocus="on" cols="30"placeholder="entrez son nom" > 
+          <input type="text" id="lastname1" name="lastNameCo" required autofocus="on" cols="30"placeholder="entrez son nom" > 
         </div>
         <div class="form-group col-lg-12"> 
           <label for="firstname1">Prénom<span class="fatRed">*</span></label><br />
-          <input type="text" id="firstname1" name="firstNameCo" required="valid" cols="30" placeholder="entrez son prénom" > 
+          <input type="text" id="firstname1" name="firstNameCo" required cols="30" placeholder="entrez son prénom" > 
         </div>
         <div class="form-group col-lg-12">
           <label for="birthdate">Date de Naissance<span class="fatRed">*</span></label><br />
-          <input type="date" id="birthdate" name="birthDateCo" required="valid" cols="30" placeholder="entrez sa date de naissance">
+          <input type="date" id="birthdate" name="birthDateCo" required cols="30" placeholder="entrez sa date de naissance">
         </div>
         <div class="form-group col-lg-12">
           <label for="weightCo">Poids en Kg</label><br />
@@ -30,17 +30,9 @@
           <input type="date" id="weightDateCo" name="weightDateCo" />
         </div>
         <div class="form-group col-lg-12" id="gender">
-          <label for="sexe">Sexe de l'enfant<span class="fatRed">*</span></label><br />
+          <label for="genderCo">Sexe de l'enfant<span class="fatRed">*</span></label><br />
           <input type="radio" name="genderCo" class="genderCo" value="0" checked> Garçon<br>
           <input type="radio" name="genderCo" class="genderCo" value="1"> Fille<br>
-        </div>
-        <div class="form-group col-lg-12">
-          <label for="parent1">Parent 1<span class="fatRed">*</span></label><br />
-          <input type="text" id="parent1" name="parent1Co" required="valid" cols="30" placeholder="nom du 1er parent">
-          </div>
-        <div class="form-group col-lg-12 ">
-          <label for="parent2">Parent 2</label><br />
-          <input type="text" id="parent2" name="parent2Co" cols="30" placeholder="nom du 2ème parent" >
         </div><hr>
         <!--***********************FOOD********************-->
         <div class="form-group col-lg-12 ">
@@ -58,8 +50,8 @@
             <input id="myInput" type="text" name="medsCo" placeholder="liste des médicaments">
           </div>
           <div class="form-group col-lg-12 startDate" >
-            <label for="startDate">Date de début du traitement</label>
-            <input id="startDateCo" type="date" name="startDateCo" >
+            <label for="startDate">Date de début du traitement<span class="fatRed">*</span></label>
+            <input id="startDateCo" type="date" name="startDateCo">
           </div><hr>
         <!--***********************ALLERGIES********************-->
           <div class="form-group col-lg-12 ">
@@ -78,6 +70,5 @@
 <?php $content = ob_get_clean(); ?>
 <!--template.php-->
 <?php require 'templateHeadScripts.php'; ?>
-
 
 

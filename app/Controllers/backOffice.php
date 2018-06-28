@@ -1,7 +1,7 @@
 <?php
 
 namespace Src\Controllers;
-
+ini_set('display_errors', 'On');
 class BackOffice{
     function goToDashboard(){
         $adminManager = new \Src\Models\AdminManager();
@@ -38,8 +38,7 @@ class BackOffice{
            array_push($nbMembers,  $adminManager -> nbMembers($idFamily)->fetch())  ;
            array_push($nbChildren,  $adminManager -> nbChildren($idFamily)->fetch())  ;                   
         }
-        $famAll = $adminManager -> familyStats();
-        
+        $famAll = $adminManager -> familyStats();     
         require 'app/Views/backend/familiesView.php';
     }
     function deleteMember($idBackMember){

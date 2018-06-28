@@ -4,7 +4,7 @@
 require 'templateNav.php'
 ?>
 <!--*********MAIN*************-->
-<style>body{background-image:url(app/Public/Backgrounds/backg-bois-rouge.jpg);background-attachment:fixed;background-repeat:no-repeat;}</style>
+<style>body{background-image:url(app/Public/backgrounds/backg-bois-rouge.jpg);background-attachment:fixed !important;background-repeat:no-repeat;}</style>
 <div class="container" >
 <!--********BANNER************-->
     <div class="bannerBox">
@@ -43,7 +43,7 @@ if(isset($getFamilyName['familyName'])==true){
 if($_SESSION['parenthood'] == 0){
 ?>     
 
-       <div class="lead loco alert alert-success alert-dismissible fade show"  data-dismiss="alert" role="alert" title="Faîtes disparaitre ce message en cliquant dessus, il réapparaitra la prochaine fois que vous viendrez sur cette page ;)">
+       <div class="lead loco alert alert-success alert-dismissible fade show col-lg-10"  data-dismiss="alert" role="alert" title="Faîtes disparaitre ce message en cliquant dessus, il réapparaitra la prochaine fois que vous viendrez sur cette page ;)">
 
        <p>L'Espace Famille permet de regrouper tous les enfants, parents et grand-parents. Deux options s'offrent à vous : <br /> -créer cet Espace ou en rejoindre un existant.</p>
        <p> Le modérateur de l'Espace Famille, c'est-à-dire celui qui est à l'origine de sa création, est le seul à pouvoir vous rattacher à cet Espace en renseignant votre email. Si dans votre entourage, aucun espace n'a été créé, soyez la première personne à le faire et devenez-en le modérateur. Rendez-vous sur l'Espace Famille, accessible depuis la barre de navigation.</p>
@@ -67,6 +67,8 @@ if($_SESSION['parenthood'] == 0){
                         </button>
                     </div>
                     <div class="modal-body">
+                        <p>Votre fichier doit obligatoirement être au format jpg, jpeg, png ou gif et ne pas dépasser 5Mo.
+                        </p>
                         <form action="index.php?action=uploadAva&idMember=<?= $modif['idMember'] ?>" method="post" enctype="multipart/form-data">
                             <fieldset>
                             <input type="file" name="fileToUpload" id="fileToUpload" /> 
@@ -107,7 +109,6 @@ else{
 <?php
 }
 ?>                                     
-                    
                     
                     <label for="mail" class="label1">Email</label>
                         <input type="email" id="mailCo" name="mailCo" value="<?= $modif['mail'] ?>"><br />

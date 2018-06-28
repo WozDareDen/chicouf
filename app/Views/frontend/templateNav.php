@@ -62,6 +62,7 @@ if($_SESSION['modo'] >0){
                     <div class="dropdown-divider"></div>
                     <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddParent" >Rattacher un membre <span class="eraseThD">à votre famille</span></a>
                     <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddBanner" >Modifier la bannière</a>
+                    <a href="index.php?action=deleteBanner&id=<?= $_SESSION['family'] ?>" class="btn dropdown-item kitDel">Supprimer la bannière</a>
                     <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddModo" >Ajouter un modérateur</a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="btn dropdown-item kitDel4" data-toggle="modal" data-target="#modalStopModo">Quitter la modération</a>
@@ -152,6 +153,29 @@ elseif($_SESSION['parenthood'] == 0){
                 <div class="nav-link contactMouse" data-toggle="modal" data-target="#ModalContact">Nous contacter</div>
             </li>
         </ul>
+        <?php
+if($_SESSION['modo'] >0){
+?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Modération</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                    <a href="index.php?action=goToModo&id=<?=$_SESSION['family'] ?>" class="btn dropdown-item kitDel" id="modoFamList" >Tableau de bord</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddParent" >Rattacher un membre <span class="eraseThD">à votre famille</span></a>
+                    <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddBanner" >Modifier la bannière</a>
+                    <a href="index.php?action=deleteBanner&id=<?= $_SESSION['family'] ?>" class="btn dropdown-item kitDel">Supprimer la bannière</a>
+                    <a href="#" class="btn dropdown-item kitDel" data-toggle="modal" data-target="#modalAddModo" >Ajouter un modérateur</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="btn dropdown-item kitDel4" data-toggle="modal" data-target="#modalStopModo">Quitter la modération</a>
+                    <a href="#" class="btn dropdown-item kitDel4" data-toggle="modal" data-target="#modalBann">Bannir un membre<span class="eraseThD"> de votre famille</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="btn dropdown-item kitDel5" data-toggle="modal" data-target="#modalDeleteFamily">Supprimer votre Espace Famille</a>
+                </div>
+            </li>
+
+<?php
+}
+?>        
         <div class="form-inline my-2 my-lg-0 iconeSpan">
 
 <?php 
@@ -275,7 +299,7 @@ else{
       <p>Cette action entrainera la <strong>suppression définitive</strong> de cet Espace Famille. Par la suite, vous pourrez recréer un nouvel Espace Famille.</p>
         <form action="index.php?action=deleteFamily&id=<?= $_SESSION['family'] ?>" method="post">
           <div class="form-check">
-          <input type="checkbox" name="choixDelCo" required="valid" /> Je confirme vouloir supprimer cet Espace Famille.</br>
+          <input type="checkbox" name="choixDelCo" required /> Je confirme vouloir supprimer cet Espace Famille.</br>
           </div>
           <button type="submit" class="btn btn-outline-danger">Valider</button>
         </form>
@@ -284,11 +308,11 @@ else{
   </div>
 </div>
 <!-- MODAL ADD PARENT TO FAMILY-->
-<div class="modal fade" id="modalAddParent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+<div class="modal fade" id="modalAddParent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header padiday2">
-                <h5 class="modal-title" style="color:black;">Rattacher un utilisateur à cet Espace Famille</h5>
+                <h5 class="modal-title" id="exampleModalLabel2" style="color:black;">Rattacher un utilisateur à cet Espace Famille</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span >&times;</span>
                 </button>
@@ -298,7 +322,7 @@ else{
                 <form action="index.php?action=belongParent" method="post">
                     <div class="form-group">
                         <input type="hidden" name="idCoFamily" value="<?= $_SESSION['family'] ?>">
-                        <input type="mail" class="form-control" id="mailCoParent" name="mailCoParent" placeholder="Entrez son mail">
+                        <input type="email" class="form-control" id="mailCoParent" name="mailCoParent" placeholder="Entrez son mail">
                     </div>
                     <button type="submit" class="btn btn-outline-info">Valider</button>
                 </form>
@@ -307,16 +331,18 @@ else{
     </div>
 </div>
 <!-- MODAL ADD BANNER -->
-<div class="modal fade" id="modalAddBanner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+<div class="modal fade" id="modalAddBanner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header padiday2">
-                <h5 class="modal-title" style="color:black;">Modifier la bannière de cet Espace Famille</h5>
+                <h5 class="modal-title" id="exampleModalLabel3" style="color:black;">Modifier la bannière de cet Espace Famille</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span >&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+                <p>Votre fichier doit obligatoirement être au format jpg, jpeg, png ou gif et ne pas dépasser 5Mo.
+                </p>
                 <form action="index.php?action=uploadBanner&idFamily=<?= $_GET['id'] ?>" method="post" enctype="multipart/form-data">
                     <fieldset>
                         <input type="hidden" name="idFamilyCo" value="<?= $dataF6['idFamily'] ?>" />
@@ -330,10 +356,11 @@ else{
     </div>
 </div>
 <!-- MODAL ADD MODO -->
-<div class="modal fade" id="modalAddModo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
+<div class="modal fade" id="modalAddModo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header padiday2">
+                <h5 class="modal-title" id="exampleModalLabel4" style="color:black;">Modifier la bannière de cet Espace Famille</h5>
                 <h5 class="modal-title" style="color:black;">Ajouter un Modérateur à cet Espace Famille</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span >&times;</span>
@@ -343,7 +370,7 @@ else{
                 <p>Pour ajouter un modérateur à cet Espace Famille, il vous suffit de renseigner son adresse mail.<br />Ainsi cette personne disposera des mêmes droits que vous au sein de cet Espace.</p>
                 <form action="index.php?action=newModo" method="post">
                     <div class="form-group">
-                        <input type="mail" class="form-control" id="mailCoModo" name="mailCoModo" placeholder="Entrez son mail">
+                        <input type="email" class="form-control" id="mailCoModo" name="mailCoModo" placeholder="Entrez son mail">
                     </div>
                     <button type="submit" class="btn btn-outline-info">Valider</button>
                 </form>
@@ -356,6 +383,7 @@ else{
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header padiday">
+                <h5 class="modal-title" id="exampleModalLabel6" style="color:black;">Modifier la bannière de cet Espace Famille</h5>
                 <h5 class="modal-title" style="color:black;">Quitter la modération</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span >&times;</span>
@@ -375,10 +403,11 @@ else{
     </div>
 </div>
 <!-- MODAL BANN MEMBER-->
-<div class="modal fade" id="modalBann" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6" >
+<div class="modal fade" id="modalBann" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel7" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header padiday">
+                <h5 class="modal-title" id="exampleModalLabel7" style="color:black;">Modifier la bannière de cet Espace Famille</h5>
                 <h5 class="modal-title" style="color:black;">Bannir un membre</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span >&times;</span>
@@ -388,7 +417,7 @@ else{
                 <p>En validant, vous retirez un membre de votre Espace Famille. Cela n'aura pas pour effet de supprimer son compte. Cette action n'est pas irreversible, vous pourrez à tout moment, rattacher de nouveau ce membre à votre Espace. <br /></p>
                  <form action="index.php?action=bann" method="post">
                  <div class="form-group">
-                        <input type="mail" class="form-control" id="mailCoModo" name="mailCoModo" placeholder="Entrez son mail" required>
+                        <input type="email" class="form-control" id="mailCoModo" name="mailCoModo" placeholder="Entrez son mail" required>
                     </div>
                  <div class="form-check">
                     <input type="checkbox" name="choixDelCo" required /> Je confirme supprimer ce membre de mon Espace Famille.</br>
@@ -400,11 +429,11 @@ else{
     </div>
 </div>
 <!--************MODAL CONTACT********************-->
-<div class="modal fade" id="ModalContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel8" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header padiday2">
-        <h5 class="modal-title" id="exampleModalLabel">Fenêtre de contact</h5>
+        <h5 class="modal-title" id="exampleModalLabel8">Fenêtre de contact</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -415,14 +444,14 @@ else{
                 <input type="text" class="form-control" id="usernameContact" name="usernameContact" placeholder="Entrez votre nom" required />
             </div>          
             <div class="form-group">
-                <input type="mail" class="form-control" id="mailContact" name="mailContact" placeholder="votre email"  required />
+                <input type="email" class="form-control" id="mailContact" name="mailContact" placeholder="votre email"  required />
                 <small id="emailHelp" class="form-text text-muted">Nous ne partagerons votre email avec aucun tiers.</small>
             </div>
             <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Précisez le sujet</label>
                     </div>
-                    <select required class="custom-select" name="titleContact" id="inputGroupSelect01"  required />
+                    <select required class="custom-select" name="titleContact" id="inputGroupSelect01" >
                         <option value="0">fonctionnement du site</option>
                         <option value="1">questions relatives à la sécurité des données</option>
                         <option value="2">autre</option>
@@ -430,7 +459,7 @@ else{
                 </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Message</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" name='contentContact' rows="6"  required /></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name='contentContact' rows="6"  required ></textarea>
             </div>
           <button type="submit" class="btn btn-outline-info ">Valider</button>
         </form>

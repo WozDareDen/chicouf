@@ -46,7 +46,7 @@ class UserManager extends Manager
     // GET IDMEMBER THROUGH MAIL
     public function getBelongParent($mailCo){
         $db = $this -> dbConnect();
-        $belong0 = $db->prepare('SELECT idMember,modo FROM members WHERE mail = ?');
+        $belong0 = $db->prepare('SELECT idMember,modo,firstname FROM members WHERE mail = ?');
         $belong0->execute(array($mailCo));
         return $belong0;
     }

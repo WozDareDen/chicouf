@@ -185,6 +185,13 @@ class FamilyManager extends Manager{
         $insertPicture->execute(array($target_file, intval($idFamily)));
         return $insertPicture;
     }
+    // DELETE BANNER
+    public function eraseBanner($banner,$idFamily){
+        $db = $this -> dbConnect();
+        $deleteBanner = $db->prepare('UPDATE family SET banner=? WHERE idFamily=?');
+        $deleteBanner->execute(array($banner,$idFamily));
+        return $deleteBanner;
+    }
     // MODO STATS
     public function countUsers($idFamily){
         $db = $this -> dbConnect();
@@ -198,4 +205,17 @@ class FamilyManager extends Manager{
         $dataModoFam2->execute(array($idFamily));
         return $dataModoFam2;
     }
+    public function updateFamName($newName,$idFamily){
+        $db = $this -> dbConnect();
+        $changeFamilyName = $db->prepare('UPDATE family SET familyName = ? WHERE idFamily = ?');
+        $changeFamilyName->execute(array($newName,$idFamily));
+        return $changeFamilyName;
+    }
+    // public function getFamNames($idMember){
+    //     $db = $this -> dbConnect();
+    //     $getFamNames = $db->prepare('SELECT familyName from family INNER JOIN member_family ON member_family.idFamily = family.idFamily WHERE idMember=?');
+    //     $getFamNames->execute(array($idMember));
+    //     return $getFamNames;
+    // }
+
 }

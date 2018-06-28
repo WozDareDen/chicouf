@@ -31,17 +31,27 @@ $('#regFormPass2').on('keyup',function(){
         $('#message').html('Les mots de passe ne correspondent pas').css('color', 'red');
 });
     var $mail = $('#mail');
+    // $mail.keyup(function () {
+    //     if ($mail[0].value.match(/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/)) {
+    //         document.getElementById('popMail').style.display = 'none';
+    //     }else {
+    //         document.getElementById('popMail').style.display = 'block';
+    //         $(this).css({ 
+    //             borderColor: 'red',
+    //             color: 'red'
+    //         });
+    //     }
+    // });
     $mail.keyup(function () {
-        if ($mail[0].value.match(/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/)) {
-            console.log('mailTrue');
-            document.getElementById('popMail').style.display = 'none';
-        }else {
-            console.log('mailfalse');
+        if ($mail[0].value.match(/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/) == false) {
             document.getElementById('popMail').style.display = 'block';
-            $(this).css({ // on rend le champ rouge
+            $(this).css({ 
                 borderColor: 'red',
                 color: 'red'
             });
+        }else {
+             document.getElementById('popMail').style.display = 'none';
+            
         }
     });
 });
@@ -90,18 +100,16 @@ $('#myInput').length && $('#myInput').autocomplete({
         });
         $( ul ).find( "li:odd" ).addClass( "odd" );
       },
-      select(e, i) {
-          var item = current_list_data.find(function(d) {
-            return d.title === i.label;
-        }), nb_current_meds = $('.meds_container');
+    select: function(event,ui) {
+        nb_current_meds = $('.meds_container');
         var formGroupMeds = $('<div class="meds_container"><div class="form-group col-lg-12"><label for="meds">Médicament</label></div></div>');
         var divMedsCo = $('<div class="medsCo"></div>');
         var inputMedsCo = $('<input type="search" disabled />');
         var inputId = $('#myInput').val();
-        $(inputMedsCo).attr('id', item.value);
-        $(inputMedsCo).attr('name',item.label);
-        $(inputMedsCo).val(item.label);
-       
+        $(inputMedsCo).attr('id', ui.item.value);
+        $(inputMedsCo).attr('name',ui.item.label);
+        $(inputMedsCo).val(ui.item.label);
+        
         var formGroupPoso = $('<div class="form-group col-lg-12><label for="poso">Fréquences/prises</label></div></div>')
         var divPoso = $('<div class="posoCo"></div>')
         var textareaPoso = $('<br /><textarea rows="2" cols="30" ></textarea>');    
@@ -151,11 +159,9 @@ $('#submitChildren').on('click',function(){
     NewChildren.bulk = $('#weightCo').val();
     NewChildren.bulkDate = $('#weightDateCo').val();
     NewChildren.gender = $('input[name=genderCo]:checked',"#gender").val();
-    NewChildren.parent1 = $('#parent1').val();
     NewChildren.allergies = $('#allergies').val();  
     NewChildren.favMeal = $('#favoriteMeal').val();
     NewChildren.hatedMeal = $('#hatedMeal').val();
-    NewChildren.parent2 = $('#parent2').val();
     NewChildren.startDate = $('#startDateCo').val();
 
     NewChildren.meds = [];
@@ -199,12 +205,10 @@ $('#submitChildren2').on('click',function(){
     NewChildren2.birthdate = $('#birthdateUp').val();
     NewChildren2.bulk = $('#weightUp').val();
     NewChildren2.bulkDate = $('#weightDateUp').val();
-    NewChildren2.parent1 = $('#parent1Up').val();
     NewChildren2.idAllergy = $('#idAllergyCoUp').val();
     NewChildren2.allergies = $('#allergiesUp').val();  
     NewChildren2.favMeal = $('#favoriteMealUp').val();
     NewChildren2.hatedMeal = $('#hatedMealUp').val();
-    NewChildren2.parent2 = $('#parent2Up').val();
     NewChildren2.startDate = $('#startDateCoUp').val();
     NewChildren2.meds = [];
     var posoPoso = $('.posoCo');
@@ -252,6 +256,27 @@ $.ajax({
     method: "POST",
         success: function(data){          
             location.href = "admin.php?action=goToWriteStuff";
+        },
+        error: function(e){
+            console.log(e.message);
+        }
+    });
+})
+
+// OBJECT FAMILY NAME
+var familyName = {
+    contentB: ""
+}
+// GET VALUE FROM MODO-FORM
+$('#validNameModo').on('click',function(){
+    familyName.contentB = $('#familyNameModo').val();
+    var familyString = JSON.stringify(familyName);  
+$.ajax({  
+    url: "index.php",
+    data: {data:familyString,action:"changeFamilyName"},
+    method: "POST",
+        success: function(data){          
+            location.href = "index.php";
         },
         error: function(e){
             console.log(e.message);

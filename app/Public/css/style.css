@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
-
+html{
+    overflow-x: hidden !important;
+}
 body{
     font-family: 'Roboto', sans-serif;
     background-color: #dbe7f7;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+    overflow-x: hidden !important;
 }
 h5{
     color:black;
@@ -16,9 +21,13 @@ li{
     -moz-animation: cssName 2s 1 ease forwards;
     -o-animation: cssName 2s 1 ease forwards;
     } 
+    @-webkit-keyframes cssName{
+        0% {-webkit-transform: scale(0);transform: scale(0);}         
+        100% {-webkit-transform: scale(1);transform: scale(1);}
+    } 
     @keyframes cssName{
-        0% {transform: scale(0);}         
-        100% {transform: scale(1);}
+        0% {-webkit-transform: scale(0);transform: scale(0);}         
+        100% {-webkit-transform: scale(1);transform: scale(1);}
     } 
 .photoChild:hover, .photoChild2:hover{
     border:2px solid black;
@@ -35,7 +44,8 @@ li{
     background-color:white;
     padding:30px 0;
     border-radius:30px;
-    box-shadow:  0 0 30px #212121;
+    -webkit-box-shadow:  0 0 30px #212121;
+            box-shadow:  0 0 30px #212121;
 }
 .avatarBox a, .photoChild2{
     margin-top:10px;
@@ -79,7 +89,8 @@ li{
 .cardFamX{
     border:8px solid #f4d3b8;
     border-radius: 20px !important;
-    box-shadow: 6px 6px 20px #212121;
+    -webkit-box-shadow: 6px 6px 20px #212121;
+            box-shadow: 6px 6px 20px #212121;
     background-color: white;
 }
 .cardXX{
@@ -90,7 +101,8 @@ li{
 }
 .cardFamX:hover{
     border:8px solid #89654f;
-    box-shadow: 6px 6px 20px #212121;
+    -webkit-box-shadow: 6px 6px 20px #212121;
+            box-shadow: 6px 6px 20px #212121;
 }
 .cardFamX h2{
     margin-top:10px;
@@ -141,6 +153,8 @@ li{
 /*------------------popup password and mail-------------------------*/
 #pop{
     display: none;
+    width: -webkit-max-content;
+    width: -moz-max-content;
     width: max-content;
 }
 #popMail{
@@ -184,7 +198,6 @@ footer{
 .address li a:hover , .menu li a:hover{
     color: #da3e44;
     -webkit-transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
     -o-transition: all 1s ease-in-out;
     transition: all 1s ease-in-out;
 }
@@ -192,7 +205,6 @@ footer{
     color: #da3e44;
     cursor: pointer;
     -webkit-transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
     -o-transition: all 1s ease-in-out;
     transition: all 1s ease-in-out;
 }
@@ -225,6 +237,15 @@ a.dropdown-item:hover{
 .photoChild:hover{
     background-color: white;
 }
+@-webkit-keyframes blurFadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+		text-shadow: 0px 0px 50px #fff;
+	}
+}
 @keyframes blurFadeIn {
 	0% {
 		opacity: 0;
@@ -234,28 +255,53 @@ a.dropdown-item:hover{
 		text-shadow: 0px 0px 50px #fff;
 	}
 }
-@keyframes blurFadeInOut {
+@-webkit-keyframes blurFadeInOut {
 	0% {
 		opacity: 0;
 		text-shadow: 0px 0px 60px #fff;
-		transform: scale(1.3);
+		-webkit-transform: scale(1.3);
+		        transform: scale(1.3);
 	}
 	50% {
 		opacity: 0.5;
 		text-shadow: 0px 0px 20px #fff;
-		transform: scale(1.1);
+		-webkit-transform: scale(1.1);
+		        transform: scale(1.1);
 	}
 	100% {
 		opacity: 1;
 		text-shadow: 0px 0px 1px #fff;
-		transform: scale(1);
+		-webkit-transform: scale(1);
+		        transform: scale(1);
+	}
+}
+@keyframes blurFadeInOut {
+	0% {
+		opacity: 0;
+		text-shadow: 0px 0px 60px #fff;
+		-webkit-transform: scale(1.3);
+		        transform: scale(1.3);
+	}
+	50% {
+		opacity: 0.5;
+		text-shadow: 0px 0px 20px #fff;
+		-webkit-transform: scale(1.1);
+		        transform: scale(1.1);
+	}
+	100% {
+		opacity: 1;
+		text-shadow: 0px 0px 1px #fff;
+		-webkit-transform: scale(1);
+		        transform: scale(1);
 	}
 }
 .bannerFamily{
-    animation:blurFadeIn 0.5s ease-in 0.3s backwards;
+    -webkit-animation:blurFadeIn 0.5s ease-in 0.3s backwards;
+            animation:blurFadeIn 0.5s ease-in 0.3s backwards;
 }
 .frame5 span{
-    animation: blurFadeInOut 0.5s ease-in backwards;
+    -webkit-animation: blurFadeInOut 0.5s ease-in backwards;
+            animation: blurFadeInOut 0.5s ease-in backwards;
     font-family: 'Caveat Brush', cursive;
     color: #056c8e;
 }
@@ -270,7 +316,8 @@ a.dropdown-item:hover{
     margin-top: 30px;
 }
 .frame6 span{
-    animation: blurFadeInOut 0.5s ease-in 0.3s backwards;
+    -webkit-animation: blurFadeInOut 0.5s ease-in 0.3s backwards;
+            animation: blurFadeInOut 0.5s ease-in 0.3s backwards;
     font-family: 'Caveat Brush', cursive;
     color: #056c8e;
 }
@@ -278,28 +325,49 @@ a.dropdown-item:hover{
     font-family: 'Caveat Brush', cursive;
 }
 .avatarBox .photoChild, .loco{
-    animation: blurFadeIn 0.5s ease-in 0.3s backwards;
+    -webkit-animation: blurFadeIn 0.5s ease-in 0.3s backwards;
+            animation: blurFadeIn 0.5s ease-in 0.3s backwards;
 }
 .avatarBox .photoChild:nth-child(2){
-    animation: blurFadeIn 1s ease-in 0.7s backwards;
+    -webkit-animation: blurFadeIn 1s ease-in 0.7s backwards;
+            animation: blurFadeIn 1s ease-in 0.7s backwards;
 }
 .avatarBox .photoChild:nth-child(3){
-    animation: blurFadeIn 1s ease-in 0.8s backwards;
+    -webkit-animation: blurFadeIn 1s ease-in 0.8s backwards;
+            animation: blurFadeIn 1s ease-in 0.8s backwards;
 }
 .avatarBox .photoChild:nth-child(4){
-    animation: blurFadeIn 1s ease-in 0.9s backwards;
+    -webkit-animation: blurFadeIn 1s ease-in 0.9s backwards;
+            animation: blurFadeIn 1s ease-in 0.9s backwards;
 }
 .avatarBox .photoChild:nth-child(5){
-    animation: blurFadeIn 1s ease-in 1s backwards;
+    -webkit-animation: blurFadeIn 1s ease-in 1s backwards;
+            animation: blurFadeIn 1s ease-in 1s backwards;
 }
 
 /*--------MEMBERVIEW---------*/
 #logoTurn{
-    transform-origin: 50% 50%;
+    -webkit-transform-origin: 50% 50%;
+        -ms-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
     animation: rotating 3s linear infinite;
     -webkit-animation: rotating 3s linear infinite;
     -moz-animation: rotating 3s linear infinite;
     -o-animation: rotating 3s linear infinite;
+}
+@-webkit-keyframes rotating {
+    from{
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+    }
 }
 @keyframes rotating {
     from{
@@ -321,7 +389,8 @@ a.dropdown-item:hover{
     -moz-animation: rotating 3s linear 2;  
 }
 #logoTurn2:hover{
-    animation-play-state: paused;
+    -webkit-animation-play-state: paused;
+            animation-play-state: paused;
 }
 
 .writings{
@@ -351,9 +420,24 @@ a.dropdown-item:hover{
 }
 /*------DELETE FAMILY MODAL---------*/
 .padiday{
+    background: -webkit-linear-gradient(330deg, #da3e44, #AA0044);
+    background: -o-linear-gradient(330deg, #da3e44, #AA0044);
     background: linear-gradient(120deg, #da3e44, #AA0044);
     background-size: 200% 200%;
-    animation: warningModal 3s ease infinite;
+    -webkit-animation: warningModal 3s ease infinite;
+            animation: warningModal 3s ease infinite;
+}
+
+@-webkit-keyframes warningModal{
+    0%{background-position: 0% 50%;
+
+    }
+    50%{background-position: 100% 50%;
+
+    }
+    100%{background-position: 0% 50%;
+
+    }
 }
 
 @keyframes warningModal{
@@ -369,9 +453,24 @@ a.dropdown-item:hover{
 }
 /*------ADD MODO MODAL---------*/
 .padiday2{
+    background: -webkit-linear-gradient(330deg, #0272a1, #17a2b8);
+    background: -o-linear-gradient(330deg, #0272a1, #17a2b8);
     background: linear-gradient(120deg, #0272a1, #17a2b8);
     background-size: 300% 300%;
-    animation: warningModal2 3s ease infinite;
+    -webkit-animation: warningModal2 3s ease infinite;
+            animation: warningModal2 3s ease infinite;
+}
+
+@-webkit-keyframes warningModal2{
+    0%{background-position: 0% 50%;
+
+    }
+    50%{background-position: 100% 50%;
+
+    }
+    100%{background-position: 0% 50%;
+
+    }
 }
 
 @keyframes warningModal2{
@@ -428,8 +527,12 @@ a.dropdown-item:hover{
 .folio1, .folio2{
     margin-top:100px;
     height: 300px;
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 .spanDashX{
     font-weight: bold;
@@ -451,9 +554,16 @@ a.dropdown-item:hover{
 }
 /*----------AUTOCOMPLETE--------*/
 .childMain{
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
-    flex-direction: column; 
-    align-items:center;   
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; 
+    -webkit-box-align:center; 
+        -ms-flex-align:center; 
+            align-items:center;   
 
 
   }
@@ -497,8 +607,13 @@ a.dropdown-item:hover{
     text-decoration: underline;
 }
 .errorMsg{
-    animation: errorAnim 1s infinite;
+    -webkit-animation: errorAnim 1s infinite;
+            animation: errorAnim 1s infinite;
     text-align: center;
+}
+@-webkit-keyframes errorAnim{
+    0%{ opacity: 0; }
+    100%{opacity:1;}
 }
 @keyframes errorAnim{
     0%{ opacity: 0; }
@@ -530,13 +645,16 @@ a.dropdown-item:hover{
     padding:30px 0;
     border-top: 8px solid #f4d3b8;
     border-radius:30px;
-    box-shadow:  0 0 30px #212121;
+    -webkit-box-shadow:  0 0 30px #212121;
+            box-shadow:  0 0 30px #212121;
     margin-top: 30px;
 }
 .thead-light{
     border-bottom: 3px solid #85562b;
 }
 #modoMemList{
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
 }
 .nameChild{
@@ -561,7 +679,8 @@ a.dropdown-item:hover{
     padding:30px 0;
     border: 8px solid #f4d3b8;
     border-radius:30px;
-    box-shadow:  0 0 30px #212121;
+    -webkit-box-shadow:  0 0 30px #212121;
+            box-shadow:  0 0 30px #212121;
 }
 .h1Create{
     font-size:3rem;
@@ -626,12 +745,11 @@ input,textarea{
     #mask{
         margin-left:-10px;
     }
-}
-@media screen and (max-width: 568px){
-    body{
-        overflow-x: hidden;
+    .h1Home{
+        font-size: 2.5rem;
     }
 }
+
 @media screen and (min-width: 593px){
     .jumbo,.jumbo2{
         position: relative;
@@ -645,6 +763,12 @@ input,textarea{
         font-size:12px;
         position: absolute;
         margin-left:10%;        
+    }
+    .h1Home{
+            font-size: 2.5rem;
+        }
+    .reduceTitle{
+        font-size:2.5rem !important;
     }
     .yop{
         display: none;
@@ -675,12 +799,22 @@ input,textarea{
         display: none;
     }
     #accordion{
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
     }
     .msgR{
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
     }
     .zipThead{
         color:#c85d7b;
@@ -699,8 +833,13 @@ input,textarea{
         font-size: 1.5rem;
     }
     .tableModo{
+       display:-webkit-box;
+       display:-ms-flexbox;
        display:flex;
-       flex-direction: column;
+       -webkit-box-orient: vertical;
+       -webkit-box-direction: normal;
+           -ms-flex-direction: column;
+               flex-direction: column;
        border: 4px solid black !important;
     }
     .proForm input, .proForm textarea{
@@ -774,8 +913,3 @@ input,textarea{
        margin-left:60px;
     }
 }
-/* @media screen and (max-width:1066px){
-    .iconeSpan{
-       margin-left:60px;
-    }
-} */

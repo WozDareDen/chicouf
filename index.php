@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once __DIR__ . '/vendor/autoload.php';
-
 try{
     $frontoffice = new \Src\Controllers\FrontOffice();
     if (!(empty($_POST['action'])) && $_POST['action'] =="addNewChild") {
@@ -12,18 +11,22 @@ try{
         $children = $_POST['data'];
         $frontoffice->updateChild($children);
     }
+    elseif(!(empty($_POST['action'])) && $_POST['action'] == "changeFamilyName"){
+        $family = $_POST['data'];
+        $frontoffice->changeFamilyName($family);
+    }
     if (isset($_GET['action'])) {
         //ADD NEW USER
         if ($_GET['action'] == 'addUser'){
-            if(!(empty($_POST['firstNameCo'])) && !(empty($_POST['lastNameCo'])) && !(empty($_POST['passCo'])) && !(empty($_POST['pass2Co'])) && !(empty($_POST['mailCo'])) && !(empty($_POST['parentCo'])) && !(empty($_POST['genderCo']))){
+            if(!(empty($_POST['firstNameCo'])) && !(empty($_POST['lastNameCo'])) && !(empty($_POST['passCo'])) && !(empty($_POST['pass2Co'])) && isset($_POST['genderCo'])){
                 $firstNameCo = htmlspecialchars($_POST['firstNameCo']);
                 $lastNameCo = htmlspecialchars($_POST['lastNameCo']);
                 $passCo = htmlspecialchars($_POST['passCo']);
                 $pass2Co = htmlspecialchars($_POST['pass2Co']);
                 $mailCo = htmlspecialchars($_POST['mailCo']);
-                $parentCo = htmlspecialchars($_POST['parentCo']);
-                $genderCo = htmlspecialchars($_POST['genderCo']);
-                    if($parentCo == 0 || $parentCo == 1){
+                $parentCo = $_POST['parentCo'];
+                $genderCo = $_POST['genderCo'];
+                    if(intval($parentCo) == 0 || intval($parentCo) == 1){
                         if($passCo == $pass2Co){
                             if(filter_var($mailCo, FILTER_VALIDATE_EMAIL)){                        
                                 $frontoffice->newUser($firstNameCo, $lastNameCo, $passCo, $mailCo, $parentCo, $genderCo);
@@ -37,7 +40,7 @@ try{
                         }
                     }
                     else{
-                        throw new Exception('veuillez préciser votre parentalité');
+                        throw new Exception(var_dump($parentCo).'veuillez préciser votre parentalité');
                     }
             }
             else{
@@ -246,6 +249,9 @@ try{
         //     $mailCo = $_SESSION['mail'];
         //     $frontoffice->bann($idFamily,$mailCo);
         // }
+        elseif($_GET['action'] == 'test'){
+            require 'app/Views/frontend/test3.php';
+        }
         // BANN MEMBER
         elseif($_GET['action'] == 'bann'){
             if(!(empty($_POST['mailCoModo']))){
@@ -280,9 +286,12 @@ try{
                 throw new \Exception('cette page n\'existe pas');
             }  
         }
+        // GO TO MEMORY CARD
+        elseif($_GET['action'] == 'memoryGame'){
+            require 'app/Views/frontend/memoryGame.php';
+        }
         // UPDATE PROFILE
         elseif ($_GET['action'] == 'changeProfile'){ 
-            if(!(empty($_POST['surnameCo'])) && !(empty($_POST['mailCo'])) && !(empty($_POST['birthdateCo'])) && !(empty($_POST['cityCo']))){
                 $idMember = $_SESSION['id'];
                 $words = htmlspecialchars($_POST['wordsCo']);
                 $name = htmlspecialchars($_POST['surnameCo']);
@@ -290,10 +299,6 @@ try{
                 $birthdate = htmlspecialchars($_POST['birthdateCo']);
                 $city = htmlspecialchars($_POST['cityCo']);
                 $frontoffice->changeProfile($name, $mail, $birthdate, $city, $idMember,$words);
-            }
-            else{
-                throw new \Exception('cette page n\'existe pas');
-            }
         }
         // CHANGE PASS
         elseif($_GET['action'] == "changePass"){
