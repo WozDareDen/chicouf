@@ -116,14 +116,14 @@ if($getWords != NULL){
         <div>
             <div class="photopile-wrapper">
                 <ul class="photopile">
-
+                
 <?php
 foreach ($getUrl as $one_img) {
 ?>
 
                     <li>
                         <a href="<?= $one_img['img']?>">
-                            <a href="index.php?action=memoryGame">Bonus !</a>
+                            
                             <img src="<?= $one_img['img']?>" alt="<?= $one_img['firstname']?>" ... /><?= $one_img['firstname']?>
                         </a>
                     </li>
@@ -134,6 +134,7 @@ foreach ($getUrl as $one_img) {
             
                 </ul>
             </div>
+            <a style="position:absolute;left:290px;bottom:-150px;font-weight:bold !important;display:inline-block;background-color:black;color:red" href="index.php?action=memoryGame" >&nbsp;Bonus !&nbsp; </a>
         </div>
     </div>
 
