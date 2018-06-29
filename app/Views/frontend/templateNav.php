@@ -16,7 +16,7 @@ if(isset($_SESSION['parenthood'])){
     <div class="collapse navbar-collapse justify-content-between" id="navbar2">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="index.php?action=recoverUser&id=<?= $_SESSION['id'] ?>">Mon Profil</a>
+                <a class="nav-link" href="index.php?action=testProfile">Mon Profil</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,10 +47,10 @@ else{
 <?php
 }
 ?>
-
             <li class="nav-item">
-                <div class="nav-link contactMouse" data-toggle="modal" data-target="#ModalContact" >Nous contacter</div>
+                <a class="nav-link" href="index.php?action=pageMenuBlog">Le coin des blogs</a>
             </li>
+
         
 <?php
 if($_SESSION['modo'] >0){
@@ -144,7 +144,7 @@ elseif($_SESSION['parenthood'] == 0){
     <div class="collapse navbar-collapse justify-content-between" id="navbar2">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="index.php?action=recoverUser&id=<?= $_SESSION['id'] ?>">Mon Profil</a>
+                <a class="nav-link" href="index.php?action=testProfile">Mon Profil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="index.php?action=familyLink&id=<?= $_SESSION['family'] ?>">Espace Famille</a>

@@ -692,15 +692,16 @@ class FrontOffice
             $familyManager = new \Src\Models\FamilyManager();
             $getFamilyName = $familyManager -> getFamilyName($idFamily);
         }
+        $getBlogData = $userManager -> getBlogData($idMember)->fetchAll();
+        
         require 'app/Views/frontend/test4.php';
     }
-public function saveBlog($memberBlog){
-    $idMember = $_SESSION['id'];
-    $memBlog = json_decode($memberBlog, true);
-    $title = htmlspecialchars($memBlog['title']);
-    $content = htmlspecialchars($memBlog['content']);
-    $img = htmlspecialchars($memBlog['img']);
-}
+    public function saveBlog($idMember, $title, $content, $img){
+        $idMember = $_SESSION['id'];     
+        $userManager = new \Src\Models\UserManager();
+        $saveBlog = $userManager -> saveDataBlog($idMember, $title, $content, $img);
+        header('Location: index.php?action=testProfile');
+    }
 
 }
 

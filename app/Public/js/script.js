@@ -275,7 +275,11 @@ $.ajax({
     url: "index.php",
     data: {data:familyString,action:"changeFamilyName"},
     method: "POST",
-        success: function(data){          
+        success: function(data){           
+            // var changeName = $('<div>$data</div>')
+            // $('#familyNameModo').append(changeName);
+
+
             location.href = "index.php";
         },
         error: function(e){
@@ -286,27 +290,41 @@ $.ajax({
 
 
 
-let memberBlog = {
-    title:"",
-    content:"",
-    img:""
-}
+// let memberBlog = {
+//     title:"",
+//     content:"",
+//     img:""
+// }
 
-// SAVE BLOG FROM MEMBER DASHBOARD
-$('#idFormBlog').on('click',function(){
-    memberBlog.title = $('#blogTitle').val();
-    memberBlog.content = $('#blogContent').val();
-    memberBlog.img = $('#blogImg').val();
-    let memberBlogString = JSON.stringify(memberBlog);  
-$.ajax({  
-    url: "index.php",
-    data: {data:memberBlogString,action:"saveBlog"},
-    method: "POST",
-        success: function(data){          
-            location.href = "testProfile";
-        },
-        error: function(e){
-            console.log(e.message);
-        }
-    });
-})
+// // SAVE BLOG FROM MEMBER DASHBOARD
+// $('#idFormBlog').on('click',function(){
+//     memberBlog.title = $('#blogTitle').val();
+
+//     memberBlog.img = $('#blogImg').val();  
+//     memberBlog.content.textarea ={
+//         get: function(elem){
+//             return elem.value.replace( /\r?\n/g, "\r\n" );
+//         }
+//     }
+
+//     let memberBlogString = JSON.stringify(memberBlog);
+
+  
+//     console.log(memberBlogString);  
+// $.ajax({  
+//     url: "index.php",
+//     data: {data:memberBlogString,action:"saveBlog"},
+//     method: "POST",
+//         success: function(data){   
+//             console.log('toto');  
+//             // let blogLine = $("<div>+ $data['title'] +</div>");
+            
+//             // $('#listMemberBlog').append(blogLine); 
+            
+//             location.href="index.php?action=testProfile";
+//         },
+//         error: function(e){
+//             console.log('tata');
+//         }
+//     });
+// })

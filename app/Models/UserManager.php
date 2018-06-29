@@ -58,7 +58,7 @@ class UserManager extends Manager
     }
     public function userById($idMember){
         $db = $this -> dbConnect();
-        $req = $db->prepare('SELECT * FROM members WHERE idMember = ?');
+        $req = $db->prepare('SELECT idMember, surname,firstname,img,mail,pass, gender, parenthood,modo,words,city,DATE_FORMAT(birthdate,\'%d.%m.%Y\') as newBirthdate, DATE_FORMAT(registrationDate,\'%d.%m.%Y\') as newRegDate FROM members WHERE idMember = ?');
         $req->execute(array($idMember));
         return $req;
     }
@@ -129,5 +129,17 @@ class UserManager extends Manager
         $checkChildren = $db->prepare('SELECT children.idChildren FROM children INNER JOIN member_children ON member_children.idChildren=children.idChildren WHERE idMember = ?');
         $checkChildren->execute(array($idMember));
         return $checkChildren;
+    }
+    public function saveDataBlog($idMember, $title, $content, $img){
+        $db = $this -> dbConnect();
+        $saveData = $db->prepare('INSERT INTO blogs(title,img,content,statut, publishDate, idMember) VALUES (?,?,?,0,NOW(),?) ');
+        $saveData->execute(array($title,$img,$content,$idMember));
+        return $saveData;
+    }
+    public function getBlogData($idMember){
+        $db = $this -> dbConnect();
+        $getBlogData = $db->prepare('SELECT idBlog,title,img,content,statut, DATE_FORMAT(publishDate,\'%d.%m.%Y\') as newPubDate  FROM blogs WHERE idMember=?');
+        $getBlogData->execute(array($idMember));
+        return $getBlogData;
     }
 }

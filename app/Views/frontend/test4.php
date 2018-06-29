@@ -112,15 +112,16 @@ else{
 <?php
 }
 ?>                                     
-                    
+                    <p>Inscrit le <?= $modif['newRegDate'] ?></p>
                     <p><?= $modif['mail'] ?></p>
                     
-                        <p>Né le <?= $modif['birthdate'] ?></p>
+                        <p>Né le <?= $modif['newBirthdate'] ?></p>
                    
                         <hr >  
                       
                    
                         <p>Adresse : <?= $modif['city'] ?></p>
+                        <a href="http://localhost/chicouf/index.php?action=recoverUser&id=<?= $modif['idMember'] ?>">Modifier mon profil</a>
                    
 </div>
 
@@ -129,20 +130,42 @@ else{
 
 
 </article>
+</div> 
+<br />
+ <!--*********BLOG BILLS***************-->
+<?php
+if(!(empty($getBlogData))){
+?>
+
+        <div class="mainPV">
+            <h2 class="mbr-section-title" style="text-align:center;">Gérer mes billets de Blog</h2>
+            <div id="listMemberBlog">
+<div class="row">
+<?php
+foreach($getBlogData as $blogData){
+?>      
+
+            <h5 class="offset-lg-2 col-lg-8" >_<?= $blogData['title'] ?> publié le <?= $blogData['newPubDate'] ?></h5>
+
+<?php
+}
+?>
+</div>
+            </div>
+        </div>
+
+
+<?php
+}?>
+
+
+<!--********BLOG EDITOR*************-->
  
-
-
-
-
-
-<!--********END OF PAGE*************-->
-</div>  
 <br />  
    <div class="mainPV">
         <h2 class="mbr-section-title" style="text-align:center;">Espace d'expression</h2>
-        <p>ESPACE BLOG</p>
-        <script type="text/javascript" src="app\Views\frontend\tinymce\js\tinymce\tinymce.min.js"></script>
-	<script type="text/javascript">
+        <script type="text/javascript" src="app\Views\frontend\tinymce\js\tinymce\tinymce.min.js"></script> 
+        <script type="text/javascript">
 		tinymce.init({
 			// type de mode
 			// mode : "exact", 
@@ -196,13 +219,13 @@ else{
 	</script>
 
 
-        <form class="entree commentsEdition" id="formBlog" >
+        <form class="entree commentsEdition" id="formBlog" action="index.php?action=saveBlog" method="POST">
             <label for="blogTitle">Titre de l'article</label>
             <input type="text" id="blogTitle" name="blogTitle" /></br>
             <label class="upper" for="blogImg">Illustration</label>
             <input class="upper" type="file" id="blogImg" name="blogImg" /><br />
-            <textarea id="texte" name="blogContent" style="background-color:black;color:white;" rows="50"></textarea><br />
-            <input type="submit" value="sauvegarder" />
+            <textarea id="blogContent" name="blogContent" style="background-color:black;color:white;" rows="50"></textarea><br />
+            <input type='submit' name="submit" id="idFormBlog" value="Sauvegarder" />
         </form>
 
 

@@ -123,6 +123,7 @@ foreach ($getUrl as $one_img) {
 
                     <li>
                         <a href="<?= $one_img['img']?>">
+                            <a href="index.php?action=memoryGame">Bonus !</a>
                             <img src="<?= $one_img['img']?>" alt="<?= $one_img['firstname']?>" ... /><?= $one_img['firstname']?>
                         </a>
                     </li>

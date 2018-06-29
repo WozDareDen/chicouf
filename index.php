@@ -15,10 +15,6 @@ try{
         $family = $_POST['data'];
         $frontoffice->changeFamilyName($family);
     }
-    elseif(!(empty($_POST['action'])) && $_POST['action'] == "saveBlog"){
-        $memberBlog = $_POST['data'];
-        $frontoffice->saveBlog($memberBlog);
-    }
     if (isset($_GET['action'])) {
         //ADD NEW USER
         if ($_GET['action'] == 'addUser'){
@@ -295,6 +291,14 @@ try{
             else{
                 throw new \Exception('cette page n\'existe pas');
             }  
+        }
+        // SAVE BLOG
+        elseif($_GET['action'] == 'saveBlog'){
+            $idMember = $_SESSION['id'];
+            $title = $_POST['blogTitle'];
+            $content = $_POST['blogContent'];
+            $img = $_POST['blogImg'];
+            $frontoffice->saveBlog($idMember, $title, $content, $img);
         }
         // GO TO MEMORY CARD
         elseif($_GET['action'] == 'memoryGame'){

@@ -115,9 +115,8 @@ else{
                     <div id="popMail">
                         <p>Votre mail n'est pas conforme.</p>
                     </div>        
-       
                     <label for="birthDateCo" class="label2">Date de naissance</label>
-                        <input type="date" id="birthdateCo" name="birthdateCo"  value="<?= $modif['birthdate'] ?>"><br />
+                        <input type="date" id="birthdateCo" name="birthdateCo"  value="<?= $modif['newBirthdate'] ?>"><br />
                     <label for="mdpCoCo" class="label3">Mot de passe</label>
                     <button type="button" class="btn btn-outline-info"  class="btn social" data-toggle="modal" data-target="#modalChangePass">Modifier</button>
                     </div>
